@@ -1,0 +1,15 @@
+.edit_buttons_main {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.edit_buttons_container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.edit_buttons_inner {
+    margin-top: 12px;
+}
