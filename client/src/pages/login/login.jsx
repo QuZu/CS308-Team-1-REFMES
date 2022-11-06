@@ -38,19 +38,16 @@ function Login() {
       email: data.email,
       password: data.password,
     };
-    console.log(user);
     console.log(process.env)
     axios
       .post(`${process.env.REACT_APP_URL}/api/users/login`,user)
       .then((res) => {
-        console.log(res);
         //response bize json objesi döndürüyor o gelen objenin
         if (res.status === 200 && res.data.message) {
           setErrorMessage(res.data.message);
         } else if (res.status === 200) {
           setErrorMessage("You logged in succesfully");
           const dbUser = res.data;
-          console.log("login user:", dbUser);
           dispatch(userLogin(dbUser));
           navigate("/home");
         } else {
