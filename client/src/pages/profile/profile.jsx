@@ -70,7 +70,7 @@ function Myprofile() {
 
         <div className="club_container">
           <div className="col-4 club_inner"><img src={clubLogo}/></div>
-          <div className="col-8 club_inner"><p>Fenerbahçe</p></div>
+          <div className="col-8 club_inner"><p>Fenerbahçe SK</p></div>
         </div>
 
         <div className="social_media_container">

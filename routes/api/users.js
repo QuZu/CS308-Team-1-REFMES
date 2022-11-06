@@ -52,13 +52,11 @@ router.post('/register',async (req, res)=>{
 });
 router.post('/login', async (req, res) => {
     const {email,password} =req.body;
-    console.log("Burdayım1")
    if(!password || !email) {
       return res.status(400).json({ msg: 'Please enter all fields' });
     }
   
     try {
-      console.log("Burdayım2")
       // Check for existing user
       const user = await User.findOne({ email });
       if (!user) throw Error('User does not exist');
@@ -89,16 +87,69 @@ router.post('/login', async (req, res) => {
   });
   router.post("/updatesetting", async (req, res) => {
     const dataID=req.body.id;
-    console.log(req.body)
-    console.log("girdim")
-    console.log(dataID)
-    console.log(req.body.email)
       await User.findOneAndUpdate({email: req.body.email},
         {name:req.body.name},
        
        );
        console.log(`${dataID} User has been found...`)
       res.status(200).json(`${dataID} User has been found...`);
+  });
+ router.post("/change-password",async (req, res)=> {
+    
+    const BCRYPT_SALT_ROUNDS = 10;
+    const currUser = req.body.user;
+    let myQuery = { "email": currUser.user.email}
+    console.log("currentuser email:",currUser.user.email)
+    
+     
+    User
+    .findOne(myQuery, async (err, result) => {
+      if(err){
+        console.log(err.message)
+      }
+  
+      else if(result) {
+        console.log("result: ",result)
+        const validPassword = await bcrypt.compare(req.body.currentPassword.toString(), result.password);
+        console.log(validPassword, ""+req.body.password, result.password)
+        if(validPassword){
+          console.log("res:",result)
+  
+          bcrypt.genSalt(BCRYPT_SALT_ROUNDS, function (saltError, salt) {
+          if (saltError) {
+            console.log(saltError);
+            return saltError
+          }
+          else {
+            bcrypt.hash(req.body.password, salt, function (hashError, hash) {
+              if (hashError) {
+                console.log(hashError);
+                return hashError
+              }
+              console.log("updating...");
+               User.findOneAndUpdate({ "email": currUser.user.email }, 
+              {
+                  password: hash,
+                })
+                .then(() => {
+                  console.log('password changed');
+                  res.status(200).json(hash);
+                });
+            });
+          }
+          });
+  
+        }else {
+          res.status(200).json({message: "Current password is invalid"});
+        }
+  
+      }
+      else {
+        res.status(200).json({message: "Error! Please try again"});
+      }
+  
+    }
+    );
   });
 
 module.exports = router;

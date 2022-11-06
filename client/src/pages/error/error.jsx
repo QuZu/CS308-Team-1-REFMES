@@ -1,8 +1,11 @@
 import React from "react";
+import AppNavBar from "../../components/appnavbar.jsx"
+
 function ErrorPage() {
     return (
       <div>
-       <h1>Permission Denied!</h1>
+        <AppNavBar/>
+        <h1 style={{textAlign: "center", marginTop: "172px"}}>Opps, something went wrong!</h1>
       </div>
     );
   }
