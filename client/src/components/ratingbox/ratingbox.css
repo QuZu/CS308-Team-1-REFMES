@@ -1,0 +1,95 @@
+.react-rater-star {
+    color: #ccc !important;
+    font-size: 28px;
+}
+
+.react-rater-star.is-active {
+    color: #fc6 !important;
+}
+
+.react-rater-star.will-be-active {
+    color: #fd9 !important;
+}
+
+.outer-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #fff;
+    margin: 2em;
+    padding: 3em 2em 3em 2em;
+    border-radius: 10px;
+    max-width: 900px;
+    flex: 1;
+}
+
+.rating-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em;
+}
+
+.rating-left {
+    display: flex;
+    flex-direction: row;
+    flex: 3;
+}
+
+.rating-team {
+    display: flex;
+    align-items: center;
+}
+
+.rating-team img {
+    width: 28px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.rating-team a {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.rating-left-match {
+    display: flex;
+    flex: 3;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-left-referee {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-left-referee a {
+    color: #444;
+    text-decoration: none;
+}
+
+.rating-left-referee a:hover {
+    color: #e51936;
+}
+
+.rating-right {
+    text-align: center;
+    flex: 1;
+}
+
+.comment-left {
+
+}
+
+.comment-right {
+
+}
