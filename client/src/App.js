@@ -12,6 +12,7 @@ import MyProfile from "./pages/profile/profile";
 import EditPage from "./pages/edit/editpage"
 import UserEditPage from "./pages/edit/usernameedit"
 import PassEditPage from "./pages/edit/passedit"
+import RefPage from "./pages/single-referee/singleRefPage";
 function App() {
   const [state] = useStore();
   const { user: currentUser } = state;
@@ -68,6 +69,10 @@ function App() {
         <Route
         path="/editusername"
         element={<UserEditPage/>}
+        />
+        <Route
+        path="/referees"
+        element={<RefPage/>}
         />
         <Route
         path="*"
