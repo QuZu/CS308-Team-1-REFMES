@@ -8,11 +8,21 @@ import { useStore } from "./store/store";
 import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import ErrorPage from "./pages/error/error";
-import MyProfile from "./pages/profile/profile";
-import EditPage from "./pages/edit/editpage"
-import UserEditPage from "./pages/edit/usernameedit"
-import PassEditPage from "./pages/edit/passedit"
+import ProfilePage from "./pages/profile/profile";
+import EditPage from "./pages/edit/editpage";
+import UserEditPage from "./pages/edit/usernameedit";
+import PassEditPage from "./pages/edit/passedit";
 import RefPage from "./pages/single-referee/singleRefPage";
+import PostMatchPage from "./pages/post-match/post-match";
+import PreMatchPage from "./pages/pre-match/pre-match";
+import AwardsPage from "./pages/awards/awards";
+import WHighlightsPage from "./pages/weekly-highlights/weekly-highlights";
+import MHighlightsPage from "./pages/monthly-highlights/monthly-highlights";
+import SingleClubPage from "./pages/single-club/single-club";
+import ClubsPage from "./pages/clubs/clubs";
+import MatchesPage from "./pages/matches/matches";
+import RefereesPage from "./pages/referees/referees";
+
 function App() {
   const [state] = useStore();
   const { user: currentUser } = state;
@@ -23,61 +33,31 @@ function App() {
       <Routes>
         { !currentUser ?
         <>
-        <Route
-        path="/"
-        element={<Landing />}
-        />
-        <Route
-        path="/landing"
-        element={<Landing />}
-        />
-        <Route
-        path="/login"
-        element={<Login />}
-        />
-        <Route
-        path="/signup"
-        element={<Signup />}
-        />
-       <Route
-        path="*"
-        element={<ErrorPage />}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<ErrorPage />} />
         </>
         :
         <>
-        <Route
-          path="/"
-          element={<Landing />}
-        />
-        <Route
-          path="/edit"
-          element={< EditPage/>}
-        />
-        <Route
-          path="/home"
-          element={<Landing/>}
-        />
-        <Route
-        path="/myprofile"
-        element={<MyProfile />}
-        />
-        <Route
-        path="/editpass"
-        element={<PassEditPage/>}
-        />
-        <Route
-        path="/editusername"
-        element={<UserEditPage/>}
-        />
-        <Route
-        path="/referees"
-        element={<RefPage/>}
-        />
-        <Route
-        path="*"
-        element={<ErrorPage />}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/edit" element={< EditPage/>} />
+        <Route path="/home" element={<Home/>} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/edit/password" element={<PassEditPage/>} />
+        <Route path="/edit/username" element={<UserEditPage/>} />
+        <Route path="/referee" element={<RefPage/>} />
+        <Route path="/pre-match" element={<PreMatchPage />} />
+        <Route path="/post-match" element={<PostMatchPage />} />
+        <Route path="/awards" element={<AwardsPage />} />
+        <Route path="/highlights/weekly" element={<WHighlightsPage />} />
+        <Route path="/highlights/monthly" element={<MHighlightsPage />} />
+        <Route path="/club" element={<SingleClubPage />} />
+        <Route path="/clubs" element={<ClubsPage />} />
+        <Route path="/matches" element={<MatchesPage />} />
+        <Route path="/referees" element={<RefereesPage />} />
+        <Route path="*" element={<ErrorPage />} />
         </>
 }
       </Routes>
