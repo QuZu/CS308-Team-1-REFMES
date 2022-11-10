@@ -10,7 +10,7 @@ import clubLogo from '../../logos/logo_fenerbahce.png';
 import profilePhoto from '../../photos/halperk.png';
 import {BsTwitter, BsInstagram, BsLinkedin, BsPencilFill, BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 
-function Myprofile() {
+function ProfilePage() {
     const [state, dispatch] = useStore();
     const navigate = useNavigate();
     const {user:currentUser} = state;
@@ -102,4 +102,4 @@ function Myprofile() {
   </div>
  )
 }
-export default Myprofile
+export default ProfilePage
