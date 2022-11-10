@@ -6,7 +6,7 @@ import { userLogout } from "../../store/userreducer";
 import axios from "axios";
 import AppNavBar from "../../components/appnavbar.jsx";
 import stadium from '../../stadiums/fenerbahce.jpg';
-import clubLogo from '../../logos/logo_fenerbahce.png';
+import clubLogo from '../../logos/fenerbahce.png';
 import profilePhoto from '../../photos/halperk.png';
 import {BsTwitter, BsInstagram, BsLinkedin, BsPencilFill, BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 
