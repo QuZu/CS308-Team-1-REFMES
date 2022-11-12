@@ -7,6 +7,7 @@ const jwt=require("jsonwebtoken");
 // Item Model
 const User= require('../../models/usermodel');
 const { response } = require("express");
+const Ref = require("../../models/refereemodel");
 
 /**
  * @route   POST api/users
@@ -151,5 +152,19 @@ router.post('/login', async (req, res) => {
     }
     );
   });
+router.get("/getref/:refName",async (req,res)=>{
+  const {name} =req.body;
+  try {
+    await Ref.findOne({name:req.params.refName}).then((result) => {
 
+      res.json(result);
+    })
+    .catch((err) => {
+      throw err;
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+})
 module.exports = router;
