@@ -178,7 +178,7 @@ list.sort(function(a, b){
       <div className="container d-flex justify-content-center">
         <div className="col-sm-8 col-md-12">
         <div className="row">
-          <h1 className="text-center">Latest Pre-Match Comments</h1>
+          <h1 className="text-center">Latest Post-Match Comments</h1>
         </div>
         <div className="row">
       { list ?
