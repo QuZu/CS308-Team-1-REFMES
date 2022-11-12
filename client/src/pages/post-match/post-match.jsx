@@ -10,8 +10,10 @@ function PostMatchPage() {
     return(
         <div>
             <AppNavBar/>
-
-            <div className="matches" style={{justifyContent: "center"}}>
+            <div>
+                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Post-Match Rating and Comments</h1>
+            </div>
+            <div className="matches">
                 <RatingBox club1={0} club1Score={3} club2={2} club2Score={2} referee="Cüneyt Çakır"/>
                 <RatingBox club1={8} club1Score={1} club2={14} club2Score={1} referee="Fırat Aydınus"/>
                 <RatingBox club1={7} club1Score={2} club2={3} club2Score={6} referee="Kutluhan Bilgiç"/>
