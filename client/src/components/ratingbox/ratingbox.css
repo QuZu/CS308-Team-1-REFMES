@@ -16,24 +16,17 @@
     flex-direction: column;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     background-color: #fff;
-    margin: 2em;
+    margin: 2em 2em 0em 2em;
     padding: 3em 2em 3em 2em;
     border-radius: 10px;
     max-width: 900px;
     flex: 1;
+    width: 100%;
 }
 
 .rating-container {
     display: flex;
     flex-direction: row;
-}
-
-.comment-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 3em;
 }
 
 .rating-left {
@@ -86,10 +79,39 @@
     flex: 1;
 }
 
-.comment-left {
-
+.comment-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em;
 }
 
-.comment-right {
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.comment-description {
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.comment-text {
+    width: 100%;
+}
+
+.comment-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.edit-button {
+    margin-right: 0.5em;
+}
+
+.delete-button {
 
 }
