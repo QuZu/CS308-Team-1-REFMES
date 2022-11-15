@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import Rater from 'react-rater';
+import axios from "axios";
 import { useStore } from "../../store/store";
 import "../ratingbox/ratingbox.css";
 import 'react-rater/lib/react-rater.css';
@@ -46,6 +47,27 @@ function RatingBox({ club1 = 0, club1Score = 0, club2 = 1, club2Score = 0, refer
         console.log("hadi eyw silindim ben");
     }
 
+    const newComment = {userEmail: "halperk@halperk.net", comment: "Trial comment"};
+    const [errorMessage, setErrorMessage] = useState("");
+
+    console.log(clubs[club1], clubs[club2]);
+    
+    axios
+        .post(`${process.env.REACT_APP_URL}/api/users/sendComment`, newComment)
+        .then((res) => {
+        if (res.data.message) {
+            setErrorMessage(res.data.message);
+        } else if (res.status === 200) {
+            setErrorMessage(`You sent your comment successfully`);
+        } else {
+            setErrorMessage("Error! Please try again.");
+        }
+        })
+        .catch((err) => {
+        console.log("Error:", err);
+        setErrorMessage("Error! Please try again.");
+        });
+
     return (
         <>
         <div className="outer-container">
@@ -74,7 +96,7 @@ function RatingBox({ club1 = 0, club1Score = 0, club2 = 1, club2Score = 0, refer
                         <input className="comment-text btn-border input-style form-control" placeholder="Add a comment..." contentEditable="true" onClick={editComment}></input>
                     </div>
                     <div className="comment-menu">
-                        <div className="btn btn-primary edit-button" onClick={editComment}>Edit</div>
+                        <div className="btn btn-primary edit-button" onClick={editComment}>Submit</div>
                         <div className="btn btn-danger delete-button" onClick={deleteComment}>Delete</div>
                     </div>
                 </div>
