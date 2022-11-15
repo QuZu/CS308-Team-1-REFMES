@@ -1,21 +1,22 @@
 body {
-    background-color: #f9f9fa
+    background-color: #f7f7f7d1
 }
 
-.padding {
-    padding: 25px !important
+.padding-15 {
+    padding: 15px !important
 }
-
-.user-card-full {
-    overflow: hidden;
+.padding-b{
+    padding-bottom: 15px;
 }
-
+.padding-l-15{
+padding-left: 15px;
+}
 .card {
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
-    box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+    border-radius: 5px 5px 5px 5px;
+    -webkit-box-shadow: 0 10px 20px 0 rgba(6, 58, 82, 0.08);
+    box-shadow: 0 1px 20px 0 rgba(0, 23, 34, 0.08);
     border: none;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .m-r-0 {
@@ -27,11 +28,11 @@ body {
 }
 
 .user-card-full .user-profile {
-    border-radius: 5px 5 0 5px;
+    border-radius: 5px 5px 5px 5px;
 }
 
-.bg-c-lite-green {
-    background: linear-gradient(to right, #e4b2ba, #e46e54);
+.grad-color {
+    background: linear-gradient(to right, #e4b2ba, rgb(232, 17, 17));
 }
 
 .user-profile {
@@ -86,7 +87,9 @@ h6 {
 .text-muted {
     color: #919aa3 !important;
 }
-
+.m-l-15{
+    margin-left: 15px;
+}
 .b-b-default {
     border-bottom: 1px solid #e0e0e0;
 }
@@ -128,7 +131,9 @@ h6 {
 .m-t-40 {
     margin-top: 20px;
 }
-
+.text-center{
+    text-align: center;
+}
 
 
 
