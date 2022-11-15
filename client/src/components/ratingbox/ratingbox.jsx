@@ -24,7 +24,7 @@ import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
 
-function RatingBox({ club1 = 0, club1Score = 0, club2 = 1, club2Score = 0, referee = "Referee" }) {
+function RatingBox({ club1 = 0, club1Score = 0, club2 = 1, club2Score = 0, referee = "Referee", weekNo = 0 }) {
     const [state, dispatch] = useStore();
     const {user:currentUser} = state;
 
@@ -46,27 +46,26 @@ function RatingBox({ club1 = 0, club1Score = 0, club2 = 1, club2Score = 0, refer
     function deleteComment() {
         console.log("hadi eyw silindim ben");
     }
-
-    const newComment = {userEmail: "halperk@halperk.net", comment: "Trial comment"};
     const [errorMessage, setErrorMessage] = useState("");
 
-    console.log(clubs[club1], clubs[club2]);
-    
-    axios
-        .post(`${process.env.REACT_APP_URL}/api/users/sendComment`, newComment)
-        .then((res) => {
-        if (res.data.message) {
-            setErrorMessage(res.data.message);
-        } else if (res.status === 200) {
-            setErrorMessage(`You sent your comment successfully`);
-        } else {
+    function ratingFunction(rating) {
+        const newRating = {userEmail: currentUser.user.email, rating: rating, club1: clubs[club1], club2: clubs[club2], weekNo: weekNo};
+        axios
+            .post(`${process.env.REACT_APP_URL}/api/users/sendRating`, newRating)
+            .then((res) => {
+            if (res.data.message) {
+                setErrorMessage(res.data.message);
+            } else if (res.status === 200) {
+                setErrorMessage(`You sent your comment successfully`);
+            } else {
+                setErrorMessage("Error! Please try again.");
+            }
+            })
+            .catch((err) => {
+            console.log("Error:", err);
             setErrorMessage("Error! Please try again.");
-        }
-        })
-        .catch((err) => {
-        console.log("Error:", err);
-        setErrorMessage("Error! Please try again.");
-        });
+            });
+    }
 
     return (
         <>
@@ -87,20 +86,9 @@ function RatingBox({ club1 = 0, club1Score = 0, club2 = 1, club2Score = 0, refer
                     <div className="rating-left-referee"><a href='../referee/referee-name'><b>{referee}</b></a></div>
                 </div>
                 <div className="rating-right">
-                    <Rater onRate={({rating}) => {console.log(rating);}} total={5} rating={0} interactive={true}/>
+                    <Rater onRate={({rating}) => {ratingFunction(rating)}} total={5} rating={0} interactive={true}/>
                 </div>
             </div>
-            <form className="comment-container">
-                <div className="comment-content">
-                    <div className="comment-description">
-                        <input className="comment-text btn-border input-style form-control" placeholder="Add a comment..." contentEditable="true" onClick={editComment}></input>
-                    </div>
-                    <div className="comment-menu">
-                        <div className="btn btn-primary edit-button" onClick={editComment}>Submit</div>
-                        <div className="btn btn-danger delete-button" onClick={deleteComment}>Delete</div>
-                    </div>
-                </div>
-            </form>
         </div>
         </>
     );
