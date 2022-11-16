@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Rater from 'react-rater';
 import axios from "axios";
 import { useStore } from "../../store/store";
@@ -24,48 +24,64 @@ import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
 
-function RatingBox({ club1 = 0, club1Score = 0, club2 = 1, club2Score = 0, referee = "Referee", weekNo = 0 }) {
+const clubs = ["Fenerbahçe", "Galatasaray", "Beşiktaş", "Başakşehir", "Adana Demirspor",
+"Konyaspor", "Hatayspor", "Giresunspor", "Alanyaspor", "Sivasspor",
+"Antalyaspor", "Gaziantep FK", "Ümraniyespor", "İstanbulspor", "Kasımpaşa",
+"Ankaragücü", "Trabzonspor", "Karagümrük", "Kayserispor"];
+
+const clubLogos = [logoFenerbahce, logoGalatasaray, logoBesiktas, logoBasaksehir, logoAdanaDemirspor,
+    logoKonyaspor, logoHatayspor, logoGiresunspor, logoAlanyaspor, logoSivasspor,
+    logoAntalyaspor, logoGaziantepFK, logoUmraniyespor, logoIstanbulspor, logoKasimpasa,
+    logoAnkaragucu, logoTrabzonspor, logoKaragumruk, logoKayserispor];
+
+function RatingBox({ match_id }) {
+    const club1 = 3; const club2 = 1; const club1Score = 2; const club2Score = 3; const referee="Cüneyt Çakır"; const weekNo=3;
+
     const [state, dispatch] = useStore();
     const {user:currentUser} = state;
-
-    const clubs = ["Fenerbahçe", "Galatasaray", "Beşiktaş", "Başakşehir", "Adana Demirspor",
-                   "Konyaspor", "Hatayspor", "Giresunspor", "Alanyaspor", "Sivasspor",
-                   "Antalyaspor", "Gaziantep FK", "Ümraniyespor", "İstanbulspor", "Kasımpaşa",
-                   "Ankaragücü", "Trabzonspor", "Karagümrük", "Kayserispor"];
-    
-    const clubLogos = [logoFenerbahce, logoGalatasaray, logoBesiktas, logoBasaksehir, logoAdanaDemirspor,
-                       logoKonyaspor, logoHatayspor, logoGiresunspor, logoAlanyaspor, logoSivasspor,
-                       logoAntalyaspor, logoGaziantepFK, logoUmraniyespor, logoIstanbulspor, logoKasimpasa,
-                       logoAnkaragucu, logoTrabzonspor, logoKaragumruk, logoKayserispor];
-
-    function editComment() {
-        console.log("zort diye editlendim");
-        console.log(currentUser.user.name);
-    }
-
-    function deleteComment() {
-        console.log("hadi eyw silindim ben");
-    }
+    const [matchDetailsData, setMatchDetailsData] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
+    const [loading,setLoading] = useState(false);
+
+    const getMatchDetails = async() => {
+        await axios
+            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${match_id}`)
+            .then(res => {
+                setMatchDetailsData(res.data);
+                setLoading(true);
+        }).catch(err => console.log(err));
+    };
+
+    useEffect(() => {
+        getMatchDetails();
+    }, []);
+
+    console.log("Zort: ", matchDetailsData);
+    if (matchDetailsData.length == 1) {
+        const club1Score = matchDetailsData[0]["club1_goals"];
+        const club2Score = matchDetailsData[0]["club2_goals"];
+        console.log("Hadi club1:", matchDetailsData[0]["club1_goals"]);
+        console.log("Hadi club2:", matchDetailsData[0]["club2_goals"]);
+    }
 
     function ratingFunction(rating) {
-        const newRating = {userEmail: currentUser.user.email, rating: rating, club1: clubs[club1], club2: clubs[club2], weekNo: weekNo};
+        const newPostRating = {rating: rating, user_id: "6374a8295ac7890d97b6a182", match_id: "6374f1412ae02fddd24a4c1b", date: "2022-11-15"};
         axios
-            .post(`${process.env.REACT_APP_URL}/api/users/sendRating`, newRating)
-            .then((res) => {
-            if (res.data.message) {
-                setErrorMessage(res.data.message);
-            } else if (res.status === 200) {
-                setErrorMessage(`You sent your comment successfully`);
-            } else {
-                setErrorMessage("Error! Please try again.");
-            }
-            })
-            .catch((err) => {
-            console.log("Error:", err);
+        .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
+        .then((res) => {
+        if (res.status === 200 && res.data.message) {
+            setErrorMessage(res.data.message);
+        } else if (res.status === 200) {
+            setErrorMessage("Your rating submitted successfully");
+        } else {
             setErrorMessage("Error! Please try again.");
-            });
+        }
+        }).catch((err) => {
+            console.log("Error: ", err);
+            setErrorMessage("Error! Please try again.");
+        });
     }
+    
 
     return (
         <>
