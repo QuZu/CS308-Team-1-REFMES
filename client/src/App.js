@@ -47,7 +47,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/edit/password" element={<PassEditPage/>} />
         <Route path="/edit/username" element={<UserEditPage/>} />
-        <Route path="/referee/:refId" element={<RefPage/>} />
+        <Route path="/referee/:rUsername" element={<RefPage/>} />
         <Route path="/pre-match" element={<PreMatchPage />} />
         <Route path="/post-match" element={<PostMatchPage />} />
         <Route path="/awards" element={<AwardsPage />} />
