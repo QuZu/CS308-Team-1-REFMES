@@ -1,36 +1,46 @@
-const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-
-// Create Schema
-const RefSchema = new Schema({
+const RefereeSchema = new Schema({
+  r_username: {
+    type: String,
+    required: true,
+    unique: true
+  },
   name: {
     type: String,
     required: true
   },
-  BirthDate:{
+  biography:{
     type:String,
     required:true
   },
-  BirthPlace: {
+  birth_date: {
     type: String,
     required: true,
   },
-  Biography: {
+  birth_place: {
     type: String,
     required: true
   },
-  FifaDate: {
+  fifa_date: {
     type: String,
     required: true
   },
-  FirstSuperDate: {
+  first_super_date: {
     type: String,
     required: true
   },
-
+  total_rating: {
+    type: String,
+    required: true
+  },
+  rating_total: {
+    type: String,
+    required: true
+  }
 });
 
-const Ref = mongoose.model('referees', RefSchema);
+const Referee = mongoose.model('referees', RefereeSchema);
 
-module.exports=Ref
+module.exports = Referee
