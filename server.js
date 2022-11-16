@@ -17,7 +17,15 @@ mongoose
     .catch((err)=>console.log(err));
 
 //Use routes
-app.use('/api/users',require('./routes/api/users'))
+app.use('/api/users',require('./routes/api/users'));
+app.use('/api/referees',require('./routes/api/referees'));
+app.use('/api/matches',require('./routes/api/matches'));
+app.use('/api/comments',require('./routes/api/comments'));
+app.use('/api/postRatings',require('./routes/api/postRatings'));
+app.use('/api/preRatings',require('./routes/api/preRatings'));
+app.use('/api/clubs',require('./routes/api/clubs'));
+app.use('/api/weeks',require('./routes/api/weeks'));
+
 if (process.env.NODE_ENV === 'production') {
     // Exprees will serve up production assets
     app.use(express.static('client/build'));
