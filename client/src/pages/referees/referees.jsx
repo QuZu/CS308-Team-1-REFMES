@@ -5,9 +5,9 @@ import React, { useCallback, useState } from "react";
 import axios from "axios";
 
 function RefereesPage() {
-    var ref1="Enis Mert";
-    var ref2="Ali Palabiyik";
-    var ref3="Mete Kalkavan";
+    var ref1="enis_mert_kuzu";
+    var ref2="ali_palabiyik";
+    var ref3="mete_kalkavan";
     return(
         <div>
             <AppNavBar/>

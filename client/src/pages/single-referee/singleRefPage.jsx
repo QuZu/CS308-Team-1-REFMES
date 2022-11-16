@@ -4,14 +4,15 @@ import RefInfo from "../../components/refbar/refbar.jsx";
 import {useParams} from "react-router-dom"
 import axios from "axios";
 import { useEffect,useState } from "react";
-import * as ReactBootstrap from "react-bootstrap"
+import * as ReactBootstrap from "react-bootstrap";
+
 function RefPage() {
-  const {refId} = useParams()
+  const {rUsername} = useParams();
   const [allData, setallData] = useState({});
-  const[loading,setLoading]=useState(false);
+  const[loading,setLoading] = useState(false);
 
   const getRef = async()=>{
-    await axios.get(`${process.env.REACT_APP_URL}/api/users/getref/${refId}`).then(res=>{
+    await axios.get(`${process.env.REACT_APP_URL}/api/referees/getref/${rUsername}`).then(res=>{
       setallData(res.data);
       setLoading(true);
   
@@ -20,7 +21,7 @@ function RefPage() {
   useEffect(() => {
     getRef();
   }, [])
-  console.log("Alldatam: ",allData)
+  console.log("All data: ", allData)
     return (
       <div>
         <AppNavBar/>

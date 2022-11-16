@@ -5,9 +5,6 @@ import user_AliPalabiyik from "../refbar/ali-palabiyik.jpg";
 import user_profile from"../refbar/user_profile.png"
 import CommentBox from "../comment/commentbox";
 
-
-
-
 function RefInfo({refName}) {
   var list=[
     {commentPerson:"Mert",pComment:"Hakemde baya iyiydi,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non mi eget urna tempor sollicitudin ut eu ipsum. Aliquam lobortis odio justo, ut congue mauris sodales at. Proin non ligula at diam rhoncus finibus. Nam et lobortis nulla. Ut id tortor metus. Cras porta fringilla dui, vel consectetur quam gravida sed. Vestibulum faucibus ante nunc, a faucibus magna ullamcorper eget. Sed vel risus purus."},
@@ -55,22 +52,22 @@ list.sort(function(a, b){
                         <div className="row">
                           <div className="col">
                             <p className="f-w-500 m-b-0">Place of birth:</p>
-                            <h6 className="text-muted f-w-400">{refName.BirthPlace}</h6>
+                            <h6 className="text-muted f-w-400">{refName.birth_place}</h6>
                           </div>
                           <div className="col">
                             <p className="f-w-500 m-b-0">Date of birth:</p>
-                            <h6 className="text-muted f-w-400">{refName.BirthDate}</h6>
+                            <h6 className="text-muted f-w-400">{refName.birth_date}</h6>
                           </div>
                         </div>
                         <h6 className="m-b-10 p-b-5 p-t-15 b-b-default f-w-500">Referee information</h6>
                         <div className="row">
                           <div className="col">
                             <p className="f-w-500 m-b-0">FIFA referee:</p>
-                            <h6 className="text-muted f-w-400">{refName.FifaDate}</h6>
+                            <h6 className="text-muted f-w-400">{refName.fifa_date}</h6>
                           </div>
                           <div className="col">
                             <p className="f-w-500 m-b-0" >First Super League Match:</p>
-                            <h6 className="text-muted f-w-400">{refName.FirstSuperDate}</h6>
+                            <h6 className="text-muted f-w-400">{refName.first_super_date}</h6>
                           </div>
                         </div>
                     </div>
@@ -109,7 +106,7 @@ list.sort(function(a, b){
                 </div>
                 <div className="card-body">
                   <p className="card-text">
-                  {refName.Biography}
+                  {refName.biography}
                   </p>
                 </div>
               </div>
