@@ -26,7 +26,7 @@ function SingleClubPage() {
   };
 
   useEffect(()=> {
-    setClubData();
+    getClub();
   }, [])
   console.log(ClubData);
 

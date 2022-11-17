@@ -1,11 +1,10 @@
 const express = require("express");
-const { response } = require("express");
 const router = express.Router();
 require("dotenv").config();
 const Club = require('../../models/clubModel');
 
 router.get("/getClub/:clubName", async(req, response) => {
-    console.log(req.params.clubName);
+    console.log("Clubname:",req.params.clubName);
     try{
         await Club.findOne({asci_name: req.params.clubName}).then((result) => { // go to the database return the values in which acii name = clubName(like fenerbahce)
             response.json(result);
