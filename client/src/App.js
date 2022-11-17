@@ -22,7 +22,10 @@ import SingleClubPage from "./pages/single-club/single-club";
 import ClubsPage from "./pages/clubs/clubs";
 import MatchesPage from "./pages/matches/matches";
 import RefereesPage from "./pages/referees/referees";
-
+import AdminPage from "./pages/admin/admin";
+import AdminAuthPage from "./pages/admin-auth/admin-auth";
+import AdminAddReferee from "./pages/admin-auth/addReferee";
+import AdminSelectReferee from "./pages/admin-auth/selectReferee";
 function App() {
   const [state] = useStore();
   const { user: currentUser } = state;
@@ -37,6 +40,10 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin-auth" element={<AdminAuthPage />} />
+        <Route path="/admin-auth/addReferee" element={<AdminAddReferee />} />
+        <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
         <Route path="*" element={<ErrorPage />} />
         </>
         :
