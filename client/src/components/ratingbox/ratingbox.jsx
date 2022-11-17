@@ -99,7 +99,7 @@ function RatingBox({ match_id }) {
                             <a>{clubs[club2]} <b>({club2Score})</b></a>
                         </div>
                     </div>
-                    <div className="rating-left-referee"><a href='../referee/referee-name'><b>{referee}</b></a></div>
+                    <div className="rating-left-referee"><a href={`../referee/${referee}`}><b>{referee}</b></a></div>
                 </div>
                 <div className="rating-right">
                     <Rater onRate={({rating}) => {ratingFunction(rating)}} total={5} rating={0} interactive={true}/>
