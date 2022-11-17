@@ -47,8 +47,11 @@
     ]
   },
   "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-     "proxy": "http://localhost:4800"
+    "allowedHosts": [
+      "localhost",
+      ".localhost"
+    ],
+    "proxy": "http://localhost:4800"
   },
   "devDependencies": {
     "sass": "^1.55.0"
