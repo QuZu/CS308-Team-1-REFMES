@@ -24,64 +24,61 @@ import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
 
-const clubs = ["Fenerbahçe", "Galatasaray", "Beşiktaş", "Başakşehir", "Adana Demirspor",
-"Konyaspor", "Hatayspor", "Giresunspor", "Alanyaspor", "Sivasspor",
-"Antalyaspor", "Gaziantep FK", "Ümraniyespor", "İstanbulspor", "Kasımpaşa",
-"Ankaragücü", "Trabzonspor", "Karagümrük", "Kayserispor"];
+const clubs = [
+    { name: "Fenerbahçe", src: logoFenerbahce},
+    { name: "Galatasaray", src: logoGalatasaray},
+    { name: "Beşiktaş", src: logoBesiktas},
+    { name: "Başakşehir", src: logoBasaksehir},
+    { name: "Adana Demirspor", src: logoAdanaDemirspor},
+    { name: "Konyaspor", src: logoKonyaspor},
+    { name: "Hatayspor", src: logoHatayspor},
+    { name: "Giresunspor", src: logoGiresunspor},
+    { name: "Alanyaspor", src: logoAlanyaspor},
+    { name: "Sivasspor", src: logoSivasspor},
+    { name: "Antalyaspor", src: logoAntalyaspor},
+    { name: "Gaziantep FK", src: logoGaziantepFK},
+    { name: "Ümraniyespor", src: logoUmraniyespor},
+    { name: "İstanbulspor", src: logoIstanbulspor},
+    { name: "Kasımpaşa", src: logoKasimpasa},
+    { name: "Ankaragücü", src: logoAnkaragucu},
+    { name: "Trabzonspor", src: logoTrabzonspor},
+    { name: "Karagümrük", src: logoKaragumruk},
+    { name: "Kayserispor", src: logoKayserispor},
+  ]
 
-const clubLogos = [logoFenerbahce, logoGalatasaray, logoBesiktas, logoBasaksehir, logoAdanaDemirspor,
-    logoKonyaspor, logoHatayspor, logoGiresunspor, logoAlanyaspor, logoSivasspor,
-    logoAntalyaspor, logoGaziantepFK, logoUmraniyespor, logoIstanbulspor, logoKasimpasa,
-    logoAnkaragucu, logoTrabzonspor, logoKaragumruk, logoKayserispor];
-
-function RatingBox({ match_id }) {
-    const club1 = 3; const club2 = 1; const club1Score = 2; const club2Score = 3; const referee="Cüneyt Çakır"; const weekNo=3;
+function RatingBox({ matchData }) {
 
     const [state, dispatch] = useStore();
     const {user:currentUser} = state;
-    const [matchDetailsData, setMatchDetailsData] = useState({});
+    const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
-    const [loading,setLoading] = useState(false);
+    const [isInteractive, setIsInteractive] = useState(true);
+    const [btnValue, setBtnValue] = useState("Submit");
 
-    const getMatchDetails = async() => {
-        await axios
-            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${match_id}`)
-            .then(res => {
-                setMatchDetailsData(res.data);
-                setLoading(true);
-        }).catch(err => console.log(err));
-    };
-
-    useEffect(() => {
-        getMatchDetails();
-    }, []);
-
-    console.log("Zort: ", matchDetailsData);
-    if (matchDetailsData.length == 1) {
-        const club1Score = matchDetailsData[0]["club1_goals"];
-        const club2Score = matchDetailsData[0]["club2_goals"];
-        console.log("Hadi club1:", matchDetailsData[0]["club1_goals"]);
-        console.log("Hadi club2:", matchDetailsData[0]["club2_goals"]);
-    }
-
-    function ratingFunction(rating) {
-        const newPostRating = {rating: rating, user_id: "6374a8295ac7890d97b6a182", match_id: "6374f1412ae02fddd24a4c1b", date: "2022-11-15"};
-        axios
-        .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
-        .then((res) => {
-        if (res.status === 200 && res.data.message) {
-            setErrorMessage(res.data.message);
-        } else if (res.status === 200) {
-            setErrorMessage("Your rating submitted successfully");
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (rating == 0) {
+            console.log("You have to choose a rating to submit.")
         } else {
-            setErrorMessage("Error! Please try again.");
+            const newPostRating = {rating: rating, user_id: currentUser.user.id, match_id: matchData._id, date: "2022-11-19"};
+            axios
+            .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
+            .then((res) => {
+                if (res.status === 200 && res.data.message) {
+                    setErrorMessage(res.data.message);
+                } else if (res.status === 200) {
+                    setErrorMessage("Your rating submitted successfully");
+                } else {
+                    setErrorMessage("Error! Please try again.");
+                }
+            }).catch((err) => {
+                console.log("Error: ", err);
+                setErrorMessage("Error! Please try again.");
+            });
+            setIsInteractive(false);
+            setBtnValue("Saved");
         }
-        }).catch((err) => {
-            console.log("Error: ", err);
-            setErrorMessage("Error! Please try again.");
-        });
     }
-    
 
     return (
         <>
@@ -90,19 +87,24 @@ function RatingBox({ match_id }) {
                 <div className="rating-left">
                     <div className="rating-left-match">
                         <div className="rating-team">
-                            <img src={clubLogos[club1]}/>
-                            <a>{clubs[club1]} <b>({club1Score})</b></a>
+                            <img src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
+                            <a>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></a>
                         </div>
                         <a> vs. </a>
                         <div className="rating-team">
-                            <img src={clubLogos[club2]}/>
-                            <a>{clubs[club2]} <b>({club2Score})</b></a>
+                            <img src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
+                            <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
                         </div>
                     </div>
-                    <div className="rating-left-referee"><a href='../referee/referee-name'><b>{referee}</b></a></div>
+                    <div className="rating-left-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
                 </div>
                 <div className="rating-right">
-                    <Rater onRate={({rating}) => {ratingFunction(rating)}} total={5} rating={0} interactive={true}/>
+                    <Rater onRate={({rating}) => {setRating(rating);}} total={5} rating={0} interactive={isInteractive}/>
+                </div>
+                <div>
+                <form onSubmit={handleSubmit}>
+                    <input type="submit" name="submitButton" className="btn btn-success" value={`${btnValue}`}/>
+                </form>
                 </div>
             </div>
         </div>
