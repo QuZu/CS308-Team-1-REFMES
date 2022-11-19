@@ -7,15 +7,15 @@ const MatchSchema = new Schema({
     required: true
   },
   referee_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   },
   club1_id:{
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   },
   club2_id:{
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   },
   club1_goals:{
