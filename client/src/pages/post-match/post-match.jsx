@@ -22,18 +22,10 @@ function PostMatchPage() {
         }).catch(err => console.log(err));
     };
 
-    const saveUserID = async() => {
-        await axios
-            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${weekNo}`)
-            .then(res => {
-                setMatchDetails(res.data);
-                setLoading(true);
-        }).catch(err => console.log(err));
-    };
-
     useEffect(() => {
         getMatchDetails();
     }, []);
+
     return(
         <div>
             <AppNavBar/>

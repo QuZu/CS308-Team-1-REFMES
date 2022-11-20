@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import Rater from 'react-rater';
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useStore } from "../../store/store";
 import "../ratingbox/ratingbox.css";
@@ -106,6 +107,9 @@ function RatingBox({ matchData }) {
                     <input type="submit" name="submitButton" className="btn btn-success" value={`${btnValue}`}/>
                 </form>
                 </div>
+            </div>
+            <div className="comment-container">
+                <div><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
             </div>
         </div>
         </>
