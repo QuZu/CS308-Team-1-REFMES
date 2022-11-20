@@ -71,4 +71,42 @@ router.get("/getMatchDetails/:weekNo", async(req, res) => {
     }
 });
 
+router.get("/getSingleMatchDetails/:matchID", async(req, res) => {
+    try {
+       await Match.aggregate(
+            [{$lookup:
+                {
+                    from:"referees",
+                    localField:"referee_id",
+                    foreignField:"_id",
+                    as:"ref_info"
+                }
+            },
+            {$lookup:
+                {
+                    from:"clubs",
+                    localField:"club1_id",
+                    foreignField:"_id",
+                    as:"club1_info"
+                }
+            },
+            {$lookup:
+                {
+                    from:"clubs",
+                    localField:"club2_id",
+                    foreignField:"_id",
+                    as:"club2_info"
+                }
+            },
+            { $match: { $expr : { $eq: [ '$_id' , { $toObjectId: req.params.matchID} ] } } }
+            ]
+            ).then(result=>{
+                res.json(result);
+            })
+    } catch (err) {
+        res.status(500).json(err);
+        console.log("Could not get match details");
+    }
+});
+
 module.exports = router;
