@@ -1,0 +1,13 @@
+.clubcard {
+
+    width: 18rem;
+    height: 18rem;
+    float:left;
+    border-style: solid;
+    border-color: brown;
+    margin: 2rem;
+
+}
+img{
+    border-radius: 15px;
+}
