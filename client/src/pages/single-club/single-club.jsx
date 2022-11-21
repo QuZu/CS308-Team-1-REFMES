@@ -82,54 +82,54 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
 
   return(
       
-    <div>
-        <AppNavBar/>
-
-        <div className = "club-general-info">
-          <div className = "club-logo"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {result} alt = "Fenerbahce logo" /> </a> </div>
-          <div className = "club-info">
-            <div className = "c-i-h"> <h1 id = "c-info-head"> {ClubData.full_name} </h1> <br/> </div>
-            <div className = "c-i-t1"> <p className="c-info-text"> Founded: {ClubData.founded}</p> <br/> </div>
-            <div className = "c-i-t2"> <p className="c-info-text"> Stadium informations: {ClubData.stadium}</p> </div>
-            <div className = "c-i-g"> <p className="c-info-text"> {ClubData.full_name} ({ClubData.founded}) </p> 
+    <div className="col">
+      
+        <div className="row"> <AppNavBar/> </div>
+        <div id = "club-info-section" className = "row">
+          <div id = "club-logo" className = "col-4"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {result} alt = "Fenerbahce logo" /> </a> </div>
+          <div id = "club-info" className="col-8">
+            <div id = "c-i-h"  className="row"> <h1 id = "c-info-head"> {ClubData.full_name} </h1> <br/> </div>
+            <div id = "c-i-t1" className="row"> <p className="c-info-text"> Founded: {ClubData.founded}</p> <br/> </div>
+            <div id = "c-i-t2" className="row"> <p className="c-info-text"> Stadium informations: {ClubData.stadium}</p> </div>
+            <div id = "c-i-g"  className="row"> <p className="c-info-text"> {ClubData.full_name} ({ClubData.founded}) </p> 
             <p className="c-info-text"> {ClubData.info}</p>
             </div>
           </div>
         </div>
-        <div className = "players-twitter-section">
-          <div className = "players-section"> 
-            <div className = "row d-flex-justify-content-center"> <h2> Current list of players</h2> 
-            <div className = "col-8 ">
-              <table  className= "players-table"> 
-                  <thead>
-                    <tr>
-                      <th>Player Name</th> <th>Jersey Number</th> <th>Age</th> <th>Height</th> <th>Foot</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  { playerlist ?
-                    (playerlist.length > 0 ?
-                      playerlist.map((item) => {
-                        
-                        return(
-                        
-                          <tr key={item.pName}>
-                           <td className="name-col">{item.pName}</td>
-                           <td>{item.jerseyNumber}</td>
-                           <td>{item.Age}</td>
-                           <td>{item.height}</td>
-                           <td>{item.Foot}</td>
-                          </tr>
-                        );
-                      }) : <></>)            :<></>                  
-                  }
-                  </tbody>
-              </table>
-              </div>
+        
+        <div id = "player-list-section" className = "row"> 
+          <div id = "table-head" className = "col container text-center"> <h2> Current list of players</h2> 
+         
+          <div id = "table" className = "col-8">
+            <table  className= "players-table"> 
+                <thead>
+                  <tr>
+                    <th>Player Name</th> <th>Jersey Number</th> <th>Age</th> <th>Height</th> <th>Foot</th>
+                  </tr>
+                </thead>
+                <tbody>
+                { playerlist ?
+                  (playerlist.length > 0 ?
+                    playerlist.map((item) => {
+                      
+                      return(
+                      
+                        <tr key={item.pName}>
+                          <td className="name-col">{item.pName}</td>
+                          <td>{item.jerseyNumber}</td>
+                          <td>{item.Age}</td>
+                          <td>{item.height}</td>
+                          <td>{item.Foot}</td>
+                        </tr>
+                      );
+                    }) : <></>)            :<></>                  
+                }
+                </tbody>
+            </table>
             </div>
+            
           </div>
         </div>
-
     </div>
      
   )
