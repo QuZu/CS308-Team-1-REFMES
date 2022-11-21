@@ -85,7 +85,7 @@ function PostCommentBox({ matchData }) {
     
     return (
         <>
-       <div className="outer-container">
+       <div className="comment-outer-container">
             <div className="commentbox-container">
                 <div className="comment-match">
                     <div className="comment-team">
