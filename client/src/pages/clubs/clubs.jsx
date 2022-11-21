@@ -3,6 +3,7 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import React, {  useEffect, useState } from "react";
 import axios from "axios";
 import ClubCard from "../../components/clubs/clubCard"
+import "../clubs/clubs.css"
 
 function ClubsPage() {
 
@@ -26,7 +27,7 @@ function ClubsPage() {
     return(
         <div>
             <AppNavBar/>
-            <div>
+            <div className="clubs-body">
             { ClubsData ?
                     (ClubsData.length > 0 ?
                       ClubsData.map((item) => {
