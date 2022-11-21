@@ -57,11 +57,15 @@ function RatingBox({ matchData }) {
     const [btnValue, setBtnValue] = useState("Submit");
     const [ratingEntered, setRatingEntered] = useState(true);
     const [btnDisabled, setBtnDisabled] = useState(false);
+    const [day, setDay] = useState("");
+    const [month, setMonth] = useState("");
+    const [year, setYear] = useState("");
+
+    const monthSet = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (rating == 0) {
-            console.log("You have to choose a rating to submit.")
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
@@ -80,6 +84,10 @@ function RatingBox({ matchData }) {
                     console.log("Error: ", err);
                     setErrorMessage("Error! Please try again.");
                 });
+            const date = new Date();
+            setDay(date.getDate());
+            setMonth(monthSet[date.getMonth()]);
+            setYear(date.getFullYear());
             setIsInteractive(false);
             setBtnValue("Saved");
             setBtnDisabled(true);
@@ -90,10 +98,13 @@ function RatingBox({ matchData }) {
         await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getPostRating/${matchData._id}/${currentUser.user.id}`).then(res => {
             setRating(res.data);
             if (res.data == []) {
-                console.log("boş");
+                console.log("Empty");
             } else {
-                console.log(res.data[0].rating);
                 setRating(res.data[0].rating);
+                const date = new Date(res.data[0].date);
+                setDay(date.getDate());
+                setMonth(monthSet[date.getMonth()]);
+                setYear(date.getFullYear());
                 setIsInteractive(false);
                 setBtnValue("Saved");
                 setBtnDisabled(true);
@@ -107,7 +118,7 @@ function RatingBox({ matchData }) {
 
     return (
         <>
-        <div className="outer-container">
+        <div className="rating-outer-container">
             <div className="rating-container">
                 <div className="rating-left">
                     <div className="rating-left-match">
@@ -121,20 +132,21 @@ function RatingBox({ matchData }) {
                             <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
                         </div>
                     </div>
-                    <div className="rating-left-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
                 </div>
                 <div className="rating-right">
-                    <Rater onRate={({rating}) => {setRating(rating);}} total={5} rating={rating} interactive={isInteractive}/>
+                    <div className="rating-right-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
+                    <Rater onRate={({rating}) => {setRating(rating); setRatingEntered(true);}} total={5} rating={rating} interactive={isInteractive}/>
+                    {isInteractive ? <></> : <div className="rating-right-date">{month} {day}, {year}</div>}
+                    {ratingEntered ? <></> : <div className="rating-right-error"><a>Choose a rating, please!</a><br/></div>}
                 </div>
-                <div>
+                <div className="rating-submit">
                 <form onSubmit={handleSubmit}>
                     <input type="submit" name="submitButton" disabled={btnDisabled} className="btn btn-success" value={`${btnValue}`}/>
                 </form>
                 </div>
             </div>
-            <div className="comment-container">
-                {ratingEntered ? <></>: <div style={{display: {ratingEntered}}}><a>No rating selected.</a><br/></div>}
-                <div><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
+            <div className="rating-comment-container">
+                <div className="rating-comment-add-button"><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
             </div>
         </div>
         </>

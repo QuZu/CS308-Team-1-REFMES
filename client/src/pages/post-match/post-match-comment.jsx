@@ -30,7 +30,7 @@ function PostMatchCommentPage() {
     return(
         <div>
             <AppNavBar/>
-            <h1 style={{textAlign: "center", marginTop: "172px", marginBottom: "60px"}}>Post-Match Comment Page</h1>
+            <h1 style={{textAlign: "center", marginTop: "144px", marginBottom: "60px"}}>Post-Match Comment Page</h1>
             {loading && matchDetails ?
                 <div className="matches">
                     <PostCommentBox matchData={matchDetails}/>
