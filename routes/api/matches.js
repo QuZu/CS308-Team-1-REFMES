@@ -3,6 +3,8 @@ const { response } = require("express");
 const router = express.Router();
 require("dotenv").config();
 const Match = require('../../models/matchModel');
+const Club = require('../../models/clubModel');
+const Referee = require("../../models/refereeModel");
 
 router.post("/addMatch", async(req, res) => {
     const {week_no, referee_id, club1_id, club2_id, club1_goals, club2_goals} = req.body;
@@ -32,7 +34,6 @@ router.get("/getMatchDetailss/:matchID", async(req, res) => {
         console.log("zortladik");
     }
 });
-
 router.get("/getMatchDetails/:weekNo", async(req, res) => {
     try {
        await Match.aggregate(
@@ -65,7 +66,7 @@ router.get("/getMatchDetails/:weekNo", async(req, res) => {
             ).then(result=>{
                 res.json(result);
             })
-    } catch (err) {
+            } catch (err) {
         res.status(500).json(err);
         console.log("Could not get match details");
     }

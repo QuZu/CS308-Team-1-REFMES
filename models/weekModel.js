@@ -7,11 +7,11 @@ const WeekSchema = new Schema({
     required: true
   },
   start_date: {
-    type: String,
+    type: Date,
     required: true
   },
   end_date:{
-    type: String,
+    type: Date,
     required: true
   }
 });

@@ -58,6 +58,7 @@ function App() {
         <Route path="/referees" element={<RefereesPage />} />
         <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/post-comment" element={<PostCommentPage/>} />
         </>
 }
       </Routes>
