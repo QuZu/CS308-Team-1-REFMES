@@ -51,6 +51,15 @@ router.get("/getComments/:refid", async(req, res) => {
                         as:"user_info"
                     }
                 },
+                {$lookup:
+                    {
+                        from:"matches",
+                        localField:"match_id",
+                        foreignField:"_id",
+                        as:"match_info"
+                    }
+                
+                },
                 {$match:
                     {
                         referee_id:mongoose.Types.ObjectId(req.params.refid)

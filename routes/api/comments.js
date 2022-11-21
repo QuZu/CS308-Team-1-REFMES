@@ -3,6 +3,7 @@ const { response } = require("express");
 const router = express.Router();
 require("dotenv").config();
 const Comment = require('../../models/commentModel');
+const Club=require("../../models/clubModel")
 
 router.post("/sendComment", async(req, res) => {
     const {comment, user_id, match_id, referee_id} = req.body;
@@ -20,5 +21,4 @@ router.post("/sendComment", async(req, res) => {
         res.status(400).json({ error: e.message });
     }
 });
-  
 module.exports = router;
