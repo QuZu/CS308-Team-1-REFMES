@@ -4,8 +4,35 @@ const router = express.Router();
 require("dotenv").config();
 const Week = require('../../models/weekModel');
 
-router.post("/getWeek", async(req, res) => {
-    console.log(1);
+router.get("/getWeek", async(req, res) => {
+    try{
+        const currentdate=new Date();
+        console.log("Backenddeyim date: ",currentdate);
+        await Week.find({})
+        .then(res=>{
+            res.json(result);
+        }).catch((err) => {
+            throw err;
+        });
+    }catch (err) {
+        res.status(500).json(err.response);
+        console.log("Could not get week for this week");
+    }
 });
-
+router.post("/setWeek", async(req, res) => {
+    const{ weekno,start_Date,end_Date}=req.body;
+    try {
+        const newWeek=new Week({week_no:weekno,start_date:start_Date,end_date:end_Date});
+        const savedweek=await newWeek.save();
+        res.status(200).json({
+            savedweek: {
+                week_no:savedweek.week_no,
+                start_date:savedweek.start_date,
+                end_date:savedweek.end_date
+            }});
+    } catch (err) {
+        res.status(500).json(err);
+        console.log("Could not get all match for this week");
+    }
+});
 module.exports = router;
