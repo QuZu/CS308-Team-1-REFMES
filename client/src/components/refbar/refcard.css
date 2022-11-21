@@ -1,3 +1,13 @@
-img{
+.rounded img{
     border-radius: 15px;
+}
+.ref-hover-effect a{
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 500;
+
+}
+
+.ref-hover-effect a:hover{
+    color:rgb(255, 255, 255);
 }

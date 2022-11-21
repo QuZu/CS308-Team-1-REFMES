@@ -65,15 +65,15 @@ function RefCard({r_username,Refname}) {
 
     return(
         
-                            <div className="bg-color rounded shadow-sm pt-5 pb-2 px-4">
-                                <img  src={result}  width="90" height="90"></img>
-                                  <div className="mt-2">
-                                  <a href={`/referee/${r_username}`}>{Refname}</a>
-                                  </div>
-                                <div>
-                                  <span className=" text-color small text-uppercase">Referee</span>
-                                </div>
-                            </div>
+            <div className="bg-color rounded shadow-sm pt-5 pb-2 px-4">
+                <img  src={result}  width="90" height="90"></img>
+                  <div className="mt-2 ref-hover-effect">
+                  <a href={`/referee/${r_username}`}>{Refname}</a>
+                  </div>
+                <div>
+                  <span className=" text-color small text-uppercase">Referee</span>
+                </div>
+            </div>
                       
     );
     
