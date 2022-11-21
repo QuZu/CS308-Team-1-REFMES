@@ -86,13 +86,13 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
       
         <div className="row"> <AppNavBar/> </div>
         <div id = "club-info-section" className = "row">
-          <div id = "club-logo" className = "col-4"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {result} alt = "Fenerbahce logo" /> </a> </div>
-          <div id = "club-info" className="col-8">
+          <div id = "club-logo" className = "col-3"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {result} alt = "Fenerbahce logo" /> </a> </div>
+          <div id = "club-info" className="col-9">
             <div id = "c-i-h"  className="row"> <h1 id = "c-info-head"> {ClubData.full_name} </h1> <br/> </div>
             <div id = "c-i-t1" className="row"> <p className="c-info-text"> Founded: {ClubData.founded}</p> <br/> </div>
             <div id = "c-i-t2" className="row"> <p className="c-info-text"> Stadium informations: {ClubData.stadium}</p> </div>
             <div id = "c-i-g"  className="row"> <p className="c-info-text"> {ClubData.full_name} ({ClubData.founded}) </p> 
-            <p className="c-info-text"> {ClubData.info}</p>
+            <p className="c-g-info"> {ClubData.info}</p>
             </div>
           </div>
         </div>
@@ -127,7 +127,6 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
                 </tbody>
             </table>
             </div>
-            
         </div>
     </div>
      
