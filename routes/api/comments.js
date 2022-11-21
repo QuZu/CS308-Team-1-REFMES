@@ -3,22 +3,22 @@ const { response } = require("express");
 const router = express.Router();
 require("dotenv").config();
 const Comment = require('../../models/commentModel');
+const Club=require("../../models/clubModel")
 
 router.post("/sendComment", async(req, res) => {
-    const {userEmail, comment} = req.body;
-    console.log(userEmail);
-    console.log(comment);
-});
+    const {comment, user_id, match_id, referee_id} = req.body;
+    timeZone = 'Europe/Istanbul';
+    const date = new Date().toLocaleString('en-US', { timeZone });
+        
+    const newComment = new Comment({ comment, user_id, match_id, referee_id, date });
 
-router.post("/sendRating", async(req, res) => {
-    const {userEmail, rating, club1, club2, weekNo} = req.body;
-    console.log("\n");
-    console.log("Email: ", userEmail);
-    console.log("Rating: ", rating);
-    console.log("Club 1: ", club1);
-    console.log("Club 2: ", club2);
-    console.log("Week No: ", weekNo);
-    console.log("\n");
+    try {
+
+        const savedComment = await newComment.save();
+        if (!savedComment) throw Error('Something went wrong while saving the post rating');
+
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
 });
-  
 module.exports = router;

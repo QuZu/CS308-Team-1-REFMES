@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 
 const PostRatingSchema = new Schema({
   rating:{
-    type: String,
+    type: Schema.Types.Number,
     required: true
   },
   user_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   },
   match_id:{
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   },
   date:{

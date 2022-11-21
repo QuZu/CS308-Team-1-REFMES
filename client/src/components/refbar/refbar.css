@@ -32,7 +32,7 @@ padding-left: 15px;
 }
 
 .grad-color {
-    background: linear-gradient(to right, #e4b2ba, rgb(232, 17, 17));
+    background: linear-gradient(to right, #262626, rgb(255, 0, 0));
 }
 
 .user-profile {

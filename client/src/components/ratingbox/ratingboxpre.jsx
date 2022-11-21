@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useStore } from "../../store/store";
 import "../ratingbox/ratingbox.css";
+import "../ratingbox/ratingboxpre.css";
 import 'react-rater/lib/react-rater.css';
 import logoFenerbahce from '../../logos/fenerbahce.png';
 import logoGalatasaray from '../../logos/galatasaray.png';
@@ -47,7 +48,7 @@ const clubs = [
     { name: "Kayserispor", src: logoKayserispor},
   ]
 
-function RatingBox({ matchData }) {
+function RatingBoxPre({ refereeData }) {
 
     const [state, dispatch] = useStore();
     const {user:currentUser} = state;
@@ -69,9 +70,9 @@ function RatingBox({ matchData }) {
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
-            const newPostRating = {rating: rating, user_id: currentUser.user.id, match_id: matchData._id};
+            const newPreRating = {rating: rating, user_id: currentUser.user.id, week_no: refereeData.week_no, referee_id: refereeData.referee_id };
             axios
-                .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
+                .post(`${process.env.REACT_APP_URL}/api/preRatings/addPreRating`, newPreRating)
                 .then((res) => {
                     if (res.status === 200 && res.data.message) {
                         setErrorMessage(res.data.message);
@@ -95,8 +96,7 @@ function RatingBox({ matchData }) {
     }
 
     const getCurrentPostRating = async()=>{
-        await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getPostRating/${matchData._id}/${currentUser.user.id}`).then(res => {
-            setRating(res.data);
+        await axios.get(`${process.env.REACT_APP_URL}/api/preRatings/getPreRating/${currentUser.user.id}/${refereeData.referee_id}/${refereeData.week_no}`).then(res => {
             if (res.data == []) {
                 console.log("Empty");
             } else {
@@ -118,23 +118,14 @@ function RatingBox({ matchData }) {
 
     return (
         <>
-        <div className="rating-outer-container">
+        <div className="rating-outer-container-pre">
             <div className="rating-container">
-                <div className="rating-left">
+                <div className="rating-left-pre">
                     <div className="rating-left-match">
-                        <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
-                            <a>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></a>
-                        </div>
-                        <a> vs. </a>
-                        <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
-                            <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
-                        </div>
+                        <div className="rating-right-referee" style={{margin: "0"}}><a href={`../referee/${refereeData.ref_info[0].r_username}`}><b>{refereeData.ref_info[0].name}</b></a></div>
                     </div>
                 </div>
-                <div className="rating-right">
-                    <div className="rating-right-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
+                <div className="rating-right-pre">
                     <Rater onRate={({rating}) => {setRating(rating); setRatingEntered(true);}} total={5} rating={rating} interactive={isInteractive}/>
                     {isInteractive ? <></> : <div className="rating-right-date">{month} {day}, {year}</div>}
                     {ratingEntered ? <></> : <div className="rating-right-error"><a>Choose a rating, please!</a><br/></div>}
@@ -145,11 +136,8 @@ function RatingBox({ matchData }) {
                 </form>
                 </div>
             </div>
-            <div className="rating-comment-container">
-                <div className="rating-comment-add-button"><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
-            </div>
         </div>
         </>
     );
   }
-  export default RatingBox;
+  export default RatingBoxPre;

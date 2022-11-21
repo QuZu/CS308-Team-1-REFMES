@@ -17,7 +17,6 @@ router.get("/getClub/:clubName", async(req, response) => {
     }catch (err){
         response.status(500).json(err);
     }
-
 });
 
 router.get("/getClubs", async(req, response) => {
