@@ -3,8 +3,9 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import { useNavigate } from "react-router";
 import React, { useCallback, useState, useEffect } from "react";
 import axios from "axios";
+import PostCommentBox from "../../components/post-comment/post-comment.jsx"
 import { useParams } from "react-router-dom";
-import AddComment from "../../components/post-comment/post-comment.jsx";
+import * as ReactBootstrap from "react-bootstrap";
 
 function PostMatchCommentPage() {
     const params = useParams();
@@ -17,7 +18,7 @@ function PostMatchCommentPage() {
         await axios
             .get(`${process.env.REACT_APP_URL}/api/matches/getSingleMatchDetails/${matchID}`)
             .then(res => {
-                setMatchDetails(res.data[0]);
+                setMatchDetails((res.data ?? [])[0]);
                 setLoading(true);
         }).catch(err => console.log(err));
     };
@@ -28,10 +29,18 @@ function PostMatchCommentPage() {
 
     return(
         <div>
+
             <AppNavBar/>
-            <h1 style={{textAlign: "center", marginTop: "172px"}}>Post Match Comment Page</h1>
-            <h2 style={{textAlign: "center", marginTop: "172px"}}>{matchID}</h2>
-            <AddComment matchData={matchDetails}/>
+            <h1 style={{textAlign: "center", marginTop: "172px", marginBottom: "60px"}}>Post-Match Comment Page</h1>
+            {loading && matchDetails ?
+                <div className="matches">
+                    <PostCommentBox matchData={matchDetails}/>
+                </div>
+            :
+            <div className="d-flex justify-content-center">
+                (<ReactBootstrap.Spinner animation="border"/>)
+            </div>
+            }
         </div>
     )
 }
