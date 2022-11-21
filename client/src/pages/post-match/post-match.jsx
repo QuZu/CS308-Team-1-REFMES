@@ -5,10 +5,10 @@ import { useNavigate } from "react-router";
 import React, { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import "../post-match/post-match.css";
+import * as ReactBootstrap from "react-bootstrap";
 
 function PostMatchPage() {
     const weekNo = "3";
-    const userID = "6374a8295ac7890d97b6a182";
 
     const [matchDetails, setMatchDetails] = useState([]);
     const [loading,setLoading] = useState(false);
@@ -32,11 +32,17 @@ function PostMatchPage() {
             <div>
                 <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Post-Match Rating for Week {weekNo}</h1>
             </div>
-            <div className="matches">
-            {matchDetails.map((singleMatchDetails) => {
-                return(<RatingBox key={singleMatchDetails._id} matchData={singleMatchDetails} userID={userID}/>)
-            })}
-            </div>
+            {loading && matchDetails ?
+                <div className="matches">
+                {matchDetails.map((singleMatchDetails) => {
+                    return(<RatingBox key={singleMatchDetails._id} matchData={singleMatchDetails}/>)
+                })}
+                </div>
+                :
+                <div className="d-flex justify-content-center">
+                    <ReactBootstrap.Spinner animation="border"/>
+                </div>
+            }
         </div>
     )
 }

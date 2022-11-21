@@ -105,7 +105,7 @@ function PostCommentBox({ matchData }) {
                 <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <br/><textarea {...register("comment")} className="form-control" onChange={(e)=>setComment(e.target.value)} name="comment" cols="75" rows="5" placeholder="Type your comment here.."></textarea>
-                    <br/><br/><input type="submit" name="submitButton" className="btn btn-success" value={`Send`}/>
+                    <br/><input type="submit" name="submitButton" className="btn btn-success" value={`Send`}/>
                 </form>
                 </div>
             </div>
