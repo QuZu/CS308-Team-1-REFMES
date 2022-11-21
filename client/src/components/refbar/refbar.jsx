@@ -209,9 +209,10 @@ console.log(list);
                       className="container d-flex justify-content-center padding-b"
                     >
                       <CommentBox
-                       commentPerson={item.user_info[0].username}
+                       commentPerson={item.user_info[0].full_name}
                        pComment={item.comment}
-                       Date={item.date}
+                       myDate={item.date}
+                       MatchData={item.match_info}
                        >
                       </CommentBox>
                     </div>
