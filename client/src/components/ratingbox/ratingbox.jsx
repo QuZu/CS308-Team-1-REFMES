@@ -29,6 +29,7 @@ const clubs = ["Fenerbahçe", "Galatasaray", "Beşiktaş", "Başakşehir", "Adan
 "Antalyaspor", "Gaziantep FK", "Ümraniyespor", "İstanbulspor", "Kasımpaşa",
 "Ankaragücü", "Trabzonspor", "Karagümrük", "Kayserispor"];
 
+
 const clubLogos = [logoFenerbahce, logoGalatasaray, logoBesiktas, logoBasaksehir, logoAdanaDemirspor,
     logoKonyaspor, logoHatayspor, logoGiresunspor, logoAlanyaspor, logoSivasspor,
     logoAntalyaspor, logoGaziantepFK, logoUmraniyespor, logoIstanbulspor, logoKasimpasa,

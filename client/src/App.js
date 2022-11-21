@@ -22,7 +22,6 @@ import SingleClubPage from "./pages/single-club/single-club";
 import ClubsPage from "./pages/clubs/clubs";
 import MatchesPage from "./pages/matches/matches";
 import RefereesPage from "./pages/referees/referees";
-import PostCommentPage from "./pages/post-match-comment/post-match-comment"
 
 function App() {
   const [state] = useStore();
@@ -59,7 +58,6 @@ function App() {
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/post-comment" element={<PostCommentPage/>} />
         </>
 }
       </Routes>
