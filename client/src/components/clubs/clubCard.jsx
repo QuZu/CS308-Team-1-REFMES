@@ -55,16 +55,16 @@ function ClubCard({clubName, asciName}){
     // logo = related image source
     
     var logo=(c_images.find(({id})=>id === asciName )).src;
-    
 
     return(
         
-        <div  className="card clubcard">
+        <a href = {`/club/${asciName}`}> <div  className="card clubcard">
+
             <img src= {logo}  className="card-img-top" alt= {clubName}/>
-            <div className="card-body">
-                <a href = {`/club/${asciName}`}> <h5 className="card-title">{clubName}</h5> </a>
-            </div>
-        </div>
+            <div className="card-body c_title">
+                <h3 className="card-title">{clubName}</h3> 
+            </div> 
+        </div> </a>
        
     )
 }
