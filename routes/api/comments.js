@@ -5,9 +5,9 @@ require("dotenv").config();
 const Comment = require('../../models/commentModel');
 
 router.post("/sendComment", async(req, res) => {
-    const {userEmail, comment} = req.body;
-    console.log(userEmail);
-    console.log(comment);
+    const {userid, usercomment} = req.body;
+    console.log(userid);
+    console.log(usercomment);
 });
 
 router.post("/sendRating", async(req, res) => {
