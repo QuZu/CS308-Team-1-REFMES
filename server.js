@@ -25,6 +25,7 @@ app.use('/api/postRatings',require('./routes/api/postRatings'));
 app.use('/api/preRatings',require('./routes/api/preRatings'));
 app.use('/api/clubs',require('./routes/api/clubs'));
 app.use('/api/weeks',require('./routes/api/weeks'));
+app.use('/api/refereesOfWeek',require('./routes/api/refereesOfWeek'));
 
 if (process.env.NODE_ENV === 'production') {
     // Exprees will serve up production assets
