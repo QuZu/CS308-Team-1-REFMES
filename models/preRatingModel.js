@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PreRatingSchema = new Schema({
-  total_ratings:{
-    type: String,
+  rating:{
+    type: Schema.Types.Number,
     required: true
   },
-  rating_count: {
-    type: String,
+  user_id: {
+    type: Schema.Types.ObjectId,
     required: true
   },
   week_no:{
@@ -16,6 +16,10 @@ const PreRatingSchema = new Schema({
   },
   referee_id:{
     type: Schema.Types.ObjectId,
+    required: true
+  },
+  date:{
+    type: Date,
     required: true
   }
 });
