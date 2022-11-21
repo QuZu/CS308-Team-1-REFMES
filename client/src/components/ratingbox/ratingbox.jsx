@@ -55,31 +55,55 @@ function RatingBox({ matchData }) {
     const [errorMessage, setErrorMessage] = useState("");
     const [isInteractive, setIsInteractive] = useState(true);
     const [btnValue, setBtnValue] = useState("Submit");
+    const [ratingEntered, setRatingEntered] = useState(true);
+    const [btnDisabled, setBtnDisabled] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (rating == 0) {
             console.log("You have to choose a rating to submit.")
+            setRatingEntered(false);
         } else {
-            const newPostRating = {rating: rating, user_id: currentUser.user.id, match_id: matchData._id, date: "2022-11-19"};
+            setRatingEntered(true);
+            const newPostRating = {rating: rating, user_id: currentUser.user.id, match_id: matchData._id};
             axios
-            .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
-            .then((res) => {
-                if (res.status === 200 && res.data.message) {
-                    setErrorMessage(res.data.message);
-                } else if (res.status === 200) {
-                    setErrorMessage("Your rating submitted successfully");
-                } else {
+                .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
+                .then((res) => {
+                    if (res.status === 200 && res.data.message) {
+                        setErrorMessage(res.data.message);
+                    } else if (res.status === 200) {
+                        setErrorMessage("Your rating submitted successfully");
+                    } else {
+                        setErrorMessage("Error! Please try again.");
+                    }
+                }).catch((err) => {
+                    console.log("Error: ", err);
                     setErrorMessage("Error! Please try again.");
-                }
-            }).catch((err) => {
-                console.log("Error: ", err);
-                setErrorMessage("Error! Please try again.");
-            });
+                });
             setIsInteractive(false);
             setBtnValue("Saved");
+            setBtnDisabled(true);
         }
     }
+
+    const getCurrentPostRating = async()=>{
+        await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getPostRating/${matchData._id}/${currentUser.user.id}`).then(res => {
+            setRating(res.data);
+            if (res.data == []) {
+                console.log("boş");
+            } else {
+                console.log(res.data[0].rating);
+                setRating(res.data[0].rating);
+                setIsInteractive(false);
+                setBtnValue("Saved");
+                setBtnDisabled(true);
+            }
+        }).catch(err => console.log(err))
+    };
+
+    useEffect(() => {
+        getCurrentPostRating();
+    }, []);
 
     return (
         <>
@@ -100,15 +124,16 @@ function RatingBox({ matchData }) {
                     <div className="rating-left-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
                 </div>
                 <div className="rating-right">
-                    <Rater onRate={({rating}) => {setRating(rating);}} total={5} rating={0} interactive={isInteractive}/>
+                    <Rater onRate={({rating}) => {setRating(rating);}} total={5} rating={rating} interactive={isInteractive}/>
                 </div>
                 <div>
                 <form onSubmit={handleSubmit}>
-                    <input type="submit" name="submitButton" className="btn btn-success" value={`${btnValue}`}/>
+                    <input type="submit" name="submitButton" disabled={btnDisabled} className="btn btn-success" value={`${btnValue}`}/>
                 </form>
                 </div>
             </div>
             <div className="comment-container">
+                {ratingEntered ? <></>: <div style={{display: {ratingEntered}}}><a>No rating selected.</a><br/></div>}
                 <div><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
             </div>
         </div>
