@@ -98,7 +98,7 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
         </div>
         
         <div id = "player-list-section" className = "row"> 
-          <div id = "table-head" className = "col container text-center"> <h2> Current list of players</h2> 
+          <div id = "table-head" className = "col container text-center"> <h2> Current List of Players</h2> </div>
          
           <div id = "table" className = "col-8">
             <table  className= "players-table"> 
@@ -128,7 +128,6 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
             </table>
             </div>
             
-          </div>
         </div>
     </div>
      
