@@ -155,3 +155,12 @@ tr:hover {background-color: coral;}
 .name-col {
     width: 100px;;
 }
+
+#table {
+    margin-left:16.5%;
+    margin-right:16.5%;
+    margin-top:3%;
+    overflow-x:auto;
+}
+
+
