@@ -1,6 +1,4 @@
 
-
-
 .rounded:hover{
     background: rgba(255, 0, 0, 0.93);
     text-decoration: none;
@@ -22,12 +20,4 @@
     color:rgb(255, 255, 255);
     font-weight: 700;
     letter-spacing: 2px;
-}
-a {
-    color:rgb(0, 0, 0);
-    text-decoration: none;
-    font-weight: 500;
-}
-a:hover{
-    color:rgb(255, 255, 255);
 }
