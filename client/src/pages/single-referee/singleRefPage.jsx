@@ -32,7 +32,7 @@ function RefPage() {
           </>
         :  
         <div className="d-flex justify-content-center">
-           (<ReactBootstrap.Spinner animation="border"/>)
+           <ReactBootstrap.Spinner animation="border"/>
         </div>
         }
       </div>

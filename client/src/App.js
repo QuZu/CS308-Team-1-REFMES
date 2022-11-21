@@ -22,12 +22,11 @@ import SingleClubPage from "./pages/single-club/single-club";
 import ClubsPage from "./pages/clubs/clubs";
 import MatchesPage from "./pages/matches/matches";
 import RefereesPage from "./pages/referees/referees";
+import PostMatchCommentPage from "./pages/post-match/post-match-comment";
 
 function App() {
   const [state] = useStore();
   const { user: currentUser } = state;
-  console.log("state")
-  console.log(state)
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
       <Routes>
@@ -57,7 +56,9 @@ function App() {
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
+        <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         </>
 }
       </Routes>

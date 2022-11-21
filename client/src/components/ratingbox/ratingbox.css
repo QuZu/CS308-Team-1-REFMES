@@ -17,7 +17,7 @@
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     background-color: #fff;
     margin: 2em 2em 0em 2em;
-    padding: 3em 2em 3em 2em;
+    padding: 4.5em 2em 3em 2em;
     border-radius: 10px;
     max-width: 900px;
     flex: 1;
@@ -82,9 +82,10 @@
 .comment-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
-    margin-top: 3em;
+    margin-top: 0.75em;
+    font-size: 0.75em;
 }
 
 .comment-content {
@@ -105,7 +106,7 @@
 .comment-menu {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .edit-button {

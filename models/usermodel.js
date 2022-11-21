@@ -21,11 +21,11 @@ const UserSchema = new Schema({
     required: true
   },
   fan_of:{
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   },
   social_media:{
-    type: Array
+    type: Schema.Types.Array
   }
 });
 

@@ -5,7 +5,11 @@ require("dotenv").config();
 const PostRating = require('../../models/postRatingModel');
 
 router.post("/addPostRating", async(req, res) => {
-    const {rating, user_id, match_id, date} = req.body;
+    const {rating, user_id, match_id} = req.body;
+    
+    timeZone = 'Europe/Istanbul';
+    const date = new Date().toLocaleString('en-US', { timeZone });
+    
     const newPostRating = new PostRating({ rating, user_id, match_id, date });
 
     try {
@@ -20,9 +24,9 @@ router.post("/addPostRating", async(req, res) => {
     }
 });
 
-router.get("/getPostRating/:userID", async(req, res) => {
+router.get("/getPostRating/:matchID/:userID", async(req, res) => {
     try {
-        await PostRating.find({ user_id: req.params.userID}).then((result) => {
+        await PostRating.find({ user_id: req.params.userID, match_id: req.params.matchID }).then((result) => {
             res.json(result);
         }).catch((err) => {
             throw err;
