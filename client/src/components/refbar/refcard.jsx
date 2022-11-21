@@ -64,9 +64,9 @@ function RefCard({r_username,Refname}) {
   }
 
     return(
-        <div key={r_username} className="col-xl-3 col-sm-6 mb-5">
+        
                             <div className="bg-color rounded shadow-sm pt-5 pb-2 px-4">
-                                <img  src={result}   width="90" height="90"></img>
+                                <img  src={result}  width="90" height="90"></img>
                                   <div className="mt-2">
                                   <a href={`/referee/${r_username}`}>{Refname}</a>
                                   </div>
@@ -74,7 +74,7 @@ function RefCard({r_username,Refname}) {
                                   <span className=" text-color small text-uppercase">Referee</span>
                                 </div>
                             </div>
-                        </div>
+                      
     );
     
 }
