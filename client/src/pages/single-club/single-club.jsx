@@ -81,14 +81,14 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   var playerlist = ClubData.playerArray;
 
   return(
-      
+     
+    <div className="container-fluid">
     <div className="col-12">
-      
         <div className="row"> <AppNavBar/> </div>
         <div id = "club-info-section" className = "row">
           <div id = "club-logo" className = "col-3"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {result} alt = "Fenerbahce logo" /> </a> </div>
           <div id = "club-info" className="col-9">
-            <div id = "c-i-h"  className="row"> <h1 id = "c-info-head"> {ClubData.full_name} </h1> <br/> </div>
+            <div id = "c-i-h"  className="row"> <h1 id = "c-info-head"> <b>{ClubData.full_name}</b> </h1> <br/> </div>
             <div id = "c-i-t1" className="row"> <p className="c-info-text"> Founded: {ClubData.founded}</p> <br/> </div>
             <div id = "c-i-t2" className="row"> <p className="c-info-text"> Stadium informations: {ClubData.stadium}</p> </div>
             <div id = "c-i-g"  className="row"> <p className="c-info-text"> {ClubData.full_name} ({ClubData.founded}) </p> 
@@ -97,10 +97,11 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
           </div>
         </div>
         
-        <div id = "player-list-section" className = "row"> 
-          <div id = "table-head" className = "col container text-center"> <h2> Current List of Players</h2> </div>
+        <div  className = "row"> 
+          <div id = "table-head" className = "row container text-center"> <h2> Current List of Players</h2> </div>
          
-          <div id = "table" className = "col-8">
+          <div  className = "row">
+            <div id = "table" className="col-8">
             <table  className= "players-table"> 
                 <thead className="players-table-head">
                   <tr>
@@ -127,9 +128,10 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
                 </tbody>
             </table>
             </div>
+            </div>
         </div>
     </div>
-     
+    </div>
   )
 }
 export default SingleClubPage
