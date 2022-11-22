@@ -3,24 +3,31 @@
     width: 22rem;
     height: 25rem;
     float:left;
-    border-style: solid;
-    border-color: brown;
     margin: 3rem;
     padding: 2rem;
     padding-top: 1rem;
-    background-color: rgb(145, 7, 7);
+    border-radius: 40px;
 }
-img{
-    border-radius: 15px;
+.c-card-img{
+
+    width:80%;
+    height:auto;
     margin-bottom: 1rem;
+
 }
 
 .c_title {
     
     text-align: center;
-    color: white;
+    color: #e51937;
     height: 6rem;
 
+}
+.club-card-image {
 
+    display:flex;
+    justify-content: center;
+    margin-top: 2em;
+    
 }
 
