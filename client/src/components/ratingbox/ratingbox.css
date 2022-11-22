@@ -113,4 +113,6 @@
 .rating-submit {
     display: flex;
     align-items: center;
+    flex: 1.25;
+    justify-content: center;
 }
