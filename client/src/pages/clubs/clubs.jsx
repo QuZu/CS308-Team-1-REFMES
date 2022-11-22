@@ -27,6 +27,9 @@ function ClubsPage() {
     return(
         <div>
             <AppNavBar/>
+            <div>
+                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Clubs Page </h1>
+            </div>
             <div className="clubs-body">
             { ClubsData ?
                     (ClubsData.length > 0 ?
