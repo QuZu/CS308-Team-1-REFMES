@@ -3,7 +3,6 @@ import "../admin-auth/addReferee.css";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import "../signup/signup.css";
 
 function AdminAddReferee(){
   const [rname,Setname] = useState("");
@@ -55,36 +54,36 @@ function AdminAddReferee(){
     //console.log(process.env.REACT_APP_URL);
     return(
         <div>
-            <h1>ADD REFEREE PAGE</h1>
+            <h1 style={{textAlign: "center", color: "red"}}>ADD REFEREE PAGE</h1>
             <div>
                 <h2 style={{textAlign:"center"}}>FILL THE FOLLOWING INFORMATION ABOUT THE NEW REFEREE:</h2>
-                <form onSubmit={handleSubmit}>
+                <form className="form_addReferee" onSubmit={handleSubmit}>
                 <div>
-                <p>Enter the name of the referee:</p>
+                <p className="p_addReferee">Enter the name of the referee:</p>
                 <input onChange={(e)=>Setname(e.target.value)}  placeholder="Name" type="text" className="btn-border input-style form-control"/>
                  </div>
               <div>
-                <p>Enter the username of the referee:</p>
+                <p className="p_addReferee">Enter the username of the referee:</p>
                 <input onChange={(e)=>Setusername(e.target.value)}  placeholder="Username" type="text" className="btn-border input-style form-control"/>
               </div>
               <div>
-                <p>Enter the birth date of the referee:</p>
+                <p className="p_addReferee">Enter the birth date of the referee:</p>
                 <input onChange={(e)=>Setbirthdate(e.target.value)}  placeholder="Birth Date" type="text" className="btn-border input-style form-control"/>
               </div>
                  <div>
-                <p>Enter the birth place of the referee:</p>
+                <p className="p_addReferee">Enter the birth place of the referee:</p>
                 <input onChange={(e)=>Setbirthplace(e.target.value)}  placeholder="Birth Place" type="text" className="btn-border input-style form-control"/>
                 </div>
                 <div>
-                <p>Enter the date of the first match that the referee ruled:</p>
+                <p className="p_addReferee">Enter the date of the first match that the referee ruled:</p>
                 <input onChange={(e)=>Setdebutdate(e.target.value)}  placeholder="Debut date" type="text" className="btn-border input-style form-control"/>
               </div>
               <div>
-                <p>Enter the date when the referee get FIFA Cockade:</p>
+                <p className="p_addReferee">Enter the date when the referee get FIFA Cockade:</p>
                 <input onChange={(e)=>Setfifadate(e.target.value)}  placeholder="FIFA Cockade date" type="text" className="btn-border input-style form-control"/>
               </div>
               <div>
-                <p>Provide a short biography of the referee:</p>
+                <p className="p_addReferee">Provide a short biography of the referee:</p>
                 <textarea onChange={(e)=>Setbio(e.target.value)} style={{width: "100%", minHeight:"80px"}} placeholder="Biography..."></textarea>
               </div>
               <div  style={{marginLeft:"150px",marginTop:"20px",marginBottom:"20px"}}>
