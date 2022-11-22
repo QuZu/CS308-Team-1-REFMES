@@ -82,7 +82,7 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
 
   return(
       
-    <div className="col">
+    <div className="col-12">
       
         <div className="row"> <AppNavBar/> </div>
         <div id = "club-info-section" className = "row">
@@ -102,9 +102,9 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
          
           <div id = "table" className = "col-8">
             <table  className= "players-table"> 
-                <thead>
+                <thead className="players-table-head">
                   <tr>
-                    <th>Player Name</th> <th>Jersey Number</th> <th>Age</th> <th>Height</th> <th>Foot</th>
+                    <th className="players-table-head-th">Player Name</th> <th className="players-table-head-th">Jersey Number</th> <th className="players-table-head-th">Age</th> <th className="players-table-head-th">Height</th> <th className="players-table-head-th">Foot</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -114,12 +114,12 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
                       
                       return(
                       
-                        <tr key={item.pName}>
+                        <tr className = "players-table-tr" key={item.pName}>
                           <td className="name-col">{item.pName}</td>
-                          <td>{item.jerseyNumber}</td>
-                          <td>{item.Age}</td>
-                          <td>{item.height}</td>
-                          <td>{item.Foot}</td>
+                          <td className="players-table-td">{item.jerseyNumber}</td>
+                          <td className="players-table-td">{item.Age}</td>
+                          <td className="players-table-td">{item.height}</td>
+                          <td className="players-table-td">{item.Foot}</td>
                         </tr>
                       );
                     }) : <></>)            :<></>                  
