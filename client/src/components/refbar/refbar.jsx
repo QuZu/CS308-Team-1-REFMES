@@ -1,33 +1,89 @@
 import React from "react";
 import "../refbar/refbar.css";
-import user_MeteKalkavan from "../refbar/mete-kalkavan.jpg";
-import user_AliPalabiyik from "../refbar/ali-palabiyik.jpg";
+import MeteKalkavan from "../refbar/refImage/mete-kalkavan.jpg";
+import AliPalabiyik from "../refbar/refImage/ali-palabiyik.jpg";
+import VolkanBayarslan from "../refbar/refImage/volkan-bayarslan.jpg"
+import MertGuzenge from "../refbar/refImage/mert-güzenge.jpg"
+import ArdaKardesler from "../refbar/refImage/arda-kardesler.png"
+import UmıtOzturk from "../refbar/refImage/umit-öztürk.jpg"
+import BahattinSimsek from "../refbar/refImage/bahattin-simsek.jpg"
+import MustafaFiliz from "../refbar/refImage/kursad-filiz.jpg"
+import ZorbayKucuk from "../refbar/refImage/zorbay-kucuk.jpg"
+import AliSansalan from "../refbar/refImage/ali-sansalan.jpg"
+import Atilla from "../refbar/refImage/atilla-karaoglan.jpg"
+import HuseyinGocek from "../refbar/refImage/huseyin-gocek.jpg"
+import SuatArslanboga from "../refbar/refImage/suat-arslanboga.jpg"
+import CagdasAltay from "../refbar/refImage/cagdas-altay.jpg"
+import Sarper from "../refbar/refImage/sarper.jpg"
+import Bitigen from "../refbar/refImage/bitigen.jpg"
+import HalilUmut from "../refbar/refImage/halil-umut.jpg"
+import ErkanOzdamar from "../refbar/refImage/erkan-ozdamar.jpg"
+import BurakSeker from "../refbar/refImage/burak-seker.jpg"
+import YasinKol from "../refbar/refImage/yasin-kol.jpg"
+import KadirSaglam from "../refbar/refImage/kadir-saglam.jpg"
+import Tugay from "../refbar/refImage/tugay-numanoglu.jpg"
+import YasarKemal from  "../refbar/refImage/yasar-kemal.jpg"
 import user_profile from"../refbar/user_profile.png"
 import CommentBox from "../comment/commentbox";
 
+import axios from "axios";
+import { useState, useEffect } from "react";
+
 function RefInfo({refName}) {
-  var list=[
-    {commentPerson:"Mert",pComment:"Hakemde baya iyiydi,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non mi eget urna tempor sollicitudin ut eu ipsum. Aliquam lobortis odio justo, ut congue mauris sodales at. Proin non ligula at diam rhoncus finibus. Nam et lobortis nulla. Ut id tortor metus. Cras porta fringilla dui, vel consectetur quam gravida sed. Vestibulum faucibus ante nunc, a faucibus magna ullamcorper eget. Sed vel risus purus."},
-    {commentPerson:"Kuzu",pComment:"Hakemde baya kötü yönetti"},
-    {commentPerson:"demo1",pComment:"Hakemde iyiydi,demo1 olarak beğendim"},
-
-];
-const picname = (refName.name).replace(" ", '');
+const [list,setList]=useState([]);
+console.log(refName._id);
+const picname = refName.r_username;
 const images = [
-  { id: "MeteKalkavan", src: user_MeteKalkavan},
-  { id: "AliPalabiyik", src: user_AliPalabiyik},
-  { id: "EnisMert", src: user_profile},
+  { id: "mete_kalkavan", src: MeteKalkavan},
+  { id: "ali_palabiyik", src: AliPalabiyik},
+  { id: "enis_mert_kuzu", src: user_profile},
+  { id:"volkan_bayarslan",src:VolkanBayarslan},
+  { id:"mert_guzenge",src:MertGuzenge},
+  { id:"arda_kardesler",src:ArdaKardesler},
+  { id:"umit_ozturk",src:UmıtOzturk},
+  { id:"bahattin_simsek",src:BahattinSimsek},
+  { id:"mustafa_kursad_filiz",src:MustafaFiliz},
+  { id:"zorbay_kucuk",src:ZorbayKucuk},
+  { id:"ali_sansalan",src:AliSansalan},
+  { id:"atilla_karaoglan",src:Atilla},
+  { id:"huseyin_gocek",src:HuseyinGocek},
+  { id:"suat_arslanboga",src:SuatArslanboga},
+  { id:"cagdas_altay",src:CagdasAltay},
+  { id:"sarper_baris_saka",src:Sarper},
+  { id:"abdulkadir_bitigen",src:Bitigen},
+  { id:"halil_umut_meler",src:HalilUmut},
+  { id:"erkan_ozdamar",src:ErkanOzdamar},
+  { id:"burak_seker",src:BurakSeker},
+  { id:"yasin_kol",src:YasinKol},
+  { id:"kadir_saglam",src:KadirSaglam },
+  { id:"tugay_kaan_numanoglu",src:Tugay},
+  { id:"yasar_kemal_ugurlu",src:YasarKemal},
 ]
+async function GetData()
+{
+ await axios.get(`${process.env.REACT_APP_URL}/api/referees/getComments/${refName._id}`).then(res=>{
+  setList(res.data);
 
-const result=(images.find(({id})=>id ===picname)).src;
+}).catch(err => console.log(err))
+}
+var result=(images.find(({id})=>id ===picname));
+if(result){
+  result=result.src
+}
+else{
+  result=user_profile;
+}
 console.log(result)
-
+useEffect(() => {
+  GetData();
+}, []);
 
 list.sort(function(a, b){
-  if(a.commentPerson < b.commentPerson) { return -1; }
-  if(a.commentPerson > b.commentPerson) { return 1; }
+  if(a.date < b.date) { return 1; }
+  if(a.date > b.date) { return -1; }
   return 0;
 })
+console.log(list);
     return (
         <div className="col">
         <div className="padding-15 row">
@@ -138,60 +194,25 @@ list.sort(function(a, b){
       <div className="container d-flex justify-content-center">
         <div className="col-sm-8 col-md-12">
         <div className="row">
-          <h1 className="text-center">Latest Pre-Match Comments</h1>
-        </div>
-        <div className="row">
-      { list ?
-            (list.length > 0 ?
-              list.map((item) => {
-
-                return(
-                  <div
-                    key={item.commentPerson}
-                  >
-                    <div
-                      className="container d-flex justify-content-center padding-b"
-                    >
-                      <CommentBox
-                       commentPerson={item.commentPerson}
-                       pComment={item.pComment}
-                       >
-                      </CommentBox>
-                    </div>
-                  </div>
-
-                );
-              }) :<p>No comment yet !!!</p>)            :
-            <p>Loading...</p>
-
-          }
-          </div>
-          </div>
-          </div>
-      </div>
-      </div>
-      <div className="padding-15 row">
-      <div className="col-sm-8 col-md-9">
-      <div className="container d-flex justify-content-center">
-        <div className="col-sm-8 col-md-12">
-        <div className="row">
           <h1 className="text-center">Latest Post-Match Comments</h1>
         </div>
         <div className="row">
       { list ?
             (list.length > 0 ?
-              list.slice(0,2).map((item) => {
+              list.slice(0,3).map((item) => {
 
                 return(
                   <div
-                    key={item.commentPerson}
+                    key={item._id}
                   >
                     <div
                       className="container d-flex justify-content-center padding-b"
                     >
                       <CommentBox
-                       commentPerson={item.commentPerson}
-                       pComment={item.pComment}
+                       commentPerson={item.user_info[0].full_name}
+                       pComment={item.comment}
+                       myDate={item.date}
+                       MatchData={item.match_info}
                        >
                       </CommentBox>
                     </div>

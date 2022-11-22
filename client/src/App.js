@@ -26,11 +26,11 @@ import AdminPage from "./pages/admin/admin";
 import AdminAuthPage from "./pages/admin-auth/admin-auth";
 import AdminAddReferee from "./pages/admin-auth/addReferee";
 import AdminSelectReferee from "./pages/admin-auth/selectReferee";
+import PostMatchCommentPage from "./pages/post-match/post-match-comment";
+
 function App() {
   const [state] = useStore();
   const { user: currentUser } = state;
-  console.log("state")
-  console.log(state)
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
       <Routes>
@@ -60,11 +60,13 @@ function App() {
         <Route path="/awards" element={<AwardsPage />} />
         <Route path="/highlights/weekly" element={<WHighlightsPage />} />
         <Route path="/highlights/monthly" element={<MHighlightsPage />} />
-        <Route path="/club" element={<SingleClubPage />} />
+        <Route path="/club/:clubName" element={<SingleClubPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
+        <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         </>
 }
       </Routes>

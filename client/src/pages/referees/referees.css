@@ -1,0 +1,23 @@
+
+.rounded:hover{
+    background: rgba(255, 0, 0, 0.93);
+    text-decoration: none;
+}
+
+.rounded:hover a{
+    color: rgba(255, 255, 255, 0.93);
+}
+
+.rounded:hover img{
+    border: 3px solid #ffffff;
+}
+
+.bg-color{
+    background-color: rgba(255, 255, 255, 0.693);
+    border: 3px rgba(255, 0, 0, 0.93) solid;
+}
+.text-color{
+    color:rgb(255, 255, 255);
+    font-weight: 700;
+    letter-spacing: 2px;
+}

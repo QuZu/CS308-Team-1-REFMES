@@ -25,7 +25,13 @@ const ClubSchema = new Schema({
   website:{
     type: String,
     required: true
+  },
+  players:{
+    type: Schema.Types.Array,
+    required: true
+
   }
+
 });
 
 const Club = mongoose.model('clubs', ClubSchema);

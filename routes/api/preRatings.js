@@ -4,8 +4,36 @@ const router = express.Router();
 require("dotenv").config();
 const PreRating = require('../../models/preRatingModel');
 
-router.post("/getPreRating", async(req, res) => {
-    console.log(1);
+router.post("/addPreRating", async(req, res) => {
+    const {rating, user_id, week_no, referee_id} = req.body;
+    
+    timeZone = 'Europe/Istanbul';
+    const date = new Date().toLocaleString('en-US', { timeZone });
+    
+    const newPreRating = new PreRating({ rating, user_id, week_no, referee_id, date });
+
+    try {
+        const preRating = await PreRating.findOne({ user_id: user_id, week_no: week_no, referee_id: referee_id });
+        if (preRating) throw Error('This pre rating already exists');
+
+        const savedPreRating = await newPreRating.save();
+        if (!savedPreRating) throw Error('Something went wrong while saving the pre rating');
+
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+});
+
+router.get("/getPreRating/:userID/:refereeID/:weekNo", async(req, res) => {
+    try {
+        await PreRating.find({ user_id: req.params.userID, referee_id: req.params.refereeID, week_no: req.params.weekNo }).then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            throw err;
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 module.exports = router;
