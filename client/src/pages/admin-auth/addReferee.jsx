@@ -54,7 +54,7 @@ function AdminAddReferee(){
     //console.log(process.env.REACT_APP_URL);
     return(
         <div>
-            <h1>ADD REFEREE PAGE</h1>
+            <h1 style={{textAlign: "center", color: "red"}}>ADD REFEREE PAGE</h1>
             <div>
                 <h2 style={{textAlign:"center"}}>FILL THE FOLLOWING INFORMATION ABOUT THE NEW REFEREE:</h2>
                 <form className="form_addReferee" onSubmit={handleSubmit}>
