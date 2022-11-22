@@ -1,4 +1,4 @@
-.comment-outer-container {
+.post-comment-outer-container {
     display: flex;
     flex-direction: column;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -12,41 +12,41 @@
     font-size: 1em;
 }
 
-.comment-container {
+.post-comment-container {
     display: flex;
     flex-direction: row;
 }
 
-.comment-left {
+.post-comment-left {
     display: flex;
     flex-direction: row;
     flex: 3;
 }
 
-.comment-team {
+.post-comment-team {
     display: flex;
     align-items: center;
 }
 
-.comment-team img {
+.post-comment-team img {
     width: 28px;
     margin-right: 5px;
     margin-left: 10px;
 }
 
-.comment-team a {
+.post-comment-team a {
     margin-right: 10px;
     margin-left: 5px;
 }
 
-.comment-match {
+.post-comment-match {
     display: flex;
     flex: 3;
     justify-content: center;
     align-items: center;
 }
 
-.comment-referee {
+.post-comment-referee {
     display: flex;
     flex: 1;
     justify-content: center;
@@ -54,20 +54,26 @@
     margin-top: 1em;
 }
 
-.comment-referee a {
+.post-comment-referee a {
     color: #444;
     text-decoration: none;
 }
 
-.comment-referee a:hover {
+.post-comment-referee a:hover {
     color: #e51936;
 }
 
-.comment-right {
+.post-comment-right {
     text-align: center;
     flex: 1;
 }
 
-.comment-textarea {
+.post-comment-textarea {
     width: 100%;
+}
+
+.post-comment-comment-error {
+    margin-top: 1em;
+    color: #e51936;
+    font-size: 0.9em;
 }

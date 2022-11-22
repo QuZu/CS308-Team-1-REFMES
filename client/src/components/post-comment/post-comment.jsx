@@ -55,6 +55,7 @@ function PostCommentBox({ matchData }) {
     const {user:currentUser} = state;
     const [errorMessage, setErrorMessage] = useState("");
     const [comment, setComment] = useState("");
+    const [isEmptyComment, setIsEmptyComment] = useState(false);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
 
@@ -62,8 +63,9 @@ function PostCommentBox({ matchData }) {
         e.preventDefault();
         setComment(data.comment);
         if (comment == 0) {
-            console.log("Please enter a comment.");
+            setIsEmptyComment(true);
         } else {
+            setIsEmptyComment(false);
             const newComment = { comment: comment, user_id: currentUser.user.id, match_id: matchData._id, referee_id: matchData.ref_info[0]._id };
             axios
             .post(`${process.env.REACT_APP_URL}/api/comments/sendComment`, newComment)
@@ -85,26 +87,27 @@ function PostCommentBox({ matchData }) {
     
     return (
         <>
-       <div className="comment-outer-container">
-            <div className="commentbox-container">
-                <div className="comment-match">
-                    <div className="comment-team">
+       <div className="post-comment-outer-container">
+            <div className="post-comment-inner-container">
+                <div className="post-comment-match">
+                    <div className="post-comment-team">
                         <img src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
                         <a>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></a>
                         </div>
                     <a> vs. </a>
-                    <div className="comment-team">
+                    <div className="post-comment-team">
                         <img src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
                         <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
                     </div>
                 </div>
 
-                <div className="comment-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
+                <div className="post-comment-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
             </div>
             <div>
                 <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <br/><textarea {...register("comment")} className="form-control" onChange={(e)=>setComment(e.target.value)} name="comment" cols="75" rows="5" placeholder="Type your comment here.."></textarea>
+                    {isEmptyComment ? <div className="post-comment-comment-error"><a>Please enter a comment to send.</a></div> : <></>}
                     <br/><input type="submit" name="submitButton" className="btn btn-success" value={`Send`}/>
                 </form>
                 </div>
