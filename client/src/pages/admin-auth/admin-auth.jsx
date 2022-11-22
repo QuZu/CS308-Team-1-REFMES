@@ -13,7 +13,7 @@ function AdminAuthPage(){
     return(
         <div>
             <div> <img src={logo} style={{height: "150px", marginLeft:"500px"}} alt="refmes_logo"/> </div>
-            <div><h1>ADMIN CONTROL PANEL</h1></div>
+            <div><h1 className="h1_admin-auth">ADMIN CONTROL PANEL</h1></div>
             <div style={{minHeight:"100px", marginTop:"20px"}}  className="row">
                     <button onClick={goToAddReferee} style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-success">
                     ADD REFEREE</button>
