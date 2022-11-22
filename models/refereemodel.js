@@ -32,13 +32,37 @@ const RefereeSchema = new Schema({
     required: true
   },
   total_rating: {
-    type: String,
+    type: Schema.Types.Number,
     required: true
   },
-  rating_total: {
-    type: String,
+  rating_count: {
+    type: Schema.Types.Number,
     required: true
-  }
+  },
+  totalMatch:{
+    type:Schema.Types.Number,
+  },
+   yellowCard:{
+    type:Schema.Types.Number,
+   },
+   avgYellowCard:{
+    type:Schema.Types.Number,
+   },
+   yellowToRed:{
+    type:Schema.Types.Number,
+   },
+   redCard:{
+    type:Schema.Types.Number,
+   },
+   avgRedCard:{
+    type:Schema.Types.Number,
+   },
+   penalty:{
+    type:Schema.Types.Number,
+   },
+   avgPenalty:{
+    type:Schema.Types.Number,
+   }
 });
 
 const Referee = mongoose.model('referees', RefereeSchema);
