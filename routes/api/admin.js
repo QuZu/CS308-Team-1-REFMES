@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt=require("bcrypt");
 require("dotenv").config();
 const Referee = require('../../models/refereeModel');
+const Observer = require('../../models/observerModel');
 
 router.post('/addReferee', async(req, res) => {
     console.log("Gelen datam:", req.body); 
@@ -47,4 +48,31 @@ router.post('/addReferee', async(req, res) => {
       }
     }
   );
+  router.post('/addObserver', async(req, res) => {
+    console.log("Gelen datam:", req.body); 
+  const {observer_id,password} = req.body;
+    if(!observer_id || !password) {
+      return res.status(400).json({msg: "Please enter all fields"});
+    }
+  
+    try {
+      const observer = await Observer.findOne({ observer_id });
+      if (observer) throw Error('Observer already exists');
+
+      const newObserver = new Observer({observer_id,password});
+      const savedObserver = await newObserver.save();
+      if (!savedObserver) throw Error('Something went wrong while saving the observer');
+  
+      res.status(200).json({
+        observer: {
+          observer_id: savedObserver.observer_id,
+          password: savedObserver.password,
+        }});
+  
+      } catch (e) {
+        res.status(400).json({ error: e.message });
+      }
+    }
+  );
+
   module.exports = router;
