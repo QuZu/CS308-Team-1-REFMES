@@ -27,6 +27,7 @@ import AdminAuthPage from "./pages/admin-auth/admin-auth";
 import AdminAddReferee from "./pages/admin-auth/addReferee";
 import AdminSelectReferee from "./pages/admin-auth/selectReferee";
 import PostMatchCommentPage from "./pages/post-match/post-match-comment";
+import StandingPage from "./pages/standings/standings"
 
 function App() {
   const [state] = useStore();
@@ -67,6 +68,7 @@ function App() {
         <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
+        <Route path="/standings" element={<StandingPage/>} />
         </>
 }
       </Routes>
