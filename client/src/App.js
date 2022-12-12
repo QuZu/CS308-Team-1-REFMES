@@ -27,6 +27,8 @@ import AdminAuthPage from "./pages/admin-auth/admin-auth";
 import AdminAddReferee from "./pages/admin-auth/addReferee";
 import AdminSelectReferee from "./pages/admin-auth/selectReferee";
 import PostMatchCommentPage from "./pages/post-match/post-match-comment";
+import ObserverAuthPage from "./pages/observer-auth/observer-auth";
+import ObserverRatingPage from "./pages/observer-auth/observerRating";
 
 function App() {
   const [state] = useStore();
@@ -44,6 +46,8 @@ function App() {
         <Route path="/admin-auth" element={<AdminAuthPage />} />
         <Route path="/admin-auth/addReferee" element={<AdminAddReferee />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
+        <Route path="/observer-auth" element={<ObserverAuthPage />} />
+        <Route path="/observer-auth/observerRating" element={<ObserverRatingPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
         :
