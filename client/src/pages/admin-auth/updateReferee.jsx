@@ -19,6 +19,7 @@ function updateReferee(){
                 </div>
                 <div className="col-6">
                     <h1>Yellow card</h1>
+    return(
 
                 </div>
             </div>
