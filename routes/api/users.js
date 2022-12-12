@@ -3,7 +3,7 @@ const { response } = require("express");
 const router = express.Router();
 const bcrypt=require("bcrypt");
 require("dotenv").config();
-const User = require('../../models/userModel');
+const User = require('../../models/usermodel');
 
 router.post('/signup', async(req, res) => {
   const {username, full_name, email, password, fan_of} = req.body;
