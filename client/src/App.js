@@ -26,6 +26,7 @@ import AdminPage from "./pages/admin/admin";
 import AdminAuthPage from "./pages/admin-auth/admin-auth";
 import AdminAddReferee from "./pages/admin-auth/addReferee";
 import AdminSelectReferee from "./pages/admin-auth/selectReferee";
+import AdminUpdateReferee from "./pages/admin-auth/updateReferee";
 import PostMatchCommentPage from "./pages/post-match/post-match-comment";
 import ObserverLoginPage from "./pages/observer/observerLogin";
 
@@ -45,7 +46,11 @@ function App() {
         <Route path="/admin-auth" element={<AdminAuthPage />} />
         <Route path="/admin-auth/addReferee" element={<AdminAddReferee />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
+
         <Route path="/observer" element={<ObserverLoginPage />} />
+
+        <Route path="/admin-auth/updateReferee" element={<AdminUpdateReferee />} />
+
         <Route path="*" element={<ErrorPage />} />
         </>
         :
