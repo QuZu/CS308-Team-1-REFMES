@@ -7,3 +7,7 @@
     margin: 2em auto;
     
 }
+.selectRefereeResultMessage {
+    color: rgba(39, 39, 194, 0.801);
+    padding-left: 600px;
+  }
