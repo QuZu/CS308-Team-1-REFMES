@@ -5,6 +5,7 @@ require("dotenv").config();
 const Match = require('../../models/matchModel');
 const Club = require('../../models/clubModel');
 const Referee = require("../../models/refereeModel");
+const Standings=require("../../models/standingsModel")
 
 router.post("/addMatch", async(req, res) => {
     const {week_no, referee_id, club1_id, club2_id, club1_goals, club2_goals} = req.body;
@@ -109,5 +110,16 @@ router.get("/getSingleMatchDetails/:matchID", async(req, res) => {
         console.log("Could not get match details");
     }
 });
-
+router.get("/getstandings", async(req, res) => {
+    try {
+        await Standings.find({}).then((result) => {
+            res.json(result[0].allData);
+        }).catch((err) => {
+            throw err;
+        });
+    } catch (err) {
+        res.status(500).json(err);
+        console.log("standing alınamadı");
+    }
+});
 module.exports = router;

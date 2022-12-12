@@ -27,6 +27,7 @@ function Brand() {
             <Nav.Link href="/referees" className="navText">Referees</Nav.Link>
             <Nav.Link href="/matches" className="navText">Matches</Nav.Link>
             <Nav.Link href="/clubs" className="navText">Clubs</Nav.Link>
+            <Nav.Link href="/standings" className="navText">Standings</Nav.Link>
             <NavDropdown title={<span className="navText">Rating</span>} id="basic-nav-dropdown">
               <NavDropdown.Item href="/pre-match">Pre-Match Rating</NavDropdown.Item>
               <NavDropdown.Item href="/post-match">Post-Match Rating</NavDropdown.Item>
