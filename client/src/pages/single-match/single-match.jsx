@@ -9,4 +9,4 @@ function SingleMatchPage() {
        </div>
     )
 }
-export default SingleClubPage
+export default SingleMatchPage
