@@ -54,11 +54,11 @@ function StandingsTable({AllArray}) {
                               for (let index = 0; index < forms.length; index++) {
                                 const element = forms[index];
                                 if(element==="L")
-                                    badges.push(<div key={index} className="lose-badge">L</div>)
+                                    badges.push(<div key={index} className="standing-badge lose-badge">L</div>)
                                 if(element==="W")
-                                    badges.push(<div key={index} className="win-badge">W</div>)
+                                    badges.push(<div key={index} className="standing-badge win-badge">W</div>)
                                 if(element==="D")
-                                    badges.push(<div key={index} className="draw-badge">D</div>)
+                                    badges.push(<div key={index} className="standing-badge draw-badge">D</div>)
                               }
                               const teamName=item.team.name
                               const asciName=(c_images.find(({src})=>src ===teamName));
