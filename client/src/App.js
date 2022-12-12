@@ -29,6 +29,7 @@ import AdminSelectReferee from "./pages/admin-auth/selectReferee";
 import AdminUpdateReferee from "./pages/admin-auth/updateReferee";
 import PostMatchCommentPage from "./pages/post-match/post-match-comment";
 import StandingPage from "./pages/standings/standings"
+import MatchImportancePage from "./pages/match-importance/match-importance-landing";
 
 import ObserverLoginPage from "./pages/observer/observerLogin";
 
@@ -85,6 +86,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
+        <Route path="/currentstatus" element={<MatchImportancePage/>} />
         </>
 }
       </Routes>
