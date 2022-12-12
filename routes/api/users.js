@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt=require("bcrypt");
 require("dotenv").config();
 const User = require('../../models/userModel');
-
+const Observer = require('../../models/observerModel')
 router.post('/signup', async(req, res) => {
   const {username, full_name, email, password, fan_of} = req.body;
   if(!username || !full_name || !email || !password || !fan_of){
@@ -63,6 +63,37 @@ router.post('/login', async(req, res) => {
       }});
 
     console.log(user);
+
+    } catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  }
+);
+
+router.post('/observerLogin', async(req, res) => {
+  const {email, password} = req.body;
+  console.log("email:" ,email);
+  console.log("passw:" ,password);
+  if(!email || !password) {
+      return res.status(400).json({ msg: 'Please enter all fields' });
+  }
+  
+  try {
+    const observer = await Observer.findOne({ email });
+    console.log("observer:" ,observer);
+    if (!observer) throw Error('Observer does not exist');
+  
+    if (password !== observer.password){
+
+      throw Error('Invalid credentials');
+    }
+    res.status(200).json({
+      observer: {
+        id: observer._id,
+        email: observer.email,
+      }});
+
+    console.log(observer);
 
     } catch (e) {
       res.status(400).json({ msg: e.message });
