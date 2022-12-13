@@ -1,5 +1,5 @@
 import { useStore } from "../../store/store";
-import AppNavBar from "../../components/appnavbar.jsx";
+import AppNavBarSingle from "../../components/appnavbarsingle.jsx";
 import ObserverRatingBox from "../../components/ratingbox/observerratingbox.jsx";
 import { useNavigate } from "react-router";
 import React, { useCallback, useState, useEffect } from "react";
@@ -28,7 +28,7 @@ function ObserverRatingPage() {
 
     return(
         <div>
-            <AppNavBar/>
+            <AppNavBarSingle/>
             <div>
                 <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Observer Rating for Week {weekNo}</h1>
             </div>
