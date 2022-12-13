@@ -71,15 +71,15 @@ router.post('/login', async(req, res) => {
 );
 
 router.post('/observerLogin', async(req, res) => {
-  const {email, password} = req.body;
-  console.log("email:" ,email);
+  const {observerid, password} = req.body;
+  console.log("id:" ,observerid);
   console.log("passw:" ,password);
-  if(!email || !password) {
+  if(!observerid || !password) {
       return res.status(400).json({ msg: 'Please enter all fields' });
   }
   
   try {
-    const observer = await Observer.findOne({ email });
+    const observer = await Observer.findOne({ observer_id: observerid });
     console.log("observer:" ,observer);
     if (!observer) throw Error('Observer does not exist');
   
