@@ -11,6 +11,7 @@ function UpdateRefPage() {
   const [Loading, setLoading] = useState(false);
 
   const getRefs = async() =>{
+    
     await axios.get(`${process.env.REACT_APP_URL}/api/referees/getAllRef`).then(response =>{
       console.log("response: ", response);
       setRefData(response.data);

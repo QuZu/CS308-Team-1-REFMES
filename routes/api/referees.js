@@ -4,10 +4,10 @@ const router = express.Router();
 require("dotenv").config();
 const Referee = require('../../models/refereeModel');
 const Comments=require('../../models/commentModel');
-const mongoose=require("mongoose")
+const mongoose=require("mongoose");
+const axios = require('axios')
 
 const cheerio =require("cheerio");
-const Referee=require("../../models/refereemodel");
   
 router.get("/getref/:rUsername", async(req, res) => {
     try {
@@ -32,14 +32,17 @@ router.get("/getrefbyId/:refid", async(req, res) => {
     }}
 );
 router.get("/getAllref", async(req, res) => {
+    console.log("in backend");
     try {
         await Referee.find({}).then((result) => {
             res.json(result);
         }).catch((err) => {
+            console.log(err);
             throw err;
         });
     } catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }}
 );
 router.get("/getComments/:refid", async(req, res) => {
@@ -79,4 +82,94 @@ router.get("/getComments/:refid", async(req, res) => {
         res.status(500).json(err);
     }}
 );
+
+router.get("/updateRef", async(req, res) => {
+    try {
+        const url = 'https://www.transfermarkt.com.tr/super-lig/schiedsrichter/wettbewerb/TR1/saison_id/2022/plus/1'
+        var allRef=[];
+        const getRef= async()=>{
+        await axios(url)
+        .then((response) => {
+        const html=response.data;
+        //console.log(html)
+        const $=cheerio.load((html))
+        const items=$('.grid-view');
+        const alltr=items.find("tbody").find("tr");
+        alltr.each((i,element)=>{
+            let refName=$(element).find(".inline-table").find(".hauptlink").children("a").text();
+            //console.log(name)
+            const data=$(element).find(".zentriert")
+            const Data=[];
+            if(refName!="")
+            {
+                data.each((i,element)=>{
+                    const refdata= $(element).text();
+                    Data.push(refdata);
+                    })
+                
+                allRef.push(
+                    {refName,
+                    firstMatch:Data[0],
+                    totalMatch:Data[1],
+                    yellowCard:(Data[2]=="-" ? 0:Data[2]),
+                    avgYellowCard:(Data[3]=="-" ? 0:Data[3]),
+                    yellowToRed:(Data[4]=="-" ? 0:Data[4]),
+                    avgYellowToRed:(Data[5]=="-" ? 0:Data[5]),
+                    redCard:(Data[6]=="-" ? 0:Data[6]),
+                    avgRedCard:(Data[7]=="-" ? 0:Data[7]),
+                    penalty:(Data[8]=="-" ? 0:Data[8]),
+                    avgPenalty:(Data[9]=="-" ? 0:Data[9])
+                });
+            }
+        })
+        console.log("Array budur:",allRef);
+        //console.log(ALL[14].Data[2]);
+        
+    }).catch((err) => {});
+ }
+    async function UpdateDatabase(item){
+        try {
+            var refname=item.refName;
+            var username=refname.replaceAll(" ","_");
+            updated_item = {
+
+                username:username,
+                totalMatch:item.totalMatch,
+                yellowCard:item.yellowCard,
+                avgYellowCard:item.avgYellowCard,
+                redCard:item.redCard,
+                avgRedCard:item.avgRedCard,
+                penalty:item.penalty,
+                avgPenalty:item.avgPenalty
+
+            }
+
+            console.log("updated item:", updated_item);
+            
+            const updatedRef=await Referee.findOneAndUpdate({r_username:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
+                 {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty})
+            console.log(updatedRef);
+            
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+    async function UpdateRef() {
+        await getRef();
+        allRef.forEach(UpdateDatabase);
+        res.status(200).json(allRef);
+
+    }
+    UpdateRef();
+
+    
+    } catch (err) {
+        res.status(500).json(err);
+        }
+    }
+);
+
+
+
 module.exports = router;
