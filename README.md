@@ -111,3 +111,9 @@ $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
    ```sh
    $ npm run dev
    ```
+#### If you want to deploy
+Our web application includes the Heroku postscript to be deployed to Heroku. For Heroku deployment:
+- Select your GitHub repository
+- Link to Heroku account
+- Set environment variables on Heroku (as described above)
+- Press the deploy button
