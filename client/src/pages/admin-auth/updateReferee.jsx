@@ -1,31 +1,58 @@
-import AliPalabiyik from "../../components/refbar/refImage/ali-palabiyik.jpg"
+import { useStore } from "../../store/store";
+import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
+import React, {  useEffect, useState } from "react";
+import axios from "axios";
+import UpdateRefBar from "../../components/refbar/updatebar"
+import "../admin-auth/updateReferee.css"
 
-function updateReferee(){
+function UpdateRefPage() {
 
+  const [RefData, setRefData] = useState({});
+  const [Loading, setLoading] = useState(false);
+
+  const getRefs = async() =>{
+    await axios.get(`${process.env.REACT_APP_URL}/api/referees/getAllRef`).then(response =>{
+      console.log("response: ", response);
+      setRefData(response.data);
+      setLoading(true);
+
+    }).catch(err => console.log(err))
+
+  };
+
+  
+
+  useEffect(()=> {
+    getRefs();
+  }, [])
+  console.log(RefData);
     return(
-
-        <div className="container-fluid">
-
-            <div className="row update-bar">
-                <div className="col-3">
-
-                    <div class="card" style="width: 100%;">
-                    <img src= {AliPalabiyik} class="card-img-top" alt="referee"/>
-                    <div class="card-body">
-                        <h5 class="card-title">Ali Palabiyik</h5>
-                    </div>
-                    </div>
-
-                </div>
-                <div className="col-6">
-                    <h1>Yellow card</h1>
-    return(
-
-                </div>
+        <div>
+            <AppNavBarSingle/>
+            <div>
+                <h1 style={{textAlign: "center", margin: "2em 0em 2em 0em"}}>Referee Information Update Page </h1>
+            </div>
+            <div className="container-fluid">
+            <div className="row">
+              <div className="col-1"></div>
+            <div className="col-9">
+            { RefData ?
+                    (RefData.length > 0 ?
+                      RefData.map((item) => {
+                        
+                        return(
+                          <div key={item.name}> 
+                            <UpdateRefBar referee = {item} >  </UpdateRefBar>
+                          </div>
+                        );
+                      }) : <></>)            :<></>
+                   
+                  }
+            </div>
+            <div className="col-2"> <button onClick={updateRef} type="button" className="btn btn-warning update-ref-btn-size">Update</button></div>
+            </div>
             </div>
         </div>
-
-
     )
 }
-export default updateReferee
+export default UpdateRefPage

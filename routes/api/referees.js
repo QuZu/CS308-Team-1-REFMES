@@ -5,6 +5,9 @@ require("dotenv").config();
 const Referee = require('../../models/refereeModel');
 const Comments=require('../../models/commentModel');
 const mongoose=require("mongoose")
+
+const cheerio =require("cheerio");
+const Referee=require("../../models/refereemodel");
   
 router.get("/getref/:rUsername", async(req, res) => {
     try {
