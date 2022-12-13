@@ -47,10 +47,14 @@ const clubs = [
     { name: "Kayserispor", src: logoKayserispor},
   ]
 
-  function ObserverRatingBox(matchData){
 
+  function ObserverRatingBox({matchData}){
+
+   
     const [state, dispatch] = useStore();
-    const {user:currentUser} = state;
+    const {observer:CurrentObserver} = state;
+    console.log("currentobserver", CurrentObserver);
+
     const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
     const [isInteractive, setIsInteractive] = useState(true);
@@ -64,9 +68,9 @@ const clubs = [
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
-            const newPostRating = {rating: rating, user_id: currentUser.user.id, match_id: matchData._id};
+            const newPostRating = {rating: rating, observer_id: CurrentObserver.observer.id, match_id: matchData._id};
             axios
-                .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
+                .post(`${process.env.REACT_APP_URL}/api/postRatings/addObserverRating`, newPostRating)
                 .then((res) => {
                     if (res.status === 200 && res.data.message) {
                         setErrorMessage(res.data.message);
@@ -79,16 +83,25 @@ const clubs = [
                     console.log("Error: ", err);
                     setErrorMessage("Error! Please try again.");
                 });
-            const date = new Date();
-            setDay(date.getDate());
-            setMonth(monthSet[date.getMonth()]);
-            setYear(date.getFullYear());
-            setIsInteractive(false);
-            setBtnValue("Saved");
-            setBtnDisabled(true);
         }
     }
 
+    const getCurrentObserverRating = async()=>{
+        await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getObserverRating/${matchData._id}/${CurrentObserver.observer.id}`).then(res => {
+            setRating(res.data);
+            if (res.data == []) {
+                console.log("Empty");
+            } else {
+                setRating(res.data[0].rating);
+                setIsInteractive(false);
+                setBtnValue("Saved");
+                setBtnDisabled(true);
+            }
+        }).catch(err => console.log(err))
+    };
+    useEffect(() => {
+        getCurrentObserverRating();
+    }, []);
 
 
     return(
@@ -111,7 +124,6 @@ const clubs = [
             <div className="rating-right">
                 <div className="rating-right-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
                 <Rater onRate={({rating}) => {setRating(rating); setRatingEntered(true);}} total={5} rating={rating} interactive={isInteractive}/>
-                {isInteractive ? <></> : <div className="rating-right-date">{month} {day}, {year}</div>}
                 {ratingEntered ? <></> : <div className="rating-right-error"><a>Choose a rating, please!</a><br/></div>}
             </div>
             <div className="rating-submit">
@@ -120,14 +132,10 @@ const clubs = [
             </form>
             </div>
         </div>
-        <div className="rating-comment-container">
-            <div className="rating-comment-add-button"><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
-        </div>
     </div>
-
 
     )
 
   }
+export default ObserverRatingBox
 
-  export default ObserverRatingBox
