@@ -46,10 +46,10 @@ router.post("/addObserverRating", async(req, res) => {
     const newObserverRating = new ObserverRating({ rating, observer_id, match_id});
 
     try {
-        const postRating = await PostRating.findOne({ user_id: user_id, match_id: match_id });
-        if (postRating) throw Error('This post rating already exists');
+        const observerRating = await ObserverRating.findOne({ observer_id: observer_id, match_id: match_id });
+        if (observerRating) throw Error('This post rating already exists');
 
-        const savedPostRating = await newPostRating.save();
+        const savedPostRating = await newObserverRating.save();
         if (!savedPostRating) throw Error('Something went wrong while saving the post rating');
 
     } catch (e) {
@@ -57,9 +57,16 @@ router.post("/addObserverRating", async(req, res) => {
     }
 });
 
-
-
-
-
+router.get("/getObserverRating/:matchID/:observerID", async(req, res) => {
+    try {
+        await ObserverRating.find({ observer_id: req.params.observerID, match_id: req.params.matchID }).then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            throw err;
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;

@@ -7,7 +7,7 @@ const ObserverRatingSchema = new Schema({
     required: true
   },
   observer_id: {
-    type: Schema.Types.String,
+    type: Schema.Types.Number,
     required: true
   },
   match_id:{
