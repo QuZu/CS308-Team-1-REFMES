@@ -25,7 +25,6 @@ import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
 
-
 const clubs = [
     { name: "Fenerbahçe", src: logoFenerbahce},
     { name: "Galatasaray", src: logoGalatasaray},
@@ -55,6 +54,7 @@ const clubs = [
     const [state, dispatch] = useStore();
     const {observer:CurrentObserver} = state;
     console.log("currentobserver", CurrentObserver);
+
     const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
     const [isInteractive, setIsInteractive] = useState(true);
@@ -103,6 +103,7 @@ const clubs = [
         getCurrentObserverRating();
     }, []);
 
+
     return(
 
         <div className="rating-outer-container">
@@ -137,3 +138,4 @@ const clubs = [
 
   }
 export default ObserverRatingBox
+
