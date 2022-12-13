@@ -1,7 +1,13 @@
 import React from "react";
 import logo from '../../logo.png';
 import { useNavigate } from "react-router";
+import { useStore } from "../../store/store";
+
 function ObserverAuthPage(){
+    const [state, dispatch] = useStore();
+    const {observer:CurrentObserver} = state;
+    console.log("currentobserver", CurrentObserver);
+    console.log(CurrentObserver.observer.id);
     const navigate = useNavigate();
     const goToObserverRate = (e) => {
         navigate("/observer-auth/observerRating")

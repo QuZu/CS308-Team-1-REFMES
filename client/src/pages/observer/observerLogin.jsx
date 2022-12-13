@@ -9,29 +9,32 @@ import { observerLogin } from "../../store/userreducer";
 import "../login/login.css";
 import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 
-const loginSchema = z
+const observerloginSchema = z
   .object({
-    email: z.string().email("Please enter a valid email"),
+    observerid: z.string().min(1),
     password: z.string().min(1),
   });
 
 function ObserverLogin() {
-  const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(loginSchema), mode: "all",});
+  const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(observerloginSchema), mode: "all",});
   const [, dispatch] = useStore();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const onSubmit = useCallback((data) => {
     const observer = {
-      email: data.email,
+      observerid: data.observerid,
       password: data.password,
     };
     axios
       .post(`${process.env.REACT_APP_URL}/api/users/observerLogin`,observer)
       .then((res) => {
+        console.log("data:", res.data);
         if (res.status === 200 && res.data.message) {
           setErrorMessage(res.data.message);
         } else if (res.status === 200) {
+          const observer = res.data;
+          dispatch(observerLogin(observer));
           setErrorMessage("You logged in succesfully");
           navigate("/observer-auth");
         } else {
@@ -59,8 +62,7 @@ function ObserverLogin() {
               <p className="errorMessage">{errorMessage}</p>
 
               <div className="mt-4 d-flex flex-column">
-                <input {...register("email")} placeholder="E-mail" type="email" className="btn-border input-style form-control"/>
-                <small className="align-self-start error-text">{errors.email?.message}</small>
+                <input {...register("observerid")} placeholder="observerid" type="observerid" className="btn-border input-style form-control"/>
               </div>
 
               <div className="mt-3 d-flex flex-column">
