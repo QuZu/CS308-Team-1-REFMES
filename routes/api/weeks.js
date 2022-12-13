@@ -6,10 +6,7 @@ const Week = require('../../models/weekModel');
 
 router.get("/getWeek", async(req, res) => {
     try{
-        const currentdate=new Date();
-        console.log("Backenddeyim date: ",currentdate);
-        await Week.find({})
-        .then(res=>{
+        await Week.findById("63781a749e79075af41da252").then(result=>{
             res.json(result);
         }).catch((err) => {
             throw err;

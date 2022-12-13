@@ -4,6 +4,9 @@ const router = express.Router();
 const bcrypt=require("bcrypt");
 require("dotenv").config();
 const Referee = require('../../models/refereeModel');
+const Observer = require('../../models/observerModel');
+const Match = require('../../models/matchModel');
+const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 
 router.post('/addReferee', async(req, res) => {
     console.log("Gelen datam:", req.body); 
@@ -47,4 +50,67 @@ router.post('/addReferee', async(req, res) => {
       }
     }
   );
+  router.post('/addObserver', async(req, res) => {
+    console.log("Gelen datam:", req.body); 
+  const {observer_id,password} = req.body;
+    if(!observer_id || !password) {
+      return res.status(400).json({msg: "Please enter all fields"});
+    }
+  
+    try {
+      const observer = await Observer.findOne({ observer_id });
+      if (observer) throw Error('Observer already exists');
+
+      const newObserver = new Observer({observer_id,password});
+      const savedObserver = await newObserver.save();
+      if (!savedObserver) throw Error('Something went wrong while saving the observer');
+  
+      res.status(200).json({
+        observer: {
+          observer_id: savedObserver.observer_id,
+          password: savedObserver.password,
+        }});
+  
+      } catch (e) {
+        res.status(400).json({ error: e.message });
+      }
+    }
+  );
+  router.post('/updateMatchScore', async(req, res) => {
+    const {match_id,team1goal,team2goal}= req.body;
+    console.log(match_id);
+    console.log("Gelen datam:", req.body); 
+    if(team1goal < 0 || team2goal < 0) {
+      return res.status(400).json({msg: "Please enter valid score!"});
+    }
+    await Match.findByIdAndUpdate(match_id,{club1_goals:team1goal, club2_goals: team2goal}).then(() => {
+      res.status(200);
+    }
+      
+    )
+  }
+  );
+  router.post('/selectReferee', async(req, res) => {
+    console.log("Gelen datam:", req.body); 
+  const {week_no,referee_id} = req.body;
+   
+      try {
+        const newRefereesOFWeek = new RefereesOfWeek({week_no,referee_id});
+        const savedRefereesOFWeek = await newRefereesOFWeek.save();
+        if (!savedRefereesOFWeek) throw Error('Something went wrong while saving the referee list');
+    
+        res.status(200).json({
+          refereesOfWeek: {
+            week_no: savedRefereesOFWeek.week_no,
+            referee_id: savedRefereesOFWeek.referee_id,
+          }});
+    
+        } catch (e) {
+          res.status(400).json({ error: e.message });
+        }
+      }
+    
+  
+  );
+
   module.exports = router;
