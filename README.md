@@ -102,7 +102,7 @@ $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
 1. [Follow this instructions](#how-to-obtain-the-source-code) to get source code
 2. Install NPM packages both for frontend and the backend
    ```sh
-   $ npm install && cd frontend && npm install
+   $ npm install && cd client && npm install
    ```
 3. Setting the env variables
    - `MONGO_URI` = the uri string for your database
