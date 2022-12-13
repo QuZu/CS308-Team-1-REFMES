@@ -26,8 +26,8 @@ function AdminSelectRefereeLanding(){
         <div>
             {loading ?
             <>
-                <h1 className="selectRefh1"> SELECT THE REFEREES OF THE WEEK {week}: </h1>
-                <AdminSelectReferee currentweek={week} allData={allData}/>
+                <h1 className="selectRefh1"> SELECT THE REFEREES OF THE WEEK {15}: </h1>
+                <AdminSelectReferee currentweek= {15} allData={allData}/>
             </>
              :
              <p>Loading...</p>

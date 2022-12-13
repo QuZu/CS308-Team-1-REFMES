@@ -42,21 +42,26 @@ function AdminSelectReferee({currentweek,allData}){
   const handleSubmit = async(e) =>{
     e.preventDefault();
     console.log(checkedCheckboxes);
-    const newRefereesOfWeek ={
-      week_no: currentweek,
-      referees: checkedCheckboxes
-    };
+    if(checkedCheckboxes.length === 9){
+      for(let i=0; i<checkedCheckboxes.length;i++){
+        const newRefereesOfWeek ={
+          week_no: currentweek,
+          referee_id: checkedCheckboxes[i]._id
+        };
+        await axios.post(`${process.env.REACT_APP_URL}/api/admin/selectReferee`,newRefereesOfWeek)
+      .then(res =>{
+          console.log(res.data);
+  
+      }).catch(err=>console.log(err));
+      }
+    }
     if(checkedCheckboxes.length !== 9){
       setResultMessage("Please, select exactly 9 referees!");
     }
     else{
       setResultMessage("You have selected the referee list successfully!");
     }
-    await axios.post(`${process.env.REACT_APP_URL}/api/admin/selectReferee`,newRefereesOfWeek)
-    .then(res =>{
-        console.log(res.data);
 
-    }).catch(err=>console.log(err));
   }
     return(
         <div>
