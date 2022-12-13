@@ -95,7 +95,7 @@ $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
 - ##### `server.js` -This folder starts the backend application and provides a database connection.
 - ##### `package.json` - Defines npm behaviors and dependencies with packages for the backend.Also includes first scripts to run the app
 - ##### `.gitignore` - Tells git which files to ignore in Git
-- ##### `README` - Informative documentation file of app
+#### `README` - Informative documentation file of app
 
 ### How to build and deploy the software?
 #### If you want to build on your local machine
