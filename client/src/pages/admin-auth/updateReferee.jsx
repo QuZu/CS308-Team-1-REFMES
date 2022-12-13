@@ -20,7 +20,15 @@ function UpdateRefPage() {
 
   };
 
-  
+  const updateRef = async() =>{
+    await axios.get(`${process.env.REACT_APP_URL}/api/referees/updateRef`).then(response =>{
+      console.log("response: ", response);
+      setRefData(response.data);
+      setLoading(true);
+
+    }).catch(err => console.log(err))
+
+  };
 
   useEffect(()=> {
     getRefs();
