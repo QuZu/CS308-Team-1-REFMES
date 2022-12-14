@@ -10,6 +10,7 @@ function UpdateRefPage() {
   const [RefData, setRefData] = useState({});
   const [UpdateRefData, setUpdateRefData] = useState({});
   const [Loading, setLoading] = useState(false);
+  const [Updated, setUpdated] = useState(false);
 
   const getRefs = async() =>{
     
@@ -26,8 +27,8 @@ function UpdateRefPage() {
     await axios.get(`${process.env.REACT_APP_URL}/api/referees/updateRef`).then(res =>{
       //console.log("response: ", res);
       setUpdateRefData(res.data);
+      setUpdated(true);
       console.log("updateref returns", UpdateRefData);
-      setLoading(true);
 
     }).catch(err => console.log(err))
 
@@ -36,6 +37,7 @@ function UpdateRefPage() {
   useEffect(()=> {
     getRefs();
   }, [])
+ 
   console.log(RefData);
     return(
         <div>
@@ -60,7 +62,10 @@ function UpdateRefPage() {
                    
                   }
             </div>
-            <div className="col-2"> <button onClick={updateRef} type="button" className="btn btn-warning update-ref-btn-size">Update</button></div>
+            <div className="col-2"> 
+              <button onClick={updateRef} type="button" className="btn btn-warning update-ref-btn-size">Update</button>
+              <a href="/admin-auth/updateReferee"> <button type="button" className="btn btn-warning update-ref-btn-size">See Last Version</button> </a>
+             </div>
             </div>
             </div>
         </div>

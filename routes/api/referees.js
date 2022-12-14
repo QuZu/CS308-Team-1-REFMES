@@ -144,6 +144,7 @@ router.get("/updateRef", async(req, res) => {
  }
     async function UpdateDatabase(item){
         try {
+            console.log(item);
             var refname=item.refName;
             var username=refname.replaceAll(" ","_");
             updated_item = {
@@ -161,21 +162,21 @@ router.get("/updateRef", async(req, res) => {
 
             console.log("updated item:", updated_item);
             
-            // const updatedRef=await updatedReferee.findOneAndUpdate({t_name:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
-            //      {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty}, {new: true});
-            // console.log(updatedRef);
+            const updatedRef=await updatedReferee.findOneAndUpdate({t_name:username},{totalMatch:item.totalMatch, yellowCard:item.yellowCard, avgYellowCard:item.avgYellowCard,
+                 redCard:item.redCard, avgRedCard:item.avgRedCard, penalty:item.penalty, avgPenalty:item.avgPenalty});
+            console.log(updatedRef);
 
-            updatedReferee.findOneAndUpdate({t_name:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
-                 {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty},
-                 function(err, ref){
-                    if(err){
+            // updatedReferee.findOneAndUpdate({t_name:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
+            //      {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty},
+            //      function(err, ref){
+            //         if(err){
 
-                        console.log(err);
-                    }
-                    else{
-                        console.log(ref);
-                    }
-            });
+            //             console.log(err);
+            //         }
+            //         else{
+            //             console.log(ref);
+            //         }
+            // });
             
         } catch (error) {
             console.log(error);
