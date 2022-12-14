@@ -11,7 +11,7 @@ const ObserverSchema = new Schema({
     password:{
         type: String,
         required: true,
-    }
+  }
 
 });
 const Observer = mongoose.model('observers', ObserverSchema);

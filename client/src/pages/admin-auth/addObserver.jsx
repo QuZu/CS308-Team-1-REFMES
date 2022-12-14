@@ -17,6 +17,9 @@ function AdminAddObserver(){
         if(!newObserver.observer_id || !newObserver.password){
             setErrorMessage("Please, enter all fields!");
         }
+        else{
+            setErrorMessage("You have successfully added observer to the database!");
+        }
         await axios.post(`${process.env.REACT_APP_URL}/api/admin/addObserver`,newObserver)
         .then(res =>{
             console.log(res.data);
