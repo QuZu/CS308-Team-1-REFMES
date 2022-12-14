@@ -1,15 +1,51 @@
+import { useStore } from "../../store/store";
+import AppNavBarSingle from "../../components/appnavbarsingle.jsx";
+import ObserverRatingBox from "../../components/ratingbox/observerratingbox.jsx";
+import { useNavigate } from "react-router";
+import React, { useCallback, useState, useEffect } from "react";
+import axios from "axios";
+import "../observer-auth/observerRating.css";
+import * as ReactBootstrap from "react-bootstrap";
 
+function ObserverRatingPage() {
+    const weekNo = "3";
 
+    const [matchDetails, setMatchDetails] = useState([]);
+    const [loading,setLoading] = useState(false);
 
-function observerRating(){
+    const getMatchDetails = async() => {
+        await axios
+            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${weekNo}`)
+            .then(res => {
+                setMatchDetails(res.data);
+                setLoading(true);
+        }).catch(err => console.log(err));
+    };
 
+    useEffect(() => {
+        getMatchDetails();
+    }, []);
 
     return(
-
-
-        <h1>Observer Rating Page</h1>
-
+        <div>
+            <AppNavBarSingle/>
+            <div>
+                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Observer Rating for Week {weekNo}</h1>
+            </div>
+            {loading && matchDetails ?
+                <div className="matches">
+                {matchDetails.map((singleMatchDetails) => {
+                    return(<ObserverRatingBox key={singleMatchDetails._id} matchData={singleMatchDetails}/>)
+                })}
+                </div>
+                :
+                <div className="d-flex justify-content-center">
+                    <ReactBootstrap.Spinner animation="border"/>
+                </div>
+            }
+        </div>
     )
-
 }
-export default observerRating
+
+export default ObserverRatingPage
+

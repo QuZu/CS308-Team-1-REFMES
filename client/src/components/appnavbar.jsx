@@ -24,6 +24,7 @@ function Brand() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" color="white" >
           <Nav className="me-auto">
+          <Nav.Link href="/livestatus" className="navText">Live Status</Nav.Link>
             <Nav.Link href="/referees" className="navText">Referees</Nav.Link>
             <Nav.Link href="/matches" className="navText">Matches</Nav.Link>
             <Nav.Link href="/clubs" className="navText">Clubs</Nav.Link>

@@ -8,9 +8,8 @@ import * as ReactBootstrap from "react-bootstrap";
 
 function RefPage() {
   const {rUsername} = useParams();
-  const [allData, setallData] = useState({});
+  const [allData, setallData] = useState([]);
   const[loading,setLoading] = useState(false);
-
   const getRef = async()=>{
     await axios.get(`${process.env.REACT_APP_URL}/api/referees/getref/${rUsername}`).then(res=>{
       setallData(res.data);

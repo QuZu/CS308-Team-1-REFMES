@@ -122,4 +122,34 @@ router.get("/getstandings", async(req, res) => {
         console.log("standing alınamadı");
     }
 });
+router.get("/getWeekMatchDetails/:weekNo", async(req, res) => {
+    try {
+       await Match.aggregate(
+            [
+            {$lookup:
+                {
+                    from:"clubs",
+                    localField:"club1_id",
+                    foreignField:"_id",
+                    as:"club1_info"
+                }
+            },
+            {$lookup:
+                {
+                    from:"clubs",
+                    localField:"club2_id",
+                    foreignField:"_id",
+                    as:"club2_info"
+                }
+            },
+                {$match:{week_no:req.params.weekNo}}
+            ]
+            ).then(result=>{
+                res.json(result);
+            })
+            } catch (err) {
+        res.status(500).json(err);
+        console.log("Could not get match details");
+    }
+});
 module.exports = router;
