@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     required: true
   },
   fan_of:{
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   social_media:{

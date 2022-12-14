@@ -73,7 +73,7 @@ if(result){
 else{
   result=user_profile;
 }
-console.log(result)
+//console.log(result)
 useEffect(() => {
   GetData();
 }, []);

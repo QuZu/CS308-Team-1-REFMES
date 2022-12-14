@@ -5,6 +5,7 @@ require("dotenv").config();
 const Match = require('../../models/matchModel');
 const Club = require('../../models/clubModel');
 const Referee = require("../../models/refereeModel");
+const Standings=require("../../models/standingsModel")
 
 router.post("/addMatch", async(req, res) => {
     const {week_no, referee_id, club1_id, club2_id, club1_goals, club2_goals} = req.body;
@@ -109,5 +110,46 @@ router.get("/getSingleMatchDetails/:matchID", async(req, res) => {
         console.log("Could not get match details");
     }
 });
-
+router.get("/getstandings", async(req, res) => {
+    try {
+        await Standings.find({}).then((result) => {
+            res.json(result[0].allData);
+        }).catch((err) => {
+            throw err;
+        });
+    } catch (err) {
+        res.status(500).json(err);
+        console.log("standing alınamadı");
+    }
+});
+router.get("/getWeekMatchDetails/:weekNo", async(req, res) => {
+    try {
+       await Match.aggregate(
+            [
+            {$lookup:
+                {
+                    from:"clubs",
+                    localField:"club1_id",
+                    foreignField:"_id",
+                    as:"club1_info"
+                }
+            },
+            {$lookup:
+                {
+                    from:"clubs",
+                    localField:"club2_id",
+                    foreignField:"_id",
+                    as:"club2_info"
+                }
+            },
+                {$match:{week_no:req.params.weekNo}}
+            ]
+            ).then(result=>{
+                res.json(result);
+            })
+            } catch (err) {
+        res.status(500).json(err);
+        console.log("Could not get match details");
+    }
+});
 module.exports = router;
