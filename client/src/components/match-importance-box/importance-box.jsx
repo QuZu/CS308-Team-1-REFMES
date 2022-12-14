@@ -49,17 +49,19 @@ function ImportanceBox({ matchData }) {
         <>
         <div className="importance-match-outer-container">
             <div className="importance-match-container">
-                <div className="importance-match-rating-left">
-                    <div className="importance-match-left-match">
-                        <div className="importance-match-team">
-                            <img src={(clubs.find(({name})=>name == matchData.club1)).src}/>
-                            <a>{matchData.club1} </a>
-                        </div>
-                        <b> vs. </b>
-                        <div className="importance-match-team">
-                            <a>{matchData.club2} </a>
-                            <img src={(clubs.find(({name})=>name == matchData.club2)).src}/>
-                        </div>
+                <div className="importance-match-left-team">
+                    <div className="importance-match-team">
+                        <img src={(clubs.find(({name})=>name == matchData.club1)).src}/>
+                        <a>{matchData.club1} </a>
+                    </div>
+                </div>
+                <div className="importance-match-middle">
+                    <b> VS. </b>
+                </div>
+                <div className="importance-match-right-team">
+                    <div className="importance-match-team">
+                        <a>{matchData.club2} </a>
+                        <img src={(clubs.find(({name})=>name == matchData.club2)).src}/>
                     </div>
                 </div>
             </div>
