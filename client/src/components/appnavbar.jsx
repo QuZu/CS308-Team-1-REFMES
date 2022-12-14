@@ -46,6 +46,7 @@ function Brand() {
           { !currentUser ?
           <div style={{display:"flex"}}>
             <Nav.Link href="/login" align="center" style={{paddingRight: "10px"}}><span className="btn btn-success">Login</span></Nav.Link>
+            <Nav.Link href="/observer" align="center" style={{paddingRight: "10px"}}><span className="btn btn-success">Observer Login</span></Nav.Link>
             <Nav.Link href="/signup" align="center"><span className="btn btn-danger">Sign Up</span></Nav.Link>
           </div>
           :
