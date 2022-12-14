@@ -13,11 +13,11 @@ function Edit(){
     const {user:value}=currentUser
     const [errorMessage, setErrorMessage] = useState("");
     const goTopass = (e) => {
-        navigate("/editpass")
+        navigate("/edit/password")
       }
 
     const goTousername = (e) => {
-        navigate("/editusername")
+        navigate("/edit/username")
       }
 
     const deleteUser = useCallback((data) => {

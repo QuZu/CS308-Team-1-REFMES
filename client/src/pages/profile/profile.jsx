@@ -6,11 +6,11 @@ import { userLogout } from "../../store/userreducer";
 import axios from "axios";
 import AppNavBar from "../../components/appnavbar.jsx";
 import stadium from '../../stadiums/fenerbahce.jpg';
-import clubLogo from '../../logos/logo_fenerbahce.png';
+import clubLogo from '../../logos/fenerbahce.png';
 import profilePhoto from '../../photos/halperk.png';
 import {BsTwitter, BsInstagram, BsLinkedin, BsPencilFill, BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 
-function Myprofile() {
+function ProfilePage() {
     const [state, dispatch] = useStore();
     const navigate = useNavigate();
     const {user:currentUser} = state;
@@ -19,26 +19,6 @@ function Myprofile() {
     const goToEdit = (e) => {
     navigate("/edit")
   }
-  const deleteUser = useCallback((data) => {
-    axios
-      .post(`${process.env.REACT_APP_URL}/api/users/delete`,value)
-      .then((res) => {
-        if (res.status === 200 && res.data.message) {
-          setErrorMessage(res.data.message);
-        } else if (res.status === 200) {
-          setErrorMessage("You delete account succesfully");
-          
-          dispatch(userLogout());
-          navigate("/landing");
-        } else {
-          setErrorMessage("Error! Please try again.");
-        }
-      })
-      .catch((err) => {
-        console.log("Error:", err);
-        setErrorMessage("Error! Please try again.");
-      });
-  }, [navigate, dispatch]);
 
  return(
   <div className="profile-info row align-items-center mr-0">
@@ -51,7 +31,7 @@ function Myprofile() {
       </div>
       <div className="user_profile_headline">
           <img src={profilePhoto} alt="img"/> 
-          <article style={{display:"flex"}}><p style={{marginRight: "5px", fontSize: "30px"}}>{currentUser.user.name}</p><p style={{marginTop:"15px"}}>({currentUser.user.email})</p></article>
+          <article style={{display:"flex"}}><p style={{marginRight: "5px", fontSize: "30px"}}>{currentUser.user.full_name}</p><p style={{marginTop:"15px"}}>(@{currentUser.user.username})</p></article>
       </div>
     </div>
 
@@ -70,7 +50,7 @@ function Myprofile() {
 
         <div className="club_container">
           <div className="col-4 club_inner"><img src={clubLogo}/></div>
-          <div className="col-8 club_inner"><p>Fenerbahçe SK</p></div>
+          <div className="col-8 club_inner"><p>{currentUser.user.fan_of}</p></div>
         </div>
 
         <div className="social_media_container">
@@ -102,4 +82,4 @@ function Myprofile() {
   </div>
  )
 }
-export default Myprofile
+export default ProfilePage
