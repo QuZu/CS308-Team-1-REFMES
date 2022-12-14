@@ -3,6 +3,7 @@ const { response } = require("express");
 const router = express.Router();
 require("dotenv").config();
 const Referee = require('../../models/refereeModel');
+const updatedReferee = require('../../models/updated_refereeModel');
 const Comments=require('../../models/commentModel');
 const mongoose=require("mongoose");
 const axios = require('axios')
@@ -32,9 +33,23 @@ router.get("/getrefbyId/:refid", async(req, res) => {
     }}
 );
 router.get("/getAllref", async(req, res) => {
-    console.log("in backend");
+    //console.log("in backend");
     try {
         await Referee.find({}).then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            console.log(err);
+            throw err;
+        });
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }}
+);
+router.get("/getAllUpdatedref", async(req, res) => {
+    console.log("in backend");
+    try {
+        await updatedReferee.find({}).then((result) => {
             res.json(result);
         }).catch((err) => {
             console.log(err);
@@ -146,9 +161,21 @@ router.get("/updateRef", async(req, res) => {
 
             console.log("updated item:", updated_item);
             
-            const updatedRef=await Referee.findOneAndUpdate({r_username:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
-                 {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty})
-            console.log(updatedRef);
+            // const updatedRef=await updatedReferee.findOneAndUpdate({t_name:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
+            //      {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty}, {new: true});
+            // console.log(updatedRef);
+
+            updatedReferee.findOneAndUpdate({t_name:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
+                 {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty},
+                 function(err, ref){
+                    if(err){
+
+                        console.log(err);
+                    }
+                    else{
+                        console.log(ref);
+                    }
+            });
             
         } catch (error) {
             console.log(error);
