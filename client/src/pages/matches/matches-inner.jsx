@@ -11,7 +11,7 @@ function MatchesInnerPage({currentWeekNo}) {
 
     const [matchesData, setMatchesData] = useState({});
     const [loading, setLoading] = useState(false);
-    const [weekNo, setWeekNo] = useState(3);
+    const [weekNo, setWeekNo] = useState(currentWeekNo-1);
     const [playedWeek, setPlayedWeek] = useState(false);
 
     const getMatchDetails = async() => {
