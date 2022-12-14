@@ -11,7 +11,7 @@ import * as ReactBootstrap from "react-bootstrap";
 function MatchesPage() {
 
     const [loading, setLoading] = useState(false);
-    const [currentWeekNo, setCurrentWeekNo] = useState(4);
+    const [currentWeekNo, setCurrentWeekNo] = useState(5);
 
     const getCurrentWeek = async() => {
         await axios
