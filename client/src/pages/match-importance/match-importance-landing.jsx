@@ -23,15 +23,8 @@ function MatchImportancePage() {
         <AppNavBar/>
         {loading ?
         <div className="mt-5">
-            <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Order of Importance Week {currentweek}</h1>
-            <div className="row">
-              <div className="col-8"> 
-                <MatchDataPage  Week={currentweek}/>
-              </div>
-              <div className="col-4"> 
-                <MatchDataPage  Week={currentweek}/>
-              </div>
-            </div>
+            <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Order of Importance and Current Status Week {currentweek}</h1>
+            <MatchDataPage  Week={currentweek}/>
         </div>
         :
         <p>Loading...</p>

@@ -28,11 +28,11 @@ function SortedMatches({allmatches}) {
     const[loading,setLoading] = useState(false);
     const [standingsdata, setstandingsdata] = useState([]);
     const getStandings = async()=>{
-
+        
         await axios.get(`${process.env.REACT_APP_URL}/api/matches/getstandings`).then(res=>{
             setstandingsdata(res.data);
             setLoading(true);
-      
+
         }).catch(err => console.log(err))
       };
       useEffect(() => {
@@ -60,8 +60,16 @@ function SortedMatches({allmatches}) {
             var club1_name=element.club1_info[0].name
             var club2_name=element.club2_info[0].name
             var club1_rank=(myarray.find(({asciname})=>asciname ===club1_asci)).rank;
+            if(club1_asci==="fenerbahce" ||club1_asci==="galatasaray" || club1_asci==="besiktas" || club1_asci==="basaksehir"||club1_asci==="trabzonspor")
+            {
+                club1_rank=club1_rank-5;
+            }
             // console.log(club1_rank.rank);
             var club2_rank=(myarray.find(({asciname})=>asciname ===club2_asci)).rank;
+            if(club2_asci==="fenerbahce" ||club2_asci==="galatasaray" || club2_asci==="besiktas" || club2_asci==="basaksehir"||club2_asci==="trabzonspor")
+            {
+                club2_rank=club2_rank-5;
+            }
             var matchID=element._id
             var alldata={
                 club1_asci:club1_asci,
@@ -74,7 +82,7 @@ function SortedMatches({allmatches}) {
             myranking.push(alldata)
         });
     }
-    console.log(myranking);
+    //console.log(myranking);
     myranking.sort(function(a, b){
         if(a.totalrank > b.totalrank) { return 1; }
         if(a.totalrank < b.totalrank) { return -1; }
