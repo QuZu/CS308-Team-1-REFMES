@@ -4,17 +4,16 @@ const router = express.Router();
 const bcrypt=require("bcrypt");
 require("dotenv").config();
 const User = require('../../models/usermodel');
+const Observer = require('../../models/observerModel');
 
 router.post('/signup', async(req, res) => {
   const {username, full_name, email, password, fan_of} = req.body;
   if(!username || !full_name || !email || !password || !fan_of){
     return res.status(400).json({msg: "Please enter all fields"});
   }
-
   try {
     const user = await User.findOne({ email });
     if (user) throw Error('User already exists');
-
     const salt = await bcrypt.genSalt(10);
     if (!salt) throw Error('Something went wrong with bcrypt');
 
@@ -22,7 +21,9 @@ router.post('/signup', async(req, res) => {
     if (!hash) throw Error('Something went wrong hashing the password');
 
     const newUser = new User({ username, full_name, email, password: hash, fan_of });
+    console.log(newUser);
     const savedUser = await newUser.save();
+    console.log("Saveduser:",savedUser)
     if (!savedUser) throw Error('Something went wrong while saving the user');
 
     res.status(200).json({
@@ -63,6 +64,36 @@ router.post('/login', async(req, res) => {
       }});
 
     console.log(user);
+
+    } catch (e) {
+      res.status(400).json({ msg: e.message });
+    }
+  }
+);
+
+router.post('/observerLogin', async(req, res) => {
+  const {observerid, password} = req.body;
+  console.log("id:" ,observerid);
+  console.log("passw:" ,password);
+  if(!observerid || !password) {
+      return res.status(400).json({ msg: 'Please enter all fields' });
+  }
+  
+  try {
+    const observer = await Observer.findOne({ observer_id:observerid });
+    console.log("observer:" ,observer);
+    if (!observer) throw Error('Observer does not exist');
+  
+    if (password !== observer.password){
+
+      throw Error('Invalid credentials');
+    }
+    res.status(200).json({
+      observer: {
+        id: observer.observer_id,
+      }});
+
+    console.log(observer);
 
     } catch (e) {
       res.status(400).json({ msg: e.message });

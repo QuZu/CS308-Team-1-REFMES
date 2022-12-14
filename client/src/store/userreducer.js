@@ -1,10 +1,13 @@
 export const USER_LOGIN = "APP/USER/USER_LOGIN";
 export const USER_LOGOUT = "APP/USER/USER_LOGOUT";
+export const OBSERVER_LOGIN = "APP/OBSERVER/OBSERVER_LOGIN"; 
+export const OBSERVER_LOGOUT = "APP/OBSERVER/OBSERVER_LOGOUT";
 
 const currUser = JSON.parse(localStorage.getItem("currentUser"));
-
+const currObserver = JSON.parse(localStorage.getItem("observer"));
 export const initialState = {
   user: currUser,
+  observer: currObserver,
 };
 
 export const userLogin = (user) => ({
@@ -12,8 +15,17 @@ export const userLogin = (user) => ({
   user,
 });
 
+export const observerLogin = (observer) => ({
+  type: OBSERVER_LOGIN,
+  observer,
+});
+
 export const userLogout = () => ({
   type: USER_LOGOUT,
+});
+
+export const observerLogout = () => ({
+  type: OBSERVER_LOGOUT,
 });
 
 export const userReducer = (state = initialState, action) => {
@@ -29,6 +41,20 @@ export const userReducer = (state = initialState, action) => {
     return {
       ...state,
       user: "",
+    };
+  }
+  else if (action.type === OBSERVER_LOGIN){
+    localStorage.setItem("observer", JSON.stringify(action.observer));
+    return {
+      ...state,
+      observer: action.observer,
+    };
+  }
+  else if (action.type === OBSERVER_LOGOUT) {
+    localStorage.removeItem("observer");
+    return {
+      ...state,
+      observer: "",
     };
   }
 };
