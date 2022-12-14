@@ -36,6 +36,7 @@ import MatchImportancePage from "./pages/match-importance/match-importance-landi
 import ObserverLoginPage from "./pages/observer/observerLogin";
 import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
+import RefmesRatingPage from "./pages/admin-auth/refmesRating";
 
 
 function App() {
@@ -61,7 +62,7 @@ function App() {
         <Route path="/observer-auth" element={<ObserverAuthPage />} />
         <Route path="/observer-auth/observerRating" element={<ObserverRatingPage />} />
         <Route path="/admin-auth/updateReferee" element={<AdminUpdateReferee />} />
-
+        <Route path="admin-auth/refmesRating" element={<RefmesRatingPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
         :
@@ -83,10 +84,10 @@ function App() {
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
         <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
-        <Route path="*" element={<ErrorPage />} />
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />
+        <Route path="*" element={<ErrorPage />} />
         </>
 }
       </Routes>
