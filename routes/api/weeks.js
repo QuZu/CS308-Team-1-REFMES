@@ -5,20 +5,17 @@ require("dotenv").config();
 const Week = require('../../models/weekModel');
 
 router.get("/getWeek", async(req, res) => {
-    try{
-        const currentdate=new Date();
-        console.log("Backenddeyim date: ",currentdate);
-        await Week.find({})
-        .then(res=>{
+    try {
+        await Week.findById("63781a749e79075af41da252").then((result) => {
             res.json(result);
         }).catch((err) => {
             throw err;
         });
-    }catch (err) {
-        res.status(500).json(err.response);
-        console.log("Could not get week for this week");
-    }
-});
+    } catch (err) {
+        res.status(500).json(err);
+    }}
+);
+
 router.post("/setWeek", async(req, res) => {
     const{ weekno,start_Date,end_Date}=req.body;
     try {
