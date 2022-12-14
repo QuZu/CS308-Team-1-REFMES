@@ -27,6 +27,7 @@ import AdminAuthPage from "./pages/admin-auth/admin-auth";
 import AdminAddReferee from "./pages/admin-auth/addReferee";
 import AdminSelectReferee from "./pages/admin-auth/selectReferee";
 import PostMatchCommentPage from "./pages/post-match/post-match-comment";
+import SingleMatchPage from "./pages/single-match/single-match";
 
 function App() {
   const [state] = useStore();
@@ -65,6 +66,7 @@ function App() {
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
         <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
+        <Route path="/match/:matchID" element={<SingleMatchPage />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         </>
