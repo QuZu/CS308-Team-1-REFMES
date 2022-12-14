@@ -7,6 +7,7 @@ const Referee = require('../../models/refereeModel');
 const Observer = require('../../models/observerModel');
 const Match = require('../../models/matchModel');
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
+const RefmesRating = require('../../models/refmesRatingModel');
 
 router.post('/addReferee', async(req, res) => {
     console.log("Gelen datam:", req.body); 
@@ -109,4 +110,15 @@ router.post('/addReferee', async(req, res) => {
   
   );
 
-  module.exports = router;
+router.get("/getRefmesRatingWeights", async(req, res) => {
+  try {
+    await RefmesRating.findById("639a1da0ed4b14a87afe9ed5").then((result) => {
+    res.json(result);
+  }).catch((err) => {
+    throw err;
+  });} catch (err) {
+    res.status(500).json(err);
+  }}
+);
+
+module.exports = router;
