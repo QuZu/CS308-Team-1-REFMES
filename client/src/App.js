@@ -25,14 +25,15 @@ import RefereesPage from "./pages/referees/referees";
 import AdminPage from "./pages/admin/admin";
 import AdminAuthPage from "./pages/admin-auth/admin-auth";
 import AdminAddReferee from "./pages/admin-auth/addReferee";
+import AdminSelectRefereeLanding from "./pages/admin-auth/selectref-landing";
+import AdminAddObserver from "./pages/admin-auth/addObserver";
+import AdminEnterResult from "./pages/admin-auth/enterResult";
 import AdminSelectReferee from "./pages/admin-auth/selectReferee";
 import AdminUpdateReferee from "./pages/admin-auth/updateReferee";
 import PostMatchCommentPage from "./pages/post-match/post-match-comment";
 import StandingPage from "./pages/standings/standings"
 import MatchImportancePage from "./pages/match-importance/match-importance-landing";
-
 import ObserverLoginPage from "./pages/observer/observerLogin";
-
 import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
 
@@ -52,14 +53,13 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin-auth" element={<AdminAuthPage />} />
         <Route path="/admin-auth/addReferee" element={<AdminAddReferee />} />
+        <Route path="/admin-auth/enterResult" element={<AdminEnterResult />} />
+        <Route path="/admin-auth/selectReferee" element={<AdminSelectRefereeLanding />} />
+        <Route path="/admin-auth/addObserver" element={<AdminAddObserver />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
-
         <Route path="/observer" element={<ObserverLoginPage />} />
-
         <Route path="/observer-auth" element={<ObserverAuthPage />} />
         <Route path="/observer-auth/observerRating" element={<ObserverRatingPage />} />
-
-
         <Route path="/admin-auth/updateReferee" element={<AdminUpdateReferee />} />
 
         <Route path="*" element={<ErrorPage />} />

@@ -1,14 +1,9 @@
-import { useStore } from "../../store/store";
-import AppNavBarSingle from "../../components/appnavbarsingle.jsx";
-import ObserverRatingBox from "../../components/ratingbox/observerratingbox.jsx";
-import { useNavigate } from "react-router";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../observer-auth/observerRating.css";
+import ResultBox from "../../components/enterResult/ResultBox.jsx";
 import * as ReactBootstrap from "react-bootstrap";
-
-function ObserverRatingPage() {
-    const weekNo = "3";
+function AdminEnterResult(){
+    const weekNo = "1";
 
     const [matchDetails, setMatchDetails] = useState([]);
     const [loading,setLoading] = useState(false);
@@ -25,17 +20,14 @@ function ObserverRatingPage() {
     useEffect(() => {
         getMatchDetails();
     }, []);
-
+    console.log(matchDetails);
     return(
         <div>
-            <AppNavBarSingle/>
-            <div>
-                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Observer Rating for Week {weekNo}</h1>
-            </div>
-            {loading && matchDetails ?
-                <div className="matches">
+             <h1 style={{textAlign: "center" ,color:"red", paddingBottom:"10px"}}>ENTER THE RESULTS OF THE WEEK {weekNo}</h1>
+             {loading && matchDetails ?
+                <div>
                 {matchDetails.map((singleMatchDetails) => {
-                    return(<ObserverRatingBox key={singleMatchDetails._id} matchData={singleMatchDetails}/>)
+                    return(<ResultBox key={singleMatchDetails._id} matchData={singleMatchDetails}/>)
                 })}
                 </div>
                 :
@@ -44,8 +36,7 @@ function ObserverRatingPage() {
                 </div>
             }
         </div>
+
     )
-}
-
-export default ObserverRatingPage
-
+};
+export default AdminEnterResult;
