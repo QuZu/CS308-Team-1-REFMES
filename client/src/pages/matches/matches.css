@@ -5,7 +5,7 @@
 .matches-league-week-inner-container {
     display: flex;
     justify-content: center;
-    margin-top: 0.25em;
+    margin-top: 0.5em;
 }
 
 .matches-league-week-block {
@@ -15,7 +15,9 @@
     justify-content: center;
     align-items: center;
     background: #fff;
-    margin-left: 0.25em;
+    margin-left: 0.5em;
+    border-radius: 25%;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
 
 .matches-league-week-block:hover {
