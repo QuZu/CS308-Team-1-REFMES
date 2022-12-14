@@ -8,7 +8,7 @@ const MatchSchema = new Schema({
   },
   referee_id: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: false
   },
   club1_id:{
     type: Schema.Types.ObjectId,
@@ -20,11 +20,11 @@ const MatchSchema = new Schema({
   },
   club1_goals:{
     type: String,
-    required: true
+    required: false
   },
   club2_goals:{
     type: String,
-    required: true
+    required: false
   }
 });
 

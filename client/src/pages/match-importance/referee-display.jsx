@@ -29,7 +29,13 @@ function RefereeDisplay({RefData,CurrentWeek}) {
         }
         arrayelement.sum=totalsum;
         arrayelement.count=arrayelement.data.length
-        arrayelement.ratio=(totalsum/arrayelement.data.length).toFixed(2)
+        if(arrayelement.data.length==0){
+          arrayelement.ratio=0.00;
+        }
+        else{
+          arrayelement.ratio=(totalsum/arrayelement.data.length).toFixed(2)
+
+        }
 
       }
       setRefarray(mydata)

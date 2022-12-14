@@ -6,12 +6,12 @@ import RefereeDisplay from "./referee-display.jsx";
 function MatchDataPage({Week}) {
     const[loading,setLoading] = useState(false);
     const [allmatchDetails, setallMatchDetails] = useState([]);
-    const [WeekReferee,setWeekReferee]=useState({})
-     const stabilweek="5"
+    const [WeekReferee,setWeekReferee]=useState([])
+     const stabilweek="15"
     const getWeekMatchDetails = async() => {
       await axios.all([
         axios.get(`${process.env.REACT_APP_URL}/api/matches/getWeekMatchDetails/${Week}`),
-        axios.get(`${process.env.REACT_APP_URL}/api/refereesOfWeek/getRefereesOfWeek/${stabilweek}`)
+        axios.get(`${process.env.REACT_APP_URL}/api/refereesOfWeek/getRefereesOfWeek/${Week}`)
       ])
       .then(axios.spread((res1, res2) => {
         setallMatchDetails(res1.data);
@@ -33,7 +33,9 @@ function MatchDataPage({Week}) {
               <SortedMatches allmatches={allmatchDetails} />
           </div>
           <div className="col-5">
-              <RefereeDisplay RefData={WeekReferee} CurrentWeek={stabilweek} />
+            {WeekReferee.length>0 ? 
+            <RefereeDisplay RefData={WeekReferee} CurrentWeek={Week} />
+            :<h3 style={{textAlign: "center"}}>Something went wrong when getting referee..</h3> }
           </div>
         </div>
         :

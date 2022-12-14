@@ -10,11 +10,9 @@ router.post('/signup', async(req, res) => {
   if(!username || !full_name || !email || !password || !fan_of){
     return res.status(400).json({msg: "Please enter all fields"});
   }
-
   try {
     const user = await User.findOne({ email });
     if (user) throw Error('User already exists');
-
     const salt = await bcrypt.genSalt(10);
     if (!salt) throw Error('Something went wrong with bcrypt');
 
@@ -22,7 +20,9 @@ router.post('/signup', async(req, res) => {
     if (!hash) throw Error('Something went wrong hashing the password');
 
     const newUser = new User({ username, full_name, email, password: hash, fan_of });
+    console.log(newUser);
     const savedUser = await newUser.save();
+    console.log("Saveduser:",savedUser)
     if (!savedUser) throw Error('Something went wrong while saving the user');
 
     res.status(200).json({
