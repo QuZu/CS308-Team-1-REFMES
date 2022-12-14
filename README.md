@@ -32,8 +32,7 @@ https://github.com/SU-CS308-22FA/Team-1-REFMES/issues/25 https://github.com/SU-C
 
 ### How to install the software?
 
-Currently the users cannot install our since we have no app version in App Store or Google Play Store but in the future we are planning to publish app version too.
-This part will be updated when the app is published
+Currently the users cannot install our app since we have no app version in App Store or Google Play Store but in the future we are planning to publish app version too. So,this part will be updated when the app is published
 
 ### How to run the software?
 
@@ -46,10 +45,15 @@ Users can register by creating an account so that they can use a great deal of f
 
 ### How to report a bug?
 If you find a bug, you can follow these steps...
-1. You should write about what is the problem and what may cause this problem.
-2. In order to solve this problem we should understand what cause the problem. Hence, you should document the error via recording a video or taking a screenshot.
-3. Try to explain as much as you can when it occurs and what triggers it. 
-4. Finally you can send us an email with your documentation. Here is our email: refmes.org@gmail.com
+1. First, specify the location where it took place.
+2. You should write about what is the problem and what may cause this problem.
+3. Describe your path around the app until you see the error because we need to reproduce the error.
+4. Write down when it occurred and what the expected behavior should be.
+5. Write down the hardware and web versions you are using.
+6. If you have a suggestion, you can add your suggestion to the end.
+7. Finally you can send us an email with your documentation. Here is our email: refmes.org@gmail.com
+
+***If you want to get more detailed information, you can view a sample bug report*** [here](https://github.com/SU-CS308-22FA/Team-1-REFMES/issues/73).
 
 ### Known bugs?
 Currently we do not have any particular bugs. However, we are not completely sure that there are no bugs since we do not complete all the tests.
