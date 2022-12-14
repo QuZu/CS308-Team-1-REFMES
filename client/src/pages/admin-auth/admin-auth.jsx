@@ -20,7 +20,9 @@ function AdminAuthPage(){
       const goToUpdateReferee = (e) => {
         navigate("/admin-auth/updateReferee")
       }
-
+      const gotoRefmesRating = (e) => {
+        navigate("/admin/refmesRating")
+      }
 
     return(
         <div>
@@ -42,6 +44,8 @@ function AdminAuthPage(){
             <div style={{minHeight:"100px", marginTop:"40px"}}  className="row">
                     <button onClick={goToUpdateReferee}  style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-info btn-lg">
                     UPDATE THE REFEREE INFORMATION</button>
+                    <button onClick={gotoRefmesRating}  style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-secondary btn-lg">
+                    REFMES RATING</button>
       
             </div>
         </div>
