@@ -31,6 +31,7 @@ import AdminEnterResult from "./pages/admin-auth/enterResult";
 import AdminSelectReferee from "./pages/admin-auth/selectReferee";
 import AdminUpdateReferee from "./pages/admin-auth/updateReferee";
 import PostMatchCommentPage from "./pages/post-match/post-match-comment";
+import SingleMatchPage from "./pages/single-match/single-match";
 import StandingPage from "./pages/standings/standings"
 import MatchImportancePage from "./pages/match-importance/match-importance-landing";
 import ObserverLoginPage from "./pages/observer/observerLogin";
@@ -83,6 +84,8 @@ function App() {
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
         <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
+        <Route path="/match/:matchID" element={<SingleMatchPage />} />
+        <Route path="*" element={<ErrorPage />} />
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />

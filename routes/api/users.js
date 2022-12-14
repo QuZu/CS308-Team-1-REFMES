@@ -5,6 +5,7 @@ const bcrypt=require("bcrypt");
 require("dotenv").config();
 const User = require('../../models/usermodel');
 const Observer = require('../../models/observerModel');
+
 router.post('/signup', async(req, res) => {
   const {username, full_name, email, password, fan_of} = req.body;
   if(!username || !full_name || !email || !password || !fan_of){

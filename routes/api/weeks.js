@@ -7,7 +7,6 @@ const Week = require('../../models/weekModel');
 router.get("/getWeek", async(req, res) => {
     try {
         await Week.findById("63781a749e79075af41da252").then((result) => {
-
             res.json(result);
         }).catch((err) => {
             throw err;
@@ -16,6 +15,7 @@ router.get("/getWeek", async(req, res) => {
         res.status(500).json(err);
     }}
 );
+
 router.post("/setWeek", async(req, res) => {
     const{ weekno,start_Date,end_Date}=req.body;
     try {
