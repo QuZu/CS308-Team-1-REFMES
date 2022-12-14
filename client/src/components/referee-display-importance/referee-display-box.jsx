@@ -15,7 +15,7 @@ function RefereeDisplayBox({ RefereeData }) {
                 </div>
                 <div className="referee-display-right-container">
                     <div className="referee-display-text">
-                        <a>{RefereeData.ratio} </a>
+                        <div className="referee-display-point-circle">{RefereeData.ratio} </div>
                     </div>
                 </div>
             </div>
