@@ -22,7 +22,7 @@ function calculateRefmesRating(weights, totalFanRating, fanRatingCount, totalObs
 }
 
 function RefmesRatingPage(){
-    const [errorMessage, setErrorMessage] = useState("To submit your new calculation, click Send Database");
+    const [errorMessage, setErrorMessage] = useState("To submit your new calculation, click on 'Send to the Database' button.");
     const [wFan, setWFan] = useState();
     const [wObserver, setWObserver] = useState();
     const [wExperience, setWExperience] = useState();
@@ -32,7 +32,7 @@ function RefmesRatingPage(){
     const [randomObser,setRandomobserver]=useState(0)
     const [randomEx,setRandomexperience]=useState(0)
     const [btnDisabled, setBtnDisabled] = useState(false);
-    const [btnValue, setBtnValue] = useState("Calculate");
+    const [btnValue, setBtnValue] = useState("Calculate the Weights");
 
     const getWeights = async() => {
         await axios
@@ -141,13 +141,13 @@ function RefmesRatingPage(){
       var doublewconst= parseFloat(wConstant)
       function loadingwaiting() {
         setLoading(true)
-        setBtnValue("Calculate")
+        setBtnValue("Calculate the Weights")
         setBtnDisabled(false)
-        setErrorMessage("New weights calculated")
+        setErrorMessage("New weights of the algorithm are calculated!")
       }
       const newRandom = (e) => {
         setBtnDisabled(true)
-        setBtnValue("Calculating..")
+        setBtnValue("Calculating...")
         setLoading(false)
         var randomfan=getRndInteger(doubleWfan-0.03*doubleWfan,doubleWfan+0.03*doubleWfan)
         var randomObserver=getRndInteger(doubleWObserver-0.03*doubleWObserver,doubleWObserver+0.03*doubleWObserver)
@@ -168,31 +168,57 @@ function RefmesRatingPage(){
     return(
         <div>
             <AppNavBarSingle/>
-            <h1 style={{textAlign: "center", marginTop: "144px"}}>REFMES Rating</h1>
+            <h1 style={{textAlign: "center", marginTop: "72px", marginBottom: "32px"}}>REFMES Rating</h1>
 
             <div className="row">
-                { loading ?
                     <div className="refmes-rating-outer-container">
-                        <div><a>Weight of Fan Rating: {wFan}</a></div>
-                        <div><a>Weight of Observer Rating: {wObserver}</a></div>
-                        <div><a>Weight of Referee Experience: {wExperience}</a></div>
-                        <div><a>Constant: {wConstant}</a></div>
+                        <div className="refmes-rating-weight-container">
+                            <div className="refmes-rating-weight-inner">
+                            { loading ?
+                                <a>Weight of Fan Rating: <b>{wFan}</b></a>
+                                :
+                                <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
+                            }
+                            </div>
+                        </div>
+                        <div className="refmes-rating-weight-container">
+                            <div className="refmes-rating-weight-inner">
+                            { loading ?
+                                <a>Weight of Observer Rating: <b>{wObserver}</b></a>
+                                :
+                                <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
+                            }
+                            </div>
+                        </div>
+                        <div className="refmes-rating-weight-container">
+                            <div className="refmes-rating-weight-inner">
+                            { loading ?
+                                <a>Weight of Referee Experience: <b>{wExperience}</b></a>
+                                :
+                                <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
+                            }
+                            </div>
+                        </div>
+                        <div className="refmes-rating-weight-container">
+                            <div className="refmes-rating-weight-inner">
+                            { loading ?
+                                <a>Constant: <b>{wConstant}</b></a>
+                                :
+                                <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
+                            }
+                            </div>
+                        </div>
                     </div>
-                    :
-                    <div className="d-flex justify-content-center">
-                        <ReactBootstrap.Spinner animation="border"/>
-                    </div>
-                }
                 <div style={{minHeight:"100px", marginTop:"20px"}}  className="refmes-rating-outer-container">
                         <div className="refmes-rating-outer-container mt-4">
                             <input onClick={newRandom} style={{"width":400 }} type="submit" name="submitButton" disabled={btnDisabled} className="btn btn-success" value={`${btnValue}`}/>                   
                         </div>
                         <div className="refmes-rating-outer-container mt-4">
-                            <input onClick={PostDatabase} style={{"width":400 }} type="submit" name="submitButton" disabled={btnDisabled} className="btn btn-warning" value="Send Database"/>                   
+                            <input onClick={PostDatabase} style={{"width":400 }} type="submit" name="submitButton" disabled={btnDisabled} className="btn btn-warning" value="Send to the Database"/>                   
                         </div>
                         <div className="refmes-rating-outer-container mt-4">
-                            <div>
-                                <h3>{errorMessage}</h3>
+                            <div className="refmes-rating-inner-container-error">
+                                <a>{errorMessage}</a>
                             </div>
                         </div>
                 </div>
