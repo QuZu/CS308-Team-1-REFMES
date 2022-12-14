@@ -3,19 +3,19 @@ const Schema = mongoose.Schema;
 
 const RefmesRatingSchema = new Schema({
   wFan:{
-    type: Schema.Types.Decimal128,
+    type: Schema.Types.String,
     required: true
   },
   wObserver: {
-    type: Schema.Types.Decimal128,
+    type: Schema.Types.String,
     required: true
   },
   wExperience:{
-    type: Schema.Types.Decimal128,
+    type: Schema.Types.String,
     required: true
   },
   wConstant:{
-    type: Schema.Types.Decimal128,
+    type: Schema.Types.String,
     required: true
   }
 });

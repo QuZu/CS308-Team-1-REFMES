@@ -1,0 +1,5 @@
+.refmes-rating-outer-container {
+    align-items:baseline ;
+    text-align: center;
+    flex-direction: column;
+}

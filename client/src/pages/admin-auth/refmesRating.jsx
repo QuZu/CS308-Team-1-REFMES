@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import MLR from "ml-regression-multivariate-linear";
 import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 import * as ReactBootstrap from "react-bootstrap";
+import "../admin-auth/refmes-rating.css"
 
 function calculateRefmesRating(weights, totalFanRating, fanRatingCount, totalObserverRating, observerRatingCount, yearExperience) {
     const wFan = weights[0];
@@ -21,12 +22,17 @@ function calculateRefmesRating(weights, totalFanRating, fanRatingCount, totalObs
 }
 
 function RefmesRatingPage(){
-    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("To submit your new calculation, click Send Database");
     const [wFan, setWFan] = useState();
     const [wObserver, setWObserver] = useState();
     const [wExperience, setWExperience] = useState();
     const [wConstant, setWConstant] = useState();
     const [loading,setLoading] = useState(false);
+    const [randomFan,setRandomfan]=useState(0)
+    const [randomObser,setRandomobserver]=useState(0)
+    const [randomEx,setRandomexperience]=useState(0)
+    const [btnDisabled, setBtnDisabled] = useState(false);
+    const [btnValue, setBtnValue] = useState("Calculate");
 
     const getWeights = async() => {
         await axios
@@ -109,34 +115,64 @@ function RefmesRatingPage(){
         [18]];
 
     const mlr = new MLR(x, y);
-    // console.log(mlr.weights);
-    // const weights = [0.2633877143059147, 0.6347570089117198, 0.13270641429156882, 13.04011230161882];
-    // const refmesRating = calculateRefmesRating(weights, 200, 40, 100, 24, 5);
-    // console.log(refmesRating);
 
-    const handleSubmit = async (e)=> {
+    const PostDatabase = async (e)=> {
+        var newWeights={
+            fan:wFan,
+            observer:wObserver,
+            experience:wExperience,
+            constant:wConstant
+        }
+        setBtnDisabled(true)
         e.preventDefault();
-        if(true){
-            setErrorMessage("Please, enter all fields!");
-        }
-        else{
-            setErrorMessage("You have successfully added observer to the database!");
-        }
-        // await axios.post(`${process.env.REACT_APP_URL}/api/`,)
-        // .then(res =>{
-        //     console.log(res.data);
+        await axios.post(`${process.env.REACT_APP_URL}/api/admin/postRefmesRatingWeights`,newWeights)
+         .then(res =>{
+            setErrorMessage("You have successfully added new weights to the database!");
+            setBtnDisabled(false);
 
-        // }).catch(err=>console.log(err));
+         }).catch(err=>console.log(err));
     };
-
+    function getRndInteger(min, max) {
+        return (Math.random() * (max - min) ) + min;
+      }
+      var doubleWfan= parseFloat(wFan)
+      var doubleWObserver= parseFloat(wObserver)
+      var doublewExperience= parseFloat(wExperience)
+      var doublewconst= parseFloat(wConstant)
+      function loadingwaiting() {
+        setLoading(true)
+        setBtnValue("Calculate")
+        setBtnDisabled(false)
+        setErrorMessage("New weights calculated")
+      }
+      const newRandom = (e) => {
+        setBtnDisabled(true)
+        setBtnValue("Calculating..")
+        setLoading(false)
+        var randomfan=getRndInteger(doubleWfan-0.03*doubleWfan,doubleWfan+0.03*doubleWfan)
+        var randomObserver=getRndInteger(doubleWObserver-0.03*doubleWObserver,doubleWObserver+0.03*doubleWObserver)
+        var randomExperience=getRndInteger(doublewExperience-0.03*doublewExperience,doublewExperience+0.03*doublewExperience)
+        var randomconst=getRndInteger(doublewconst-0.006*doublewconst,doublewconst+0.006*doublewconst)
+        
+        setWFan(randomfan)
+        setWObserver(randomObserver)
+        setWExperience(randomExperience)
+        setWConstant(randomconst)
+        setTimeout(loadingwaiting,3000)
+      }
+    useEffect(() => {
+    }, [randomEx])
+    
+  console.log(wFan);
+  //console.log("Değişcek ha bu:",numberRandom)
     return(
         <div>
             <AppNavBarSingle/>
             <h1 style={{textAlign: "center", marginTop: "144px"}}>REFMES Rating</h1>
 
-            <div>
+            <div className="row">
                 { loading ?
-                    <div>
+                    <div className="refmes-rating-outer-container">
                         <div><a>Weight of Fan Rating: {wFan}</a></div>
                         <div><a>Weight of Observer Rating: {wObserver}</a></div>
                         <div><a>Weight of Referee Experience: {wExperience}</a></div>
@@ -147,6 +183,19 @@ function RefmesRatingPage(){
                         <ReactBootstrap.Spinner animation="border"/>
                     </div>
                 }
+                <div style={{minHeight:"100px", marginTop:"20px"}}  className="refmes-rating-outer-container">
+                        <div className="refmes-rating-outer-container mt-4">
+                            <input onClick={newRandom} style={{"width":400 }} type="submit" name="submitButton" disabled={btnDisabled} className="btn btn-success" value={`${btnValue}`}/>                   
+                        </div>
+                        <div className="refmes-rating-outer-container mt-4">
+                            <input onClick={PostDatabase} style={{"width":400 }} type="submit" name="submitButton" disabled={btnDisabled} className="btn btn-warning" value="Send Database"/>                   
+                        </div>
+                        <div className="refmes-rating-outer-container mt-4">
+                            <div>
+                                <h3>{errorMessage}</h3>
+                            </div>
+                        </div>
+                </div>
 
             </div>
 

@@ -120,5 +120,26 @@ router.get("/getRefmesRatingWeights", async(req, res) => {
     res.status(500).json(err);
   }}
 );
+router.post("/postRefmesRatingWeights", async(req, res) => {
+  const{fan,observer,experience,constant}=req.body
+  console.log(fan,observer,experience,constant);
+  try {
+    await RefmesRating.findByIdAndUpdate("639a1da0ed4b14a87afe9ed5",
+    {
+      wFan:fan,
+      wObserver:observer,
+      wExperience:experience,
+      wConstant:constant
+    })
+    .then((result) => {
+    res.json(result);
+  }).catch((err) => {
+    throw err;
+  });} 
+  catch (err) {
+    res.status(500).json(err);
+  }
+}
+);
 
 module.exports = router;
