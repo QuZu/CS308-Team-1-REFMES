@@ -163,6 +163,18 @@
     box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
     margin: 1em;
     width: 50%;
+    align-items: center;
+}
+
+.matchbox-advanced-referee-name {
+    text-decoration: none;
+    color: #3b3b3b;
+}
+
+.matchbox-advanced-referee-name:hover {
+    text-decoration: none;
+    color: #e51936;
+    font-size: 1.1em;
 }
 
 .matchbox-advanced-comments-container {

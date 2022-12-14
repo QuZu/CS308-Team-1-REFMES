@@ -112,7 +112,7 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
             </div>
             <div className="matchbox-advanced-referee-container">
                 {playedWeek && hasRefInfo ?
-                    <div>Match in <b>Week {matchData.week_no}</b> | Referee: <Link to={`../referee/${matchData.ref_info[0].r_username}`}>{matchData.ref_info[0].name}</Link></div>
+                    <div>Match in <b>Week {matchData.week_no}</b> | Referee: <b><Link className="matchbox-advanced-referee-name" to={`../referee/${matchData.ref_info[0].r_username}`}>{matchData.ref_info[0].name}</Link></b></div>
                     :
                     <div>Match in <b>Week {matchData.week_no}</b> | Referee is not assigned yet.</div>
                 }
