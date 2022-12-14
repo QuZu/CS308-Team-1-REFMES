@@ -86,7 +86,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
-        <Route path="/currentstatus" element={<MatchImportancePage/>} />
+        <Route path="/livestatus" element={<MatchImportancePage/>} />
         </>
 }
       </Routes>
