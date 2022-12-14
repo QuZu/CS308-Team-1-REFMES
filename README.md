@@ -48,10 +48,11 @@ If you find a bug, you can follow these steps...
 1. First, specify the location where it took place.
 2. You should write about what is the problem and what may cause this problem.
 3. Describe your path around the app until you see the error because we need to reproduce the error.
-4. Write down when it occurred and what the expected behavior should be.
-5. Write down the hardware and web versions you are using.
-6. If you have a suggestion, you can add your suggestion to the end.
-7. Finally you can send us an email with your documentation. Here is our email: refmes.org@gmail.com
+4. You can include a screenshot or video recording that explains visually to make it easier to understand.
+5. Write down when it occurred and what the expected behavior should be.
+6. Write down the hardware and web versions you are using.
+7. If you have a suggestion, you can add your suggestion to the end.
+8. Finally you can send us an email with your documentation. Here is our email: refmes.org@gmail.com
 
 ***If you want to get more detailed information, you can view a sample bug report*** [here](https://github.com/SU-CS308-22FA/Team-1-REFMES/issues/73).
 
