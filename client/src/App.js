@@ -38,7 +38,6 @@ import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
 
-
 function App() {
   const [state] = useStore();
   const { user: currentUser } = state;
@@ -62,7 +61,7 @@ function App() {
         <Route path="/observer-auth" element={<ObserverAuthPage />} />
         <Route path="/observer-auth/observerRating" element={<ObserverRatingPage />} />
         <Route path="/admin-auth/updateReferee" element={<AdminUpdateReferee />} />
-        <Route path="admin-auth/refmesRating" element={<RefmesRatingPage />} />
+        <Route path="admin/refmesRating" element={<RefmesRatingPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
         :

@@ -21,7 +21,7 @@ function AdminAuthPage(){
         navigate("/admin-auth/updateReferee")
       }
       const gotoRefmesRating = (e) => {
-        navigate("/admin-auth/refmesRating")
+        navigate("/admin/refmesRating")
       }
 
     return(
