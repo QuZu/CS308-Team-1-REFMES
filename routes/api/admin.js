@@ -56,23 +56,19 @@ router.post('/addReferee', async(req, res) => {
     if(!observer_id || !password) {
       return res.status(400).json({msg: "Please enter all fields"});
     }
-  
-    try {
-      const observer = await Observer.findOne({ observer_id });
-      if (observer) throw Error('Observer already exists');
 
+    
       const newObserver = new Observer({observer_id,password});
-      const savedObserver = await newObserver.save();
-      if (!savedObserver) throw Error('Something went wrong while saving the observer');
-  
-      res.status(200).json({
-        observer: {
-          observer_id: savedObserver.observer_id,
-          password: savedObserver.password,
-        }});
-  
-      } catch (e) {
-        res.status(400).json({ error: e.message });
+      const newSavedObserver = await newObserver.save().then(business => {console.log(business)}).catch(err => {console.log(err)});
+    
+      
+      console.log("savedObserver:", newSavedObserver);
+      if(newSavedObserver !== undefined){
+        res.status(200).json({
+          observer: {
+            observer_id: newSavedObserver.observer_id,
+            password: newSavedObserver.password,
+          }});
       }
     }
   );
