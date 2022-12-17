@@ -83,7 +83,7 @@ $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
 ```
 ### :file_folder:The layout of project folder/file structure
 ```
-├── client - This folder is for the frontend side of the application.
+├── client
 │   ├── public
 │   ├── src
 |   |   ├── components
