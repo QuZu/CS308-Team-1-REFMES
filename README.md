@@ -91,8 +91,7 @@ $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
 │   │   ├── pages
 │   │   ├── store
 │   │   ├── App.js
-│   │   ├── index.js
-│   │   └── Untitled-1.psd
+│   │   └── index.js
 │   └── package.json
 ├── config
 ├── models
