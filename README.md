@@ -1,6 +1,6 @@
 # Referee Management and Evulation System (REFMES)
 You can reach the website via this link => [`REFMES`](https://www.refmes.org/)
-## Description of the project
+## :beginner: Description of the project
 ### What is REFMES?
 The unfairness in the assignments of referees is argued by fans all the time because the performance of the referees is a topic of discussion after almost every match.
 With our website, **REFMES**, we aim to make a significant contribution to the solution of assignment problems in referee management,especially since we will collect
@@ -67,7 +67,7 @@ The REFMES project is made using MERN stack:
 - [React JS](https://reactjs.org/)
 - [Node JS](https://nodejs.org/)
 
-### How to obtain the source code?
+### :electric_plug: How to obtain the source code?
 All frontend files are located in the client folder and backend folders can be found as other files such as routes and server.js. Therefore, the project has both
 the backend and front in the same repository.So, acting according to the instructions below will provide access to the source code of the project.
 
@@ -81,9 +81,29 @@ If you created a folder on code IDE then use this command to clone the repositor
 ```sh
 $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
 ```
-### The layout of project folder/file structure
+### :file_folder:The layout of project folder/file structure
+```
+├── client - This folder is for the frontend side of the application.
+│   ├── public
+│   ├── src
+|   |   ├── components
+│   │   ├── logos
+│   │   ├── pages
+│   │   ├── store
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   └── Untitled-1.psd
+│   └── package.json
+├── config
+├── models
+├── server.js
+├── package.json
+├── .gitignore
+└── README.md
+```
+
 #### **Frontend side**
-##### `client`- This folder is for the frontend side of the application.
+##### `client`- //This folder is for the frontend side of the application.
 - ##### `public` - This holds all of our static files.
 - ##### `src`- This holds all of the frontend react and javascript code files.
     - ##### `components` - This folder contains common design codes used in the application.
@@ -103,7 +123,7 @@ $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
 #### `README` - Informative documentation file of app
 
 ### How to build and deploy the software?
-#### If you want to build on your local machine
+#### :hammer: If you want to build on your local machine
 1. [Follow this instructions](#how-to-obtain-the-source-code) to get source code
 2. Install NPM packages both for frontend and the backend
    ```sh
@@ -116,7 +136,7 @@ $ git clone https://github.com/SU-CS308-22FA/Team-1-REFMES.git
    ```sh
    $ npm run dev
    ```
-#### If you want to deploy
+#### :rocket: If you want to deploy
 Our web application includes the Heroku postscript to be deployed to Heroku. For Heroku deployment:
 - Select your GitHub repository
 - Link to Heroku account
