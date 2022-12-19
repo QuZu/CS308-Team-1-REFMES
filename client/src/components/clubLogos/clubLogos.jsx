@@ -47,8 +47,7 @@ function findLogo(clubName){
 
      // logo = related image source
      var logo=(clubs.find(({name})=>name === clubName )).src;
-
-
+     
     return( logo)
 
 }
