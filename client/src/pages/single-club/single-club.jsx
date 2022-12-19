@@ -7,27 +7,7 @@ import axios from "axios";
 import "./single-club.css" 
 import { useEffect } from "react";
 
-//importing all club logos
-import logoFenerbahce from '../../logos/fenerbahce.png';
-import logoGalatasaray from '../../logos/galatasaray.png';
-import logoBesiktas from '../../logos/besiktas.png';
-import logoBasaksehir from '../../logos/basaksehir.png';
-import logoAdanaDemirspor from '../../logos/adana_demirspor.png';
-import logoKonyaspor from '../../logos/konyaspor.png';
-import logoHatayspor from '../../logos/hatayspor.png';
-import logoGiresunspor from '../../logos/giresunspor.png';
-import logoAlanyaspor from '../../logos/alanyaspor.png';
-import logoSivasspor from '../../logos/sivasspor.png';
-import logoAntalyaspor from '../../logos/antalyaspor.png';
-import logoGaziantepFK from '../../logos/gaziantep_fk.png';
-import logoUmraniyespor from '../../logos/umraniyespor.png';
-import logoIstanbulspor from '../../logos/istanbulspor.png';
-import logoKasimpasa from '../../logos/kasimpasa.png';
-import logoAnkaragucu from '../../logos/ankaragucu.png';
-import logoTrabzonspor from '../../logos/trabzonspor.png';
-import logoKaragumruk from '../../logos/karagumruk.png';
-import logoKayserispor from '../../logos/kayserispor.png';
-
+import findLogo from "../../components/clubLogos/clubLogos.jsx";
 
 function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   // getting parameters from clubs page
@@ -49,34 +29,9 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   useEffect(()=> {
     getClub();
   }, [])
-  console.log(ClubData);
-  // declaring the logos dictionary
-  const images = [
-    { id: "fenerbahce", src: logoFenerbahce},
-    { id: "galatasaray", src: logoGalatasaray},
-    { id: "besiktas", src: logoBesiktas},
-    { id: "basaksehir", src: logoBasaksehir},
-    { id: "adanademirspor", src: logoAdanaDemirspor},
-    { id: "konyaspor", src: logoKonyaspor},
-    { id: "hatayspor", src: logoHatayspor},
-    { id: "giresunspor", src: logoGiresunspor},
-    { id: "alanyaspor", src: logoAlanyaspor},
-    { id: "sivasspor", src: logoSivasspor},
-    { id: "antalyaspor", src: logoAntalyaspor},
-    { id: "gaziantepfk", src: logoGaziantepFK},
-    { id: "umraniyespor", src: logoUmraniyespor},
-    { id: "istanbulspor", src: logoIstanbulspor},
-    { id: "kasimpasaspor", src: logoKasimpasa},
-    { id: "ankaragucuspor", src: logoAnkaragucu},
-    { id: "trabzonspor", src: logoTrabzonspor},
-    { id: "karagumrukspor", src: logoKaragumruk},
-    { id: "kayserispor", src: logoKayserispor}
-
-  ]
-
+  console.log("club data",ClubData);
   // result = related image source
-  const result=(images.find(({id})=>id === clubName)).src;
-  console.log("result: ", result);
+  const logo= findLogo(clubName);
   // declaring the playerlist
   var playerlist = ClubData.playerArray;
 
@@ -86,7 +41,7 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
     <div className="col-12">
         <div className="row"> <AppNavBar/> </div>
         <div id = "club-info-section" className = "row">
-          <div id = "club-logo" className = "col-3"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {result} alt = "Fenerbahce logo" /> </a> </div>
+          <div id = "club-logo" className = "col-3"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {logo} alt = "Fenerbahce logo" /> </a> </div>
           <div id = "club-info" className="col-9">
             <div id = "c-i-h"  className="row"> <h1 id = "c-info-head"> <b>{ClubData.full_name}</b> </h1> <br/> </div>
             <div id = "c-i-t1" className="row"> <p className="c-info-text"> Founded: {ClubData.founded}</p> <br/> </div>

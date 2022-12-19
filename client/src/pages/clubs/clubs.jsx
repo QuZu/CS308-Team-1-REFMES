@@ -37,7 +37,7 @@ function ClubsPage() {
                         
                         return(
                           <div key={item.name}> 
-                            <ClubCard clubName = {item.name} asciName = {item.asci_name}>  </ClubCard>
+                            <ClubCard clubName = {item.name} >  </ClubCard>
                           </div>
                         );
                       }) : <></>)            :<></>
