@@ -49,33 +49,32 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   useEffect(()=> {
     getClub();
   }, [])
-  console.log(ClubData);
+  console.log("club data",ClubData);
   // declaring the logos dictionary
-  const images = [
-    { id: "fenerbahce", src: logoFenerbahce},
-    { id: "galatasaray", src: logoGalatasaray},
-    { id: "besiktas", src: logoBesiktas},
-    { id: "basaksehir", src: logoBasaksehir},
-    { id: "adanademirspor", src: logoAdanaDemirspor},
-    { id: "konyaspor", src: logoKonyaspor},
-    { id: "hatayspor", src: logoHatayspor},
-    { id: "giresunspor", src: logoGiresunspor},
-    { id: "alanyaspor", src: logoAlanyaspor},
-    { id: "sivasspor", src: logoSivasspor},
-    { id: "antalyaspor", src: logoAntalyaspor},
-    { id: "gaziantepfk", src: logoGaziantepFK},
-    { id: "umraniyespor", src: logoUmraniyespor},
-    { id: "istanbulspor", src: logoIstanbulspor},
-    { id: "kasimpasaspor", src: logoKasimpasa},
-    { id: "ankaragucuspor", src: logoAnkaragucu},
-    { id: "trabzonspor", src: logoTrabzonspor},
-    { id: "karagumrukspor", src: logoKaragumruk},
-    { id: "kayserispor", src: logoKayserispor}
-
+  const clubs = [
+    { name: "Fenerbahçe", src: logoFenerbahce},
+    { name: "Galatasaray", src: logoGalatasaray},
+    { name: "Beşiktaş", src: logoBesiktas},
+    { name: "Başakşehir", src: logoBasaksehir},
+    { name: "Adana Demirspor", src: logoAdanaDemirspor},
+    { name: "Konyaspor", src: logoKonyaspor},
+    { name: "Hatayspor", src: logoHatayspor},
+    { name: "Giresunspor", src: logoGiresunspor},
+    { name: "Alanyaspor", src: logoAlanyaspor},
+    { name: "Sivasspor", src: logoSivasspor},
+    { name: "Antalyaspor", src: logoAntalyaspor},
+    { name: "Gaziantep FK", src: logoGaziantepFK},
+    { name: "Ümraniyespor", src: logoUmraniyespor},
+    { name: "İstanbulspor", src: logoIstanbulspor},
+    { name: "Kasımpaşa", src: logoKasimpasa},
+    { name: "Ankaragücü", src: logoAnkaragucu},
+    { name: "Trabzonspor", src: logoTrabzonspor},
+    { name: "Karagümrük", src: logoKaragumruk},
+    { name: "Kayserispor", src: logoKayserispor},
   ]
 
   // result = related image source
-  const result=(images.find(({id})=>id === clubName)).src;
+  const result=(clubs.find(({name})=>name === clubName)).src;
   console.log("result: ", result);
   // declaring the playerlist
   var playerlist = ClubData.playerArray;
