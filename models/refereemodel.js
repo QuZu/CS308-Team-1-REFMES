@@ -62,7 +62,20 @@ const RefereeSchema = new Schema({
    },
    avgPenalty:{
     type:Schema.Types.Number,
-   }
+   },
+   t_name: {
+    type: String,
+    required: true
+  },
+  preRating: {
+    type: Schema.Types.Array,
+  },
+  postRating: {
+    type:Schema.Types.Array,
+  },
+  observerRating: {
+    type:Schema.Types.Array,
+  }
 });
 
 const Referee = mongoose.model('referees', RefereeSchema);
