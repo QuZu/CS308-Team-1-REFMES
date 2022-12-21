@@ -55,5 +55,37 @@ router.get("/getComments/:matchID", async(req, res) => {
         res.status(500).json(err);
     }}
 );
-
+router.get("/getUserComments/:userID", async(req, res) => {
+    try {
+        await Comment.aggregate(
+            [
+                {$lookup:
+                    {
+                        from:"matches",
+                        localField:"match_id",
+                        foreignField:"_id",
+                        as:"match_infos"
+                    }
+                },
+                {$lookup:
+                    {
+                        from:"referees",
+                        localField:"referee_id",
+                        foreignField:"_id",
+                        as:"referee_info"
+                    }
+                },
+                {$match: {user_id:mongoose.Types.ObjectId(req.params.userID)}}
+            ]
+        )
+        .then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            throw err;
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }}
+);
 module.exports = router;

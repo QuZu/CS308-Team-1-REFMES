@@ -102,7 +102,8 @@
 }
 
 .club_container {
-  margin-top: 60px;
+  margin-top: 2em;
+  margin-bottom: 1em;
   display:flex;
   justify-content: center;
 }
@@ -112,6 +113,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-style: italic;
+  font-size: large;
+  font-weight: 600;
 }
 
 .club_inner img {
@@ -133,9 +137,9 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 60px;
-  padding-left: 50px;
-  padding-right: 50px;
+  margin-top: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .social_media_inner {
@@ -198,4 +202,38 @@
 
 .user_vote_stars:hover {
   color: #ff7700;
+}
+.profile-left-sidebar{
+  padding: 0.5em;
+  width: 90%;
+  height: 42em;
+  border: 0.2em solid red;
+  border-radius: 2em;
+  justify-content: center;
+  align-items: center;
+}
+.left-sidebar-margin{
+  margin-right:1.5em ;
+  margin-top: 1.5em;
+}
+.profile-section-text{
+  font-size: large;
+  font-weight: 800;
+}
+.profile-subsection-text{
+  font-size: medium;
+  font-weight: 600;
+  margin-top: 0.7em;
+  margin-bottom: 0.2em;
+}
+.user-profile-information{
+  margin: 0.2em;
+  text-align: center;
+}
+.user-profile-input{
+  border-radius: 0.4em;
+  border: 0.1em solid rgb(255, 102, 0);
+  width: 60%;
+  height: 2em;
+  text-align: center;
 }
