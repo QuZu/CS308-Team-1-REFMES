@@ -79,7 +79,7 @@ function App() {
         <Route path="/awards" element={<AwardsPage />} />
         <Route path="/highlights/weekly" element={<WHighlightsPage />} />
         <Route path="/highlights/monthly" element={<MHighlightsPage />} />
-        <Route path="/club/:clubName" element={<SingleClubPage />} />
+        <Route path="/club/:asciName" element={<SingleClubPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
