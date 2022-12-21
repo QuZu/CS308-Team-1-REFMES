@@ -33,8 +33,8 @@ function MatchDataPage({Week}) {
               <SortedMatches allmatches={allmatchDetails} />
           </div>
           <div className="col-5">
-            {WeekReferee.length>0 ? 
-            <RefereeDisplay RefData={WeekReferee} CurrentWeek={Week} />
+            {WeekReferee.myarray.length >0 ? 
+            <RefereeDisplay RefData={WeekReferee.myarray} CurrentWeek={Week} />
             :<h3 style={{textAlign: "center"}}>Something went wrong when getting referee..</h3> }
           </div>
         </div>

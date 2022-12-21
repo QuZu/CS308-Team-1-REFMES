@@ -89,17 +89,17 @@ router.post('/addReferee', async(req, res) => {
   );
   router.post('/selectReferee', async(req, res) => {
     console.log("Gelen datam:", req.body); 
-  const {week_no,referee_id} = req.body;
+  const {week_no,referee_ids} = req.body;
    
       try {
-        const newRefereesOFWeek = new RefereesOfWeek({week_no,referee_id});
+        const newRefereesOFWeek = new RefereesOfWeek({week_no,referee_ids});
         const savedRefereesOFWeek = await newRefereesOFWeek.save();
         if (!savedRefereesOFWeek) throw Error('Something went wrong while saving the referee list');
     
         res.status(200).json({
           refereesOfWeek: {
             week_no: savedRefereesOFWeek.week_no,
-            referee_id: savedRefereesOFWeek.referee_id,
+            referee_ids: savedRefereesOFWeek.referee_ids,
           }});
     
         } catch (e) {

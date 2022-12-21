@@ -43,17 +43,20 @@ function AdminSelectReferee({currentweek,allData}){
     e.preventDefault();
     console.log(checkedCheckboxes);
     if(checkedCheckboxes.length === 9){
+      var allarray=[];
       for(let i=0; i<checkedCheckboxes.length;i++){
-        const newRefereesOfWeek ={
-          week_no: currentweek,
-          referee_id: checkedCheckboxes[i]._id
-        };
-        await axios.post(`${process.env.REACT_APP_URL}/api/admin/selectReferee`,newRefereesOfWeek)
+        allarray.push(checkedCheckboxes[i]._id);
+        
+      }
+      const newRefereesOfWeek ={
+        week_no: currentweek,
+        referee_ids: allarray
+      };
+      await axios.post(`${process.env.REACT_APP_URL}/api/admin/selectReferee`,newRefereesOfWeek)
       .then(res =>{
           console.log(res.data);
   
       }).catch(err=>console.log(err));
-      }
     }
     if(checkedCheckboxes.length !== 9){
       setResultMessage("Please, select exactly 9 referees!");
