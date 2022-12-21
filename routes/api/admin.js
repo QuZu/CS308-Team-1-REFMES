@@ -11,8 +11,8 @@ const RefmesRating = require('../../models/refmesRatingModel');
 
 router.post('/addReferee', async(req, res) => {
     console.log("Gelen datam:", req.body); 
-  const {r_username, name, biography, birth_date, birth_place, fifa_date, first_super_date, total_rating, rating_count, totalMatch, yellowCard, avgYellowCard, yellowToRed, redCard, avgRedCard, penalty, avgPenalty} = req.body;
-    if(!r_username || !name || !biography || !birth_date || !birth_place || !fifa_date || !first_super_date){
+  const {r_username, name, biography, birth_date, birth_place, fifa_date, first_super_date, total_rating, rating_count, totalMatch, yellowCard, avgYellowCard, yellowToRed, redCard, avgRedCard, penalty, avgPenalty,t_name,preRating,postRating,observerRating} = req.body;
+    if(!r_username || !name || !biography || !birth_date || !birth_place || !fifa_date || !first_super_date || !t_name){
       return res.status(400).json({msg: "Please enter all fields"});
     }
   
@@ -20,7 +20,7 @@ router.post('/addReferee', async(req, res) => {
       const referee = await Referee.findOne({ name });
       if (referee) throw Error('Referee already exists');
 
-      const newReferee = new Referee({ r_username, name, biography, birth_date ,birth_place, fifa_date, first_super_date, total_rating,rating_count, totalMatch, yellowCard, avgYellowCard, yellowToRed, redCard, avgRedCard, penalty, avgPenalty});
+      const newReferee = new Referee({ r_username, name, biography, birth_date ,birth_place, fifa_date, first_super_date, total_rating,rating_count, totalMatch, yellowCard, avgYellowCard, yellowToRed, redCard, avgRedCard, penalty, avgPenalty,t_name,preRating,postRating,observerRating});
       const savedReferee = await newReferee.save();
       if (!savedReferee) throw Error('Something went wrong while saving the user');
   
@@ -44,6 +44,10 @@ router.post('/addReferee', async(req, res) => {
           avgRedCard: savedReferee.avgRedCard, 
           penalty: savedReferee.penalty, 
           avgPenalty: savedReferee.penalty,
+          t_name: savedReferee.t_name,
+          preRating: savedReferee.preRating,
+          postRating: savedReferee.postRating,
+          observerRating: savedReferee.observerRating
         }});
   
       } catch (e) {

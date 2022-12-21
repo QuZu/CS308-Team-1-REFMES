@@ -12,11 +12,13 @@ function AdminAddReferee(){
   const [bio,Setbio] = useState("");
   const [birthdate,Setbirthdate] = useState("");
   const [debutdate,Setdebutdate] = useState("");
-
+  const [tname,Settname] = useState("");
+  const [btnDisabled,Setbtndisabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit= async (e)=>{
+    Setbtndisabled(false);
     e.preventDefault();
         console.log(rname);
         const newReferee = {
@@ -27,6 +29,7 @@ function AdminAddReferee(){
           birth_place: birthplace,
           fifa_date: fifadate,
           first_super_date: debutdate,
+          t_name: tname,
           total_rating: 0,
           rating_count: 0,
           totalMatch: 0,
@@ -36,20 +39,28 @@ function AdminAddReferee(){
           redCard: 0,
           avgRedCard: 0.0,
           penalty: 0,
-          avgPenalty: 0.0
+          avgPenalty: 0.0,
+          preRating: [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],
+          postRating: [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],
+          observerRating: [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],
         };
         console.log(newReferee);
-        if(!newReferee.r_username || !newReferee.name || !newReferee.biography || !newReferee.birth_date || !newReferee.birth_place || !newReferee.fifa_date || !newReferee.first_super_date){
+        if(!newReferee.r_username || !newReferee.name || !newReferee.biography || !newReferee.birth_date || !newReferee.birth_place || !newReferee.fifa_date || !newReferee.first_super_date ||!newReferee.t_name){
           setErrorMessage("Please, enter all fields!");
+          Setbtndisabled(true);
         }
-        await axios.post(`${process.env.REACT_APP_URL}/api/admin/addReferee`,newReferee)
+        else{
+          await axios.post(`${process.env.REACT_APP_URL}/api/admin/addReferee`,newReferee)
         .then(res =>{
-            console.log(res.data);
-
-        }).catch(err=>console.log(err));
-    
-
-    }
+            console.log(res);
+            setErrorMessage("You have successfully added new referee to the database");
+        }).catch(err=>{
+          console.log(err.response.data.error)
+          setErrorMessage(err.response.data.error);
+        });
+          Setbtndisabled(true);
+        }
+         }
     //const app_url="http://localhost:5000"
     //console.log(process.env.REACT_APP_URL);
     return(
@@ -83,12 +94,16 @@ function AdminAddReferee(){
                 <input onChange={(e)=>Setfifadate(e.target.value)}  placeholder="FIFA Cockade date" type="text" className="btn-border input-style form-control"/>
               </div>
               <div>
+                <p className="p_addReferee">Enter the Transfermarkt name of the referee:</p>
+                <input onChange={(e)=>Settname(e.target.value)}  placeholder="Transfermarkt Name" type="text" className="btn-border input-style form-control"/>
+              </div>
+              <div>
                 <p className="p_addReferee">Provide a short biography of the referee:</p>
                 <textarea onChange={(e)=>Setbio(e.target.value)} style={{width: "100%", minHeight:"80px"}} placeholder="Biography..."></textarea>
               </div>
               <div  style={{marginLeft:"150px",marginTop:"20px",marginBottom:"20px"}}>
               <p className="errorMessage">{errorMessage}</p>
-              <button  type="submit" className="btn btn-block col-8 btn-success">ADD REFEREE</button>
+              <button disabled={!btnDisabled} type="submit" className="btn btn-block col-8 btn-success">ADD REFEREE</button>
               </div>
                 </form>
             </div>
