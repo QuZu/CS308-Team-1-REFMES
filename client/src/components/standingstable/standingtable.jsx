@@ -3,25 +3,25 @@ import "../standingstable/standingstable.css"
 //importing all club logos
 function StandingsTable({AllArray}) {
     const c_images = [
-        { id: "fenerbahce", src: "Fenerbahce"},
-        { id: "galatasaray", src: "Galatasaray"},
-        { id: "besiktas", src: "Besiktas"},
-        { id: "basaksehir", src: "Istanbul Basaksehir"},
-        { id: "adanademirspor", src: "Adana Demirspor"},
-        { id: "konyaspor", src: "Konyaspor"},
-        { id: "hatayspor", src: "Hatayspor"},
-        { id: "giresunspor", src: "Giresunspor"},
-        { id: "alanyaspor", src: "Alanyaspor"},
-        { id: "sivasspor", src: "Sivasspor"},
-        { id: "antalyaspor", src: "Antalyaspor"},
-        { id: "gaziantepfk", src: "Gazişehir Gaziantep"},
-        { id: "umraniyespor", src: "Ümraniyespor"},
-        { id: "istanbulspor", src: "İstanbulspor"},
-        { id: "kasimpasaspor", src: "Kasimpasa"},
-        { id: "ankaragucuspor", src: "Ankaragucu"},
-        { id: "trabzonspor", src: "Trabzonspor"},
-        { id: "karagumrukspor", src: "Fatih Karagümrük"},
-        { id: "kayserispor", src: "Kayserispor"}
+        { name: "Fenerbahçe",id: "fenerbahce", src: "Fenerbahce"},
+        { name: "Galatasaray",id: "galatasaray", src: "Galatasaray"},
+        { name: "Beşiktaş",id: "besiktas", src: "Besiktas"},
+        { name: "Başakşehir", id: "basaksehir", src: "Istanbul Basaksehir"},
+        { name: "Adana Demirspor",id: "adanademirspor", src: "Adana Demirspor"},
+        { name: "Konyaspor", id: "konyaspor", src: "Konyaspor"},
+        { name: "Hatayspor",id: "hatayspor", src: "Hatayspor"},
+        { name: "Giresunspor",id: "giresunspor", src: "Giresunspor"},
+        { name: "Alanyaspor",id: "alanyaspor", src: "Alanyaspor"},
+        { name: "Sivasspor",id: "sivasspor", src: "Sivasspor"},
+        { name: "Antalyaspor",id: "antalyaspor", src: "Antalyaspor"},
+        { name: "Gaziantep FK",id: "gaziantepfk", src: "Gazişehir Gaziantep"},
+        { name: "Ümraniyespor",id: "umraniyespor", src: "Ümraniyespor"},
+        { name: "İstanbulspor", id: "istanbulspor", src: "İstanbulspor"},
+        { name: "Kasımpaşa",id: "kasimpasaspor", src: "Kasimpasa"},
+        { name: "Ankaragücü",id: "ankaragucuspor", src: "Ankaragucu"},
+        { name: "Trabzonspor",id: "trabzonspor", src: "Trabzonspor"},
+        { name: "Karagümrük",id: "karagumrukspor", src: "Fatih Karagümrük"},
+        { name: "Kayserispor",id: "kayserispor", src: "Kayserispor"}
     ]
 
     return (
@@ -62,6 +62,7 @@ function StandingsTable({AllArray}) {
                               }
                               const teamName=item.team.name
                               const asciName=(c_images.find(({src})=>src ===teamName));
+                              const DisplayName=(c_images.find(({src})=>src ===teamName)).name;
                               var teamlink;
                               if(asciName)
                                teamlink=asciName.id
@@ -74,7 +75,7 @@ function StandingsTable({AllArray}) {
                                     <td className="text-left">
                                         <img src={item.team.logo} alt="logo"/>
                                         <a className="standing-table-teamname" href={`/club/${teamlink}`}> 
-                                        {item.team.name}
+                                        {DisplayName}
                                         </a>
                                         
                                     </td>
