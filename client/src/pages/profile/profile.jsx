@@ -6,10 +6,10 @@ import { userLogout } from "../../store/userreducer";
 import axios from "axios";
 import AppNavBar from "../../components/appnavbar.jsx";
 import stadium from '../../stadiums/fenerbahce.jpg';
-import clubLogo from '../../logos/fenerbahce.png';
 import profilePhoto from '../../components/refbar/user_profile.png'
 import {BsTwitter, BsInstagram, BsLinkedin, BsPencilFill, BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 import CommentBox from "../../components/comment/commentbox";
+import findLogo from "../../components/clubLogos/clubLogos";
 function ProfilePage() {
     const [state, dispatch] = useStore();
     const navigate = useNavigate();
@@ -17,6 +17,7 @@ function ProfilePage() {
     const [UserComments,setUserComments]=useState([]);
     const [loading,setLoading]=useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    var clubLogo=findLogo(currentUser.user.fan_of)
     const getUserComments = async () => {
       await axios.get(`${process.env.REACT_APP_URL}/api/comments/getUserComments/${currentUser.user.id}`).then(res => {
           if (res.data == []) {
