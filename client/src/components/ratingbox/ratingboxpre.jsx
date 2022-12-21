@@ -122,7 +122,7 @@ function RatingBoxPre({ refereeData }) {
             <div className="rating-container">
                 <div className="rating-left-pre">
                     <div className="rating-left-match">
-                        <div className="rating-right-referee" style={{margin: "0"}}><a href={`../referee/${refereeData.ref_info[0].r_username}`}><b>{refereeData.ref_info[0].name}</b></a></div>
+                        <div className="rating-right-referee" style={{margin: "0"}}><a href={`../referee/${refereeData.r_username}`}><b>{refereeData.name}</b></a></div>
                     </div>
                 </div>
                 <div className="rating-right-pre">

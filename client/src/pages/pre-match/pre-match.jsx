@@ -17,7 +17,7 @@ function PreMatchPage() {
         await axios
             .get(`${process.env.REACT_APP_URL}/api/refereesOfWeek/getRefereesOfWeek/${weekNo}`)
             .then(res => {
-                setRefereesOfWeek(res.data);
+                setRefereesOfWeek(res.data.myarray);
                 setLoading(true);
         }).catch(err => console.log(err));
     };
