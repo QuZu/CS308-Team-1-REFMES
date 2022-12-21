@@ -24,8 +24,10 @@ import YasarKemal from  "../refbar/refImage/yasar-kemal.jpg"
 import user_profile from"../refbar/user_profile.png"
 import { useNavigate } from "react-router";
 
+
 import "../refbar/refcard.css"
-function RefCard({r_username,Refname}) {
+function RefCard({Refdata,r_username,Refname}) {
+  console.log(Refdata);
   const navigate = useNavigate();
   const picname = r_username;
   //console.log(picname);
@@ -65,14 +67,56 @@ function RefCard({r_username,Refname}) {
 
     return(
         
-            <div className="bg-color rounded shadow-sm pt-5 pb-2 px-4">
-                <img  src={result}  width="90" height="90"></img>
-                  <div className="mt-2 ref-hover-effect">
-                  <a href={`/referee/${r_username}`}>{Refname}</a>
-                  </div>
-                <div>
-                  <span className=" text-color small text-uppercase">Referee</span>
+            <div className="bg-color rounded shadow-sm pt-2 pb-2 px-2 ref-box-feature">
+              <div className="ref-box-inner-container">
+                <div className="ref-box-inner-left">
+                    <img  src={result}  width="90" height="90"></img>
+                    <div className="mt-2 ref-hover-effect">
+                      <a href={`/referee/${r_username}`}>{Refname}</a>
+                    </div>
+                    <div>
+                      <span className=" text-color small text-uppercase">Referee</span>
+                    </div>
+                    <div className="ref-box-inner-total-match">
+                      <p className="ref-box-items-size">Total Match</p>
+                      <p className="ref-box-items-size">{Refdata.totalMatch}</p>
+                    </div>
                 </div>
+                
+                <div className="ref-box-inner-right">
+                      <div className="ref-box-right-row">
+                        <div className="ref-score-box">
+                          <p className="ref-box-items-size">Total Yellow Card </p>
+                          <p className="ref-box-items-size">{Refdata.yellowCard}</p>
+                          <p className="ref-box-items-size">Avg Yellow Card </p>
+                          <p className="ref-box-items-size">{Refdata.avgYellowCard}</p>
+                        </div>
+                        
+                        <div className="ref-score-box">
+                          <p className="ref-box-items-size">Total Red Card </p>
+                          <p className="ref-box-items-size">{Refdata.redCard}</p>
+                          <p className="ref-box-items-size">Avg Red Card </p>
+                          <p className="ref-box-items-size">{Refdata.avgRedCard} </p>
+                        </div>
+                      </div>
+                      <hr className="ref-box-divider"></hr>
+                      <div className="ref-box-right-row">
+                          <div className="ref-score-box">
+                            <p className="ref-box-items-size">Total Yellow to Red </p>
+                            <p className="ref-box-items-size">{(Refdata.yellowToRed)}</p>
+                            <p className="ref-box-items-size">Avg Yellow to Red </p>
+                            <p className="ref-box-items-size">{(Refdata.yellowToRed/Refdata.totalMatch).toFixed(1)} </p>
+                          </div>
+                          <div className="ref-score-box">
+                            <p className="ref-box-items-size">Total Penalty </p>
+                            <p className="ref-box-items-size">{Refdata.penalty}</p>
+                            <p className="ref-box-items-size">Avg Penalty </p>
+                            <p className="ref-box-items-size">{Refdata.avgPenalty}</p>
+                          </div>
+                        </div>
+                      
+                </div>
+              </div>
             </div>
                       
     );

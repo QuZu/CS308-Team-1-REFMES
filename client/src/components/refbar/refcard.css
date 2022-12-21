@@ -11,3 +11,60 @@
 .ref-hover-effect a:hover{
     color:rgb(255, 255, 255);
 }
+.ref-box-feature{
+    width: 32em;
+    margin: 0.25em;
+    height: 15em;
+}
+.ref-box-inner-container{
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    justify-content: center;
+    
+}
+.ref-box-inner-left{
+    flex: 3;
+}
+.ref-box-inner-right{
+    flex: 7;
+    flex-direction: column;
+}
+.ref-box-right-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.ref-box-inner-total-match{
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+.ref-box-items-size{
+    margin: 0.4em;
+    font-weight:500;
+    font-size: small;
+    font-style:italic;
+}
+.ref-box-items-yellow{
+    color: rgb(192, 192, 1);
+}
+.ref-score-box{
+    width: 9em;
+    height: 6em;
+    margin: 0.1em;
+    justify-content: center;
+    align-items: center; 
+}
+.ref-score-box img{
+    width: 100%;
+    opacity: 0.1;
+    height: 100%;
+}
+.ref-box-divider{
+    border-top: 5px dotted #bbb;
+    margin: 0.2em;
+    margin-left: 1em;
+    margin-right: 1em;
+    
+}

@@ -37,7 +37,7 @@ function RefereesPage() {
         <div>
             <AppNavBar/>
             <h1  style={{textAlign: "center", marginTop: "10px"}}>Referees</h1>
-            <div className="mt-3 container">
+            <div className="mt-3 container allref-container-center">
             <div className="row text-center">
             { allData ?
             (allData.length > 0 ?
@@ -45,12 +45,12 @@ function RefereesPage() {
           
 
                 return(
-                  <div key={item.r_username} className="col-xl-3 col-sm-6 mb-5">
-                    <RefCard r_username={item.r_username} Refname={item.name}></RefCard>
+                  <div key={item.r_username} className="d-flex justify-content-center col-xl-6 col-m-6 col-sm-12 mb-5">
+                    <RefCard Refdata={item} r_username={item.r_username} Refname={item.name}></RefCard>
                   </div>
 
                 );
-              }) :<p>No Referee yet !!!</p>)            :
+              }) :<p>Please Wait.. !!!</p>)            :
             <p>Loading...</p>
           }
           </div>
