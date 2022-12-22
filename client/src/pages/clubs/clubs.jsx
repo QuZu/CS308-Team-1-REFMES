@@ -28,20 +28,22 @@ function ClubsPage() {
         <div>
             <AppNavBar/>
             <div>
-                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Super League Clubs</h1>
+                <h1 style={{textAlign: "center", margin: "2em 0"}}>Super League Clubs</h1>
             </div>
-            <div className="container">
-            { ClubsData ?
-                    (ClubsData.length > 0 ?
-                      ClubsData.map((item) => {
-                        return(
-                          <div key={item.name}> 
-                            <ClubCard clubName = {item.name} asciName = {item.asci_name} >  </ClubCard>
-                          </div>
-                        );
-                      }) : <></>)            :<></>
-                   
-                  }
+            <div className="container" style={{marginBottom: "2em"}}>
+              <div className="row">
+                { ClubsData ?
+                        (ClubsData.length > 0 ?
+                          ClubsData.map((item) => {
+                            return(
+                              <div key={item.name} className="com-xs-12 col-sm-6 col-md-4 col-lg-3"> 
+                                <ClubCard clubName = {item.name} asciName = {item.asci_name} >  </ClubCard>
+                              </div>
+                            );
+                          }) : <></>)            :<></>
+                      
+                      }
+               </div>
             </div>
         </div>
     )
