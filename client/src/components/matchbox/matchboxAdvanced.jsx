@@ -59,7 +59,7 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
     const getCurrentComments = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/api/comments/getComments/${matchData._id}`).then(res => {
             if (res.data == []) {
-                console.log("Empty");
+                
             } else {
                 setList(res.data);
                 setLoading(true);

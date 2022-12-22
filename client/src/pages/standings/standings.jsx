@@ -19,14 +19,12 @@ function StandingsPage() {
     useEffect(() => {
         getStandings();
     }, [])
-    console.log(allData);
     return (
       <div>
         <AppNavBar/>
         <div>
             <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Super League Club Standings</h1>
         </div>
-        {console.log(allData)}
         {loading ?
         <div className="mt-5">
             <StandingsTable AllArray={allData}/> 

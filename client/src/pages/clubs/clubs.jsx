@@ -13,7 +13,6 @@ function ClubsPage() {
 
   const getClubs = async() =>{
     await axios.get(`${process.env.REACT_APP_URL}/api/clubs/getClubs`).then(response =>{
-      console.log("response: ", response);
       setClubData(response.data);
       setLoading(true);
 

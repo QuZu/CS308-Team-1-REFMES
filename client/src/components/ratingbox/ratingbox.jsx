@@ -81,7 +81,6 @@ function RatingBox({ matchData }) {
                         setErrorMessage("Error! Please try again.");
                     }
                 }).catch((err) => {
-                    console.log("Error: ", err);
                     setErrorMessage("Error! Please try again.");
                 });
             const date = new Date();
@@ -98,7 +97,7 @@ function RatingBox({ matchData }) {
         await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getPostRating/${matchData._id}/${currentUser.user.id}`).then(res => {
             setRating(res.data);
             if (res.data == []) {
-                console.log("Empty");
+
             } else {
                 setRating(res.data[0].rating);
                 const date = new Date(res.data[0].date);

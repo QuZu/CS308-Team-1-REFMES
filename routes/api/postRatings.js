@@ -39,9 +39,6 @@ router.get("/getPostRating/:matchID/:userID", async(req, res) => {
 
 router.post("/addObserverRating", async(req, res) => {
     const {rating, observer_id, match_id} = req.body;
-    console.log("rating:", rating);
-    console.log("observer id:", observer_id);
-    console.log("match id", match_id);
     
     const newObserverRating = new ObserverRating({ rating, observer_id, match_id});
 

@@ -163,8 +163,6 @@ function RefmesRatingPage(){
     useEffect(() => {
     }, [randomEx])
     
-  console.log(wFan);
-  //console.log("Değişcek ha bu:",numberRandom)
     return(
         <div>
             <AppNavBarSingle/>

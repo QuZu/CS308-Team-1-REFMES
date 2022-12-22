@@ -78,7 +78,6 @@ function PostCommentBox({ matchData }) {
                     setErrorMessage("Error! Please try again.");
                 }
             }).catch((err) => {
-                console.log("Error: ", err);
                 setErrorMessage("Error! Please try again.");
             });
             navigate("/post-match");

@@ -19,7 +19,7 @@ function MatchImportancePage() {
     useEffect(() => {
         getWeek();
     }, [])
-    //console.log(currentweek);
+    
     return (
       <div>
         <AppNavBar/>

@@ -79,7 +79,6 @@ function ResultBox({ matchData }) {
            
         
     }
-    console.log(homeGoal,awayGoal);
     return (
         <div style={{paddingLeft:"300px"}}>
         <div className="rating-outer-container">

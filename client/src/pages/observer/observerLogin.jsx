@@ -29,7 +29,6 @@ function ObserverLogin() {
     axios
       .post(`${process.env.REACT_APP_URL}/api/users/observerLogin`,observer)
       .then((res) => {
-        console.log("data:", res.data);
         if (res.status === 200 && res.data.message) {
           setErrorMessage(res.data.message);
         } else if (res.status === 200) {

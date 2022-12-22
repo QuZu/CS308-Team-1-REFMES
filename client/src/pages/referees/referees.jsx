@@ -21,8 +21,8 @@ function RefereesPage() {
   useEffect(() => {
     getAllRef();
   }, [])
-    console.log(allData);
-    function compare( a, b ) {
+
+  function compare( a, b ) {
       if ( a.name < b.name ){
         return -1;
       }

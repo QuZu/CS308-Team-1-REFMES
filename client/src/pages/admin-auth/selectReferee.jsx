@@ -3,7 +3,6 @@ import axios from "axios";
 import "../admin-auth/selectReferee.css";
 function AdminSelectReferee({currentweek,allData}){
   const [resultMessage, setResultMessage] = useState("");
-  console.log(allData);
   
       // With this useState I wan't to collect the checked checkboxes
       const [checkedCheckboxes, setCheckedCheckboxes] = useState([]);
@@ -25,9 +24,9 @@ function AdminSelectReferee({currentweek,allData}){
 
 
       useEffect(() => {
-        console.log(checkedCheckboxes);
+
     }, [checkedCheckboxes]);
-    //console.log(allData);
+    
     function compare( a, b ) {
       if ( a.name < b.name ){
         return -1;
@@ -41,7 +40,6 @@ function AdminSelectReferee({currentweek,allData}){
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
-    console.log(checkedCheckboxes);
     if(checkedCheckboxes.length === 9){
       var allarray=[];
       for(let i=0; i<checkedCheckboxes.length;i++){
@@ -54,7 +52,6 @@ function AdminSelectReferee({currentweek,allData}){
       };
       await axios.post(`${process.env.REACT_APP_URL}/api/admin/selectReferee`,newRefereesOfWeek)
       .then(res =>{
-          console.log(res.data);
   
       }).catch(err=>console.log(err));
     }

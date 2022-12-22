@@ -8,12 +8,10 @@ function AdminAddObserver(){
     const [errorMessage, setErrorMessage] = useState("");
     const handleSubmit = async (e)=> {
         e.preventDefault();
-        console.log(o_password);
         const newObserver = {
             observer_id : o_id,
             password: o_password
         };
-        console.log(newObserver);
         if(!newObserver.observer_id || !newObserver.password){
             setErrorMessage("Please, enter all fields!");
         }
@@ -22,7 +20,6 @@ function AdminAddObserver(){
         }
         await axios.post(`${process.env.REACT_APP_URL}/api/admin/addObserver`,newObserver)
         .then(res =>{
-            console.log(res.data);
 
         }).catch(err=>console.log(err));
     };

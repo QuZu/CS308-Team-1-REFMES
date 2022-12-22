@@ -62,7 +62,6 @@ if(Refarray)
     return 0;
   })
 }
-console.log("Dolu mu:",Refarray);
 
     return (
         <div>

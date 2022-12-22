@@ -25,8 +25,6 @@ function MatchDataPage({Week}) {
     useEffect(() => {
         getWeekMatchDetails();
     }, [])
-    console.log(allmatchDetails);
-    console.log(WeekReferee);
     return (
       <>
         {loading ?

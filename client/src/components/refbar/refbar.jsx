@@ -32,7 +32,6 @@ import { useState, useEffect } from "react";
 
 function RefInfo({refName}) {
 const [list,setList]=useState([]);
-console.log(refName._id);
 const picname = refName.r_username;
 const images = [
   { id: "mete_kalkavan", src: MeteKalkavan},
@@ -74,7 +73,6 @@ if(result){
 else{
   result=user_profile;
 }
-//console.log(result)
 useEffect(() => {
   GetData();
 }, []);
@@ -84,7 +82,6 @@ list.sort(function(a, b){
   if(a.date > b.date) { return -1; }
   return 0;
 })
-console.log(list);
     return (
         <div className="col">
         <div className="padding-15 row">
