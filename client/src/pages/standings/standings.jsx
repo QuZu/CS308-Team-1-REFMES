@@ -22,7 +22,7 @@ function StandingsPage() {
       <div>
         <AppNavBar/>
         <div>
-            <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Super League Turkey Club Standings</h1>
+            <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Super League Club Standings</h1>
         </div>
         {console.log(allData)}
         {loading ?

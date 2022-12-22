@@ -35,8 +35,8 @@ function RefereesPage() {
   }
     return(
         <div>
-            <AppNavBar/>
-            <h1  style={{textAlign: "center", marginTop: "10px"}}>Referees</h1>
+        <AppNavBar/>
+        <div><h1 style={{textAlign: "center", margin: "2em 0em"}}>Super League Referees</h1></div>
             <div className="mt-3 container allref-container-center">
             <div className="row text-center">
             { allData ?
