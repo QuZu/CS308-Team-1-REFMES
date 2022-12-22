@@ -146,7 +146,7 @@ function RatingBox({ matchData }) {
                 </div>
             </div>
             <div className="rating-comment-container">
-                <div className="rating-comment-add-button"><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
+                <div className="rating-comment-add-button"><Link to={`../match/${matchData._id}/comment`}>Add Comment</Link></div>
             </div>
         </div>
         </>

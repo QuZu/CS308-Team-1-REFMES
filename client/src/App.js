@@ -83,7 +83,7 @@ function App() {
         <Route path="/clubs" element={<ClubsPage />} />
         <Route path="/matches" element={<MatchesPage />} />
         <Route path="/referees" element={<RefereesPage />} />
-        <Route path="/matches/:matchID" element={<PostMatchCommentPage />} />
+        <Route path="/match/:matchID/comment" element={<PostMatchCommentPage />} />
         <Route path="/match/:matchID" element={<SingleMatchPage />} />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />

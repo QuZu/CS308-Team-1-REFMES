@@ -29,15 +29,8 @@ function Brand() {
             <Nav.Link href="/matches" className="navText">Matches</Nav.Link>
             <Nav.Link href="/clubs" className="navText">Clubs</Nav.Link>
             <Nav.Link href="/standings" className="navText">Standings</Nav.Link>
-            <NavDropdown title={<span className="navText">Rating</span>} id="basic-nav-dropdown">
-              <NavDropdown.Item href="/pre-match">Pre-Match Rating</NavDropdown.Item>
-              <NavDropdown.Item href="/post-match">Post-Match Rating</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="/awards" className="navText">Awards</Nav.Link>
-            <NavDropdown title={<span className="navText">Highlights</span>} id="basic-nav-dropdown">
-              <NavDropdown.Item href="/highlights/weekly">Weekly Highlights</NavDropdown.Item>
-              <NavDropdown.Item href="/highlights/monthly">Monthly Highlights</NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link href="/pre-match" className="navText">Pre-Match</Nav.Link>
+            <Nav.Link href="/post-match" className="navText">Post-Match</Nav.Link>
             { !currentUser ?
               <a></a>:
               <Nav.Link href="/profile" className="navText">My Profile</Nav.Link>} 
