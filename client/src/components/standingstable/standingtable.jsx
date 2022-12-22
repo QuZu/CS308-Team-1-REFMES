@@ -1,6 +1,7 @@
 import React from "react";
 import "../standingstable/standingstable.css"
 //importing all club logos
+import findLogo from "../clubLogos/clubLogos"
 function StandingsTable({AllArray}) {
     const c_images = [
         { name: "Fenerbahçe",id: "fenerbahce", src: "Fenerbahce"},
@@ -73,7 +74,7 @@ function StandingsTable({AllArray}) {
                                 <tr key={item.rank}>
                                     <td className="standing-table-text-left-number"><b>{item.rank}</b></td>
                                     <td className="text-left">
-                                        <img src={item.team.logo} alt="logo"/>
+                                        <img src={findLogo(DisplayName)} alt="logo"/>
                                         <a className="standing-table-teamname" href={`/club/${teamlink}`}> 
                                         {DisplayName}
                                         </a>
