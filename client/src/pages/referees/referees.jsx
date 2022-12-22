@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../referees/referees.css"
 import RefCard from "../../components/refbar/refcard"
+import * as ReactBootstrap from "react-bootstrap";
+
 function RefereesPage() {
   const [allData, setallData] = useState({});
   const[loading,setLoading] = useState(false);
@@ -50,8 +52,15 @@ function RefereesPage() {
                   </div>
 
                 );
-              }) :<p>Please Wait.. !!!</p>)            :
-            <p>Loading...</p>
+              }) :
+                  <div className="d-flex justify-content-center">
+                      <ReactBootstrap.Spinner animation="border"/>
+                  </div>)
+                  :
+            
+              <div className="d-flex justify-content-center">
+                  <ReactBootstrap.Spinner animation="border"/>
+              </div>
           }
           </div>
         </div>

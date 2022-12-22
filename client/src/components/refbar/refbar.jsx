@@ -25,6 +25,7 @@ import Tugay from "../refbar/refImage/tugay-numanoglu.jpg"
 import YasarKemal from  "../refbar/refImage/yasar-kemal.jpg"
 import user_profile from"../refbar/user_profile.png"
 import CommentBox from "../comment/commentbox";
+import * as ReactBootstrap from "react-bootstrap";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -220,7 +221,9 @@ console.log(list);
 
                 );
               }) :<p>No comment yet !!!</p>)            :
-            <p>Loading...</p>
+              <div className="d-flex justify-content-center">
+                  <ReactBootstrap.Spinner animation="border"/>
+              </div>
 
           }
           </div>

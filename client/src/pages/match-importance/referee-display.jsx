@@ -3,6 +3,7 @@ import {useState,useEffect} from "react"
 import axios from "axios";
 import SortedMatches from "./match-standings.jsx";
 import RefereeDisplayBox from "../../components/referee-display-importance/referee-display-box.jsx";
+import * as ReactBootstrap from "react-bootstrap";
 
 function RefereeDisplay({RefData,CurrentWeek}) {
   var mydate=RefData[0].first_super_date.split(".")
@@ -76,11 +77,15 @@ console.log("Dolu mu:",Refarray);
                 )
             }))
             :
-            <p>Please wait</p>
+            <div className="d-flex justify-content-center">
+                <ReactBootstrap.Spinner animation="border"/>
+            </div>
             }
         </div>
         :
-        <p>Loading...</p>
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
         }
       </div>
     );

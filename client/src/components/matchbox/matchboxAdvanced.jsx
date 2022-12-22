@@ -24,6 +24,7 @@ import logoAnkaragucu from '../../logos/ankaragucu.png';
 import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
+import * as ReactBootstrap from "react-bootstrap";
 
 const clubs = [
     { name: "Fenerbahçe", src: logoFenerbahce},
@@ -133,7 +134,9 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
                     :
                     <p style={{marginTop: "1em"}}>No comments yet!</p>)
                 :
-                <p>Loading...</p>
+                <div className="d-flex justify-content-center">
+                    <ReactBootstrap.Spinner animation="border"/>
+                </div>
                 }
             </div>
         </div>

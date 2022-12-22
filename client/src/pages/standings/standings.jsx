@@ -3,6 +3,8 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import StandingsTable from "../../components/standingstable/standingtable.jsx";
 import {useState,useEffect} from "react"
 import axios from "axios";
+import * as ReactBootstrap from "react-bootstrap";
+
 function StandingsPage() {
     const [allData, setallData] = useState({});
     const[loading,setLoading] = useState(false);
@@ -30,7 +32,9 @@ function StandingsPage() {
             <StandingsTable AllArray={allData}/> 
         </div>
         :
-        <p>Loading...</p>
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
         }
       </div>
     );

@@ -3,6 +3,8 @@ import {useState,useEffect} from "react"
 import axios from "axios";
 import SortedMatches from "./match-standings.jsx";
 import RefereeDisplay from "./referee-display.jsx";
+import * as ReactBootstrap from "react-bootstrap";
+
 function MatchDataPage({Week}) {
     const[loading,setLoading] = useState(false);
     const [allmatchDetails, setallMatchDetails] = useState([]);
@@ -39,7 +41,9 @@ function MatchDataPage({Week}) {
           </div>
         </div>
         :
-        <p>Loading...</p>
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
         }
       </>
     );
