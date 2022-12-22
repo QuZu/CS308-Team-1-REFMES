@@ -61,7 +61,7 @@
   justify-content: center;
   display: flex;
   overflow: hidden;
-  max-height: 250px;
+  max-height: 30em;
   box-shadow: 0 0px 20px 20px rgb(0 0 0 / 75%) inset;
 }
 
@@ -131,6 +131,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 2em;
 }
 
 .social_media_container {
@@ -153,13 +154,13 @@
 }
 
 .user_edit_pen {
-  background: #FFFFFF;
-  position: absolute;
+  background: #dddddd;
+  /* position: absolute; */
   z-index: 100;
   font-size: 27px;
-  right: 0;
-  margin-right: 24px;
-  margin-top: 24px;
+  /* right: 0; */
+  margin-left: 44px;
+  margin-top: 5px;
   width: 48px;
   height: 48px;
   display: flex;
@@ -214,7 +215,6 @@
 }
 .left-sidebar-margin{
   margin-right:1.5em ;
-  margin-top: 1.5em;
 }
 .profile-section-text{
   font-size: large;
@@ -232,8 +232,36 @@
 }
 .user-profile-input{
   border-radius: 0.4em;
-  border: 0.1em solid rgb(255, 102, 0);
+  border: 0.1em solid  rgba(0, 157, 18, 0.5);
   width: 60%;
   height: 2em;
   text-align: center;
+}
+.user-profile-comment-scroll{
+  max-height: 40em;
+  overflow-y: scroll;
+  overflow: auto;
+  padding-bottom: 2em;
+}
+.user-profile-comment-scroll::-webkit-scrollbar{
+  width: 1.25em;
+}
+.user-profile-comment-scroll::-webkit-scrollbar-track{
+  background: rgba(0, 157, 18, 0.262);
+  border-radius: 2em;
+}
+.user-profile-comment-scroll::-webkit-scrollbar-thumb{
+  background: rgb(149, 212, 145);
+  border-radius: 2em;
+  border: 0.2em solid green;
+}
+.user-profile-comment-scroll::-webkit-scrollbar-thumb:hover{
+  background: rgba(0, 157, 18, 0.547);
+}
+.user-profile-divider {
+  border-top: 0.5em dotted rgb(7, 7, 7);
+  margin-bottom: 0.5em;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  margin-top: 2em;
 }

@@ -5,11 +5,13 @@ import React, { useEffect, useState } from "react";
 import { userLogout } from "../../store/userreducer";
 import axios from "axios";
 import AppNavBar from "../../components/appnavbar.jsx";
-import stadium from '../../stadiums/fenerbahce.jpg';
+import stadium from "../profile/allclubs.png"
+// '../../stadiums/fenerbahce.jpg';
 import profilePhoto from '../../components/refbar/user_profile.png'
 import {BsTwitter, BsInstagram, BsLinkedin, BsPencilFill, BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
 import CommentBox from "../../components/comment/commentbox";
 import findLogo from "../../components/clubLogos/clubLogos";
+import findSocialMedia from "../../components/clubLogos/clubsocials";
 function ProfilePage() {
     const [state, dispatch] = useStore();
     const navigate = useNavigate();
@@ -18,6 +20,7 @@ function ProfilePage() {
     const [loading,setLoading]=useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     var clubLogo=findLogo(currentUser.user.fan_of)
+    var clubSocialInfo=findSocialMedia(currentUser.user.fan_of)
     const getUserComments = async () => {
       await axios.get(`${process.env.REACT_APP_URL}/api/comments/getUserComments/${currentUser.user.id}`).then(res => {
           if (res.data == []) {
@@ -39,13 +42,14 @@ useEffect(() => {
     {loading ?
     <div>
       <div className="user_profile_cap">
-        <div className="user_edit_pen"><a href="/edit"><BsPencilFill/></a></div>
         <div className="user_profile_cover">
           <img src={stadium} className="stadium" alt="img"/>
         </div>
         <div className="user_profile_headline">
             <img src={profilePhoto} alt="img"/> 
-            <article style={{display:"flex"}}><p style={{marginRight: "5px", fontSize: "30px"}}>{currentUser.user.full_name}</p><p style={{marginTop:"15px"}}>(@{currentUser.user.username})</p></article>
+            <article style={{display:"flex"}}><p style={{marginRight: "5px", fontSize: "30px"}}>{currentUser.user.full_name}</p><p style={{marginTop:"15px"}}>(@{currentUser.user.username})</p>
+            <div className="user_edit_pen"><a href="/edit"><BsPencilFill/></a></div>
+            </article>
         </div>
       </div>
       <div className="user_profile_main">
@@ -58,8 +62,8 @@ useEffect(() => {
               <div className="col-8 club_inner"><p>{currentUser.user.fan_of}</p></div>
             </div>
             <div className="social_media_container">
-              <div className="social_media_inner"><a style={{color: "#1D9BF0"}} href="https://twitter.com/Fenerbahce"><BsTwitter/></a></div>
-              <div className="social_media_inner"><a style={{color: "#FE0088"}} href="https://www.instagram.com/fenerbahce"><BsInstagram/></a></div>
+              <div className="social_media_inner"><a style={{color: "#1D9BF0"}} href={clubSocialInfo.twitter}><BsTwitter/></a></div>
+              <div className="social_media_inner"><a style={{color: "#FE0088"}} href={clubSocialInfo.instagram}><BsInstagram/></a></div>
             </div>
             <p className="mt-2 profile-section-text d-flex justify-content-center">User Information</p>
             <hr></hr>
@@ -75,21 +79,25 @@ useEffect(() => {
             </div> 
           </div>
         </div>
-          <div className="col-6"> 
-            {UserComments.length > 0 ? UserComments.slice(0, 10).map((item) => {
+          <div className="col-6">
+            <p  className="d-flex justify-content-center profile-section-text">All Comments</p>
+            <hr className="user-profile-divider"></hr>
+            <div className="user-profile-comment-scroll"> 
+              {UserComments.length > 0 ? UserComments.slice(0, 10).map((item) => {
 
-              return(
-              <div style={{width: "100%"}} key={item._id}>
-                  <div className="container d-flex justify-content-center">
-                  <CommentBox commentPerson={currentUser.user.full_name} pComment={item.comment} myDate={item.date} MatchData={item.match_infos}/>
-                  </div>
-              </div>
+                return(
+                <div style={{width: "100%"}} key={item._id}>
+                    <div className="container d-flex justify-content-center">
+                    <CommentBox commentPerson={currentUser.user.full_name} pComment={item.comment} myDate={item.date} MatchData={item.match_infos}/>
+                    </div>
+                </div>
 
-              );
-              })
-              :
-              <p style={{marginTop: "1em"}}>No comments yet!</p>
-              }
+                );
+                })
+                :
+                <p style={{marginTop: "1em"}}>No comments yet!</p>
+                }
+            </div>
           </div>   
       </div>
     </div>
