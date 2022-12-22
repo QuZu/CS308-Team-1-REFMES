@@ -74,39 +74,54 @@
 
 .players-table-tr{
     height: 50px;
+    background-color: #fff;
 }
 
-.players-table-tr:nth-child(even) {
-    background-color: powderblue
+.players-table-tr:nth-child(odd) {
+    background-color: #e5e5e5
 }
 
 .players-table-tr:hover {
-    background-color: coral;
+    background-color: #f9f9f9;
 }
 
-.name-col {
+.players-table-name-col {
     text-align: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.players-table-last-col {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #table {
+    display: flex;
+    justify-content: center;
     height: 800px;
     overflow-x: auto;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    border-radius: 10px;
+    background: #fff;
     margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
 }
 
 .players-table {
     width: 100%;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 0 2rem;
 }
 
 #table-head {
     color:black;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .players-table-head {
-    background-color: powderblue;
+    background-color: #fff;
     text-align: center;
     font-size: large;
     height: 100px;

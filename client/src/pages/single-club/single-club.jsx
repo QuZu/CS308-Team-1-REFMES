@@ -53,14 +53,14 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
           </div>
           
           <div className = "container players-table-container"> 
-            <div id = "table-head" className = "row container text-center"> <h2> Current List of Players</h2> </div>
+            <div id = "table-head" className = "row container text-center"> {loading ? <h2>Player List of {ClubData.name}</h2> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>} </div>
           
             <div  className = "row">
               <div id = "table">
               <table  className= "players-table"> 
                   <thead className="players-table-head">
                     <tr>
-                      <th className="players-table-head-th">Player Name</th> <th className="players-table-head-th">Jersey Number</th> <th className="players-table-head-th">Age</th> <th className="players-table-head-th">Height</th> <th className="players-table-head-th">Foot</th>
+                      <th className="players-table-head-th">Player Name</th> <th className="players-table-head-th">Number</th> <th className="players-table-head-th">Age</th> <th className="players-table-head-th">Height</th> <th className="players-table-head-th">Foot</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -71,11 +71,11 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
                         return(
                         
                           <tr className = "players-table-tr" key={item.pName}>
-                            <td className="name-col">{item.pName}</td>
-                            <td className="players-table-td">{item.jerseyNumber}</td>
-                            <td className="players-table-td">{item.Age}</td>
-                            <td className="players-table-td">{item.height}</td>
-                            <td className="players-table-td">{item.Foot}</td>
+                            <td className="players-table-name-col col-3">{item.pName}</td>
+                            <td className="players-table-td col-1">{item.jerseyNumber}</td>
+                            <td className="players-table-td col-1">{item.Age}</td>
+                            <td className="players-table-td col-1">{item.height}</td>
+                            <td className="players-table-td players-table-last-col col-1">{item.Foot}</td>
                           </tr>
                         );
                       }) : <></>)            :<></>                  
