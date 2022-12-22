@@ -28,12 +28,13 @@ function StandingsTable({AllArray}) {
     return (
    <div className="container paddings-mini">
       <div className="row">
-         <div className="col-md-10 col-lg-12 standing-table ">
+         <div className="col-md-10 col-lg-12 standing-table mb-5">
             <table className="table-striped table-responsive table-hover result-point">
                <thead className="point-table-head">
                   <tr>
-                     <th className="text-left">Rank</th>
-                     <th className="text-center">Team</th>
+                     <th className="text-center">Rank</th>
+                     <th className="text-center"></th>
+                     <th className="text-left">Team</th>
                      <th className="text-center">Played</th>
                      <th className="text-center">Win</th>
                      <th className="text-center">Draw</th>
@@ -55,11 +56,11 @@ function StandingsTable({AllArray}) {
                               for (let index = 0; index < forms.length; index++) {
                                 const element = forms[index];
                                 if(element==="L")
-                                    badges.push(<div key={index} className="standing-badge lose-badge">L</div>)
+                                    badges.push(<div key={index} className="standing-badge lose-badge"><a>L</a></div>)
                                 if(element==="W")
-                                    badges.push(<div key={index} className="standing-badge win-badge">W</div>)
+                                    badges.push(<div key={index} className="standing-badge win-badge"><a>W</a></div>)
                                 if(element==="D")
-                                    badges.push(<div key={index} className="standing-badge draw-badge">D</div>)
+                                    badges.push(<div key={index} className="standing-badge draw-badge"><a>D</a></div>)
                               }
                               const teamName=item.team.name
                               const asciName=(c_images.find(({src})=>src ===teamName));
@@ -71,24 +72,21 @@ function StandingsTable({AllArray}) {
                                teamlink="fenerbahce"
 
                             return(
-                                <tr key={item.rank}>
+                                <tr key={item.rank} style={{borderBottom: "1px solid #dedede"}}>
                                     <td className="standing-table-text-left-number"><b>{item.rank}</b></td>
-                                    <td className="text-left">
-                                        <img src={findLogo(DisplayName)} alt="logo"/>
-                                        <a className="standing-table-teamname" href={`/club/${teamlink}`}> 
-                                        {DisplayName}
-                                        </a>
-                                        
+                                    <td><img src={findLogo(DisplayName)} alt="logo"/></td>
+                                    <td className="text-left d-flex align-items-center">
+                                        <a className="standing-table-teamname" href={`/club/${teamlink}`}>{DisplayName}</a>
                                     </td>
                                     <td>{item.all.played}</td>
-                                    <td ><b className="standings-win-text-color">{item.all.win}</b></td>
+                                    <td><b className="standings-win-text-color">{item.all.win}</b></td>
                                     <td><b className="standings-draw-text-color">{item.all.draw}</b></td>
                                     <td><b className="standings-lose-text-color">{item.all.lose}</b></td>
                                     <td>{item.all.goals.for}</td>
                                     <td>{item.all.goals.against}</td>
                                     <td>{item.goalsDiff}</td>
                                     <td> <b>{item.points}</b></td>
-                                    <td>
+                                    <td className="d-flex justify-content-center" style={{margin: "1em 0"}}>
                                         {badges.map(element=>{
                                             return(element);
                                         })}
