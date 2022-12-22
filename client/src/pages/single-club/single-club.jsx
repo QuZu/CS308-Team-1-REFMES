@@ -41,22 +41,22 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
      
     <div className="container-fluid">
       <div className="row"> <AppNavBar/> </div>
-      <div className="col-12">
+      <div id="club-details-container" className="col-12">
           <div id = "club-info-section" className = "row">
               <div id = "club-logo" className = "col-3"> {loading ? <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {logo} /> </a> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>} </div>
               <div id = "club-info" className="col-9">
                 <div id = "c-i-h"  className="row"> {loading ? <h1 id = "c-info-head"> <b>{ClubData.full_name}</b> </h1> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>} <br/> </div>
-                <div id = "c-i-t1" className="row"> {loading ? <p className="c-info-text"> Founded: {ClubData.founded}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  <br/> </div>
-                <div id = "c-i-t2" className="row"> {loading ? <p className="c-info-text"> Stadium informations: {ClubData.stadium}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  </div>
-                <div id = "c-i-g"  className="row"> {loading ? <><p className="c-info-text"> {ClubData.full_name} ({ClubData.founded}) </p> <p className="c-g-info"> {ClubData.info}</p></> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  </div>
+                <div id = "c-i-t1" className="row"> {loading ? <p className="c-info-text"> <b>Founded:</b> {ClubData.founded}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  <br/> </div>
+                <div id = "c-i-t2" className="row"> {loading ? <p className="c-info-text"> <b>Stadium:</b> {ClubData.stadium}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  </div>
+                <div id = "c-i-g"  className="row"> {loading ? <p className="c-g-info"> {ClubData.info}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  </div>
               </div>
           </div>
           
-          <div  className = "row"> 
+          <div className = "container players-table-container"> 
             <div id = "table-head" className = "row container text-center"> <h2> Current List of Players</h2> </div>
           
             <div  className = "row">
-              <div id = "table" className="col-8">
+              <div id = "table">
               <table  className= "players-table"> 
                   <thead className="players-table-head">
                     <tr>
