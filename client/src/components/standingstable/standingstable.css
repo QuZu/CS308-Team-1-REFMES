@@ -2,7 +2,8 @@
 .standing-table table {
     width: 100%;
     background: #fff;
-    border: 1px solid #dedede;
+    box-shadow: 0 2px 8px 0 rgb(99 99 99 / 20%);
+    border-radius: 10px;
 }
 
 .standing-table table thead tr th {
@@ -12,7 +13,7 @@
 }
 
 .standing-table table.table-striped tbody tr:hover {
-    background-color: rgba(255, 0, 8, 0.345);
+    background-color: #92929258;
 }
 
 .standing-table table.result-point tr td.number {
@@ -42,16 +43,13 @@
 }
 
 .standing-table table tr td {
-    padding: 10px 40px;
-    border-bottom:1px solid #dedede;
+    padding: 0.6em 1.5em;
 }
 
 .standing-table table tr td img {
     max-width: 2em;
     float: left;
-    margin-right: 11px;
     margin-top: 1px;
-    border: 1px solid #ffffff00;
 }
 .lose-badge {
     height: 1.5em;
@@ -85,7 +83,6 @@
     background: grey;
     font-weight: 600;
     color:white;
-    margin-right: 1em;
 }
 .standing-table-teamname{
     text-shadow: 2em;
@@ -95,8 +92,7 @@
 }
 .standing-table-teamname:hover{
     text-shadow: 2em;
-    color: white;
-    font-weight: 700;
+    color: #e51936;
 }
 
 .standing-badge{
