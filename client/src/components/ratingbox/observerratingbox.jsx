@@ -53,7 +53,7 @@ const clubs = [
    
     const [state, dispatch] = useStore();
     const {observer:CurrentObserver} = state;
-    console.log("currentobserver", CurrentObserver);
+    //console.log("currentobserver", CurrentObserver);
 
     const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
@@ -68,9 +68,9 @@ const clubs = [
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
-            const newPostRating = {rating: rating, observer_id: CurrentObserver.observer.id, match_id: matchData._id};
+            const newObserverRating = {rating: rating, observer_id: CurrentObserver.observer.id, match_id: matchData._id, ref_id:matchData.referee_id, week_no: matchData.week_no};
             axios
-                .post(`${process.env.REACT_APP_URL}/api/postRatings/addObserverRating`, newPostRating)
+                .post(`${process.env.REACT_APP_URL}/api/postRatings/addObserverRating`, newObserverRating)
                 .then((res) => {
                     if (res.status === 200 && res.data.message) {
                         setErrorMessage(res.data.message);
@@ -79,6 +79,17 @@ const clubs = [
                     } else {
                         setErrorMessage("Error! Please try again.");
                     }
+                }).catch((err) => {
+                    console.log("Error: ", err);
+                    setErrorMessage("Error! Please try again.");
+                });
+
+            axios
+                .post(`${process.env.REACT_APP_URL}/api/postRatings/findAndUpdateRef`, newObserverRating)
+                .then((res) => {
+
+                    console.log("res", res);
+
                 }).catch((err) => {
                     console.log("Error: ", err);
                     setErrorMessage("Error! Please try again.");
@@ -99,6 +110,8 @@ const clubs = [
             }
         }).catch(err => console.log(err))
     };
+   
+
     useEffect(() => {
         getCurrentObserverRating();
     }, []);
