@@ -113,18 +113,32 @@ router.post("/delete", async(req, res) => {
 );
 
 router.post("/updatesetting", async(req, res) => {
-    const dataID = req.body.id;
-      await User.findOneAndUpdate({email: req.body.email}, {name:req.body.name});
-      console.log(`User ${dataID} has been found...`);
-      res.status(200).json(`User ${dataID} has been found...`);
+
+      var result=await User.findOne({username:req.body.username})
+      console.log(result);
+      if(result){
+        return res.status(200).json({msg: "Username exist,try again."});
+      }
+      else{
+        await User.findOneAndUpdate({email: req.body.email},
+          {username:req.body.username,
+           full_name:req.body.full_name,
+           social_media:[req.body.twitter,req.body.insta]
+         }).then(result =>{
+             res.status(200).json(result);
+         }).catch(err=>{
+           console.log(err);
+            res.status(400).json({msg: err.message});
+         });
+      }
+      
   }
 );
 
 router.post("/change-password", async(req, res)=> {
     const BCRYPT_SALT_ROUNDS = 10;
-    const currUser = req.body.user;
-    let myQuery = { "email": currUser.user.email}
-    console.log("Current user email:", currUser.user.email)
+    let myQuery = { "email": req.body.usermail}
+    console.log("Current user email:", req.body.usermail)
     User.findOne(myQuery, async (err, result) => {
       if(err) {
         console.log(err.message);
@@ -156,11 +170,21 @@ router.post("/change-password", async(req, res)=> {
           });
   
         } else {
-          res.status(200).json({message: "Current password is invalid"});
+          res.status(200).json({message: "Current password is invalid,check again."});
         }
       } else {
-        res.status(200).json({message: "Error! Please try again"});
+        res.status(200).json({message: "Error! Please try again."});
       }
+    });
+  }
+);
+router.get("/getuserInfo/:userID", async(req, res) => {
+  const user_id = req.params.userID
+    await User.findById(user_id).then((result)=>{
+      console.log(result)
+      res.status(200).json(result);
+    }).catch(err=>{
+      console.log(err);
     });
   }
 );
