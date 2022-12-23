@@ -22,9 +22,11 @@ function ObserverRatingPage() {
         }).catch(err => console.log(err));
     };
 
+
     useEffect(() => {
         getMatchDetails();
     }, []);
+
 
     return(
         <div>
