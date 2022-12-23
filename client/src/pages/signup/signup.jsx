@@ -38,7 +38,6 @@ function Signup() {
       password: data.password,
       fan_of: data.fanOf
     };
-    console.log(data.fanOf);
     //const app_url="http://localhost:5000"
     //console.log(process.env.REACT_APP_URL);
     axios
@@ -55,7 +54,6 @@ function Signup() {
         }
       })
       .catch((err) => {
-        console.log("Error:", err);
         setErrorMessage("Error! Please try again.");
       });
   }, [reset, navigate]);

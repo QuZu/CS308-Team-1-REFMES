@@ -27,10 +27,8 @@ import { useNavigate } from "react-router";
 
 import "../refbar/refcard.css"
 function RefCard({Refdata,r_username,Refname}) {
-  console.log(Refdata);
   const navigate = useNavigate();
   const picname = r_username;
-  //console.log(picname);
   const images = [
     { id: "mete_kalkavan", src: MeteKalkavan},
     { id: "ali_palabiyik", src: AliPalabiyik},

@@ -20,7 +20,6 @@ function AdminEnterResult(){
     useEffect(() => {
         getMatchDetails();
     }, []);
-    console.log(matchDetails);
     return(
         <div>
              <h1 style={{textAlign: "center" ,color:"red", paddingBottom:"10px"}}>ENTER THE RESULTS OF THE WEEK {weekNo}</h1>

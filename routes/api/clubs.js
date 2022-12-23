@@ -20,7 +20,6 @@ router.get("/getClubs", async(req, response) => {
     try{
         await Club.find({}).then((result) => { // go to the database return the values in which acii name = clubName(like fenerbahce)
             response.json(result);
-            console.log(result);
 
         }).catch((err) => {
             throw err;

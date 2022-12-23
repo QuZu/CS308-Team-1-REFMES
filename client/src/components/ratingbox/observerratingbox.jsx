@@ -10,7 +10,6 @@ import findLogo from "../clubLogos/clubLogos";
 
     const [state, dispatch] = useStore();
     const {observer:CurrentObserver} = state;
-    //console.log("currentobserver", CurrentObserver);
 
     const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
@@ -37,7 +36,6 @@ import findLogo from "../clubLogos/clubLogos";
                         setErrorMessage("Error! Please try again.");
                     }
                 }).catch((err) => {
-                    console.log("Error: ", err);
                     setErrorMessage("Error! Please try again.");
                 });
 
@@ -59,6 +57,7 @@ import findLogo from "../clubLogos/clubLogos";
             setRating(res.data);
             if (res.data === []) {
                 console.log("Empty");
+
             } else {
                 setRating(res.data[0].rating);
                 setIsInteractive(false);

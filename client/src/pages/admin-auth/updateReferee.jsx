@@ -15,7 +15,6 @@ function UpdateRefPage() {
   const getRefs = async() =>{
     
     await axios.get(`${process.env.REACT_APP_URL}/api/referees/getAllUpdatedref`).then(response =>{
-      //console.log("response: ", response);
       setRefData(response.data);
       setLoading(true);
 
@@ -25,10 +24,8 @@ function UpdateRefPage() {
 
   const updateRef = async() =>{
     await axios.get(`${process.env.REACT_APP_URL}/api/referees/updateRef`).then(res =>{
-      //console.log("response: ", res);
       setUpdateRefData(res.data);
       setUpdated(true);
-      console.log("updateref returns", UpdateRefData);
 
     }).catch(err => console.log(err))
 
@@ -38,7 +35,6 @@ function UpdateRefPage() {
     getRefs();
   }, [])
  
-  console.log(RefData);
     return(
         <div>
             <AppNavBarSingle/>

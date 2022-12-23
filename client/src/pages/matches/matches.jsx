@@ -29,7 +29,7 @@ function MatchesPage() {
     return(
         <div>
             <AppNavBar/>
-            <div><h1 style={{textAlign: "center", margin: "2em 0em 1em"}}>Matches</h1></div>
+            <div><h1 style={{textAlign: "center", margin: "2em 0em 1em"}}>Super League Matches</h1></div>
             <MatchesInnerPage currentWeekNo={currentWeekNo}/>
         </div>
     )

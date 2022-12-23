@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../referees/referees.css"
 import RefCard from "../../components/refbar/refcard"
+import * as ReactBootstrap from "react-bootstrap";
+
 function RefereesPage() {
   const [allData, setallData] = useState({});
   const[loading,setLoading] = useState(false);
@@ -19,8 +21,8 @@ function RefereesPage() {
   useEffect(() => {
     getAllRef();
   }, [])
-    console.log(allData);
-    function compare( a, b ) {
+
+  function compare( a, b ) {
       if ( a.name < b.name ){
         return -1;
       }
@@ -35,8 +37,8 @@ function RefereesPage() {
   }
     return(
         <div>
-            <AppNavBar/>
-            <h1  style={{textAlign: "center", marginTop: "10px"}}>Referees</h1>
+        <AppNavBar/>
+        <div><h1 style={{textAlign: "center", margin: "2em 0em"}}>Super League Referees</h1></div>
             <div className="mt-3 container allref-container-center">
             <div className="row text-center">
             { allData ?
@@ -50,8 +52,15 @@ function RefereesPage() {
                   </div>
 
                 );
-              }) :<p>Please Wait.. !!!</p>)            :
-            <p>Loading...</p>
+              }) :
+                  <div className="d-flex justify-content-center">
+                      <ReactBootstrap.Spinner animation="border"/>
+                  </div>)
+                  :
+            
+              <div className="d-flex justify-content-center">
+                  <ReactBootstrap.Spinner animation="border"/>
+              </div>
           }
           </div>
         </div>
