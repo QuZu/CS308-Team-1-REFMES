@@ -22,7 +22,6 @@ function ObserverRatingPage() {
     return(
         <div>
             <AppNavBarSingle/>
-            <div><h1 style={{textAlign: "center", margin: "2em 0em 1em"}}>Observer Rating Page</h1></div>
             <ObserverRatingInnerPage currentWeekNo={currentWeekNo}/>
         </div>
     )

@@ -7,7 +7,7 @@ import * as ReactBootstrap from "react-bootstrap";
 
 function ObserverRatingInnerPage({currentWeekNo}) {
 
-    const weekNo = currentWeekNo;
+    const weekNo = currentWeekNo-1;
     const [matchDetails, setMatchDetails] = useState([]);
     const [loading,setLoading] = useState(false);
 
@@ -20,15 +20,12 @@ function ObserverRatingInnerPage({currentWeekNo}) {
         }).catch(err => console.log(err));
     };
 
-
     useEffect(() => {
         getMatchDetails();
     }, []);
 
-
     return(
         <div>
-            <AppNavBarSingle/>
             <div>
                 <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Observer Rating for Week {weekNo}</h1>
             </div>
