@@ -20,7 +20,6 @@ function RefPage() {
   useEffect(() => {
     getRef();
   }, [])
-  console.log("All data: ", allData)
     return (
       <div>
         <AppNavBar/>

@@ -4,6 +4,7 @@ import React, {  useEffect, useState } from "react";
 import axios from "axios";
 import ClubCard from "../../components/clubs/clubCard"
 import "../clubs/clubs.css"
+import * as ReactBootstrap from "react-bootstrap";
 
 function ClubsPage() {
 
@@ -12,7 +13,6 @@ function ClubsPage() {
 
   const getClubs = async() =>{
     await axios.get(`${process.env.REACT_APP_URL}/api/clubs/getClubs`).then(response =>{
-      console.log("response: ", response);
       setClubData(response.data);
       setLoading(true);
 
@@ -40,8 +40,16 @@ function ClubsPage() {
                                 <ClubCard clubName = {item.name} asciName = {item.asci_name} >  </ClubCard>
                               </div>
                             );
-                          }) : <></>)            :<></>
-                      
+                          })
+                          : 
+                          <div className="d-flex justify-content-center">
+                              <ReactBootstrap.Spinner animation="border"/>
+                          </div>
+                          )
+                          :
+                          <div className="d-flex justify-content-center">
+                              <ReactBootstrap.Spinner animation="border"/>
+                          </div>
                       }
                </div>
             </div>

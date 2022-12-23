@@ -26,7 +26,6 @@ import user_profile from"../refbar/user_profile.png"
 
 function UpdateRefBar({referee}){
 
-    console.log("refname: ", referee.name);
     const picname = referee.r_username;
     const images = [
         { id: "mete_kalkavan", src: MeteKalkavan},

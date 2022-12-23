@@ -21,7 +21,6 @@ function AdminSelectRefereeLanding(){
       getWeek();
   }, [])
 
-    //console.log(allData);
     return(
         <div>
             {loading ?

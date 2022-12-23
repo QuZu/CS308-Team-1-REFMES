@@ -48,7 +48,6 @@ const clubs = [
   { name: "Kayserispor", src: logoKayserispor},
 ]
 function Comment({ commentPerson, pComment, myDate,MatchData, }) {
-  console.log(MatchData);
   const matchID=MatchData[0]._id
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const RenderDate=new Date(myDate)
@@ -70,7 +69,6 @@ function Comment({ commentPerson, pComment, myDate,MatchData, }) {
   useEffect(() => {
     getMatchDetails();
   }, []);
-  console.log("Alldetails",matchDetails);
     return(
       (loading ?
       <div className="refs-page-container">

@@ -53,7 +53,6 @@ const clubs = [
    
     const [state, dispatch] = useStore();
     const {observer:CurrentObserver} = state;
-    //console.log("currentobserver", CurrentObserver);
 
     const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
@@ -80,7 +79,6 @@ const clubs = [
                         setErrorMessage("Error! Please try again.");
                     }
                 }).catch((err) => {
-                    console.log("Error: ", err);
                     setErrorMessage("Error! Please try again.");
                 });
 
@@ -101,7 +99,7 @@ const clubs = [
         await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getObserverRating/${matchData._id}/${CurrentObserver.observer.id}`).then(res => {
             setRating(res.data);
             if (res.data == []) {
-                console.log("Empty");
+
             } else {
                 setRating(res.data[0].rating);
                 setIsInteractive(false);

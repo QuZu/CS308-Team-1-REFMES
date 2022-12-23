@@ -21,9 +21,7 @@ router.post('/signup', async(req, res) => {
     if (!hash) throw Error('Something went wrong hashing the password');
 
     const newUser = new User({ username, full_name, email, password: hash, fan_of });
-    console.log(newUser);
     const savedUser = await newUser.save();
-    console.log("Saveduser:",savedUser)
     if (!savedUser) throw Error('Something went wrong while saving the user');
 
     res.status(200).json({
@@ -63,8 +61,6 @@ router.post('/login', async(req, res) => {
         fan_of: user.fan_of
       }});
 
-    console.log(user);
-
     } catch (e) {
       res.status(400).json({ msg: e.message });
     }
@@ -73,15 +69,12 @@ router.post('/login', async(req, res) => {
 
 router.post('/observerLogin', async(req, res) => {
   const {observerid, password} = req.body;
-  console.log("id:" ,observerid);
-  console.log("passw:" ,password);
   if(!observerid || !password) {
       return res.status(400).json({ msg: 'Please enter all fields' });
   }
   
   try {
     const observer = await Observer.findOne({ observer_id:observerid });
-    console.log("observer:" ,observer);
     if (!observer) throw Error('Observer does not exist');
   
     if (password !== observer.password){
@@ -92,8 +85,6 @@ router.post('/observerLogin', async(req, res) => {
       observer: {
         id: observer.observer_id,
       }});
-
-    console.log(observer);
 
     } catch (e) {
       res.status(400).json({ msg: e.message });
@@ -115,7 +106,6 @@ router.post("/delete", async(req, res) => {
 router.post("/updatesetting", async(req, res) => {
     const dataID = req.body.id;
       await User.findOneAndUpdate({email: req.body.email}, {name:req.body.name});
-      console.log(`User ${dataID} has been found...`);
       res.status(200).json(`User ${dataID} has been found...`);
   }
 );
@@ -124,31 +114,22 @@ router.post("/change-password", async(req, res)=> {
     const BCRYPT_SALT_ROUNDS = 10;
     const currUser = req.body.user;
     let myQuery = { "email": currUser.user.email}
-    console.log("Current user email:", currUser.user.email)
     User.findOne(myQuery, async (err, result) => {
       if(err) {
-        console.log(err.message);
       } else if(result) {
-        console.log("Result: ",result);
         const validPassword = await bcrypt.compare(req.body.currentPassword.toString(), result.password);
-        console.log(validPassword, ""+req.body.password, result.password);
         if(validPassword){
-          console.log("Res:",result)
   
           bcrypt.genSalt(BCRYPT_SALT_ROUNDS, function (saltError, salt) {
           if (saltError) {
-            console.log(saltError);
             return saltError
           }
           else {
             bcrypt.hash(req.body.password, salt, function (hashError, hash) {
               if (hashError) {
-                console.log(hashError);
                 return hashError
               }
-              console.log("Updating...");
               User.findOneAndUpdate({"email": currUser.user.email}, {password: hash}).then(() => {
-                  console.log('Password changed');
                   res.status(200).json(hash);
                 });
             });

@@ -3,6 +3,8 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import {useState,useEffect} from "react"
 import axios from "axios";
 import MatchDataPage from "./match-data.jsx";
+import * as ReactBootstrap from "react-bootstrap";
+
 function MatchImportancePage() {
     const [currentweek, setcurrentweek] = useState({});
     const[loading,setLoading] = useState(false);
@@ -17,7 +19,7 @@ function MatchImportancePage() {
     useEffect(() => {
         getWeek();
     }, [])
-    //console.log(currentweek);
+    
     return (
       <div>
         <AppNavBar/>
@@ -27,7 +29,9 @@ function MatchImportancePage() {
             <MatchDataPage  Week={currentweek}/>
         </div>
         :
-        <p>Loading...</p>
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
         }
       </div>
     );

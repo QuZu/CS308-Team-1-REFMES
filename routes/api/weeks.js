@@ -29,7 +29,6 @@ router.post("/setWeek", async(req, res) => {
             }});
     } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get all match for this week");
     }
 });
 module.exports = router;

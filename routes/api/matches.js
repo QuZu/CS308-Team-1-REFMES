@@ -32,7 +32,6 @@ router.get("/getMatchDetailss/:matchID", async(req, res) => {
         });
     } catch (err) {
         res.status(500).json(err);
-        console.log("zortladik");
     }
 });
 router.get("/getMatchDetails/:weekNo", async(req, res) => {
@@ -69,7 +68,6 @@ router.get("/getMatchDetails/:weekNo", async(req, res) => {
             })
             } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get match details");
     }
 });
 
@@ -107,7 +105,6 @@ router.get("/getSingleMatchDetails/:matchID", async(req, res) => {
             })
     } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get match details");
     }
 });
 router.get("/getstandings", async(req, res) => {
@@ -119,7 +116,6 @@ router.get("/getstandings", async(req, res) => {
         });
     } catch (err) {
         res.status(500).json(err);
-        console.log("standing alınamadı");
     }
 });
 router.get("/getWeekMatchDetails/:weekNo", async(req, res) => {
@@ -149,7 +145,6 @@ router.get("/getWeekMatchDetails/:weekNo", async(req, res) => {
             })
             } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get match details");
     }
 });
 module.exports = router;
