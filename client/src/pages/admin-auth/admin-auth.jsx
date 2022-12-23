@@ -23,6 +23,9 @@ function AdminAuthPage(){
       const gotoRefmesRating = (e) => {
         navigate("/admin/refmesRating")
       }
+      const gotoWeekDecide = (e) => {
+        navigate("/admin/weekControl")
+      }
 
     return(
         <div>
@@ -31,22 +34,25 @@ function AdminAuthPage(){
             <div style={{minHeight:"100px", marginTop:"20px"}}  className="row">
                     <button onClick={goToAddReferee} style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-lg btn-success">
                     ADD REFEREE</button>
-                    <button onClick={goToSelectReferee} style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-warning">
+                    <button onClick={goToSelectReferee} style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-secondary">
                     SELECT THE REFEREES OF THE WEEK</button>
             </div>
             <div style={{minHeight:"100px", marginTop:"20px"}}  className="row">
                     <button onClick={goToAddObserver} style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-success">
                     ADD OBSERVER</button>
-                    <button onClick={goToEnterResults} style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-warning">
+                    <button onClick={goToEnterResults} style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-secondary">
                    ENTER THE RESULTS OF THE MATCHES</button>
                   
             </div>
             <div style={{minHeight:"100px", marginTop:"40px"}}  className="row">
-                    <button onClick={goToUpdateReferee}  style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-info btn-lg">
+                    <button onClick={goToUpdateReferee}  style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-success btn-lg">
                     UPDATE THE REFEREE INFORMATION</button>
                     <button onClick={gotoRefmesRating}  style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-secondary btn-lg">
                     REFMES RATING</button>
-      
+            </div>
+            <div style={{minHeight:"100px", marginTop:"40px"}}  className="row">
+                    <button onClick={gotoWeekDecide}  style={{margin: "0 auto"}} type='submit' className="col-5 btn btn-block btn-warning btn-lg">
+                    WEEK STATUS</button>
             </div>
         </div>
     );
