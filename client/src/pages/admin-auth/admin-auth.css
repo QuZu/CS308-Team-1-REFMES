@@ -3,3 +3,16 @@
     color: red;
     margin-top: 30px;
 }
+
+.admin-auth-container {
+    max-width: 840px;
+    margin-bottom: 3rem;
+}
+
+.admin-auth-btn-container {
+    padding: 1rem;
+}
+
+.admin-auth-btn {
+    padding: 1rem 1.5rem;
+}
