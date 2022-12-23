@@ -38,7 +38,8 @@ import ObserverLoginPage from "./pages/observer/observerLogin";
 import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
-import AdminWeekControlPage from "./pages/admin-auth/adminWeekControl";
+import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
+import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
 
 function App() {
   const [state] = useStore();
@@ -52,19 +53,21 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin-auth" element={<AdminAuthPage />} />
-        <Route path="/admin-auth/addReferee" element={<AdminAddReferee />} />
+        <Route path="/admin/login" element={<AdminPage />} />
+        <Route path="/admin" element={<AdminAuthPage />} />
+        <Route path="/admin/refmes_rating" element={<RefmesRatingPage />} />
+        <Route path="/admin/update_pre_week" element={<AdminUpdatePreWeekPage />} />
+        <Route path="/admin/update_post_week" element={<AdminUpdatePostWeekPage />} />
+        <Route path="/admin/retrieve_referee_info" element={<AdminUpdateReferee />} />
+        <Route path="/admin/add_referee" element={<AdminAddReferee />} />
+        <Route path="/admin/add_observer" element={<AdminAddObserver />} />
+
         <Route path="/admin-auth/enterResult" element={<AdminEnterResult />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectRefereeLanding />} />
-        <Route path="/admin-auth/addObserver" element={<AdminAddObserver />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
         <Route path="/observer" element={<ObserverLoginPage />} />
         <Route path="/observer-auth" element={<ObserverAuthPage />} />
         <Route path="/observer-auth/observerRating" element={<ObserverRatingPage />} />
-        <Route path="/admin-auth/updateReferee" element={<AdminUpdateReferee />} />
-        <Route path="admin/refmesRating" element={<RefmesRatingPage />} /> 
-        <Route path="/admin/weekControl" element={<AdminWeekControlPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
         :
