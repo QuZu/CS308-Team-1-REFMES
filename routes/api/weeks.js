@@ -43,4 +43,15 @@ router.post("/setWeek", async(req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.get("/getCurrentYear", async(req, res) => {
+    console.log("zort");
+    try {
+        var currentYear = new Date().getFullYear();
+        res.json({currentYear});
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;
