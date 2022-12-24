@@ -17,8 +17,9 @@ router.post("/addPreRating", async(req, res) => {
 
         const savedPreRating = await newPreRating.save();
         if (!savedPreRating) throw Error('Something went wrong while saving the pre rating');
-
+        res.status(200)
     } catch (e) {
+        console.log(e);
         res.status(400).json({ error: e.message });
     }
 });
@@ -39,6 +40,7 @@ router.post("/refereeAddPreRating", async(req, res) => {
             Referee.findByIdAndUpdate(referee_id,{
                 preRating:PreRating
             }).then(updateData =>{
+                res.status(200)
                 console.log("updated data", updateData);
             })
         }).catch(err => {

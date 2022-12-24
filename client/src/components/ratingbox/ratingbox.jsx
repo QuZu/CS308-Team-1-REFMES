@@ -96,7 +96,7 @@ function RatingBox({ matchData }) {
     const getCurrentPostRating = async()=>{
         await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getPostRating/${matchData._id}/${currentUser.user.id}`).then(res => {
             setRating(res.data);
-            if (res.data === []) {
+            if (res.data.length === 0) {
 
             } else {
                 setRating(res.data[0].rating);
@@ -114,10 +114,11 @@ function RatingBox({ matchData }) {
     useEffect(() => {
         getCurrentPostRating();
     }, []);
-
     return (
         <>
-        <div className="rating-outer-container">
+
+        { matchData.ref_info[0] ?
+         <div className="rating-outer-container">
             <div className="rating-container">
                 <div className="rating-left">
                     <div className="rating-left-match">
@@ -148,6 +149,9 @@ function RatingBox({ matchData }) {
                 <div className="rating-comment-add-button"><Link to={`../match/${matchData._id}/comment`}>Add Comment</Link></div>
             </div>
         </div>
+        :
+        <p>No Referee</p>
+        }
         </>
     );
   }

@@ -76,7 +76,8 @@ function RatingBoxPre({ refereeData,preWeek }) {
                 axios.post(`${process.env.REACT_APP_URL}/api/preRatings/addPreRating`, newPreRating),
                 axios.post(`${process.env.REACT_APP_URL}/api/preRatings/refereeAddPreRating`, newPreRating),
               ])
-              .then(axios.spread((res1, res2) => {
+              .then(axios.spread((res1, res2) =>    {
+                console.log("Stattus:",res1.status,res2.status);
                  if (res1.status === 200 && res2.status===200) {
                     setErrorMessage("Your rating submitted successfully");
                     const date = new Date();
@@ -87,6 +88,7 @@ function RatingBoxPre({ refereeData,preWeek }) {
                     setBtnValue("Saved");
                     setBtnDisabled(true);
                 } else {
+                    console.log("elsedeyim");
                     setErrorMessage("Error! Please try again.");
                     setBtnDisabled(true);
                 }
@@ -99,7 +101,7 @@ function RatingBoxPre({ refereeData,preWeek }) {
         }
     }
 
-    const getCurrentPostRating = async()=>{
+    const getCurrentPostRating = async()=>   {
         await axios.get(`${process.env.REACT_APP_URL}/api/preRatings/getPreRating/${currentUser.user.id}/${refereeData._id}/${preWeek}`).then(res => {
             if (res.data.length === 0) {
                 console.log("Empty");

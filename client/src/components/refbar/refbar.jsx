@@ -82,6 +82,7 @@ list.sort(function(a, b){
   if(a.date > b.date) { return -1; }
   return 0;
 })
+console.log(list);
     return (
         <div className="col">
         <div className="padding-15 row">
