@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 import "../adminRefAssign/adminRefAssign.css";
-
+import * as ReactBootstrap from "react-bootstrap";
+import RefAssignBox from "../refAssignBox/refAssignBox.jsx"; 
 
 function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
     const [loading,setLoading] = useState(false);
@@ -132,7 +133,7 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
             if (a.ratio > b.ratio) {return -1;}
             return 0;
         });
-        console.log("Sorted Referees: ", refArray);
+        // console.log("Sorted Referees: ", refArray);
     }
     
     if (rankingList.length !== 0) {
@@ -141,12 +142,28 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
             if (a.totalrank < b.totalrank) {return -1;}
             return 0;
         });
-        console.log("Sorted Matches: ", rankingList);
+        // console.log("Sorted Matches: ", rankingList);
     }
 
     return(
-        <div>
-            <a>Referee Assignment Page</a>
+        <div className="container">
+            { loading ?
+            <>
+            <div className="row">
+                { refArray && rankingList ?
+                (rankingList.map((item, index) => {
+                    return(<RefAssignBox key={index} refereeData={refArray[index]} matchData={rankingList[index]} idx={index}/>);
+                }))
+                :
+                <></>
+                }
+            </div>
+            </>
+            :
+            <div className="d-flex justify-content-center">
+                <ReactBootstrap.Spinner animation="border"/>
+            </div>
+            }
         </div>
     )
 };
