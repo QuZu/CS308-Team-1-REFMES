@@ -20,7 +20,7 @@ router.post('/signup', async(req, res) => {
     const hash = await bcrypt.hash(password, salt);
     if (!hash) throw Error('Something went wrong hashing the password');
 
-    const newUser = new User({ username, full_name, email, password: hash, fan_of });
+    const newUser = new User({ username, full_name, email, password: hash, fan_of,social_media:["",""]});
     console.log(newUser);
     const savedUser = await newUser.save();
     console.log("Saveduser:",savedUser)
@@ -32,7 +32,8 @@ router.post('/signup', async(req, res) => {
         username: savedUser.username,
         full_name: savedUser.full_name,
         email: savedUser.email,
-        fan_of: savedUser.fan_of
+        fan_of: savedUser.fan_of,
+        social_media:["",""]
       }});
 
     } catch (e) {
