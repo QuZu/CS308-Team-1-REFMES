@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 import "../adminRefAssign/adminRefAssign.css";
-
+import * as ReactBootstrap from "react-bootstrap";
 
 function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
     const [loading,setLoading] = useState(false);
@@ -132,7 +132,7 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
             if (a.ratio > b.ratio) {return -1;}
             return 0;
         });
-        console.log("Sorted Referees: ", refArray);
+        // console.log("Sorted Referees: ", refArray);
     }
     
     if (rankingList.length !== 0) {
@@ -141,11 +141,32 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
             if (a.totalrank < b.totalrank) {return -1;}
             return 0;
         });
-        console.log("Sorted Matches: ", rankingList);
+        // console.log("Sorted Matches: ", rankingList);
     }
 
     return(
         <div>
+            { loading ?
+            <>
+            <div>
+                { refArray && rankingList ?
+                (rankingList.map((item, index) => {
+                    return(
+                        <div key={index}>
+                            <p>{refArray[index].name} and {rankingList[index].club1}</p>
+                        </div>
+                    )
+                }))
+                :
+                <></>
+                }
+            </div>
+            </>
+            :
+            <div className="d-flex justify-content-center">
+                <ReactBootstrap.Spinner animation="border"/>
+            </div>
+            }
             <a>Referee Assignment Page</a>
         </div>
     )
