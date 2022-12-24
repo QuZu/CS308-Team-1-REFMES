@@ -3,6 +3,7 @@ import {useState,useEffect} from "react"
 import axios from "axios";
 import SortedMatches from "./match-standings.jsx";
 import RefereeDisplayBox from "../../components/referee-display-importance/referee-display-box.jsx";
+import * as ReactBootstrap from "react-bootstrap";
 
 function RefereeDisplay({RefData,CurrentWeek}) {
   var mydate=RefData[0].first_super_date.split(".")
@@ -44,8 +45,8 @@ function RefereeDisplay({RefData,CurrentWeek}) {
             // var total=(wConstant) +(arrayelement.observerPoint)* wObserver + (arrayelement.fanPoint)* wFan + (arrayelement.experience)* wExperience;
             // arrayelement.ratio=(total/20).toFixed(2)
           }
-          setRefarray(mydata)
-          setLoading(true)
+          setRefarray(mydata);
+          setLoading(true);
 
          }).catch(err=>console.log(err));
     };
@@ -53,15 +54,14 @@ function RefereeDisplay({RefData,CurrentWeek}) {
       getallrefpoints();
     }, [])
 
-if(Refarray)
-{
-  Refarray.sort(function(a, b){
-    if(a.ratio < b.ratio) { return 1; }
-    if(a.ratio > b.ratio) { return -1; }
-    return 0;
-  })
-}
-console.log("Dolu mu:",Refarray);
+  if(Refarray)
+  {
+    Refarray.sort(function(a, b){
+      if(a.ratio < b.ratio) { return 1; }
+      if(a.ratio > b.ratio) { return -1; }
+      return 0;
+    })
+  }
 
     return (
         <div>
@@ -76,11 +76,15 @@ console.log("Dolu mu:",Refarray);
                 )
             }))
             :
-            <p>Please wait</p>
+            <div className="d-flex justify-content-center">
+                <ReactBootstrap.Spinner animation="border"/>
+            </div>
             }
         </div>
         :
-        <p>Loading...</p>
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
         }
       </div>
     );

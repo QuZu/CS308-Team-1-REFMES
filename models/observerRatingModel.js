@@ -14,6 +14,14 @@ const ObserverRatingSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
+  ref_id:{
+    type: Schema.Types.ObjectId,
+    required: true
+  },
+  week_no:{
+    type: Schema.Types.Number,
+    required: true
+  }
 });
 
 

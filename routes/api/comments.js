@@ -51,7 +51,6 @@ router.get("/getComments/:matchID", async(req, res) => {
             throw err;
         });
     } catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }}
 );
@@ -84,7 +83,6 @@ router.get("/getUserComments/:userID", async(req, res) => {
             throw err;
         });
     } catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }}
 );

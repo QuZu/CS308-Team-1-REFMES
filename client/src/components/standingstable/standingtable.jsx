@@ -50,7 +50,6 @@ function StandingsTable({AllArray}) {
                   {AllArray ?
                     (
                         AllArray.map(item=>{
-                            //console.log(item.all.played);
                             var forms=item.form;
                             var badges=[]
                               for (let index = 0; index < forms.length; index++) {

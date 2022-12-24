@@ -25,7 +25,7 @@ function ProfilePage() {
         console.log(err);
       })
     }
-    
+
 useEffect(() => {
   getCurrentUser();
 }, [])

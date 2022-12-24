@@ -25,13 +25,13 @@ import Tugay from "../refbar/refImage/tugay-numanoglu.jpg"
 import YasarKemal from  "../refbar/refImage/yasar-kemal.jpg"
 import user_profile from"../refbar/user_profile.png"
 import CommentBox from "../comment/commentbox";
+import * as ReactBootstrap from "react-bootstrap";
 
 import axios from "axios";
 import { useState, useEffect } from "react";
 
 function RefInfo({refName}) {
 const [list,setList]=useState([]);
-console.log(refName._id);
 const picname = refName.r_username;
 const images = [
   { id: "mete_kalkavan", src: MeteKalkavan},
@@ -73,7 +73,6 @@ if(result){
 else{
   result=user_profile;
 }
-//console.log(result)
 useEffect(() => {
   GetData();
 }, []);
@@ -83,7 +82,6 @@ list.sort(function(a, b){
   if(a.date > b.date) { return -1; }
   return 0;
 })
-console.log(list);
     return (
         <div className="col">
         <div className="padding-15 row">
@@ -220,7 +218,9 @@ console.log(list);
 
                 );
               }) :<p>No comment yet !!!</p>)            :
-            <p>Loading...</p>
+              <div className="d-flex justify-content-center">
+                  <ReactBootstrap.Spinner animation="border"/>
+              </div>
 
           }
           </div>

@@ -7,8 +7,6 @@ import AppNavBarSingle from "../../components/appnavbarsingle.jsx";;
 function ObserverAuthPage(){
     const [state, dispatch] = useStore();
     const {observer:CurrentObserver} = state;
-    console.log("currentobserver", CurrentObserver);
-    console.log(CurrentObserver.observer.id);
     const navigate = useNavigate();
     const goToObserverRate = (e) => {
         navigate("/observer-auth/observerRating")

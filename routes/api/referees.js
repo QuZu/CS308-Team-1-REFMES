@@ -38,26 +38,21 @@ router.get("/getAllref", async(req, res) => {
         await Referee.find({}).then((result) => {
             res.json(result);
         }).catch((err) => {
-            console.log(err);
             throw err;
         });
     } catch (err) {
         res.status(500).json(err);
-        console.log(err);
     }}
 );
 router.get("/getAllUpdatedref", async(req, res) => {
-    console.log("in backend");
     try {
         await Referee.find({}).then((result) => {
             res.json(result);
         }).catch((err) => {
-            console.log(err);
             throw err;
         });
     } catch (err) {
         res.status(500).json(err);
-        console.log(err);
     }}
 );
 router.get("/getComments/:refid", async(req, res) => {
@@ -137,14 +132,12 @@ router.get("/updateRef", async(req, res) => {
                 });
             }
         })
-        console.log("Array budur:",allRef);
         //console.log(ALL[14].Data[2]);
         
     }).catch((err) => {});
  }
     async function UpdateDatabase(item){
         try {
-            console.log(item);
             var transfer_name=item.refName;
             updated_item = {
 
@@ -158,12 +151,9 @@ router.get("/updateRef", async(req, res) => {
                 avgPenalty:item.avgPenalty
 
             }
-
-            console.log("updated item:", updated_item);
             
             const updatedRef=await Referee.findOneAndUpdate({t_name:transfer_name},{totalMatch:item.totalMatch, yellowCard:item.yellowCard, avgYellowCard:item.avgYellowCard,
                  redCard:item.redCard, avgRedCard:item.avgRedCard, penalty:item.penalty, avgPenalty:item.avgPenalty});
-            console.log(updatedRef);
 
             // updatedReferee.findOneAndUpdate({t_name:username},{totalMatch:item.totalMatch}, {yellowCard:item.yellowCard}, {avgYellowCard:item.avgYellowCard},
             //      {redCard:item.redCard}, {avgRedCard:item.avgRedCard}, {penalty:item.penalty}, {avgPenalty:item.avgPenalty},
@@ -178,7 +168,6 @@ router.get("/updateRef", async(req, res) => {
             // });
             
         } catch (error) {
-            console.log(error);
 
         }
     }

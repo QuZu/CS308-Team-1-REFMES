@@ -20,7 +20,6 @@ function AdminAddReferee(){
   const handleSubmit= async (e)=>{
     Setbtndisabled(false);
     e.preventDefault();
-        console.log(rname);
         const newReferee = {
           r_username: username,
           name: rname,
@@ -44,7 +43,6 @@ function AdminAddReferee(){
           postRating: [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],
           observerRating: [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],
         };
-        console.log(newReferee);
         if(!newReferee.r_username || !newReferee.name || !newReferee.biography || !newReferee.birth_date || !newReferee.birth_place || !newReferee.fifa_date || !newReferee.first_super_date ||!newReferee.t_name){
           setErrorMessage("Please, enter all fields!");
           Setbtndisabled(true);
@@ -52,10 +50,8 @@ function AdminAddReferee(){
         else{
           await axios.post(`${process.env.REACT_APP_URL}/api/admin/addReferee`,newReferee)
         .then(res =>{
-            console.log(res);
             setErrorMessage("You have successfully added new referee to the database");
         }).catch(err=>{
-          console.log(err.response.data.error)
           setErrorMessage(err.response.data.error);
         });
           Setbtndisabled(true);

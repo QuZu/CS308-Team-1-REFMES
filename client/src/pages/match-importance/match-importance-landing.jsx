@@ -3,12 +3,15 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import {useState,useEffect} from "react"
 import axios from "axios";
 import MatchDataPage from "./match-data.jsx";
+import * as ReactBootstrap from "react-bootstrap";
+import CurrentWeek from "../../components/adminForm/currentWeek.jsx";
+
 function MatchImportancePage() {
-    const [currentweek, setcurrentweek] = useState({});
+    const [currentweek, setcurrentweek] = useState();
     const[loading,setLoading] = useState(false);
   
     const getWeek = async()=>{
-      await axios.get(`${process.env.REACT_APP_URL}/api/weeks/getWeek`).then(res=>{
+      await axios.get(`${process.env.REACT_APP_URL}/api/weeks/getPreWeek`).then(res=>{
         setcurrentweek(res.data.week_no);
         setLoading(true);
     
@@ -17,17 +20,19 @@ function MatchImportancePage() {
     useEffect(() => {
         getWeek();
     }, [])
-    //console.log(currentweek);
+    
     return (
       <div>
         <AppNavBar/>
         {loading ?
-        <div className="mt-5">
-            <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Order of Importance and Current Status Week {currentweek}</h1>
-            <MatchDataPage  Week={currentweek}/>
+        <div className="mt-5 d-flex flex-column align-items-center">
+            <h1 style={{textAlign: "center", margin: "1em 0"}}>Live Assignment Status for Week {currentweek}</h1>
+            <MatchDataPage Week={currentweek}/>
         </div>
         :
-        <p>Loading...</p>
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
         }
       </div>
     );
