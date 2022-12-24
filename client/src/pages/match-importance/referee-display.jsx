@@ -54,25 +54,14 @@ function RefereeDisplay({RefData,CurrentWeek}) {
       getallrefpoints();
     }, [])
 
-<<<<<<< Updated upstream
-if(Refarray)
-{
-  Refarray.sort(function(a, b){
-    if(a.ratio < b.ratio) { return 1; }
-    if(a.ratio > b.ratio) { return -1; }
-    return 0;
-  })
-}
-=======
-    if(Refarray)
-    {
-      Refarray.sort(function(a, b){
-        if(a.ratio < b.ratio) { return 1; }
-        if(a.ratio > b.ratio) { return -1; }
-        return 0;
-      });
-    }
->>>>>>> Stashed changes
+  if(Refarray)
+  {
+    Refarray.sort(function(a, b){
+      if(a.ratio < b.ratio) { return 1; }
+      if(a.ratio > b.ratio) { return -1; }
+      return 0;
+    })
+  }
 
     return (
         <div>
