@@ -35,7 +35,7 @@ const checkInput=(e)=>{
 
 useEffect(() => {
     getCurrentWeek();
-}, []);
+});
  console.log(FormData);
   return (
     <>

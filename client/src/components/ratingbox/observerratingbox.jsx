@@ -8,7 +8,7 @@ import findLogo from "../clubLogos/clubLogos";
 
   function ObserverRatingBox({matchData}){
 
-    const [state, dispatch] = useStore();
+    const [state] = useStore();
     const {observer:CurrentObserver} = state;
 
     const [rating, setRating] = useState(0);
@@ -80,12 +80,12 @@ import findLogo from "../clubLogos/clubLogos";
             <div className="rating-left">
                 <div className="rating-left-match">
                     <div className="rating-team">
-                        <img src={findLogo(matchData.club1_info[0].name)}/>
+                        <img alt="Homeclub" src={findLogo(matchData.club1_info[0].name)}/>
                         <a>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></a>
                     </div>
                     <a> vs. </a>
                     <div className="rating-team">
-                        <img src={findLogo(matchData.club2_info[0].name)}/>
+                        <img alt="Awayclub" src={findLogo(matchData.club2_info[0].name)}/>
                         <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
                     </div>
                 </div>

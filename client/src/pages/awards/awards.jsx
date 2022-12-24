@@ -1,8 +1,5 @@
-import { useStore } from "../../store/store";
 import AppNavBar from "../../components/appnavbar.jsx";
-import { useNavigate } from "react-router";
-import React, { useCallback, useState } from "react";
-import axios from "axios";
+import React from "react";
 
 function AwardsPage() {
     return(

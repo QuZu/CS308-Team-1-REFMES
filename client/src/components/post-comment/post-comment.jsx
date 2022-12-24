@@ -1,12 +1,9 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Rater from 'react-rater';
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useStore } from "../../store/store";
 import "../post-comment/post-comment.css";
-import * as ReactBootstrap from "react-bootstrap";
 import logoFenerbahce from '../../logos/fenerbahce.png';
 import logoGalatasaray from '../../logos/galatasaray.png';
 import logoBesiktas from '../../logos/besiktas.png';
@@ -62,7 +59,7 @@ function PostCommentBox({ matchData }) {
     const onSubmit = (data, e) => {
         e.preventDefault();
         setComment(data.comment);
-        if (comment == 0) {
+        if (comment === 0) {
             setIsEmptyComment(true);
         } else {
             setIsEmptyComment(false);
@@ -90,13 +87,13 @@ function PostCommentBox({ matchData }) {
             <div className="post-comment-inner-container">
                 <div className="post-comment-match">
                     <div className="post-comment-team">
-                        <img src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
-                        <a>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></a>
+                        <img alt="Homeclub" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
+                        <p>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></p>
                         </div>
                     <a> vs. </a>
                     <div className="post-comment-team">
-                        <img src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
-                        <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
+                        <img alt="Awayclub" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
+                        <p>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></p>
                     </div>
                 </div>
 
@@ -106,7 +103,7 @@ function PostCommentBox({ matchData }) {
                 <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <br/><textarea {...register("comment")} className="form-control" onChange={(e)=>setComment(e.target.value)} name="comment" cols="75" rows="5" placeholder="Type your comment here.."></textarea>
-                    {isEmptyComment ? <div className="post-comment-comment-error"><a>Please enter a comment to send.</a></div> : <></>}
+                    {isEmptyComment ? <div className="post-comment-comment-error"><p>Please enter a comment to send.</p></div> : <></>}
                     <br/><input type="submit" name="submitButton" className="btn btn-success" value={`Send`}/>
                 </form>
                 </div>

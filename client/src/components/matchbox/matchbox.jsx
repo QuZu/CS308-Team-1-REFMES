@@ -1,8 +1,5 @@
-import React, { useCallback, useState, useEffect } from "react";
-import Rater from 'react-rater';
+import React, { useState, } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { useStore } from "../../store/store";
 import "../matchbox/matchbox.css";
 import 'react-rater/lib/react-rater.css';
 import logoFenerbahce from '../../logos/fenerbahce.png';
@@ -49,8 +46,6 @@ const clubs = [
 
 function MatchBox({ matchData, playedWeek }) {
 
-    const [state, dispatch] = useStore();
-    const {user:currentUser} = state;
     const [hasRefInfo, setHasRefInfo] = useState(matchData.referee_id ? true : false);
 
     return (
@@ -60,15 +55,15 @@ function MatchBox({ matchData, playedWeek }) {
                 <div className="matchbox-inner-left">
 
                     <div className="matchbox-inner-left-name">
-                        <a>{matchData.club1_info[0].name}</a>
+                        <p>{matchData.club1_info[0].name}</p>
                     </div>
 
                     <div className="matchbox-inner-left-image">
-                        <img className="matchbox-inner-left-club-img" src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
+                        <img alt="Homeclub" className="matchbox-inner-left-club-img" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
                     </div>
 
                     <div className="matchbox-inner-left-score">
-                        {playedWeek ? <a>{matchData.club1_goals}</a> : <a>-</a>}
+                        {playedWeek ? <p>{matchData.club1_goals}</p> : <p>-</p>}
                         
                     </div>
 
@@ -76,15 +71,15 @@ function MatchBox({ matchData, playedWeek }) {
                 <div className="matchbox-inner-right">
 
                     <div className="matchbox-inner-right-score">
-                        {playedWeek ? <a>{matchData.club2_goals}</a> : <a>-</a>}
+                        {playedWeek ? <p>{matchData.club2_goals}</p> : <p>-</p>}
                     </div>
 
                     <div className="matchbox-inner-right-image">
-                        <img className="matchbox-inner-right-club-img" src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
+                        <img alt="Awayclub" className="matchbox-inner-right-club-img" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
                     </div>
 
                     <div className="matchbox-inner-right-name">
-                        <a>{matchData.club2_info[0].name}</a>
+                        <p>{matchData.club2_info[0].name}</p>
                     </div>
 
                 </div>
@@ -93,8 +88,8 @@ function MatchBox({ matchData, playedWeek }) {
                 <div className="matchbox-middle-referee">
                     {playedWeek && hasRefInfo ?
                         <div><b>Referee:</b> <Link to={`../referee/${matchData.ref_info[0].r_username}`}>{matchData.ref_info[0].name}</Link></div>
-                        :
-                        <a>Referee is not assigned yet.</a>
+                        :   
+                        <p>Referee is not assigned yet.</p>
                     }
                 </div>
             </div>

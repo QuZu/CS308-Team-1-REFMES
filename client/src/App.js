@@ -10,8 +10,6 @@ import Home from "./pages/home/home";
 import ErrorPage from "./pages/error/error";
 import ProfilePage from "./pages/profile/profile";
 import EditPage from "./pages/edit/editpage";
-import UserEditPage from "./pages/edit/usernameedit";
-import PassEditPage from "./pages/edit/passedit";
 import RefPage from "./pages/single-referee/singleRefPage";
 import PostMatchPage from "./pages/post-match/post-match";
 import PreMatchPage from "./pages/pre-match/pre-match";
@@ -76,8 +74,6 @@ function App() {
         <Route path="/edit" element={< EditPage/>} />
         <Route path="/home" element={<Home/>} />
         <Route path="/user/:username" element={<ProfilePage />} />
-        <Route path="/edit/password" element={<PassEditPage/>} />
-        <Route path="/edit/username" element={<UserEditPage/>} />
         <Route path="/referee/:rUsername" element={<RefPage/>} />
         <Route path="/pre-match" element={<PreMatchPage />} />
         <Route path="/post-match" element={<PostMatchPage />} />

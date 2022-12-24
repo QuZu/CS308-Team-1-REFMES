@@ -23,7 +23,16 @@
     font-weight: 600;
     font-size: large;
 }
-
+.referee-display-rank {
+   color: red;
+   font-size: x-large;
+   margin: 0em !important;
+}
+.referee-display-link {
+    text-decoration: none;
+    color: black;
+    margin: 0em !important;
+ }
 .referee-display-left-container {
     display: flex;
     flex: 2;

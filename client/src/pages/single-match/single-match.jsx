@@ -1,7 +1,6 @@
-import { useStore } from "../../store/store";
+
 import AppNavBar from "../../components/appnavbar.jsx";
 import SingleMatchInnerPage from "./single-match-inner.jsx";
-import { useNavigate } from "react-router";
 import React, { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";

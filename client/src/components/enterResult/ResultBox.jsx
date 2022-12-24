@@ -1,6 +1,5 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import axios from "axios";
-import { useStore } from "../../store/store";
 import "../ratingbox/ratingbox.css";
 import 'react-rater/lib/react-rater.css';
 import logoFenerbahce from '../../logos/fenerbahce.png';
@@ -47,7 +46,6 @@ const clubs = [
 
 function ResultBox({ matchData }) {
 
-    const [state, dispatch] = useStore();
     const [errorMessage, setErrorMessage] = useState("");
     const [btnValue, setBtnValue] = useState("Enter Result");
     const [btnDisabled, setBtnDisabled] = useState(false);
@@ -86,12 +84,12 @@ function ResultBox({ matchData }) {
                 <div className="rating-left">
                     <div className="rating-left-match">
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
+                            <img alt="Homeclub" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
                             <a>{matchData.club1_info[0].name} <input style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Sethomegoal(e.target.value)}/>  </a>
                         </div>
                         <a> vs. </a>
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
+                            <img alt="Awayclub" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
                             <a>{matchData.club2_info[0].name} <input style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Setawaygoal(e.target.value)}/></a>
                         </div>
                     </div>

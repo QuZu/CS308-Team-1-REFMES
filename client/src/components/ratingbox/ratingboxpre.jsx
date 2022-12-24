@@ -50,7 +50,7 @@ const clubs = [
 
 function RatingBoxPre({ refereeData }) {
 
-    const [state, dispatch] = useStore();
+    const [state] = useStore();
     const {user:currentUser} = state;
     const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
@@ -66,7 +66,7 @@ function RatingBoxPre({ refereeData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (rating == 0) {
+        if (rating === 0) {
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
@@ -97,7 +97,7 @@ function RatingBoxPre({ refereeData }) {
 
     const getCurrentPostRating = async()=>{
         await axios.get(`${process.env.REACT_APP_URL}/api/preRatings/getPreRating/${currentUser.user.id}/${refereeData.referee_id}/${refereeData.week_no}`).then(res => {
-            if (res.data == []) {
+            if (res.data === []) {
                 console.log("Empty");
             } else {
                 setRating(res.data[0].rating);

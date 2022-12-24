@@ -2,7 +2,6 @@ import React from "react";
 import "../admin-auth/addReferee.css";
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router";
 
 function AdminAddReferee(){
   const [rname,Setname] = useState("");
@@ -15,7 +14,6 @@ function AdminAddReferee(){
   const [tname,Settname] = useState("");
   const [btnDisabled,Setbtndisabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit= async (e)=>{
     Setbtndisabled(false);

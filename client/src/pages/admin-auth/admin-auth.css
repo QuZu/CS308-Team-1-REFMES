@@ -8,7 +8,12 @@
     max-width: 840px;
     margin-bottom: 3rem;
 }
-
+.admin-auth-btn-container p{
+    margin-right: 10px;
+    margin-left: 5px;
+    font-weight: 600;
+    display: contents;
+}
 .admin-auth-btn-container {
     padding: 1rem;
 }
