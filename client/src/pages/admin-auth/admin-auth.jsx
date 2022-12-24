@@ -1,6 +1,7 @@
 import React from "react";
 import "../admin-auth/admin-auth.css";
 import { useNavigate } from "react-router";
+import AppNavBarSingle from "../../components/appnavbarsingle.jsx";
 
 function AdminAuthPage(){
     const navigate = useNavigate();
@@ -31,29 +32,29 @@ function AdminAuthPage(){
 
     return(
         <div>
-            <pppNavBarSingle/>
+            <AppNavBarSingle/>
             <div>
               <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Admin Control Panel</h1>
             </div>
             <div className="admin-auth-container container">
               <div className="row">
                 <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
-                  <p onClick={goToRefmesRating} className="admin-auth-btn btn btn-warning">REFMES Referee Rating Algorithm</p>
+                  <a onClick={goToRefmesRating} className="admin-auth-btn btn btn-warning">REFMES Referee Rating Algorithm</a>
                 </div>
                 <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
-                  <p onClick={goToUpdatePreWeek} className="admin-auth-btn btn btn-success">Update Pre-Week</p>
+                  <a onClick={goToUpdatePreWeek} className="admin-auth-btn btn btn-success">Update Pre-Week</a>
                 </div>
                 <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
-                  <p onClick={goToUpdatePostWeek} className="admin-auth-btn btn btn-success">Update Post-Week</p>
+                  <a onClick={goToUpdatePostWeek} className="admin-auth-btn btn btn-success">Update Post-Week</a>
                 </div>
                 <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
-                  <p onClick={goToRetrieveReferee} className="admin-auth-btn btn btn-primary">Retrieve Referee Information</p>
+                  <a onClick={goToRetrieveReferee} className="admin-auth-btn btn btn-primary">Retrieve Referee Information</a>
                 </div>
                 <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
-                  <p onClick={goToAddReferee} className="admin-auth-btn btn btn-secondary">Add a New Referee</p>
+                  <a onClick={goToAddReferee} className="admin-auth-btn btn btn-secondary">Add a New Referee</a>
                 </div>
                 <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
-                  <p onClick={goToAddObserver} className="admin-auth-btn btn btn-secondary">Add a New Observer</p>
+                  <a onClick={goToAddObserver} className="admin-auth-btn btn btn-secondary">Add a New Observer</a>
                 </div>
               </div>
             </div>

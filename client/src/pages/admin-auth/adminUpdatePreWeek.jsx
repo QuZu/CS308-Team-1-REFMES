@@ -45,18 +45,18 @@ function AdminUpdatePreWeekPage(){
 
     const PageDisplay=()=>{
         if(page === 0) {
-            return <pdminRefAssign currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
+            return <AdminRefAssign currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         } else if (page === 1) {
-            return <pdminRefSelect currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
+            return <AdminRefSelect currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         } else {
-            return <pdminPreFinalSummary currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
+            return <AdminPreFinalSummary currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         }
     }
    
     return(
 
         <div>
-            <pppNavBarSingle/>
+            <AppNavBarSingle/>
             <div>
                 <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Admin Update Pre Week</h1>
             </div>
