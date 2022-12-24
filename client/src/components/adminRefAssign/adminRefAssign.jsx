@@ -148,11 +148,13 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
         resultList.push(innerList);
     }
     
-    setFormData({...FormData, assignmentList: resultList});
-
     useEffect(() => {
         getAssignmentDetails();
     }, []);
+
+    useEffect(() => {
+        setFormData({...FormData, assignmentList: resultList});
+    }, [resultList]);
 
     return(
         <div className="container">

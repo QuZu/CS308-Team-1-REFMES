@@ -43,8 +43,11 @@ function AdminUpdatePreWeekPage(){
 
     useEffect(() => {
         getCurrentWeek();
-        console.log(formData);
     }, []);
+
+    useEffect(() => {
+        console.log("Form Data: ", formData);
+    }, [formData]);
 
     const PageDisplay=()=>{
         if(page === 0) {
