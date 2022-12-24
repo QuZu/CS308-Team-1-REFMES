@@ -188,5 +188,15 @@ router.get("/getuserInfo/:userID", async(req, res) => {
     });
   }
 );
-
+router.get("/getuserbyUsername/:userName", async(req, res) => {
+  const user_name = req.params.userName
+  console.log(user_name);
+    await User.findOne({username:user_name}).then((result)=>{
+      console.log(result)
+      res.status(200).json(result);
+    }).catch(err=>{
+      console.log(err);
+    });
+  }
+);
 module.exports = router;
