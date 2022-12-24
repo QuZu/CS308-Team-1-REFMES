@@ -78,10 +78,6 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
         })).catch(err => console.log(err));
     };
 
-    useEffect(() => {
-        getAssignmentDetails();
-    }, []);
-
     var standingList = [];
     if (standingsData.length !== 0) {
         standingsData.forEach((item) => {
@@ -144,6 +140,19 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
         });
         // console.log("Sorted Matches: ", rankingList);
     }
+
+    var resultList = [];
+    var innerList = {refereeDetails: {}, matchDetails: {}};
+    for (let i = 0; i < rankingList.length; i++) {
+        innerList = {refereeDetails: refArray[i], matchDetails: rankingList[i]};
+        resultList.push(innerList);
+    }
+    
+    setFormData({...FormData, assignmentList: resultList});
+
+    useEffect(() => {
+        getAssignmentDetails();
+    }, []);
 
     return(
         <div className="container">

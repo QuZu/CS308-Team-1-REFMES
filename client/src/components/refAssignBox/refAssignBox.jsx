@@ -3,8 +3,6 @@ import "../refAssignBox/refAssignBox.css";
 
 function RefAssignBox({ refereeData, matchData, idx }) {
 
-    console.log(refereeData);
-
     return (
         <>
         <div className="ref-assign-box-container col-sm-12 col-md-6 col-lg-4">

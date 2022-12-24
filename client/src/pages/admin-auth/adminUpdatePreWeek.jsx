@@ -18,8 +18,9 @@ function AdminUpdatePreWeekPage(){
     const [pageTitle, setPageTitle] = useState("Referee Assignment for Week 5");
     const [formData,setFormData]=useState({
         weekReferee: [],
-        decidedReferee:[],
-        checkedCheckboxes:[],
+        decidedReferee: [],
+        checkedCheckboxes: [],
+        assignmentList: [],
         nextButton:true,
         prevButton:false
     });
@@ -42,6 +43,7 @@ function AdminUpdatePreWeekPage(){
 
     useEffect(() => {
         getCurrentWeek();
+        console.log(formData);
     }, []);
 
     const PageDisplay=()=>{
