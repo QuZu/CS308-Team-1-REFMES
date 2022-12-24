@@ -20,9 +20,7 @@ router.get("/getRefereesOfWeek/:weekNo", async(req, res) => {
        }
         res.json(mydata);
             } catch (err) {
-        console.log(err);
         res.status(500).json(err);
-        console.log("Could not get referees of the week");
     }
 });
 router.get("/getpointsRefereesOfWeek/:referee_id/:currentweek", async(req, res) => {
@@ -38,7 +36,6 @@ router.get("/getpointsRefereesOfWeek/:referee_id/:currentweek", async(req, res) 
             })
             } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get referees of the week");
     }
 });
 

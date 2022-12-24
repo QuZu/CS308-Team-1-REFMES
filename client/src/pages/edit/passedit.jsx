@@ -44,17 +44,14 @@ function EditPass(){
       const [errorMessage, setErrorMessage] = useState("");
       const onSubmit = useCallback((data) => {
         const { currentPassword, password } = data;
-        console.log(password);
         axios
           .post(`${process.env.REACT_APP_URL}/api/users/change-password`, { user, currentPassword, password })
           .then((res) => {
-            console.log(res);
             if (res.status === 200 && res.data.message) {
               setErrorMessage(res.data.message);
             } else if (res.status === 200) {
               setErrorMessage("Changed password succesfully");
               const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-              console.log(storedUser);
               reset();
              
             } else {

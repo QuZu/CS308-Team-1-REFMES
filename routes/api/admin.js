@@ -10,7 +10,6 @@ const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 const RefmesRating = require('../../models/refmesRatingModel');
 
 router.post('/addReferee', async(req, res) => {
-    console.log("Gelen datam:", req.body); 
   const {r_username, name, biography, birth_date, birth_place, fifa_date, first_super_date, total_rating, rating_count, totalMatch, yellowCard, avgYellowCard, yellowToRed, redCard, avgRedCard, penalty, avgPenalty,t_name,preRating,postRating,observerRating} = req.body;
     if(!r_username || !name || !biography || !birth_date || !birth_place || !fifa_date || !first_super_date || !t_name){
       return res.status(400).json({msg: "Please enter all fields"});
@@ -56,18 +55,14 @@ router.post('/addReferee', async(req, res) => {
     }
   );
   router.post('/addObserver', async(req, res) => {
-    console.log("Gelen datam:", req.body); 
   const {observer_id,password} = req.body;
     if(!observer_id || !password) {
       return res.status(400).json({msg: "Please enter all fields"});
     }
-
     
       const newObserver = new Observer({observer_id,password});
-      const newSavedObserver = await newObserver.save().then(business => {console.log(business)}).catch(err => {console.log(err)});
-    
+      const newSavedObserver = await newObserver.save().then(business => {}).catch(err => {});
       
-      console.log("savedObserver:", newSavedObserver);
       if(newSavedObserver !== undefined){
         res.status(200).json({
           observer: {
@@ -79,8 +74,6 @@ router.post('/addReferee', async(req, res) => {
   );
   router.post('/updateMatchScore', async(req, res) => {
     const {match_id,team1goal,team2goal}= req.body;
-    console.log(match_id);
-    console.log("Gelen datam:", req.body); 
     if(team1goal < 0 || team2goal < 0) {
       return res.status(400).json({msg: "Please enter valid score!"});
     }
@@ -92,7 +85,7 @@ router.post('/addReferee', async(req, res) => {
   }
   );
   router.post('/selectReferee', async(req, res) => {
-    console.log("Gelen datam:", req.body); 
+
   const {week_no,referee_ids} = req.body;
    
       try {
@@ -126,7 +119,6 @@ router.get("/getRefmesRatingWeights", async(req, res) => {
 );
 router.post("/postRefmesRatingWeights", async(req, res) => {
   const{fan,observer,experience,constant}=req.body
-  console.log(fan,observer,experience,constant);
   try {
     await RefmesRating.findByIdAndUpdate("639a1da0ed4b14a87afe9ed5",
     {

@@ -24,14 +24,13 @@ function ProfilePage() {
     const getUserComments = async () => {
       await axios.get(`${process.env.REACT_APP_URL}/api/comments/getUserComments/${currentUser.user.id}`).then(res => {
           if (res.data == []) {
-              console.log("Empty");
+            
           } else {
               setUserComments(res.data);
               setLoading(true);
           }
       }).catch(err => console.log(err))
   };
-console.log(UserComments);
 useEffect(() => {
   getUserComments();
 }, [])
