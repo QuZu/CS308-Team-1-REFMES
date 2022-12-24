@@ -123,11 +123,12 @@ function Edit(){
         }
         var newuseInfos={
         full_name:newfullname,
-        username:newusername,
+        username:newusername.replaceAll(/ /g,"").toLowerCase(),
         insta:newInstaname,
         twitter:newTwittername,
         email:oldInfos.email,
-        id:oldInfos._id
+        id:oldInfos._id,
+        fan_of:oldInfos.fan_of
         }
         await axios.post(`${process.env.REACT_APP_URL}/api/users/updatesetting`,newuseInfos)
           .then((res) =>{
