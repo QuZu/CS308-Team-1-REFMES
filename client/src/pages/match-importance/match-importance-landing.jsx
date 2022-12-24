@@ -3,12 +3,9 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import {useState,useEffect} from "react"
 import axios from "axios";
 import MatchDataPage from "./match-data.jsx";
-<<<<<<< Updated upstream
 import * as ReactBootstrap from "react-bootstrap";
-
-=======
 import CurrentWeek from "../../components/adminForm/currentWeek.jsx";
->>>>>>> Stashed changes
+
 function MatchImportancePage() {
     const [currentweek, setcurrentweek] = useState();
     const[loading,setLoading] = useState(false);
