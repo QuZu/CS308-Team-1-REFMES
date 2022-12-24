@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../adminRefAssign/adminRefAssign.css";
 import * as ReactBootstrap from "react-bootstrap";
+import RefAssignBox from "../refAssignBox/refAssignBox.jsx"; 
 
 function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
     const [loading,setLoading] = useState(false);
@@ -145,17 +146,13 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
     }
 
     return(
-        <div>
+        <div className="container">
             { loading ?
             <>
-            <div>
+            <div className="row">
                 { refArray && rankingList ?
                 (rankingList.map((item, index) => {
-                    return(
-                        <div key={index}>
-                            <p>{refArray[index].name} and {rankingList[index].club1}</p>
-                        </div>
-                    )
+                    return(<RefAssignBox key={index} refereeData={refArray[index]} matchData={rankingList[index]} idx={index}/>);
                 }))
                 :
                 <></>
@@ -167,7 +164,6 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
                 <ReactBootstrap.Spinner animation="border"/>
             </div>
             }
-            <a>Referee Assignment Page</a>
         </div>
     )
 };
