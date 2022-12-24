@@ -45,8 +45,8 @@ function RefereeDisplay({RefData,CurrentWeek}) {
             // var total=(wConstant) +(arrayelement.observerPoint)* wObserver + (arrayelement.fanPoint)* wFan + (arrayelement.experience)* wExperience;
             // arrayelement.ratio=(total/20).toFixed(2)
           }
-          setRefarray(mydata)
-          setLoading(true)
+          setRefarray(mydata);
+          setLoading(true);
 
          }).catch(err=>console.log(err));
     };
@@ -54,6 +54,7 @@ function RefereeDisplay({RefData,CurrentWeek}) {
       getallrefpoints();
     }, [])
 
+<<<<<<< Updated upstream
 if(Refarray)
 {
   Refarray.sort(function(a, b){
@@ -62,6 +63,16 @@ if(Refarray)
     return 0;
   })
 }
+=======
+    if(Refarray)
+    {
+      Refarray.sort(function(a, b){
+        if(a.ratio < b.ratio) { return 1; }
+        if(a.ratio > b.ratio) { return -1; }
+        return 0;
+      });
+    }
+>>>>>>> Stashed changes
 
     return (
         <div>

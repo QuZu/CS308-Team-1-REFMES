@@ -28,14 +28,18 @@ function MatchDataPage({Week}) {
     return (
       <>
         {loading ?
-        <div className="row">
-          <div className="col-6">
+        <div style={{width: "100%", maxWidth: "1080px"}}>
+          <div className="row justify-content-center">
+            <div className="col-6">
+              <div className="d-flex justify-content-center mb-4 mt-4"><a style={{fontWeight: "bold", fontSize: "1.2rem"}}>Top Matches by Importance</a></div>
               <SortedMatches allmatches={allmatchDetails} />
-          </div>
-          <div className="col-5">
-            {WeekReferee.myarray.length >0 ? 
-            <RefereeDisplay RefData={WeekReferee.myarray} CurrentWeek={Week} />
-            :<h3 style={{textAlign: "center"}}>Something went wrong when getting referee..</h3> }
+            </div>
+            <div className="col-5">
+              <div className="d-flex justify-content-center mb-4 mt-4"><a style={{fontWeight: "bold", fontSize: "1.2rem"}}>Top Referees by Rating</a></div>
+              {WeekReferee.myarray.length >0 ? 
+              <RefereeDisplay RefData={WeekReferee.myarray} CurrentWeek={Week} />
+              :<h3 style={{textAlign: "center"}}>Something went wrong when getting referee..</h3> }
+            </div>
           </div>
         </div>
         :

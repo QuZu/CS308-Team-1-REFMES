@@ -1,9 +1,12 @@
 import React from "react";
-import {useState,useEffect} from "react"
+import {useState,useEffect} from "react";
 import axios from "axios";
 import ImportanceBox from "../../components/match-importance-box/importance-box.jsx";
 import "../match-importance/match-importance.css";
+<<<<<<< Updated upstream
 import * as ReactBootstrap from "react-bootstrap";
+=======
+>>>>>>> Stashed changes
 
 function SortedMatches({allmatches}) {
     const c_images = [
