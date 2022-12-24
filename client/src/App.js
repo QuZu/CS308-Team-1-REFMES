@@ -75,7 +75,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/edit" element={< EditPage/>} />
         <Route path="/home" element={<Home/>} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/user/:username" element={<ProfilePage />} />
         <Route path="/edit/password" element={<PassEditPage/>} />
         <Route path="/edit/username" element={<UserEditPage/>} />
         <Route path="/referee/:rUsername" element={<RefPage/>} />

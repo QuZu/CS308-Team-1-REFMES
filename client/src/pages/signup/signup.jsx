@@ -32,7 +32,7 @@ function Signup() {
 
   const onSubmit = useCallback((data) => {
     const newUser = {
-      username: data.username,
+      username: data.username.replaceAll(/ /g,"").toLowerCase(),
       full_name: data.fullName,
       email: data.email,
       password: data.password,
