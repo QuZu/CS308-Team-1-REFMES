@@ -5,7 +5,7 @@ require("dotenv").config();
 const PostRating = require('../../models/postRatingModel');
 const ObserverRating = require('../../models/observerRatingModel');
 const Referee = require('../../models/refereeModel');
-const mongoose=require("mongoose");
+
 router.post("/addPostRating", async(req, res) => {
     const {rating, user_id, match_id} = req.body;
     

@@ -68,7 +68,7 @@ function Comment({ commentPerson, pComment, myDate,MatchData, }) {
     };
   useEffect(() => {
     getMatchDetails();
-  });
+  },[]);
     return(
       (loading ?
       <div className="refs-page-container">

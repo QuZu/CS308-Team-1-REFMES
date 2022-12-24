@@ -66,7 +66,7 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
 
     useEffect(() => {
         getCurrentComments();
-    });
+    },[]);
 
     list.sort(function(a, b){
         if(a.date < b.date) { return 1; }

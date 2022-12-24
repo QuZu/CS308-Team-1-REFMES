@@ -21,7 +21,7 @@ function RefereeOfWeek({FormData,setFormData}) {
   };
   useEffect(() => {
     getDetails();
-})
+},[])
  
   return (
     <>
