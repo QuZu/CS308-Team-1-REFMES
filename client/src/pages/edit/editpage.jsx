@@ -56,9 +56,6 @@ function Edit(){
     var [newfullname,setfullname]=useState("");
     var [newTwittername,setTwitterusername]=useState("");
     var [newInstaname,setInstausername]=useState("");
-    const [newPass,setnewPass]=useState("");
-    const [confirmPass,setconfirmPass]=useState("");
-    const [oldPass,setoldPass]=useState("");
     const [oldInfos,setoldInfos]=useState("");
     const [loading,setLoading]=useState(false);
 
@@ -184,7 +181,7 @@ function Edit(){
 
     useEffect(() => {
       getUserInfo();
-    }, [])
+    })
     
 
     console.log(oldInfos);
@@ -215,7 +212,7 @@ function Edit(){
                   <p className="user-edit-headline"> New Twitter username</p>
                   </div>
                   <div className="col-5">
-                  <input placeholder={oldInfos.social_media.length > 0 && oldInfos.social_media[0] !="" ? oldInfos.social_media[0] : "not entered yet!"} onChange={(e)=>setTwitterusername(e.target.value)} className="user-edit-inputs"></input>
+                  <input placeholder={oldInfos.social_media.length > 0 && oldInfos.social_media[0] !=="" ? oldInfos.social_media[0] : "not entered yet!"} onChange={(e)=>setTwitterusername(e.target.value)} className="user-edit-inputs"></input>
                   </div>
                 </div>
                 <div className="justify-content-center row">
@@ -223,7 +220,7 @@ function Edit(){
                   <p className="user-edit-headline">New Instagram username</p>
                   </div>
                   <div className="col-5">
-                  <input  placeholder={oldInfos.social_media.length > 1 && oldInfos.social_media[1] !="" ? oldInfos.social_media[1] : "not entered yet!"}  onChange={(e)=>setInstausername(e.target.value)} className="user-edit-inputs"></input>
+                  <input  placeholder={oldInfos.social_media.length > 1 && oldInfos.social_media[1] !=="" ? oldInfos.social_media[1] : "not entered yet!"}  onChange={(e)=>setInstausername(e.target.value)} className="user-edit-inputs"></input>
                   </div>
                 </div>
                 <div className="justify-content-center row">

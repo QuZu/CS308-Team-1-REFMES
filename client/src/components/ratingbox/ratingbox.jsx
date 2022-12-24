@@ -65,7 +65,7 @@ function RatingBox({ matchData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (rating == 0) {
+        if (rating === 0) {
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
@@ -96,7 +96,7 @@ function RatingBox({ matchData }) {
     const getCurrentPostRating = async()=>{
         await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getPostRating/${matchData._id}/${currentUser.user.id}`).then(res => {
             setRating(res.data);
-            if (res.data == []) {
+            if (res.data === []) {
 
             } else {
                 setRating(res.data[0].rating);
@@ -122,12 +122,12 @@ function RatingBox({ matchData }) {
                 <div className="rating-left">
                     <div className="rating-left-match">
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
+                            <img alt="Homeclub" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
                             <a>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></a>
                         </div>
                         <a> vs. </a>
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
+                            <img alt="Awayclub" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
                             <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
                         </div>
                     </div>

@@ -34,10 +34,11 @@
     margin-left: 10px;
 }
 
-.importance-match-team a {
+.importance-match-team p {
     margin-right: 10px;
     margin-left: 5px;
     font-weight: 600;
+    display: contents;
 }
 
 .importance-match-left-team {

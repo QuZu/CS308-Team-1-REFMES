@@ -28,8 +28,6 @@ function RefmesRatingPage(){
     const [wExperience, setWExperience] = useState();
     const [wConstant, setWConstant] = useState();
     const [loading,setLoading] = useState(false);
-    const [randomFan,setRandomfan]=useState(0)
-    const [randomObser,setRandomobserver]=useState(0)
     const [randomEx,setRandomexperience]=useState(0)
     const [btnDisabled, setBtnDisabled] = useState(false);
     const [btnValue, setBtnValue] = useState("Calculate the Weights");
@@ -173,7 +171,7 @@ function RefmesRatingPage(){
                         <div className="refmes-rating-weight-container">
                             <div className="refmes-rating-weight-inner">
                             { loading ?
-                                <a>Weight of Fan Rating: <b>{wFan}</b></a>
+                                <p>Weight of Fan Rating: <b>{wFan}</b></p>
                                 :
                                 <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
                             }
@@ -182,7 +180,7 @@ function RefmesRatingPage(){
                         <div className="refmes-rating-weight-container">
                             <div className="refmes-rating-weight-inner">
                             { loading ?
-                                <a>Weight of Observer Rating: <b>{wObserver}</b></a>
+                                <p>Weight of Observer Rating: <b>{wObserver}</b></p>
                                 :
                                 <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
                             }
@@ -191,7 +189,7 @@ function RefmesRatingPage(){
                         <div className="refmes-rating-weight-container">
                             <div className="refmes-rating-weight-inner">
                             { loading ?
-                                <a>Weight of Referee Experience: <b>{wExperience}</b></a>
+                                <p>Weight of Referee Experience: <b>{wExperience}</b></p>
                                 :
                                 <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
                             }
@@ -200,7 +198,7 @@ function RefmesRatingPage(){
                         <div className="refmes-rating-weight-container">
                             <div className="refmes-rating-weight-inner">
                             { loading ?
-                                <a>Constant: <b>{wConstant}</b></a>
+                                <p>Constant: <b>{wConstant}</b></p>
                                 :
                                 <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
                             }
@@ -216,7 +214,7 @@ function RefmesRatingPage(){
                         </div>
                         <div className="refmes-rating-outer-container mt-4">
                             <div className="refmes-rating-inner-container-error">
-                                <a>{errorMessage}</a>
+                                <p>{errorMessage}</p>
                             </div>
                         </div>
                 </div>

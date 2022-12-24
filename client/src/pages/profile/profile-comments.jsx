@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import findLogo from "../../components/clubLogos/clubLogos";
 import findSocialMedia from "../../components/clubLogos/clubsocials";
-import {BsTwitter, BsInstagram, BsLinkedin, BsPencilFill, BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs';
+import {BsTwitter, BsInstagram} from 'react-icons/bs';
 import axios from "axios";
 import CommentBox from "../../components/comment/commentbox";
 import "../profile/profile.css";

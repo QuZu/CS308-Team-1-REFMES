@@ -1,11 +1,11 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../logo.png';
-import {Nav,NavDropdown} from 'react-bootstrap';
+import {Nav} from 'react-bootstrap';
 import "../components/navbar.css";
 import { useStore } from "../store/store";
 import { useNavigate } from "react-router";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { userLogout } from "../store/userreducer";
 
 function Brand() {
@@ -31,7 +31,7 @@ function Brand() {
             <Nav.Link href="/pre-match" className="navText">Pre-Match</Nav.Link>
             <Nav.Link href="/post-match" className="navText">Post-Match</Nav.Link>
             { !currentUser ?
-              <a></a>:
+              <></>:
               <Nav.Link href={`/user/${currentUser.user.username}`} className="navText">My Profile</Nav.Link>} 
           </Nav>
 

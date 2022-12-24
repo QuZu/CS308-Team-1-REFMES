@@ -45,18 +45,18 @@ function AdminUpdatePreWeekPage(){
 
     const PageDisplay=()=>{
         if(page === 0) {
-            return <AdminRefAssign currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
+            return <pdminRefAssign currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         } else if (page === 1) {
-            return <AdminRefSelect currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
+            return <pdminRefSelect currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         } else {
-            return <AdminPreFinalSummary currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
+            return <pdminPreFinalSummary currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         }
     }
    
     return(
 
         <div>
-            <AppNavBarSingle/>
+            <pppNavBarSingle/>
             <div>
                 <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Admin Update Pre Week</h1>
             </div>
@@ -64,26 +64,26 @@ function AdminUpdatePreWeekPage(){
             <>
                 { isValid ?
                 <div style={{textAlign: "center"}}>
-                    {/* <a>Pre-Week: {preWeekNo} Post-Week: {postWeekNo}</a> */}
+                    {/* <p>Pre-Week: {preWeekNo} Post-Week: {postWeekNo}</p> */}
                     {PageDisplay()}
 
                     <div className="footer" style={{marginBottom: "2rem"}}>
                         { prevActive ?
-                            <a className="btn btn-primary" onClick={()=>{setPage((currPage)=>currPage-1)}}>Prev</a>
+                            <p className="btn btn-primary" onClick={()=>{setPage((currPage)=>currPage-1)}}>Prev</p>
                         :
-                            <a className="btn btn-secondary disabled" onClick={()=>{setPage((currPage)=>currPage-1)}}>Prev</a>
+                            <p className="btn btn-secondary disabled" onClick={()=>{setPage((currPage)=>currPage-1)}}>Prev</p>
                         }
                         { nextActive ?
-                            <a className="btn btn-primary" onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</a>
+                            <p className="btn btn-primary" onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</p>
                         :
-                            <a className="btn btn-secondary disabled" onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</a>
+                            <p className="btn btn-secondary disabled" onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</p>
                         }
                         
                     </div>
                 </div>
                 :
                 <div style={{textAlign: "center"}}>
-                    <a>Week values creates an inconsistency when performs this update, first update post-week, please!</a>
+                    <p>Week values creates an inconsistency when performs this update, first update post-week, please!</p>
                 </div>
                 }
             </>

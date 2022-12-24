@@ -38,3 +38,7 @@
     background-color: #e51936;
     color: #fff;
 }
+.admin-href{
+    text-decoration: none;
+    pointer-events: none;
+}

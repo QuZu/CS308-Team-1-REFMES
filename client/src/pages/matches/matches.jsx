@@ -1,12 +1,10 @@
-import { useStore } from "../../store/store";
+
 import AppNavBar from "../../components/appnavbar.jsx";
-import MatchBox from "../../components/matchbox/matchbox.jsx";
 import MatchesInnerPage from "./matches-inner.jsx";
-import { useNavigate } from "react-router";
-import React, { useCallback, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import axios from "axios";
 import "../matches/matches.css";
-import * as ReactBootstrap from "react-bootstrap";
+
 
 function MatchesPage() {
 

@@ -65,7 +65,7 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
             <form onSubmit={handleSubmit}  className="selectRefform">
                 <div className="container mt-5" style={{width: "1080px"}}>
                     <div style={{marginBottom: "2rem"}}>
-                        <a>Select exactly 9 referees for the pre-match rating section of Week {currentWeek+1}:</a>
+                        <p>Select exactly 9 referees for the pre-match rating section of Week {currentWeek+1}:</p>
                     </div>
                     <div className="row">
                     { allData ?
