@@ -14,7 +14,7 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
         if (isChecked) {
             setCheckedCheckboxes(
             checkedCheckboxes.filter(
-                (checkedCheckbox) => checkedCheckbox.name !== data.name
+                (checkedCheckbox) => (checkedCheckbox.name !== data.name)
             ));
         } else {
             setCheckedCheckboxes(checkedCheckboxes.concat(data));
@@ -25,23 +25,20 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
         setFormData({...formData, checkedCheckboxes:checkedCheckboxes});
     }, [checkedCheckboxes]);
 
-    function compare( a, b ) {
-      if ( a.name < b.name ){
-        return -1;
-      }
-      if ( a.name > b.name){
-        return 1;
-      }
+    function compare(a, b) {
+      if (a.name < b.name){return -1;}
+      if (a.name > b.name){return 1;}
       return 0;
     }
+
     allData.sort(compare);
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        console.log(checkedCheckboxes);
-        if(checkedCheckboxes.length === 9){
+
+        if (checkedCheckboxes.length === 9) {
             var allarray=[];
-            for(let i=0; i<checkedCheckboxes.length;i++){
+            for (let i=0; i<checkedCheckboxes.length;i++) {
                 allarray.push(checkedCheckboxes[i]._id); 
             }
 
@@ -50,8 +47,8 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
                 referee_ids: allarray
             };
 
-            await axios.post(`${process.env.REACT_APP_URL}/api/admin/selectReferee`,newRefereesOfWeek).then(res =>{
-                    console.log(res.data);
+            await axios.post(`${process.env.REACT_APP_URL}/api/admin/selectReferee`, newRefereesOfWeek).then(res =>{
+
             }).catch(err=>console.log(err));
 
         }
@@ -61,7 +58,6 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
         } else {
             setResultMessage("You have selected the referee list successfully!");
         }
-
     }
 
     return(

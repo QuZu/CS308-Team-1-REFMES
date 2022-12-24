@@ -22,6 +22,8 @@ function AdminUpdatePreWeekPage(){
         nextButton:true,
         prevButton:false
     });
+    const [prevActive, setPrevActive] = useState(!(page === 0 || formData.prevButton));
+    const [nextActive, setNextActive] = useState(!(page === 3 || !formData.nextButton));
     
     const getCurrentWeek = async() => {
         await axios.all([
@@ -43,9 +45,9 @@ function AdminUpdatePreWeekPage(){
 
     const PageDisplay=()=>{
         if(page === 0) {
-            return <AdminRefSelect currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
-        } else if (page === 1) {
             return <AdminRefAssign currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
+        } else if (page === 1) {
+            return <AdminRefSelect currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         } else {
             return <AdminPreFinalSummary currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>
         }
@@ -66,8 +68,17 @@ function AdminUpdatePreWeekPage(){
                     {PageDisplay()}
 
                     <div className="footer" style={{marginBottom: "2rem"}}>
-                        <button disabled={page === 0 || formData.prevButton} onClick={()=>{setPage((currPage)=>currPage-1)}}>Prev</button>
-                        <button disabled={page === 3 || !formData.nextButton} onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</button>
+                        { prevActive ?
+                            <a className="btn btn-primary" onClick={()=>{setPage((currPage)=>currPage-1)}}>Prev</a>
+                        :
+                            <a className="btn btn-secondary disabled" onClick={()=>{setPage((currPage)=>currPage-1)}}>Prev</a>
+                        }
+                        { nextActive ?
+                            <a className="btn btn-primary" onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</a>
+                        :
+                            <a className="btn btn-secondary disabled" onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</a>
+                        }
+                        
                     </div>
                 </div>
                 :

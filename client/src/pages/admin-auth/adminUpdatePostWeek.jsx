@@ -10,7 +10,7 @@ function AdminUpdatePostWeekPage(){
         <div>
             <AppNavBarSingle/>
             <div>
-                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Admin Post Week</h1>
+                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Admin Update Post Week</h1>
             </div>
         </div>
 
