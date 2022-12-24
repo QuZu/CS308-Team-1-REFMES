@@ -105,7 +105,7 @@ router.post("/delete", async(req, res) => {
 
 router.post("/updatesetting", async(req, res) => {
     const dataID = req.body.id;
-      await User.findOneAndUpdate({email: req.body.email}, {name:req.body.name});
+      await User.findOneAndUpdate({email: req.body.email}, {username:req.body.name});
       res.status(200).json(`User ${dataID} has been found...`);
   }
 );
