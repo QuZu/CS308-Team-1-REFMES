@@ -12,7 +12,6 @@ function Brand() {
   const [state, dispatch] = useStore();
   const navigate = useNavigate();
   const {user: currentUser} = state;
-
   const logOut = useCallback((data) => {dispatch(userLogout()); navigate("/");}, [dispatch, navigate]);
     return (
       <>
@@ -40,7 +39,7 @@ function Brand() {
             </NavDropdown>
             { !currentUser ?
               <a></a>:
-              <Nav.Link href="/profile" className="navText">My Profile</Nav.Link>} 
+              <Nav.Link href={`/user/${currentUser.user.username}`} className="navText">My Profile</Nav.Link>} 
           </Nav>
 
           { !currentUser ?
