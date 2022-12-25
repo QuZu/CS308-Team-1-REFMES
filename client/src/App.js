@@ -38,6 +38,7 @@ import ObserverLoginPage from "./pages/observer/observerLogin";
 import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
+import WHighlightsPageLanding from "./pages/weekly-highlights/weeklyHighlights-landing";
 
 function App() {
   const [state] = useStore();
@@ -77,7 +78,7 @@ function App() {
         <Route path="/pre-match" element={<PreMatchPage />} />
         <Route path="/post-match" element={<PostMatchPage />} />
         <Route path="/awards" element={<AwardsPage />} />
-        <Route path="/highlights/weekly" element={<WHighlightsPage />} />
+        <Route path="/weeklyHighlights" element={<WHighlightsPageLanding />} />
         <Route path="/highlights/monthly" element={<MHighlightsPage />} />
         <Route path="/club/:asciName" element={<SingleClubPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
