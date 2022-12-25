@@ -95,6 +95,26 @@ router.post('/observerLogin', async(req, res) => {
   }
 );
 
+router.post('/forgotpassword', async(req, res) => {
+  const {Email} = req.body;
+
+  const user = await User.findOne({email:Email});
+
+  if(!user) throw Error('User does not exits.');
+  // create new password
+
+
+
+  // send new password
+
+
+
+
+
+
+
+});
+
 router.post("/delete", async(req, res) => {
     const {id, username, email} =req.body;
     try {

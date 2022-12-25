@@ -38,6 +38,7 @@ import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
 import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
 import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
+import ForgotPassword from "./pages/login/forgotpassword";
 
 function App() {
   const [state] = useStore();
@@ -50,6 +51,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/login" element={<AdminPage />} />
         <Route path="/admin" element={<AdminAuthPage />} />
