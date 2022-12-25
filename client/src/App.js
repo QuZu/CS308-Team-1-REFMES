@@ -39,6 +39,7 @@ import RefmesRatingPage from "./pages/admin-auth/refmesRating";
 import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
 import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
 import ForgotPassword from "./pages/login/forgotpassword";
+import ResetPassword from "./pages/login/resetpassword";
 
 function App() {
   const [state] = useStore();
@@ -52,6 +53,7 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/login/reset-password/:username/:token" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/login" element={<AdminPage />} />
         <Route path="/admin" element={<AdminAuthPage />} />
@@ -61,7 +63,6 @@ function App() {
         <Route path="/admin/retrieve_referee_info" element={<AdminUpdateReferee />} />
         <Route path="/admin/add_referee" element={<AdminAddReferee />} />
         <Route path="/admin/add_observer" element={<AdminAddObserver />} />
-
         <Route path="/admin-auth/enterResult" element={<AdminEnterResult />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectRefereeLanding />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
