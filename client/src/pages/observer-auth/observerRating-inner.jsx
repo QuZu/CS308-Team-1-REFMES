@@ -7,13 +7,12 @@ import * as ReactBootstrap from "react-bootstrap";
 
 function ObserverRatingInnerPage({currentWeekNo}) {
 
-    const weekNo = currentWeekNo-1;
     const [matchDetails, setMatchDetails] = useState([]);
     const [loading,setLoading] = useState(false);
 
     const getMatchDetails = async() => {
         await axios
-            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${weekNo}`)
+            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${currentWeekNo}`)
             .then(res => {
                 setMatchDetails(res.data);
                 setLoading(true);
@@ -27,7 +26,7 @@ function ObserverRatingInnerPage({currentWeekNo}) {
     return(
         <div>
             <div>
-                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Observer Rating for Week {weekNo}</h1>
+                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Observer Rating for Week {currentWeekNo}</h1>
             </div>
             {loading && matchDetails ?
                 <div className="matches">

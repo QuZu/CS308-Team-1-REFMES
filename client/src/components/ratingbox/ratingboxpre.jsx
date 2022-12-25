@@ -25,6 +25,7 @@ import logoAnkaragucu from '../../logos/ankaragucu.png';
 import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
+import * as ReactBootstrap from "react-bootstrap";
 
 const clubs = [
     { name: "Fenerbahçe", src: logoFenerbahce},
@@ -76,7 +77,8 @@ function RatingBoxPre({ refereeData,preWeek }) {
                 axios.post(`${process.env.REACT_APP_URL}/api/preRatings/addPreRating`, newPreRating),
                 axios.post(`${process.env.REACT_APP_URL}/api/preRatings/refereeAddPreRating`, newPreRating),
               ])
-              .then(axios.spread((res1, res2) => {
+              .then(axios.spread((res1, res2) =>    {
+                console.log("Stattus:",res1.status,res2.status);
                  if (res1.status === 200 && res2.status===200) {
                     setErrorMessage("Your rating submitted successfully");
                     const date = new Date();
@@ -87,10 +89,11 @@ function RatingBoxPre({ refereeData,preWeek }) {
                     setBtnValue("Saved");
                     setBtnDisabled(true);
                 } else {
+                    console.log("elsedeyim");
                     setErrorMessage("Error! Please try again.");
-                    setBtnDisabled(true);
+                    setBtnValue("Save");
+                    setBtnDisabled(false);
                 }
-                setLoading(true);
             
               })).catch(err =>{
                 console.log("Error: ", err);
@@ -99,7 +102,7 @@ function RatingBoxPre({ refereeData,preWeek }) {
         }
     }
 
-    const getCurrentPostRating = async()=>{
+    const getCurrentPostRating = async()=>   {
         await axios.get(`${process.env.REACT_APP_URL}/api/preRatings/getPreRating/${currentUser.user.id}/${refereeData._id}/${preWeek}`).then(res => {
             if (res.data.length === 0) {
                 console.log("Empty");
@@ -113,6 +116,7 @@ function RatingBoxPre({ refereeData,preWeek }) {
                 setBtnValue("Saved");
                 setBtnDisabled(true);
             }
+            setLoading(true);
         }).catch(err => console.log(err))
     };
 
@@ -122,7 +126,7 @@ function RatingBoxPre({ refereeData,preWeek }) {
 
     return (
         <>
-        <div className="rating-outer-container-pre">
+        {loading ? <div className="rating-outer-container-pre">
             <div className="rating-container">
                 <div className="rating-left-pre">
                     <div className="rating-left-match">
@@ -133,6 +137,7 @@ function RatingBoxPre({ refereeData,preWeek }) {
                     <Rater onRate={({rating}) => {setRating(rating); setRatingEntered(true);}} total={5} rating={rating} interactive={isInteractive}/>
                     {isInteractive ? <></> : <div className="rating-right-date">{month} {day}, {year}</div>}
                     {ratingEntered ? <></> : <div className="rating-right-error"><a>Choose a rating, please!</a><br/></div>}
+                    <p className="rating-box-error-msg">{errorMessage}</p>
                 </div>
                 <div className="rating-submit">
                 <form onSubmit={handleSubmit}>
@@ -141,6 +146,11 @@ function RatingBoxPre({ refereeData,preWeek }) {
                 </div>
             </div>
         </div>
+        :
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
+        }
         </>
     );
   }

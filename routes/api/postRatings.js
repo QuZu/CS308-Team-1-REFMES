@@ -7,7 +7,7 @@ const ObserverRating = require('../../models/observerRatingModel');
 const Referee = require('../../models/refereeModel');
 
 router.post("/addPostRating", async(req, res) => {
-    const {rating, user_id, match_id} = req.body;
+    const {rating, user_id, match_id, referee_id,week_no} = req.body;
     
     timeZone = 'Europe/Istanbul';
     const date = new Date().toLocaleString('en-US', { timeZone });
@@ -20,7 +20,7 @@ router.post("/addPostRating", async(req, res) => {
 
         const savedPostRating = await newPostRating.save();
         if (!savedPostRating) throw Error('Something went wrong while saving the post rating');
-
+        res.status(200).json(savedPostRating)
     } catch (e) {
         res.status(400).json({ error: e.message });
     }
@@ -101,4 +101,31 @@ router.get("/getObserverRating/:matchID/:observerID", async(req, res) => {
     }
 });
 
+router.post("/refereeAddPostRating", async(req, res) => {
+    const {rating, user_id, match_id, referee_id,week_no} = req.body;
+    
+    try {
+        await Referee.findById(referee_id)
+        .then(refData=>{
+            //update correct week
+            //console.log(refData);
+            const PostRating = [...refData.postRating];
+            PostRating[week_no][0] += rating;
+            PostRating[week_no][1] += 1;
+            //update Total
+            PostRating[0][0] += rating;
+            PostRating[0][1] += 1;
+            Referee.findByIdAndUpdate(referee_id,{
+                postRating:PostRating
+            }).then(updateData =>{
+                res.status(200).json(PostRating)
+                //console.log("updated data", updateData);
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+    } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+});
 module.exports = router;

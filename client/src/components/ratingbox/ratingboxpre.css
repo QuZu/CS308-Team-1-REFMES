@@ -21,3 +21,8 @@
     text-align: center;
     flex: 5;
 }
+.rating-box-error-msg{
+    font-size: smaller;
+    font-weight: 100;
+    color: rgb(117, 117, 222);
+}
