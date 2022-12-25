@@ -11,7 +11,7 @@ import ErrorPage from "./pages/error/error";
 import ProfilePage from "./pages/profile/profile";
 import EditPage from "./pages/edit/editpage";
 import RefPage from "./pages/single-referee/singleRefPage";
-import PostMatchPage from "./pages/post-match/post-match";
+import Postmatchlanding from "./pages/post-match/post-match-landing";
 import Prematchlanding from "./pages/pre-match/pre-match-landing";
 import AwardsPage from "./pages/awards/awards";
 import WHighlightsPage from "./pages/weekly-highlights/weekly-highlights";
@@ -76,7 +76,7 @@ function App() {
         <Route path="/user/:username" element={<ProfilePage />} />
         <Route path="/referee/:rUsername" element={<RefPage/>} />
         <Route path="/pre-match" element={<Prematchlanding />} />
-        <Route path="/post-match" element={<PostMatchPage />} />
+        <Route path="/post-match" element={<Postmatchlanding/>} />
         <Route path="/awards" element={<AwardsPage />} />
         <Route path="/highlights/weekly" element={<WHighlightsPage />} />
         <Route path="/highlights/monthly" element={<MHighlightsPage />} />

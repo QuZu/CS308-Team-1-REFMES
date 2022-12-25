@@ -17,7 +17,7 @@ router.post("/addPreRating", async(req, res) => {
 
         const savedPreRating = await newPreRating.save();
         if (!savedPreRating) throw Error('Something went wrong while saving the pre rating');
-        res.status(200)
+        res.status(200).json(savedPreRating)
     } catch (e) {
         console.log(e);
         res.status(400).json({ error: e.message });
@@ -30,7 +30,7 @@ router.post("/refereeAddPreRating", async(req, res) => {
         await Referee.findById(referee_id)
         .then(refData=>{
             //update correct week
-            console.log(refData);
+            //console.log(refData);
             const PreRating = [...refData.preRating];
             PreRating[week_no][0] += rating;
             PreRating[week_no][1] += 1;
@@ -40,8 +40,8 @@ router.post("/refereeAddPreRating", async(req, res) => {
             Referee.findByIdAndUpdate(referee_id,{
                 preRating:PreRating
             }).then(updateData =>{
-                res.status(200)
-                console.log("updated data", updateData);
+                res.status(200).json(updateData)
+                //console.log("updated data", updateData);
             })
         }).catch(err => {
             console.log(err);
