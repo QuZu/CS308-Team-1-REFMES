@@ -165,6 +165,39 @@ router.post('/forgotpassword', async(req, res) => {
 
 });
 
+router.get('/linkchecker/:user_id/:token', async(req, res) => {
+
+  const user_id = req.params.user_id;
+  const token = req.params.token;
+
+  //console.log("user_id", user_id);
+  //console.log("token", token);
+
+  const _token = await Token.findOne({user_id: user_id});
+
+  if(! _token){
+
+    return res.status(200).json({ msg: 'Invalid user_id' });
+
+  }
+  else if( token !== _token.token ){
+    
+    return res.status(200).json({ msg: 'Invalid token' });
+
+  }
+  else {
+
+    res.status(200).json({
+      token: {
+         user_id: _token.user_id,
+         token: _token.token
+      }});
+
+  }
+
+});
+
+
 router.post("/delete", async(req, res) => {
     const {id, username, email} =req.body;
     try {

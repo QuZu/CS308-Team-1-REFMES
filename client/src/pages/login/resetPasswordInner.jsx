@@ -1,7 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { useStore } from "../../store/store";
 import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 import axios from "axios";
 
@@ -10,44 +12,44 @@ const ForgotPasswordSchema = z
     email: z.string().email("Please enter a valid email")
   });
 
-function ForgotPassword() {
+function ResetPasswordInner() {
 
   const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(ForgotPasswordSchema), mode: "all",});
+  const [, dispatch] = useStore();
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = useCallback((data) => {
     const user = {
       email: data.email,
     };
 
-    axios
-    .post(`${process.env.REACT_APP_URL}/api/users/forgotpassword`,user)
-    .then(res => {
-      console.log(res);
-      if(res.status === 200 && res.data.msg){
 
-        console.log("User with given email does not exist");
-        setErrorMessage("User with given email does not exist!");
-      }
 
-      else{ //if(res.status === 200)
+    // axios
+    // .post(`${process.env.REACT_APP_URL}/api/users/observerLogin`,user)
+    // .then(res => {
 
-        console.log("valid email: ", res.data.user.email);
-        setErrorMessage("Reset password message is sending to your email!");
-      }
+    //     console.log("response", res);
+
+    // })
+
     })
-
-  })
+//     if(user.password === "CS308Team1admin"){
+//         setErrorMessage("You logged in succesfully");
+//         navigate("/admin-auth");
+//     }
+//     else{setErrorMessage("Error! Please try again.");}
+//   }, [navigate, dispatch]);
   
   return (
     <div className="fullscreen row justify-content-center align-items-center">
-      <AppNavBarSingle/>
       <div className="col-10 col-sm-6 col-lg-4 justify-content-start">
         <div className="card p-1 mb-0 card-shadow">
           <div className="card-body">
             <div className="text-center">
               <h2 className="mt-2 mb-3">
-                <b>Forgot Password</b>
+                <b>Reset Password</b>
               </h2>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,7 +60,7 @@ function ForgotPassword() {
               </div>
 
               <div className="mt-5 row text-center justify-content-center">
-                <button type="submit" className="col-6 btn btn-block btn-success">Reset Your Password</button>
+                <button type="submit" className="col-6 btn btn-block btn-success">Request New Password</button>
               </div>
             </form>
           </div>
@@ -68,4 +70,4 @@ function ForgotPassword() {
 );
 }
 
-export default ForgotPassword;
+export default ResetPasswordInner;
