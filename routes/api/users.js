@@ -7,7 +7,7 @@ require("dotenv").config();
 const User = require('../../models/usermodel');
 const Token = require('../../models/tokenModel');
 const Observer = require('../../models/observerModel');
-const sendEmail = require("../api/sendEmail");
+var nodemailer = require('nodemailer');
 
 router.post('/signup', async(req, res) => {
   const {username, full_name, email, password, fan_of} = req.body;
@@ -130,12 +130,33 @@ router.post('/forgotpassword', async(req, res) => {
       }
 
       // send email
+
       const url = `${"localhost:3000"}/login/reset-password/${token.user_id}/${token.token}/`;
       console.log("url:", url);
-      await sendEmail(user.email, "Password Reset", url);
-      res
-			.status(200)
-			.send({ message: "Password reset link sent to your email account" });
+      console.log("email", user.email);
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'a.bilalyildiz@gmail.com',
+          pass: 'qmkoktbcknjudjon'
+        }
+      });
+
+      var mailOptions = {
+        from: 'a.bilalyildiz@gmail.com',
+        to: user.email,
+        subject: 'Password Reset',
+        text: url
+      };
+
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
 
   } catch(e){
     res.status(400).json({ msg: e.message });
