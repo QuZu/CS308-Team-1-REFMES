@@ -110,7 +110,7 @@ router.post('/forgotpassword', async(req, res) => {
 
     if(!user){
       
-      return res.status(400).json({ msg: 'Invalid email' });
+      return res.status(200).json({ msg: 'Invalid email' });
     }
 
     res.status(200).json({
@@ -130,7 +130,7 @@ router.post('/forgotpassword', async(req, res) => {
       }
 
       // send email
-      const url = `${process.env.API_URL}/login/reset-password/${token.token}/`;
+      const url = `${"localhost:3000"}/login/reset-password/${token.user_id}/${token.token}/`;
       console.log("url:", url);
       await sendEmail(user.email, "Password Reset", url);
       res

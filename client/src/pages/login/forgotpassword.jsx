@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useStore } from "../../store/store";
 import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 import axios from "axios";
+import { useHistory ,useLocation } from 'react-router-dom';
 
 const ForgotPasswordSchema = z
   .object({
@@ -19,19 +20,22 @@ function ForgotPassword() {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+
   const onSubmit = useCallback((data) => {
     const user = {
       email: data.email,
     };
 
+    
+
     axios
     .post(`${process.env.REACT_APP_URL}/api/users/forgotpassword`,user)
     .then(res => {
-      if(res.status === 400){
+      console.log(res);
+      if(res.status === 200 && res.data.msg){
 
         console.log("invalid email");
       }
-
 
       else{ //if(res.status === 200)
 
