@@ -130,7 +130,7 @@ router.post('/forgotpassword', async(req, res) => {
       }
 
       // send email
-      const url = `${process.env.BASE_URL}/login/reset-password/${token.user_id}/${token.token}/`;
+      const url = `${process.env.API_URL}/login/reset-password/${token.token}/`;
       console.log("url:", url);
       await sendEmail(user.email, "Password Reset", url);
       res

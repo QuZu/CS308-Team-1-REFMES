@@ -53,7 +53,7 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/login/reset-password/:username/:token" element={<ResetPassword />} />
+        <Route path="/login/reset-password/:token" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/login" element={<AdminPage />} />
         <Route path="/admin" element={<AdminAuthPage />} />
