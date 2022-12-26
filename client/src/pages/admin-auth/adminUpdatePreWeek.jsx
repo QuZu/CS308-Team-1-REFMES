@@ -45,10 +45,6 @@ function AdminUpdatePreWeekPage(){
         getCurrentWeek();
     }, []);
 
-    useEffect(() => {
-        console.log("Form Data: ", formData);
-    }, [formData]);
-
     const PageDisplay=()=>{
         if(page === 0) {
             return <AdminRefAssign currentWeek={preWeekNo} allData={refData} formData={formData} setFormData={setFormData}/>

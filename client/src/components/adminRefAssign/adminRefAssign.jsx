@@ -141,7 +141,7 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
     }, []);
 
     useEffect(() => {
-        setFormData({...FormData, assignmentList: assignmentList});
+        setFormData({...formData, assignmentList: assignmentList});
     }, [assignmentList]);
 
     return(

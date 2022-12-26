@@ -7,6 +7,7 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
 
     const [resultMessage, setResultMessage] = useState("");
 
+    console.log(formData);
     const [checkedCheckboxes, setCheckedCheckboxes] = useState(formData.checkedCheckboxes);
     
     const handleCheckboxChange = (data) => {
