@@ -24,15 +24,26 @@ function ForgotPassword() {
       email: data.email,
     };
 
+    axios
+    .post(`${process.env.REACT_APP_URL}/api/users/forgotpassword`,user)
+    .then(res => {
+      if(res.status === 400){
+
+        console.log("invalid email");
+      }
 
 
-    // axios
-    // .post(`${process.env.REACT_APP_URL}/api/users/observerLogin`,user)
-    // .then(res => {
+      else{ //if(res.status === 200)
 
-    //     console.log("response", res);
+        console.log("valid email: ", res.data.user.email);
 
-    // })
+      }
+      
+
+      
+
+
+    })
 
     })
 //     if(user.password === "CS308Team1admin"){

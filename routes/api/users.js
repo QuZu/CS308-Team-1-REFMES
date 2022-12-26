@@ -1,10 +1,13 @@
 const express = require("express");
 const { response } = require("express");
 const router = express.Router();
+const crypto = require("crypto");
 const bcrypt=require("bcrypt");
 require("dotenv").config();
 const User = require('../../models/usermodel');
+const Token = require('../../models/tokenModel');
 const Observer = require('../../models/observerModel');
+const sendEmail = require("../api/sendEmail");
 
 router.post('/signup', async(req, res) => {
   const {username, full_name, email, password, fan_of} = req.body;
@@ -77,6 +80,7 @@ router.post('/observerLogin', async(req, res) => {
   }
   
   try {
+
     const observer = await Observer.findOne({ observer_id:observerid });
     if (!observer) throw Error('Observer does not exist');
   
@@ -96,22 +100,46 @@ router.post('/observerLogin', async(req, res) => {
 );
 
 router.post('/forgotpassword', async(req, res) => {
-  const {Email} = req.body;
+  
+  const {email} = req.body;
+  //console.log("email", email);
 
-  const user = await User.findOne({email:Email});
+  try{
 
-  if(!user) throw Error('User does not exits.');
-  // create new password
+    const user = await User.findOne({email:email});
 
+    if(!user){
+      
+      return res.status(400).json({ msg: 'Invalid email' });
+    }
 
+    res.status(200).json({
+      user: {
+         email: user.email,
+      }});
 
-  // send new password
+      // form new token 
+      let token = await Token.findOne({ user_id: user._id });
+      if(!token){
 
+        token = await new Token({
+          user_id: user._id,
+          token: crypto.randomBytes(32).toString("hex"),
+        }).save();
 
+      }
 
+      // send email
+      const url = `${process.env.BASE_URL}/login/reset-password/${token.user_id}/${token.token}/`;
+      console.log("url:", url);
+      await sendEmail(user.email, "Password Reset", url);
+      res
+			.status(200)
+			.send({ message: "Password reset link sent to your email account" });
 
-
-
+  } catch(e){
+    res.status(400).json({ msg: e.message });
+  }
 
 });
 
