@@ -131,23 +131,24 @@ router.post('/forgotpassword', async(req, res) => {
 
       // send email
 
-      const url = `${"localhost:3000"}/login/reset-password/${token.user_id}/${token.token}/`;
+      const url = `${process.env.REACT_APP_URL}/login/reset-password/${token.user_id}/${token.token}/`;
       console.log("url:", url);
       console.log("email", user.email);
 
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'a.bilalyildiz@gmail.com',
-          pass: 'qmkoktbcknjudjon'
+          user: 'refmes.org@gmail.com',
+          pass: 'deuerygiggvzlkga'
         }
       });
 
       var mailOptions = {
-        from: 'a.bilalyildiz@gmail.com',
+        from: 'refmes.org@gmail.com',
         to: user.email,
         subject: 'Password Reset',
-        text: url
+        //text: url,<h4>To reset your password, please got to the below link and write your new password.</h4>
+        html: `<h4>To reset your password, please got to the below link and write your new password.</h4> <a href = ${url}>reset-password</a>`,
       };
 
       transporter.sendMail(mailOptions, function(error, info){
