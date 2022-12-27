@@ -220,11 +220,10 @@ router.post('/reset-password', async(req, res) => {
         if (hashError) {
           return hashError
         }
-        console.log(hash);
+        //console.log(hash);
 
-        User.findOneAndUpdate({"_id": user_id}, {password: hash}).then(() => {
-        return res.status(200).json(hash);
-        });
+        User.findOneAndUpdate({"_id": user_id}, {password: hash});
+        return res.status(200).json({msg: "update new password is finish"});
 
       });
 
@@ -232,7 +231,7 @@ router.post('/reset-password', async(req, res) => {
   });
 
   // delete token
-  //await Token.findByIdAndDelete(user_id);
+  await Token.findOneAndDelete({user_id:user_id});
 
 });
 
