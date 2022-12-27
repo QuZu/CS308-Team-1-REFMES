@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -15,6 +15,7 @@ function ResetPassword() {
   const{user_id, token} = useParams();
   const[LinkIsCorrect, setLinkIsCorrect] = useState(false);
 
+  const checklink = async() => {
   axios
     .get(`${process.env.REACT_APP_URL}/api/users/linkchecker/${user_id}/${token}`)
     .then(res => {
@@ -31,12 +32,17 @@ function ResetPassword() {
       }
 
     });
+  };
+
+  useEffect(() => {
+    checklink();
+}, []);
     
 
   return (
     <div className="fullscreen row justify-content-center align-items-center">
       <AppNavBarSingle/>
-      <div>
+      <div className="row justify-content-center align-items-center">
       {LinkIsCorrect && <ResetPasswordInner user_id = {user_id}/>}
       {!LinkIsCorrect && <ResetPasswordErrorInner/>}
       </div>

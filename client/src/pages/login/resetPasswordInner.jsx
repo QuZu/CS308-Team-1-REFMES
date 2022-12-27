@@ -3,8 +3,6 @@ import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { useStore } from "../../store/store";
-import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 import axios from "axios";
 
 const ResetPasswordSchema = z
@@ -19,7 +17,6 @@ const ResetPasswordSchema = z
 function ResetPasswordInner({user_id}) {
 
   const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(ResetPasswordSchema), mode: "all",});
-  const [, dispatch] = useStore();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -46,18 +43,22 @@ function ResetPasswordInner({user_id}) {
         axios.post(`${process.env.REACT_APP_URL}/api/users/reset-password/`, user)
               .then(res => {
 
-                console.log("result", res);
+                //console.log("return", res);
 
-              })
+                if(res.data){
+
+                  setErrorMessage("Your password is updated, you can login to the website!");
+                  navigate('/login');
+
+                }
+
+              });
 
     }
 
-
-
-
     })
+
   return (
-    <div className="fullscreen row justify-content-center align-items-center">
       <div className="col-10 col-sm-6 col-lg-4 justify-content-start">
         <div className="card p-1 mb-0 card-shadow">
           <div className="card-body">
@@ -84,7 +85,6 @@ function ResetPasswordInner({user_id}) {
           </div>
         </div>
       </div>
-    </div>
 );
 }
 
