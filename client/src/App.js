@@ -40,6 +40,7 @@ import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
 import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
 import ForgotPassword from "./pages/login/forgotpassword";
 import ResetPassword from "./pages/login/resetpassword";
+import ReportPage from "./pages/report-page/report-page";
 
 function App() {
   const [state] = useStore();
@@ -93,6 +94,7 @@ function App() {
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />
+        <Route path="/report/:username" element={<ReportPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
 }
