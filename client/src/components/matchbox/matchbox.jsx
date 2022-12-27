@@ -45,7 +45,6 @@ const clubs = [
   ]
 
 function MatchBox({ matchData, playedWeek }) {
-
     const [hasRefInfo, setHasRefInfo] = useState(matchData.referee_id ? true : false);
 
     return (
