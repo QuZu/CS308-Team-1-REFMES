@@ -7,7 +7,6 @@ import CommentBox from "../../components/comment/commentbox";
 import "../profile/profile.css";
 import * as ReactBootstrap from "react-bootstrap";
 function ProfileComments({CurrentUser}) {
-    console.log(CurrentUser);
     const [UserComments,setUserComments]=useState([]);
     const [loading,setLoading]=useState(false);
     var clubLogo=findLogo(CurrentUser.fan_of)
@@ -37,12 +36,12 @@ function ProfileComments({CurrentUser}) {
         <div className="col-4 club_inner"><img src={clubLogo}/></div>
         <div className="col-8 club_inner"><p>{CurrentUser.fan_of}</p></div>
         </div>
+        <p className="mt-2 profile-section-text d-flex justify-content-center">User Information</p>
+        <hr></hr>
         <div className="social_media_container">
         <div className="social_media_inner"><a style={{color: "#1D9BF0"}} href={`https://twitter.com/${CurrentUser.social_media.length>0 && CurrentUser.social_media[0] ? CurrentUser.social_media[0] :""}`}><BsTwitter/></a></div>
         <div className="social_media_inner"><a style={{color: "#FE0088"}} href={`https://www.instagram.com/${CurrentUser.social_media.length>1 && CurrentUser.social_media[1] ? CurrentUser.social_media[1] :""}`}><BsInstagram/></a></div>
         </div>
-        <p className="mt-2 profile-section-text d-flex justify-content-center">User Information</p>
-        <hr></hr>
         <div className="user-profile-information">
         <p className="d-flex justify-content-center profile-subsection-text">Email:</p>
         <input className=" user-profile-input" disabled={true} value={CurrentUser.email}></input>
