@@ -7,41 +7,55 @@ import { useStore } from "../../store/store";
 import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 import axios from "axios";
 
-const ForgotPasswordSchema = z
+const ResetPasswordSchema = z
   .object({
-    email: z.string().email("Please enter a valid email")
+    password: z.string().min(8, {message: "Password must be at least 8 character"}).regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*';."_)(+,/:>\]<=?@\\^`|[}{~-])/,
+      {message: "Password must contain uppercase, lowercase, numeric and special character"}),
+    repassword: z.string().min(1),
+
   });
 
-function ResetPasswordInner() {
+function ResetPasswordInner({user_id}) {
 
-  const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(ForgotPasswordSchema), mode: "all",});
+  const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(ResetPasswordSchema), mode: "all",});
   const [, dispatch] = useStore();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const onSubmit = useCallback((data) => {
-    const user = {
-      email: data.email,
+    const  user = {
+      _id: user_id,
+      password: data.password,
+      repassword: data.repassword
     };
 
+    // console.log("user id: ", user._id);
+    // console.log("password: ", user.password);
+    // console.log("repassword: ", user.repassword);
+
+    if(user.password !== user.repassword){
+
+        setErrorMessage("Confirmation password is wrong, please try again!");
+    }
+    else {
+
+        //setErrorMessage("Your password is updated, you can login to the website!");
+        
+
+        axios.post(`${process.env.REACT_APP_URL}/api/users/reset-password/`, user)
+              .then(res => {
+
+                console.log("result", res);
+
+              })
+
+    }
 
 
-    // axios
-    // .post(`${process.env.REACT_APP_URL}/api/users/observerLogin`,user)
-    // .then(res => {
 
-    //     console.log("response", res);
-
-    // })
 
     })
-//     if(user.password === "CS308Team1admin"){
-//         setErrorMessage("You logged in succesfully");
-//         navigate("/admin-auth");
-//     }
-//     else{setErrorMessage("Error! Please try again.");}
-//   }, [navigate, dispatch]);
-  
   return (
     <div className="fullscreen row justify-content-center align-items-center">
       <div className="col-10 col-sm-6 col-lg-4 justify-content-start">
@@ -55,12 +69,16 @@ function ResetPasswordInner() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <p className="errorMessage">{errorMessage}</p>
               <div className="mt-3 d-flex flex-column">
-                <input {...register("email")} placeholder="Email" type="email" className="btn-border input-style form-control"/>
-                <small className="align-self-start error-text">{errors.email?.message}</small>
+                <input {...register("password")} placeholder="Password" type="password" className="btn-border input-style form-control"/>
+                <small className="align-self-start error-text">{errors.password?.message}</small>
+              </div>
+              <div className="mt-3 d-flex flex-column">
+                <input {...register("repassword")} placeholder="Password (re-enter)" type="repassword" className="btn-border input-style form-control"/>
+                <small className="align-self-start error-text">{errors.repassword?.message}</small>
               </div>
 
               <div className="mt-5 row text-center justify-content-center">
-                <button type="submit" className="col-6 btn btn-block btn-success">Request New Password</button>
+                <button type="submit" className="col-6 btn btn-block btn-success">Reset Your Password</button>
               </div>
             </form>
           </div>

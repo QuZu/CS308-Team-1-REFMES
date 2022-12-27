@@ -8,6 +8,7 @@ const User = require('../../models/usermodel');
 const Token = require('../../models/tokenModel');
 const Observer = require('../../models/observerModel');
 var nodemailer = require('nodemailer');
+const { findByIdAndDelete } = require("../../models/usermodel");
 
 router.post('/signup', async(req, res) => {
   const {username, full_name, email, password, fan_of} = req.body;
@@ -194,6 +195,44 @@ router.get('/linkchecker/:user_id/:token', async(req, res) => {
       }});
 
   }
+
+});
+
+
+router.post('/reset-password', async(req, res) => {
+
+  const BCRYPT_SALT_ROUNDS = 10;
+  const user_id = req.body._id;
+  const password = req.body.password;
+
+  //console.log("user id:", user_id);
+  //console.log("password: ", password);
+
+  //update password
+
+  bcrypt.genSalt(BCRYPT_SALT_ROUNDS, function (saltError, salt) {
+    if (saltError) {
+      return saltError
+    }
+    else{
+
+      bcrypt.hash(password, salt, function (hashError, hash) {
+        if (hashError) {
+          return hashError
+        }
+        console.log(hash);
+
+        User.findOneAndUpdate({"_id": user_id}, {password: hash}).then(() => {
+        return res.status(200).json(hash);
+        });
+
+      });
+
+    }
+  });
+
+  // delete token
+  //await Token.findByIdAndDelete(user_id);
 
 });
 

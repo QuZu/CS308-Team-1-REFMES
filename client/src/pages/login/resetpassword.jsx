@@ -21,12 +21,12 @@ function ResetPassword() {
 
       if(res.status === 200 && res.data.msg){
 
-        console.log("token is false");
+        //console.log("token is false");
         setLinkIsCorrect(false);
       }
       else{ // if the token is correct
 
-        console.log("token is correct")
+        //console.log("token is correct")
         setLinkIsCorrect(true);
       }
 
@@ -37,7 +37,7 @@ function ResetPassword() {
     <div className="fullscreen row justify-content-center align-items-center">
       <AppNavBarSingle/>
       <div>
-      {LinkIsCorrect && <ResetPasswordInner/>}
+      {LinkIsCorrect && <ResetPasswordInner user_id = {user_id}/>}
       {!LinkIsCorrect && <ResetPasswordErrorInner/>}
       </div>
 
