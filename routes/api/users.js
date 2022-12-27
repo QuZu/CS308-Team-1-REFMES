@@ -221,9 +221,12 @@ router.post('/reset-password', async(req, res) => {
           return hashError
         }
         //console.log(hash);
-
-        User.findOneAndUpdate({"_id": user_id}, {password: hash});
-        return res.status(200).json({msg: "update new password is finish"});
+        console.log("new password", hash);
+        User.findOneAndUpdate({"_id": user_id}, {password: hash}).then(() => {
+          res.status(200).json({msg: "update new password is finish"});
+        });
+        //console.log("password is updated");
+        //return res.status(200).json({msg: "update new password is finish"});
 
       });
 
