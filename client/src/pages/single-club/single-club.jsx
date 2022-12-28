@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import * as ReactBootstrap from "react-bootstrap";
 import findLogo from "../../components/clubLogos/clubLogos.jsx";
 import findSocialMedia from "../../components/clubLogos/clubsocials";
+import { Timeline } from 'react-twitter-widgets'
 
 function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   // getting parameters from clubs page
@@ -25,25 +26,29 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
       if(response.data) {
         setClubName(response.data.name);
         setClubData(response.data);
-        setLoading(true);
         setLogo(findLogo(response.data.name));
         setSocialMedia(findSocialMedia(response.data.name));
+        setLoading(true);
       }
     }).catch(err => console.log(err))
 
   };
+  function setTimeLoad() {
+    setLoading(true);
+  }
 
   useEffect(()=> {
     getClub();
   }, [])
   
   var playerlist = ClubData.playerArray;
-  console.log("social meadia: ", socialMedia);
+  console.log("social media: ", socialMedia);
 
   return(
      
     <div className="container-fluid">
       <div className="row"> <AppNavBar/> </div>
+      
       <div id="club-details-container" className="col-12">
           <div id = "club-info-section" className = "row">
               <div id = "club-logo" className = "col-3"> {loading ? <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {logo} /> </a> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>} </div>
@@ -96,9 +101,14 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
           <div id = "social-media-head" className = "row container text-center">  <div className="d-flex justify-content-center"> <h2>Social Media </h2> </div> </div>
 
           <div> 
-            <p> Twitter: {socialMedia.twitter} </p>
-            <p> Instagram: {socialMedia.instagram} </p>
-          
+            {loading ?
+              <Timeline 
+              dataSource={{ sourceType: "url", url: socialMedia.twitter }}
+              options={{ borderColor: "#FF0000", width: "80%", height: "800" }}
+              />
+            :
+              <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
+            }
           </div>
           </div>
           </div>
