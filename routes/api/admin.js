@@ -74,15 +74,15 @@ router.post('/addReferee', async(req, res) => {
     }
   );
   router.post('/updateMatchScore', async(req, res) => {
-    const {match_id,team1goal,team2goal}= req.body;
-    if(team1goal < 0 || team2goal < 0) {
+    const myallData= req.body;
+    console.log(myallData);
+    if(myallData.length !== 9) {
       return res.status(400).json({msg: "Please enter valid score!"});
     }
-    await Match.findByIdAndUpdate(match_id,{club1_goals:team1goal, club2_goals: team2goal}).then((result) => {
-      res.status(200).json(result);
-    }
-      
-    )
+    res.status(200).json(myallData);
+    // await Match.findByIdAndUpdate(match_id,{club1_goals:team1goal, club2_goals: team2goal}).then((result) => {
+    //   res.status(200).json(result);
+    // })
   }
   );
   router.post('/selectReferee', async(req, res) => {
@@ -169,6 +169,23 @@ router.post('/updatePreWeek', async(req, res) => {
       }).catch((err) => {
         throw err;
       })
+    }
+    catch(error){
+      res.status(400).json(error)
+    }
+  
+  }
+);
+router.post('/updatePostWeek', async(req, res) => {
+  const{PostWeek}=req.body
+    try {
+      console.log("Post week:",req.body)
+      // await Week.findOneAndUpdate({type:"post-week"},{week_no:week_no}).then((result) => {
+      //   res.status(200).json(result);
+      // }).catch((err) => {
+      //   throw err;
+      // })
+      res.status(200).json(PostWeek);
     }
     catch(error){
       res.status(400).json(error)

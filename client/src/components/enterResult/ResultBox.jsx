@@ -44,41 +44,38 @@ const clubs = [
     { name: "Kayserispor", src: logoKayserispor},
   ]
 
-function ResultBox({ matchData }) {
+function ResultBox({ matchData,formData,setformData }) {
 
     const [errorMessage, setErrorMessage] = useState("");
     const [btnValue, setBtnValue] = useState("Enter Result");
     const [btnDisabled, setBtnDisabled] = useState(false);
-    const [homeGoal,Sethomegoal] = useState(0);   
-    const [awayGoal,Setawaygoal] = useState(0); 
+    const [homeGoal,Sethomegoal] = useState(-1);   
+    const [awayGoal,Setawaygoal] = useState(-1); 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(homeGoal,awayGoal);
             if(homeGoal < 0 || awayGoal <0){
                 setErrorMessage("Please enter a valid score!");
             }
             else{
-                setErrorMessage("You have updated the score successfully!");
+                setBtnDisabled(true)
+                const newScore = {
+                    team1goal: homeGoal ,
+                    team2goal: awayGoal,
+                    match_id: matchData._id,
+                    team_1:matchData.club1_info[0].name,
+                    team_2:matchData.club2_info[0].name
+                };
+                var oldArray=formData.resultList
+                oldArray.push(newScore);
+                setformData({...formData,resultList:oldArray})
+                setErrorMessage("You have submitted result successfully");
+                setBtnValue("Submitted")    
             }
-
-            const newScore = {team1goal: homeGoal , team2goal: awayGoal, match_id: matchData._id};
-            axios
-                .post(`${process.env.REACT_APP_URL}/api/admin/updateMatchScore`, newScore)
-                .then((res) => {
-                    
-                        if (res.status === 200) {
-                        setErrorMessage("You have submitted result successfully");
-                    } else {
-                        setErrorMessage("Error,try again!");
-                    }
-                }).catch((err) => {
-                    console.log("Error: ", err);
-                });
-           
-        
     }
     return (
-        <div style={{paddingLeft:"300px"}}>
+        <div className="d-flex justify-content-center">
         <div className="rating-outer-container">
             <div className="rating-container">
                 <div className="rating-left">
@@ -97,7 +94,7 @@ function ResultBox({ matchData }) {
                 <div className="rating-submit">
                 <form onSubmit={handleSubmit}>
                     <p style={{color:"blue"}}>{errorMessage}</p>
-                    <input type="submit" name="submitButton" className="btn btn-success" value={`${btnValue}`}/>
+                    <input  disabled={btnDisabled} type="submit" name="submitButton" className="btn btn-success" value={`${btnValue}`}/>
                 </form>
                 </div>
             </div>

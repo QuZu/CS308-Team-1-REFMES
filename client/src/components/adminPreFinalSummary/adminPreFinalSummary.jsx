@@ -67,34 +67,34 @@ function AdminPreFinalSummaryPage ( {currentWeek, allData, formData, setFormData
             </div>
             <div className="selectec-ref-text"> Selected Referee for week {currentWeek+1}</div>
             <div style={{overflow: "hidden"}} className="row">
-                    { myData ?
-                    
-                    (myData.length > 0 ?
-                        myData.map((item) => {
-                            return(
-                            <div style={{overflow: "hidden"}} key={item.name} className="ck-button-summary col-xs-12 col-sm-6 col-md-4 mt-2 mb-2">
-                                <label  style={{width: "80%"}}>
-                                    <p style={{width: "100%"}}>{item.name}</p>
-                                </label>
-                            </div>
-                            );
-                        })
-                        :
-                        <div className="d-flex justify-content-center">
-                            <ReactBootstrap.Spinner animation="border"/>
+                { myData ?
+                
+                (myData.length > 0 ?
+                    myData.map((item) => {
+                        return(
+                        <div style={{overflow: "hidden"}} key={item.name} className="ck-button-summary col-xs-12 col-sm-6 col-md-4 mt-2 mb-2">
+                            <label  style={{width: "80%"}}>
+                                <p style={{width: "100%"}}>{item.name}</p>
+                            </label>
                         </div>
-                    )
+                        );
+                    })
                     :
                     <div className="d-flex justify-content-center">
                         <ReactBootstrap.Spinner animation="border"/>
                     </div>
-                    }
-                    </div>
-                    <div className="d-flex justify-content-center row">
-                        <button onClick={handleClick} disabled={isdisabled} className="preweek-ref-submit">{btnValue}</button>
-                        <p className="preweek-ref-error-mes">{errorMessage}</p>
-                    </div>
-        </div>
+                )
+                :
+                <div className="d-flex justify-content-center">
+                    <ReactBootstrap.Spinner animation="border"/>
+                </div>
+                }
+            </div>
+            <div className="d-flex justify-content-center row">
+                <button onClick={handleClick} disabled={isdisabled} className="preweek-ref-submit">{btnValue}</button>
+                <p className="preweek-ref-error-mes">{errorMessage}</p>
+            </div>
+    </div>
     )
 };
 
