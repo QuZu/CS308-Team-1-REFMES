@@ -1,5 +1,4 @@
 const express = require("express");
-const { response } = require("express");
 const router = express.Router();
 const bcrypt=require("bcrypt");
 require("dotenv").config();
@@ -8,6 +7,8 @@ const Observer = require('../../models/observerModel');
 const Match = require('../../models/matchModel');
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 const RefmesRating = require('../../models/refmesRatingModel');
+const Week=require("../../models/weekModel")
+var mongoose = require('mongoose');
 
 router.post('/addReferee', async(req, res) => {
   const {r_username, name, biography, birth_date, birth_place, fifa_date, first_super_date, total_rating, rating_count, totalMatch, yellowCard, avgYellowCard, yellowToRed, redCard, avgRedCard, penalty, avgPenalty,t_name,preRating,postRating,observerRating} = req.body;
@@ -77,8 +78,8 @@ router.post('/addReferee', async(req, res) => {
     if(team1goal < 0 || team2goal < 0) {
       return res.status(400).json({msg: "Please enter valid score!"});
     }
-    await Match.findByIdAndUpdate(match_id,{club1_goals:team1goal, club2_goals: team2goal}).then(() => {
-      res.status(200);
+    await Match.findByIdAndUpdate(match_id,{club1_goals:team1goal, club2_goals: team2goal}).then((result) => {
+      res.status(200).json(result);
     }
       
     )
@@ -137,5 +138,42 @@ router.post("/postRefmesRatingWeights", async(req, res) => {
   }
 }
 );
-
+router.post('/assignReferee', async(req, res) => {
+  const myarray= req.body;
+    try {
+      for (let index = 0; index < myarray.length; index++) {
+        const element = myarray[index];
+        const match_id=element.matchDetails.match_id;
+        const ref_id=element.refereeDetails.ref_id;
+        //console.log(index,match_id,ref_id);
+        const updateMatch= await Match.findByIdAndUpdate(match_id,
+          {
+            referee_id: mongoose.Types.ObjectId(ref_id)
+          })
+      console.log(updateMatch);
+    }
+    res.status(200).json({err: "Assigned Refs"})
+  }
+    catch(error){
+      console.log(error);
+      res.status(400).json(error)
+    }
+  
+  }
+);
+router.post('/updatePreWeek', async(req, res) => {
+  const{week_no,referee_ids}=req.body
+    try {
+      await Week.findOneAndUpdate({type:"pre-week"},{week_no:week_no}).then((result) => {
+        res.status(200).json(result);
+      }).catch((err) => {
+        throw err;
+      })
+    }
+    catch(error){
+      res.status(400).json(error)
+    }
+  
+  }
+);
 module.exports = router;
