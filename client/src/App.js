@@ -49,8 +49,8 @@ function App() {
       <Routes>
         { !currentUser ?
         <>
-        <Route path="/" element={<Home />} />
-        <Route path="/landing" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/login/reset-password/:user_id/:token" element={<ResetPassword />} />
@@ -74,8 +74,8 @@ function App() {
         :
         <>
         <Route path="/" element={<Home />} />
-        <Route path="/edit" element={< EditPage/>} />
         <Route path="/home" element={<Home/>} />
+        <Route path="/edit" element={< EditPage/>} />
         <Route path="/user/:username" element={<ProfilePage />} />
         <Route path="/referee/:rUsername" element={<RefPage/>} />
         <Route path="/pre-match" element={<Prematchlanding />} />
