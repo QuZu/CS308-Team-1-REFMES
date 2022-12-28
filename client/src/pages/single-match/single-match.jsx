@@ -16,7 +16,7 @@ function SingleMatchPage() {
 
     const getCurrentWeek = async() => {
         await axios
-            .get(`${process.env.REACT_APP_URL}/api/weeks/getWeek/`)
+            .get(`${process.env.REACT_APP_URL}/api/weeks/getPostWeek`)
             .then(res => {
                 setCurrentWeekNo(res.data.week_no);
                 setLoading(true);
@@ -33,7 +33,7 @@ function SingleMatchPage() {
             <h1 style={{textAlign: "center", marginTop: "72px", marginBottom: "24px"}}>Match Details and Comments</h1>
             {loading && matchID ?
                 <div className="matches">
-                    <SingleMatchInnerPage matchID={matchID} currentWeekNo={currentWeekNo}/>
+                    <SingleMatchInnerPage matchID={matchID} currentWeekNo={currentWeekNo-1}/>
                 </div>
                 :
                 <div className="d-flex justify-content-center">
