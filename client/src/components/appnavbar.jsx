@@ -1,12 +1,13 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../logo.png';
-import {Nav} from 'react-bootstrap';
+import {Nav, NavbarBrand} from 'react-bootstrap';
 import "../components/navbar.css";
 import { useStore } from "../store/store";
 import { useNavigate } from "react-router";
 import React, { useCallback } from "react";
 import { userLogout } from "../store/userreducer";
+import ReportIcon from "./problem.png";
 
 function Brand() {
   const [state, dispatch] = useStore();
@@ -32,7 +33,9 @@ function Brand() {
             <Nav.Link href="/post-match" className="navText">Post-Match</Nav.Link>
             { !currentUser ?
               <></>:
-              <Nav.Link href={`/user/${currentUser.user.username}`} className="navText">My Profile</Nav.Link>} 
+              <Nav.Link href={`/user/${currentUser.user.username}`} className="navText">My Profile</Nav.Link>
+            }
+               
           </Nav>
 
           { !currentUser ?
@@ -42,7 +45,10 @@ function Brand() {
             <Nav.Link href="/signup" align="center"><span className="btn btn-danger">Sign Up</span></Nav.Link>
           </div>
           :
-          <Nav.Link onClick = {logOut} align="center"><span className="btn btn-danger">Log Out</span></Nav.Link>
+          <div className='row'>
+          <div className='col-4'><Navbar.Brand> <a href={`/report/${currentUser.user.username}`}> <img src={ReportIcon} style={{height: "48px"}} alt='Report'/> </a></Navbar.Brand> </div>
+          <div className='col-8'><Nav.Link onClick = {logOut} align="center"><span className="btn btn-danger">Log Out</span></Nav.Link> </div>
+          </div>
           }
         </Navbar.Collapse>
       </Container>
