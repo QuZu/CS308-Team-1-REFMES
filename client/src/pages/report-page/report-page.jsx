@@ -27,22 +27,22 @@ function ReportPage(){
         const user = {
             username: username,
             report: data.report
-        }
+        };
 
         console.log("data username", user.username);
         console.log("data report", user.report);
 
-        axios.post(`${process.env.REACT_APP_URL}/api/reports/reset-password/`, user)
+        axios.get(`${process.env.REACT_APP_URL}/api/reports/registerReport/${user.username}/${user.report}`)
               .then(res => {
 
-                //console.log("return", res);
+                console.log("return", res);
 
-                if(res.data){
+                // if(res.data){
 
-                  setErrorMessage("Your password is updated, you can login to the website!");
-                  navigate('/login');
+                //   setErrorMessage("Your password is updated, you can login to the website!");
+                //   navigate('/login');
 
-                }
+                // }
 
               });
        
