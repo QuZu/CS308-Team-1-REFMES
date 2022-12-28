@@ -15,7 +15,7 @@ function ProfilePage() {
     const [loading,setLoading]=useState(false);
     const [state, dispatch] = useStore();
     const {user:currentUser} = state;
-    console.log(currentUser.user.username);
+    //console.log(currentUser.user.username);
     const [userData,setuserData]=useState();
     const getCurrentUser=async()=>{
       await axios.get(`${process.env.REACT_APP_URL}/api/users/getuserbyUsername/${currUsername}`).then(res=>{

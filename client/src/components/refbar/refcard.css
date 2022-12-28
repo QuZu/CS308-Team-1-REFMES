@@ -5,11 +5,16 @@
     color:rgb(0, 0, 0);
     text-decoration: none;
     font-weight: 500;
-
+    transition: none !important;
 }
-
+.ref-click-all{
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    font-weight: 500;
+}
 .ref-hover-effect a:hover{
     color:rgb(255, 255, 255);
+    
 }
 .ref-box-feature{
     width: 32em;
@@ -46,9 +51,7 @@
     font-size: small;
     font-style:italic;
 }
-.ref-box-items-yellow{
-    color: rgb(192, 192, 1);
-}
+
 .ref-score-box{
     width: 9em;
     height: 6em;

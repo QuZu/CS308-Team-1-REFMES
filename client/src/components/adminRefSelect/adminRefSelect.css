@@ -21,7 +21,7 @@
 }
 
 .ck-button label input {
-    position: absolute;
+    position:fixed;
     top: -20px;
 }
 

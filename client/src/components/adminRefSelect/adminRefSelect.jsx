@@ -7,10 +7,12 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
 
     const [resultMessage, setResultMessage] = useState("");
 
-    console.log(formData);
+    //console.log(formData);
     const [checkedCheckboxes, setCheckedCheckboxes] = useState(formData.checkedCheckboxes);
     
-    const handleCheckboxChange = (data) => {
+    const handleCheckboxChange = (event,data) => {
+        event.preventDefault();
+        event.stopPropagation()
         const isChecked = checkedCheckboxes.some(checkedCheckbox => checkedCheckbox.name === data.name)
         if (isChecked) {
             setCheckedCheckboxes(
@@ -24,6 +26,15 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
 
     useEffect(() => {
         setFormData({...formData, checkedCheckboxes:checkedCheckboxes});
+        if(checkedCheckboxes.length !==9)
+        {
+            setResultMessage("Please, select exactly 9 referees!");
+        }
+        if(checkedCheckboxes.length ===9)
+        {
+            setResultMessage("You have selected the referee list,click next button.");
+        }
+        
     }, [checkedCheckboxes]);
 
     function compare(a, b) {
@@ -64,7 +75,7 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
     return(
         <div>
             <form onSubmit={handleSubmit}  className="selectRefform">
-                <div className="container mt-5" style={{width: "1080px"}}>
+                <div className="container mt-5" style={{width: "1080px",overflow: "hidden"}}>
                     <div style={{marginBottom: "2rem"}}>
                         <p>Select exactly 9 referees for the pre-match rating section of Week {currentWeek+1}:</p>
                     </div>
@@ -74,9 +85,9 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
                     (allData.length > 0 ?
                         allData.map((item) => {
                             return(
-                            <div key={item.name} className="ck-button col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-2">
+                            <div style={{overflow: "hidden"}} key={item.name} className="ck-button col-xs-12 col-sm-6 col-md-4 col-lg-3 mb-2">
                                 <label style={{width: "80%"}}>
-                                    <input style={{width: "100%"}} value={item.name} type="checkbox" checked={checkedCheckboxes.some(checkedCheckbox => checkedCheckbox.name === item.name)} onChange={() => handleCheckboxChange(item)}/><span>{item.name}</span>
+                                    <input style={{width: "100%"}} value={item.name} type="checkbox" checked={checkedCheckboxes.some(checkedCheckbox => checkedCheckbox.name === item.name)} onChange={(event) => handleCheckboxChange(event,item)}/><span>{item.name}</span>
                                 </label>
                             </div>
                             );
@@ -93,9 +104,6 @@ function AdminRefSelectPage ( {currentWeek, allData, formData, setFormData} ){
                 </div>
 
                 <p className="selectRefereeResultMessage">{resultMessage}</p>
-                <label>
-                    <button style={{marginLeft: "500px"}} type="submit" className="btn btn-block col-8 btn-success">CONFIRM THE LIST</button>
-                </label>
             </form>
         </div>
     )
