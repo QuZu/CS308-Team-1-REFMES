@@ -15,13 +15,16 @@ function AdminPostWeekSummary({PostWeek,formData,setFormData}) {
     }
     axios.all([
         axios.post(`${process.env.REACT_APP_URL}/api/admin/updatePostWeek`, postweekinfo),
-        axios.post(`${process.env.REACT_APP_URL}/api/admin/updateMatchScore`, formData.resultList)
+        axios.post(`${process.env.REACT_APP_URL}/api/admin/updateMatchScore`, formData.resultList),
+        axios.post(`${process.env.REACT_APP_URL}/api/admin/updateStandings`, formData.resultList)
     ])
-    .then(axios.spread((res1,res2) => {
-            if (res1.status === 200 && res2.status === 200) {
-            setErrorMessage("You have submitted result successfully");
+    .then(axios.spread((res1,res2,res3) => {
+        console.log((res1,res2,res3));
+            if (res1.status === 200 && res2.status === 200 && res3.status === 200) {
+            setErrorMessage("You have submitted result successfully,redirecting..");
             setDisabled(true)
             setBtnValue("Submitted")
+            setTimeout(PreviousPage,3000);
         } else {
             setErrorMessage("Error,try again!");
         }
@@ -29,7 +32,9 @@ function AdminPostWeekSummary({PostWeek,formData,setFormData}) {
         console.log("Error: ", err);
     });  
 }
-
+function PreviousPage() {
+    navigate("/admin")
+}
   return (
     <div className='container'>
         <div className='row'>

@@ -7,7 +7,9 @@ const Observer = require('../../models/observerModel');
 const Match = require('../../models/matchModel');
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 const RefmesRating = require('../../models/refmesRatingModel');
+const Standings =require("../../models/standingsModel")
 const Week=require("../../models/weekModel")
+const request = require("request");
 var mongoose = require('mongoose');
 
 router.post('/addReferee', async(req, res) => {
@@ -79,10 +81,12 @@ router.post('/addReferee', async(req, res) => {
     if(myallData.length !== 9) {
       return res.status(400).json({msg: "Please enter valid score!"});
     }
+    for (let index = 0; index < myallData.length; index++) {
+      const element = myallData[index];
+      console.log(element.match_id);
+      await Match.findByIdAndUpdate(element.match_id,{club1_goals:element.team1goal, club2_goals:element.team2goal})
+    } 
     res.status(200).json(myallData);
-    // await Match.findByIdAndUpdate(match_id,{club1_goals:team1goal, club2_goals: team2goal}).then((result) => {
-    //   res.status(200).json(result);
-    // })
   }
   );
   router.post('/selectReferee', async(req, res) => {
@@ -179,13 +183,44 @@ router.post('/updatePreWeek', async(req, res) => {
 router.post('/updatePostWeek', async(req, res) => {
   const{PostWeek}=req.body
     try {
-      console.log("Post week:",req.body)
-      // await Week.findOneAndUpdate({type:"post-week"},{week_no:week_no}).then((result) => {
-      //   res.status(200).json(result);
-      // }).catch((err) => {
-      //   throw err;
-      // })
-      res.status(200).json(PostWeek);
+      console.log("Post week:",PostWeek)
+      await Week.findOneAndUpdate({type:"post-week"},{week_no:PostWeek+1}).then((result) => {
+        res.status(200).json(result);
+      }).catch((err) => {
+        throw err;
+      })
+    }
+    catch(error){
+      res.status(400).json(error)
+    }
+  
+  }
+);
+router.post('/updateStandings', async(req, res) => {
+  const{PostWeek}=req.body
+    try {
+        var options = {
+            method: 'GET',
+            url: 'https://v3.football.api-sports.io/standings',
+            qs: {league: '203', season: '2022'},
+            headers: {
+              'x-rapidapi-host': 'v3.football.api-sports.io',
+              'x-rapidapi-key': '8866ba636a0415854d8f92c47a8457b3'
+            }
+          };
+          
+          request(options, function (error, response, body) {
+            if (error)
+                throw new Error(error);
+            mydata = body;
+            myjson=JSON.parse(body).response[0]
+            //console.log(myjson);
+            //console.log(myjson.league.standings);
+            Standings.findByIdAndUpdate("63909f3ac4fa2258b22d3c8d",{allData:myjson.league.standings[0]}).then(result =>{
+              //console.log(result);
+              res.status(200).json(result);
+            })
+        });
     }
     catch(error){
       res.status(400).json(error)

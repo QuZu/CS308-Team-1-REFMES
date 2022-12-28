@@ -82,12 +82,12 @@ function ResultBox({ matchData,formData,setformData }) {
                     <div className="rating-left-match">
                         <div className="rating-team">
                             <img alt="Homeclub" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
-                            <a>{matchData.club1_info[0].name} <input style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Sethomegoal(e.target.value)}/>  </a>
+                            <a>{matchData.club1_info[0].name} <input disabled={btnDisabled} style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Sethomegoal(e.target.value)}/>  </a>
                         </div>
                         <a> vs. </a>
                         <div className="rating-team">
                             <img alt="Awayclub" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
-                            <a>{matchData.club2_info[0].name} <input style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Setawaygoal(e.target.value)}/></a>
+                            <a>{matchData.club2_info[0].name} <input disabled={btnDisabled} style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Setawaygoal(e.target.value)}/></a>
                         </div>
                     </div>
                 </div>

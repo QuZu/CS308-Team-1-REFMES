@@ -20,7 +20,7 @@ useEffect(() => {
   return (
     <>
     {loading ? 
-    <PostMatchPage PostWeek={postWeek.week_no}/>
+    <PostMatchPage PostWeek={postWeek.week_no-1}/>
     :
     <div className="d-flex justify-content-center">
       <ReactBootstrap.Spinner animation="border"/>

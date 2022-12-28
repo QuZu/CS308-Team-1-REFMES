@@ -27,7 +27,7 @@ function AdminUpdatePostWeekPage(){
         ]).then(axios.spread((res1, res2) => {
             setPreWeekNo(res1.data.week_no);
             setPostWeekNo(res2.data.week_no);
-            if (res1.data.week_no - res2.data.week_no !== 1) {setIsValid(true);}
+            if (res1.data.week_no - res2.data.week_no >= 1) {setIsValid(true);}
             setLoading(true);
         })).catch(err => console.log(err));
     };
