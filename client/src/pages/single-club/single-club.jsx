@@ -7,8 +7,8 @@ import axios from "axios";
 import "./single-club.css" 
 import { useEffect } from "react";
 import * as ReactBootstrap from "react-bootstrap";
-
 import findLogo from "../../components/clubLogos/clubLogos.jsx";
+import findSocialMedia from "../../components/clubLogos/clubsocials";
 
 function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   // getting parameters from clubs page
@@ -18,6 +18,7 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   const [clubName, setClubName] = useState();
   const [logo, setLogo] = useState();
   const [loading, setLoading] = useState(false);
+  const [socialMedia, setSocialMedia] = useState();
     
   const getClub = async() =>{
     await axios.get(`${process.env.REACT_APP_URL}/api/clubs/getClub/${asciName}`).then(response =>{
@@ -26,6 +27,7 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
         setClubData(response.data);
         setLoading(true);
         setLogo(findLogo(response.data.name));
+        setSocialMedia(findSocialMedia(response.data.name));
       }
     }).catch(err => console.log(err))
 
@@ -36,6 +38,7 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   }, [])
   
   var playerlist = ClubData.playerArray;
+  console.log("social meadia: ", socialMedia);
 
   return(
      
@@ -51,11 +54,13 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
                 <div id = "c-i-g"  className="row"> {loading ? <p className="c-g-info"> {ClubData.info}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  </div>
               </div>
           </div>
-          
+          <div className="row single-clup-page-table-social-flow">
+          <div className="col-7">
           <div className = "container players-table-container"> 
             <div id = "table-head" className = "row container text-center"> {loading ? <h2>Player List of {ClubData.name}</h2> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>} </div>
           
             <div  className = "row">
+
               <div id = "table">
               <table  className= "players-table"> 
                   <thead className="players-table-head">
@@ -85,6 +90,19 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
               </div>
             </div>
           </div>
+          </div>
+
+          <div className="col-5">
+          <div id = "social-media-head" className = "row container text-center">  <div className="d-flex justify-content-center"> <h2>Social Media </h2> </div> </div>
+
+          <div> 
+            <p> Twitter: {socialMedia.twitter} </p>
+            <p> Instagram: {socialMedia.instagram} </p>
+          
+          </div>
+          </div>
+          </div>
+
       </div>
     </div>
   )
