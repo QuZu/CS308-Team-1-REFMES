@@ -7,7 +7,7 @@ function WHighlightsPageLanding(){
     const[loading,setLoading] = useState(false);
 
   const getWeek = async()=>{
-    await axios.get(`${process.env.REACT_APP_URL}/api/weeks/getWeek`).then(response=>{
+    await axios.get(`${process.env.REACT_APP_URL}/api/weeks/getPostWeek`).then(response=>{
       setweek(response.data.week_no);
       setLoading(true);
     }).catch(err => console.log(err))
@@ -21,8 +21,8 @@ function WHighlightsPageLanding(){
             {loading ?
             <>
                 <AppNavBar/>
-                <h1 style={{textAlign: "center", marginTop: "12px"}}>HIGHLIGHTS OF WEEK {week}</h1>
-                <WHighlightsPage currentWeek= {week} />
+                <h1 style={{textAlign: "center", marginTop: "12px"}}>HIGHLIGHTS OF WEEK {week-1}</h1>
+                <WHighlightsPage currentWeek= {week-1} />
             </>
              :
              <p>Loading...</p>
