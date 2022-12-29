@@ -4,9 +4,10 @@ const router = express.Router();
 require("dotenv").config();
 const Comment = require('../../models/commentModel');
 const mongoose = require("mongoose");
+const Referee =require("../../models/refereeModel")
 
 router.post("/sendComment", async(req, res) => {
-    const {comment, user_id, match_id, referee_id} = req.body;
+    const {comment, user_id, match_id, referee_id,week_no} = req.body;
     timeZone = 'Europe/Istanbul';
     const date = new Date().toLocaleString('en-US', { timeZone });
         
@@ -16,8 +17,33 @@ router.post("/sendComment", async(req, res) => {
 
         const savedComment = await newComment.save();
         if (!savedComment) throw Error('Something went wrong while saving the post rating');
-
+        res.status(200).json(savedComment)
     } catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+});
+router.post("/refereeSendComment", async(req, res) => {
+    const {comment, user_id, match_id,week_no, referee_id} = req.body;
+    try {
+        await Referee.findById(referee_id)
+        .then(refData=>{
+            //update correct week
+            //console.log(refData);
+            const PostRating = [...refData.postRating];
+            PostRating[week_no][2] += 1;
+            //update Total
+            PostRating[0][2] += 1;
+            Referee.findByIdAndUpdate(referee_id,{
+                postRating:PostRating
+            }).then(updateData =>{
+                res.status(200).json(PostRating)
+                //console.log("updated data", updateData);
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+    } catch (e) {
+        console.log(e);
         res.status(400).json({ error: e.message });
     }
 });

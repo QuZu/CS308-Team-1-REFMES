@@ -4,8 +4,7 @@
     flex-direction: column;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     background-color: #fff;
-    margin: 2em 2em 0em 2em;
-    padding: 2em;
+    padding: 1em;
     border-radius: 10px;
     max-width: 900px;
     flex: 1;
@@ -22,30 +21,37 @@
     margin-right: 10px;
     margin-left: 5px;
     font-weight: 600;
-    font-size: x-large;
+    font-size: large;
 }
-
+.referee-display-rank {
+   color: red;
+   font-size: x-large;
+   margin: 0em !important;
+}
+.referee-display-link {
+    text-decoration: none;
+    color: black;
+    margin: 0em !important;
+ }
 .referee-display-left-container {
     display: flex;
-    flex: 3;
+    flex: 2;
     justify-content: center;
     align-items: center;
 }
 .referee-display-right-container {
     display: flex;
-    flex: 3;
+    flex: 1;
     justify-content: center;
     align-items: center;
 }
 .referee-display-point-circle{
-    height: 3em;
-    width: 3em;
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    border-radius: 50%;
-    background: grey;
+    background: #1997e5;
     font-weight: 600;
     color:white;
-    margin-right: 1em;
+    padding: 0.5rem;
+    border-radius: 10px;
 }

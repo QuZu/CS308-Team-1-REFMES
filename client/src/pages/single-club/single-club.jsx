@@ -7,8 +7,9 @@ import axios from "axios";
 import "./single-club.css" 
 import { useEffect } from "react";
 import * as ReactBootstrap from "react-bootstrap";
-
 import findLogo from "../../components/clubLogos/clubLogos.jsx";
+import findSocialMedia from "../../components/clubLogos/clubsocials";
+import { Timeline } from 'react-twitter-widgets'
 
 function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   // getting parameters from clubs page
@@ -18,29 +19,36 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   const [clubName, setClubName] = useState();
   const [logo, setLogo] = useState();
   const [loading, setLoading] = useState(false);
+  const [socialMedia, setSocialMedia] = useState();
     
   const getClub = async() =>{
     await axios.get(`${process.env.REACT_APP_URL}/api/clubs/getClub/${asciName}`).then(response =>{
       if(response.data) {
         setClubName(response.data.name);
         setClubData(response.data);
-        setLoading(true);
         setLogo(findLogo(response.data.name));
+        setSocialMedia(findSocialMedia(response.data.name));
+        setLoading(true);
       }
     }).catch(err => console.log(err))
 
   };
+  function setTimeLoad() {
+    setLoading(true);
+  }
 
   useEffect(()=> {
     getClub();
   }, [])
   
   var playerlist = ClubData.playerArray;
+  console.log("social media: ", socialMedia);
 
   return(
      
     <div className="container-fluid">
       <div className="row"> <AppNavBar/> </div>
+      
       <div id="club-details-container" className="col-12">
           <div id = "club-info-section" className = "row">
               <div id = "club-logo" className = "col-3"> {loading ? <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {logo} /> </a> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>} </div>
@@ -51,11 +59,13 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
                 <div id = "c-i-g"  className="row"> {loading ? <p className="c-g-info"> {ClubData.info}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>}  </div>
               </div>
           </div>
-          
+          <div className="row single-clup-page-table-social-flow">
+          <div className="col-7">
           <div className = "container players-table-container"> 
             <div id = "table-head" className = "row container text-center"> {loading ? <h2>Player List of {ClubData.name}</h2> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>} </div>
           
             <div  className = "row">
+
               <div id = "table">
               <table  className= "players-table"> 
                   <thead className="players-table-head">
@@ -85,6 +95,24 @@ function SingleClubPage() { // it takes clubname parameter from clubs.jsx
               </div>
             </div>
           </div>
+          </div>
+
+          <div className="col-5">
+          <div id = "social-media-head" className = "row container text-center">  <div className="d-flex justify-content-center"> <h2>Social Media </h2> </div> </div>
+
+          <div> 
+            {loading ?
+              <Timeline 
+              dataSource={{ sourceType: "url", url: socialMedia.twitter }}
+              options={{ borderColor: "#FF0000", width: "80%", height: "800" }}
+              />
+            :
+              <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border"/></div>
+            }
+          </div>
+          </div>
+          </div>
+
       </div>
     </div>
   )

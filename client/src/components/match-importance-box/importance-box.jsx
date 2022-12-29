@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React from "react";
 
 import logoFenerbahce from '../../logos/fenerbahce.png';
 import logoGalatasaray from '../../logos/galatasaray.png';
@@ -51,8 +51,8 @@ function ImportanceBox({ matchData }) {
             <div className="importance-match-container">
                 <div className="importance-match-left-team">
                     <div className="importance-match-team">
-                        <img src={(clubs.find(({name})=>name == matchData.club1)).src}/>
-                        <a>{matchData.club1} </a>
+                        <img alt="Homeclub" src={(clubs.find(({name})=>name === matchData.club1)).src}/>
+                        <p>{matchData.club1} </p>
                     </div>
                 </div>
                 <div className="importance-match-middle">
@@ -60,8 +60,8 @@ function ImportanceBox({ matchData }) {
                 </div>
                 <div className="importance-match-right-team">
                     <div className="importance-match-team">
-                        <a>{matchData.club2} </a>
-                        <img src={(clubs.find(({name})=>name == matchData.club2)).src}/>
+                        <p>{matchData.club2} </p>
+                        <img alt="Awayclub" src={(clubs.find(({name})=>name === matchData.club2)).src}/>
                     </div>
                 </div>
             </div>

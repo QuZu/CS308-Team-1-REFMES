@@ -2,16 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const WeekSchema = new Schema({
-  week_no:{
-    type: String,
+  type:{
+    type: Schema.Types.String,
     required: true
   },
-  start_date: {
-    type: Date,
-    required: true
-  },
-  end_date:{
-    type: Date,
+  week_no: {
+    type: Schema.Types.Number,
     required: true
   }
 });

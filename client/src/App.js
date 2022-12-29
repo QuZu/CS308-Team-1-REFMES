@@ -10,11 +10,9 @@ import Home from "./pages/home/home";
 import ErrorPage from "./pages/error/error";
 import ProfilePage from "./pages/profile/profile";
 import EditPage from "./pages/edit/editpage";
-import UserEditPage from "./pages/edit/usernameedit";
-import PassEditPage from "./pages/edit/passedit";
 import RefPage from "./pages/single-referee/singleRefPage";
-import PostMatchPage from "./pages/post-match/post-match";
-import PreMatchPage from "./pages/pre-match/pre-match";
+import Postmatchlanding from "./pages/post-match/post-match-landing";
+import Prematchlanding from "./pages/pre-match/pre-match-landing";
 import AwardsPage from "./pages/awards/awards";
 import WHighlightsPage from "./pages/weekly-highlights/weekly-highlights";
 import MHighlightsPage from "./pages/monthly-highlights/monthly-highlights";
@@ -39,6 +37,11 @@ import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
 import WHighlightsPageLanding from "./pages/weekly-highlights/weeklyHighlights-landing";
+import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
+import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
+import ForgotPassword from "./pages/login/forgotpassword";
+import ResetPassword from "./pages/login/resetpassword";
+import ReportPage from "./pages/report-page/report-page";
 
 function App() {
   const [state] = useStore();
@@ -51,19 +54,23 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/login/reset-password/:user_id/:token" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin-auth" element={<AdminAuthPage />} />
-        <Route path="/admin-auth/addReferee" element={<AdminAddReferee />} />
+        <Route path="/admin/login" element={<AdminPage />} />
+        <Route path="/admin" element={<AdminAuthPage />} />
+        <Route path="/admin/refmes_rating" element={<RefmesRatingPage />} />
+        <Route path="/admin/update_pre_week" element={<AdminUpdatePreWeekPage />} />
+        <Route path="/admin/update_post_week" element={<AdminUpdatePostWeekPage />} />
+        <Route path="/admin/retrieve_referee_info" element={<AdminUpdateReferee />} />
+        <Route path="/admin/add_referee" element={<AdminAddReferee />} />
+        <Route path="/admin/add_observer" element={<AdminAddObserver />} />
         <Route path="/admin-auth/enterResult" element={<AdminEnterResult />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectRefereeLanding />} />
-        <Route path="/admin-auth/addObserver" element={<AdminAddObserver />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
         <Route path="/observer" element={<ObserverLoginPage />} />
         <Route path="/observer-auth" element={<ObserverAuthPage />} />
         <Route path="/observer-auth/observerRating" element={<ObserverRatingPage />} />
-        <Route path="/admin-auth/updateReferee" element={<AdminUpdateReferee />} />
-        <Route path="admin/refmesRating" element={<RefmesRatingPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
         :
@@ -71,12 +78,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/edit" element={< EditPage/>} />
         <Route path="/home" element={<Home/>} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/edit/password" element={<PassEditPage/>} />
-        <Route path="/edit/username" element={<UserEditPage/>} />
+        <Route path="/user/:username" element={<ProfilePage />} />
         <Route path="/referee/:rUsername" element={<RefPage/>} />
-        <Route path="/pre-match" element={<PreMatchPage />} />
-        <Route path="/post-match" element={<PostMatchPage />} />
+        <Route path="/pre-match" element={<Prematchlanding />} />
+        <Route path="/post-match" element={<Postmatchlanding/>} />
         <Route path="/awards" element={<AwardsPage />} />
         <Route path="/weeklyHighlights" element={<WHighlightsPageLanding />} />
         <Route path="/highlights/monthly" element={<MHighlightsPage />} />
@@ -90,6 +95,7 @@ function App() {
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />
+        <Route path="/report/:username" element={<ReportPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
 }

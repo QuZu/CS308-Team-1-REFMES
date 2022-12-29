@@ -23,7 +23,8 @@ function RefereeDisplay({RefData,CurrentWeek}) {
             observerPoint:oneRef.observerRating[0][1]===0 ? 0 : (oneRef.observerRating[0][0] /oneRef.observerRating[0][1]),
             fanPoint:oneRef.preRating[0][1]===0 ? 0 : (oneRef.preRating[0][0] /oneRef.preRating[0][1]),
             experience:currentdate-parseInt(mydate[2]),
-            ratio:0
+            ratio:0,
+            r_username:oneRef.r_username
           })
       }
       await axios.get(`${process.env.REACT_APP_URL}/api/admin/getRefmesRatingWeights`)
@@ -45,8 +46,8 @@ function RefereeDisplay({RefData,CurrentWeek}) {
             // var total=(wConstant) +(arrayelement.observerPoint)* wObserver + (arrayelement.fanPoint)* wFan + (arrayelement.experience)* wExperience;
             // arrayelement.ratio=(total/20).toFixed(2)
           }
-          setRefarray(mydata)
-          setLoading(true)
+          setRefarray(mydata);
+          setLoading(true);
 
          }).catch(err=>console.log(err));
     };
@@ -54,24 +55,24 @@ function RefereeDisplay({RefData,CurrentWeek}) {
       getallrefpoints();
     }, [])
 
-if(Refarray)
-{
-  Refarray.sort(function(a, b){
-    if(a.ratio < b.ratio) { return 1; }
-    if(a.ratio > b.ratio) { return -1; }
-    return 0;
-  })
-}
+  if(Refarray)
+  {
+    Refarray.sort(function(a, b){
+      if(a.ratio < b.ratio) { return 1; }
+      if(a.ratio > b.ratio) { return -1; }
+      return 0;
+    })
+  }
 
     return (
         <div>
         {loading ?
         <div className="mt-1">
             { Refarray? 
-            (Refarray.map((item)=>{
+            (Refarray.map((item,index)=>{
                 return(
                     <div key={item.name} className="match-importance-box-class">
-                      <RefereeDisplayBox RefereeData={item}/>
+                      <RefereeDisplayBox RefereeData={item} RefereeRank={index+1}/>
                     </div>
                 )
             }))

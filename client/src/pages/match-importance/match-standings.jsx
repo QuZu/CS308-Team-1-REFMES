@@ -1,5 +1,5 @@
 import React from "react";
-import {useState,useEffect} from "react"
+import {useState,useEffect} from "react";
 import axios from "axios";
 import ImportanceBox from "../../components/match-importance-box/importance-box.jsx";
 import "../match-importance/match-importance.css";
