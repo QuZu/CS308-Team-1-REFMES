@@ -29,6 +29,9 @@ function AdminAuthPage(){
     const goToAddObserver = (e) => {
       navigate("/admin/add_observer")
     }
+    const goToAnswerReports = (e) => {
+      navigate("/admin/adminAnswerReports")
+    }
 
     return(
         <div>
@@ -55,6 +58,9 @@ function AdminAuthPage(){
                 </div>
                 <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
                   <a onClick={goToAddObserver} className="admin-auth-btn btn btn-secondary">Add a New Observer</a>
+                </div>
+                <div className="admin-auth-btn-container col-12 d-flex justify-content-center">
+                  <a onClick={goToAnswerReports} className="admin-auth-btn btn btn-secondary">Answer Reports</a>
                 </div>
               </div>
             </div>
