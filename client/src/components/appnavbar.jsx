@@ -31,6 +31,7 @@ function Brand() {
             <Nav.Link href="/standings" className="navText">Standings</Nav.Link>
             <Nav.Link href="/pre-match" className="navText">Pre-Match</Nav.Link>
             <Nav.Link href="/post-match" className="navText">Post-Match</Nav.Link>
+            <Nav.Link href="/weeklyHighlights" className="navText">Weekly Highlights</Nav.Link>
             { !currentUser ?
               <></>:
               <Nav.Link href={`/user/${currentUser.user.username}`} className="navText">My Profile</Nav.Link>

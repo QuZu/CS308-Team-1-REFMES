@@ -36,6 +36,7 @@ import ObserverLoginPage from "./pages/observer/observerLogin";
 import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
+import WHighlightsPageLanding from "./pages/weekly-highlights/weeklyHighlights-landing";
 import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
 import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
 import ForgotPassword from "./pages/login/forgotpassword";
@@ -82,7 +83,7 @@ function App() {
         <Route path="/pre-match" element={<Prematchlanding />} />
         <Route path="/post-match" element={<Postmatchlanding/>} />
         <Route path="/awards" element={<AwardsPage />} />
-        <Route path="/highlights/weekly" element={<WHighlightsPage />} />
+        <Route path="/weeklyHighlights" element={<WHighlightsPageLanding />} />
         <Route path="/highlights/monthly" element={<MHighlightsPage />} />
         <Route path="/club/:asciName" element={<SingleClubPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
