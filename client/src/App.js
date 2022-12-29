@@ -38,6 +38,7 @@ import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
 import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
 import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
+import AdminAnswerReportsPage from "./pages/admin-auth/adminAnswerReports";
 
 function App() {
   const [state] = useStore();
@@ -59,7 +60,7 @@ function App() {
         <Route path="/admin/retrieve_referee_info" element={<AdminUpdateReferee />} />
         <Route path="/admin/add_referee" element={<AdminAddReferee />} />
         <Route path="/admin/add_observer" element={<AdminAddObserver />} />
-
+        <Route path="/admin/adminAnswerReports" element={<AdminAnswerReportsPage />} /> 
         <Route path="/admin-auth/enterResult" element={<AdminEnterResult />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectRefereeLanding />} />
         <Route path="/admin-auth/selectReferee" element={<AdminSelectReferee />} />
