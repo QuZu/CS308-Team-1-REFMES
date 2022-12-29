@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import React, { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import RefHighlightCard from "../../components/refbar/refhighlightcard";
+import RefMostCommentCard from "../../components/refbar/refmostcommentcard";
 function WHighlightsPage({currentWeek}) {
     const [refereesOfWeek, setRefereesOfWeek] = useState([]);
     const [loading,setLoading] = useState(false);
@@ -21,19 +22,28 @@ function WHighlightsPage({currentWeek}) {
 
     function compareObserverVotes( a, b) {
         if ( a.observerRating[currentWeek][0]/a.observerRating[currentWeek][1] < b.observerRating[currentWeek][0]/b.observerRating[currentWeek][1]){
-          return -1;
+          return 1;
         }
         if ( a.observerRating[currentWeek][0]/a.observerRating[currentWeek][1] > b.observerRating[currentWeek][0]/b.observerRating[currentWeek][1]){
-          return 1;
+          return -1;
         }
         return 0;
       }
       function compareFanVotes( a, b) {
         if ( a.postRating[currentWeek][0]/a.postRating[currentWeek][1] < b.postRating[currentWeek][0]/b.postRating[currentWeek][1]){
-          return -1;
+          return 1;
         }
         if ( a.postRating[currentWeek][0]/a.postRating[currentWeek][1] > b.postRating[currentWeek][0]/b.postRating[currentWeek][1]){
+          return -1;
+        }
+        return 0;
+      }
+      function compareComments( a, b) {
+        if ( a.postRating[currentWeek][2]< b.postRating[currentWeek][2]){
           return 1;
+        }
+        if ( a.postRating[currentWeek][2] > b.postRating[currentWeek][2]){
+          return -1;
         }
         return 0;
       }
@@ -43,6 +53,8 @@ function WHighlightsPage({currentWeek}) {
       const sortedFanVotes = refereesOfWeek.sort(compareFanVotes);
       const bestFanVotes = sortedFanVotes.slice(0,3);
       const worstFanVotes = sortedFanVotes.slice(8);
+      const sortedComments = refereesOfWeek.sort(compareComments);
+      const mostCommentedRef = sortedComments.slice(0,1);
     return(
         <div>
             <div className="row">
@@ -113,6 +125,23 @@ function WHighlightsPage({currentWeek}) {
                 </div>
             }
                   </div>
+                  
+                  {loading && refereesOfWeek ?
+                <div style={{marginTop:"20px"}}>
+                    <h4 style={{textAlign:"center", marginRight:"100px"}}>MOST COMMENTED REFEREE IN WEEK {currentWeek}</h4>
+                  
+                {mostCommentedRef.map((item) => {
+                    return(<div style={{marginLeft:"450px"}}>
+                       <RefMostCommentCard Refdata={item} r_username={item.r_username} Refname={item.name} week ={currentWeek}></RefMostCommentCard>
+                        </div>)
+                })}
+                </div>
+                :
+                <div>
+                   <p>Loading...</p>
+                </div>
+            }
+               
               </div>
         </div>
     )
