@@ -8,7 +8,7 @@ const Observer = require('../../models/observerModel');
 const Match = require('../../models/matchModel');
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 const RefmesRating = require('../../models/refmesRatingModel');
-
+const Report =require('../../models/reportsModel');
 router.post('/addReferee', async(req, res) => {
   const {r_username, name, biography, birth_date, birth_place, fifa_date, first_super_date, total_rating, rating_count, totalMatch, yellowCard, avgYellowCard, yellowToRed, redCard, avgRedCard, penalty, avgPenalty,t_name,preRating,postRating,observerRating} = req.body;
     if(!r_username || !name || !biography || !birth_date || !birth_place || !fifa_date || !first_super_date || !t_name){
@@ -133,6 +133,28 @@ router.post("/postRefmesRatingWeights", async(req, res) => {
     throw err;
   });} 
   catch (err) {
+    res.status(500).json(err);
+  }
+}
+);
+router.get("/getAllReports", async(req, res) => {
+  //console.log("in backend");
+  try {
+      await Report.find({}).then((result) => {
+          res.json(result);
+      }).catch((err) => {
+          throw err;
+      });
+  } catch (err) {
+      res.status(500).json(err);
+  }}
+);
+router.post("/answerReport", async(req, res) => {
+  const {user_email, admin_answer, report_id} =req.body;
+  try {
+    await Report.findByIdAndDelete(report_id);
+    res.status(200).json("Report has been deleted...");
+  } catch (err) {
     res.status(500).json(err);
   }
 }
