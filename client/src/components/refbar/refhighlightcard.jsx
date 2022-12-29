@@ -68,9 +68,9 @@ function RefHighlightCard({Refdata,r_username,Refname,week}) {
             <div className="bg-color rounded shadow-sm pt-2 pb-2 px-2 ref-box-feature">
               <div className="ref-box-inner-container">
                 <div className="ref-box-inner-left">
-                    <img  src={result}  width="135" height="135"></img>
+                    <img style={{marginTop:"10px"}} src={result}  width="135" height="135"></img>
                     <div className="mt-2 ref-hover-effect">
-                      <a href={`/referee/${r_username}`}>{Refname}</a>
+                      <a style={{marginLeft:"15px"}} href={`/referee/${r_username}`}>{Refname}</a>
                     </div>
                     <div>
                       <span className=" text-color small text-uppercase">Referee</span>
@@ -79,14 +79,14 @@ function RefHighlightCard({Refdata,r_username,Refname,week}) {
                 
                 <div className="ref-box-inner-right">
                       <div className="ref-box-right-row">
-                        <div className="row">
+                        <div style={{marginTop:"20px"}} className="row">
                             <div className="col-6">
-                             <b> Fan Rating In Week {week}</b>
-                             <p>{Refdata.postRating[week][0]/Refdata.postRating[week][1]}</p>
+                             <p style={{textAlign:"center"}}><b> Average Rating Of Fans In Week {week}</b></p>
+                             <p style={{paddingTop:"10px" ,textAlign:"center", fontSize:"50px", color:"blue"}}>{Refdata.postRating[week][0]/Refdata.postRating[week][1]}</p>
                             </div>
                             <div className="col-6">
-                            <b> Observer Rating In Week {week} </b>
-                            <p>{Refdata.observerRating[week][0]/Refdata.observerRating[week][1]}</p>
+                            <p style={{textAlign:"center"}}><b> Average Rating Of Observers In Week {week} </b></p>
+                            <p style={{textAlign:"center"}}>{Refdata.observerRating[week][0]/Refdata.observerRating[week][1]}</p>
                             </div>
                         </div>
                       </div>
