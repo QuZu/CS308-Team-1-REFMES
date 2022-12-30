@@ -71,7 +71,7 @@ function RefCard({Refdata,r_username,Refname}) {
                 <div className="ref-box-inner-left">
                     <img  src={result}  width="90" height="90"></img>
                     <div className="mt-2 ref-hover-effect">
-                      <a href={`/referee/${r_username}`}>{Refname}</a>
+                      <p className="refcard-ref-name" >{Refname}</p>
                     </div>
                     <div>
                       <span className=" text-color small text-uppercase">Referee</span>

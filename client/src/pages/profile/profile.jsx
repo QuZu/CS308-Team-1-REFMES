@@ -42,7 +42,7 @@ useEffect(() => {
             <img src={profilePhoto} alt="img"/> 
             <article style={{display:"flex"}}><p style={{marginRight: "5px", fontSize: "30px"}}>{userData.full_name}</p><p style={{marginTop:"15px"}}>(@{userData.username})</p>
             {currentUser.user.username===currUsername ? 
-            <div className="user_edit_pen"><a href="/edit"><BsPencilFill/></a></div> :
+            <div className="user_edit_pen"><a id="userEditpen" href="/edit"><BsPencilFill/></a></div> :
             <></>
             }
             </article>
