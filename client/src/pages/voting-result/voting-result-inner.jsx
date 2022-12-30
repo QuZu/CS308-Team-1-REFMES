@@ -17,7 +17,15 @@ function  VotingResultInner({PreWeek}) {
     useEffect(() => {
         getMatches();
     }, [])
-    console.log(allmatchDetails);
+    //console.log(allmatchDetails);
+    if(allmatchDetails.length !==0)
+    {
+        allmatchDetails.sort(function(a, b){
+            if (a.ref_info[0].name > b.ref_info[0].name) {return 1;}
+            if (a.ref_info[0].name < b.ref_info[0].name ) {return -1;}
+            return 0;
+        });
+    }
     return (
     <div>
         <b className='d-flex justify-content-center row mt-3 mb-3'>Voting Results and Referees for Week {PreWeek} Matches</b>

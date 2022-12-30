@@ -1,14 +1,42 @@
-import React, { useState, } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../voting-result-box/voting-result-box.css";
 import 'react-rater/lib/react-rater.css';
 import findLogo from "../clubLogos/clubLogos";
+import * as ReactBootstrap from "react-bootstrap";
+import axios from "axios";
 
 function VotingResultBox({ matchData}) {
     const [hasRefInfo, setHasRefInfo] = useState(matchData.referee_id ? true : false);
+    const [refRatio,setRefRatio]=useState(0);
+    
+    const[loading,setLoading] = useState(false);
+    var currentdate=new Date().getFullYear()
+    const getRefmesrating=async()=>{
+        await axios.get(`${process.env.REACT_APP_URL}/api/admin/getRefmesRatingWeights`).then(res=>{
+            var wConstant=parseFloat(res.data.wConstant)
+            var wExperience= parseFloat(res.data.wExperience)
+            var wFan=parseFloat(res.data.wFan)
+            var wObserver=parseFloat(res.data.wObserver)
+            var mydate= matchData.ref_info[0].first_super_date.split(".")
+            var experience=currentdate-parseInt(mydate[2])
+        
+            var observerRate=matchData.ref_info[0].observerRating[0][1]===0 ? 0 : (matchData.ref_info[0].observerRating[0][0])/(matchData.ref_info[0].observerRating[0][1])
+            var FanRate=matchData.ref_info[0].preRating[0][1]===0 ? 0 : (matchData.ref_info[0].preRating[0][0])/(matchData.ref_info[0].preRating[0][1])
+            var total=(wConstant) +(observerRate)* wObserver + (FanRate)* wFan + (experience)* wExperience
+            var ratio=(total/20).toFixed(2);
+            setRefRatio(ratio);
+            setLoading(true)
+
+        })
+    }
+    useEffect(() => {
+     getRefmesrating();
+    }, [])
 
     return (
         <>
+        {loading ?
         <div className="voting-result-box-outer-container">
             <div className="voting-result-box-inner-container">
                 <div className="voting-result-box-inner-left">
@@ -53,10 +81,15 @@ function VotingResultBox({ matchData}) {
             </div>
             <div className="voting-result-box-bottom-container">
                 <div className="voting-result-box-display-text">
-                    <div className="voting-result-box-point-circle">4.56</div>
+                    <div className="voting-result-box-point-circle">{refRatio}</div>
                 </div>
             </div>
         </div>
+        :
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
+        }
         </>
     );
   }
