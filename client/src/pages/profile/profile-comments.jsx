@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import findLogo from "../../components/clubLogos/clubLogos";
-import findSocialMedia from "../../components/clubLogos/clubsocials";
 import {BsTwitter, BsInstagram} from 'react-icons/bs';
 import axios from "axios";
 import CommentBox from "../../components/comment/commentbox";
@@ -12,7 +11,7 @@ function ProfileComments({CurrentUser}) {
     var clubLogo=findLogo(CurrentUser.fan_of)
     const getUserComments = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/api/comments/getUserComments/${CurrentUser._id}`).then(res => {
-            if (res.data == []) {
+            if (res.data.length === 0) {
                 console.log("Empty");
             } else {
                 setUserComments(res.data);
@@ -33,14 +32,14 @@ function ProfileComments({CurrentUser}) {
         <p className="mt-2 profile-section-text d-flex justify-content-center">Fan Information</p>
         <hr></hr>
         <div className="club_container">
-        <div className="col-4 club_inner"><img src={clubLogo}/></div>
+        <div className="col-4 club_inner"><img alt="userprofile" src={clubLogo}/></div>
         <div className="col-8 club_inner"><p>{CurrentUser.fan_of}</p></div>
         </div>
         <p className="mt-2 profile-section-text d-flex justify-content-center">User Information</p>
         <hr></hr>
         <div className="social_media_container">
-        <div className="social_media_inner"><a style={{color: "#1D9BF0"}} href={`https://twitter.com/${CurrentUser.social_media.length>0 && CurrentUser.social_media[0] ? CurrentUser.social_media[0] :""}`}><BsTwitter/></a></div>
-        <div className="social_media_inner"><a style={{color: "#FE0088"}} href={`https://www.instagram.com/${CurrentUser.social_media.length>1 && CurrentUser.social_media[1] ? CurrentUser.social_media[1] :""}`}><BsInstagram/></a></div>
+        <div className="social_media_inner"><a id="twitter" style={{color: "#1D9BF0"}} href={`https://twitter.com/${CurrentUser.social_media.length>0 && CurrentUser.social_media[0] ? CurrentUser.social_media[0] :""}`}><BsTwitter/></a></div>
+        <div className="social_media_inner"><a id="instagram" style={{color: "#FE0088"}} href={`https://www.instagram.com/${CurrentUser.social_media.length>1 && CurrentUser.social_media[1] ? CurrentUser.social_media[1] :""}`}><BsInstagram/></a></div>
         </div>
         <div className="user-profile-information">
         <p className="d-flex justify-content-center profile-subsection-text">Email:</p>
