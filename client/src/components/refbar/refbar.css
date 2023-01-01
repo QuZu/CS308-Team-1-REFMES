@@ -134,6 +134,12 @@ h6 {
 .text-center{
     text-align: center;
 }
-
+.ref-no-comment-text{
+    color:rgb(208, 28, 28);
+    font-weight: 600;
+    margin-top: 0.5em;
+    font-size: large;
+    font-style: italic;
+}
 
 

@@ -69,7 +69,7 @@ function ProfileComments({CurrentUser}) {
             );
             })
             :
-            <p style={{marginTop: "1em"}}>No comments yet!</p>
+            <p style={{marginTop: "1em",fontStyle:"italic",fontWeight:"bold"}}>No comments yet!</p>
             }
         </div>
     </div> 
