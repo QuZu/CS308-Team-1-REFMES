@@ -80,7 +80,6 @@ class SortedReferee(unittest.TestCase):
             self.assertGreaterEqual(Reflink.text,previous)
             previous=Reflink.text
             print(Reflink.text)
-        Reflink.text
         time.sleep(3)
     def tearDown(self):
         self.driver.close()
