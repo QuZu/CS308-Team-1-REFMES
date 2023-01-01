@@ -23,15 +23,15 @@ function Brand() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" color="white" >
-          <Nav className="me-auto">
+          <Nav justify variant="tabs" className="justify-content-center me-auto">
             <Nav.Link href="/livestatus" className="navText">Live Status</Nav.Link>
-            <Nav.Link href="/votingresults" className="navText">Voting Results</Nav.Link>
+            <Nav.Link href="/votingresults" className=" navText">Voting Results</Nav.Link>
             <Nav.Link href="/referees" className="navText">Referees</Nav.Link>
             <Nav.Link href="/matches" className="navText">Matches</Nav.Link>
             <Nav.Link href="/clubs" className="navText">Clubs</Nav.Link>
             <Nav.Link href="/standings" className="navText">Standings</Nav.Link>
-            <Nav.Link href="/pre-match" className="navText">Pre-Match</Nav.Link>
-            <Nav.Link href="/post-match" className="navText">Post-Match</Nav.Link>
+            <Nav.Link href="/pre-match" className="navText">Pre Match</Nav.Link>
+            <Nav.Link href="/post-match" className="navText">Post Match</Nav.Link>
             <Nav.Link href="/weeklyHighlights" className="navText">Weekly Highlights</Nav.Link>
             { !currentUser ?
               <></>:

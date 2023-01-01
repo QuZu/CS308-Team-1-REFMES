@@ -59,12 +59,38 @@ const images = [
   { id:"tugay_kaan_numanoglu",src:Tugay},
   { id:"yasar_kemal_ugurlu",src:YasarKemal},
 ]
+const[loading,setLoading] = useState(false);
+var currentdate=new Date().getFullYear()
+const [refRatio,setRefRatio]=useState(0);
+const [fanRatio,setFanRatio]=useState(0);
 async function GetData()
 {
- await axios.get(`${process.env.REACT_APP_URL}/api/referees/getComments/${refName._id}`).then(res=>{
-  setList(res.data);
+  await axios.all([
+    axios.get(`${process.env.REACT_APP_URL}/api/referees/getComments/${refName._id}`),
+    axios.get(`${process.env.REACT_APP_URL}/api/admin/getRefmesRatingWeights`)
+  ]).then(
+    axios.spread(
+      (res1,res2)=>{
+        setList(res1.data);var wConstant=parseFloat(res2.data.wConstant)
+        var wExperience= parseFloat(res2.data.wExperience)
+        var wFan=parseFloat(res2.data.wFan)
+        var wObserver=parseFloat(res2.data.wObserver)
+        var mydate= refName.first_super_date.split(".")
+        var experience=currentdate-parseInt(mydate[2])
 
-}).catch(err => console.log(err))
+        var observerRate=refName.observerRating[0][1]===0 ? 0 : (refName.observerRating[0][0])/(refName.observerRating[0][1])
+        var FanRate=refName.preRating[0][1]===0 ? 0 : (refName.preRating[0][0])/(refName.preRating[0][1])
+        var PostFan=refName.postRating[0][1]===0 ? 0 : (refName.postRating[0][0])/(refName.postRating[0][1])
+        var total=(wConstant) +(observerRate)* wObserver + (FanRate)* wFan + (experience)* wExperience
+        var ratio=(total/20).toFixed(2);
+        setRefRatio(ratio);
+        setFanRatio(PostFan)
+        setLoading(true)
+      }
+    )
+  ).catch(err => console.log(err))
+
+
 }
 var result=(images.find(({id})=>id ===picname));
 if(result){
@@ -82,7 +108,7 @@ list.sort(function(a, b){
   if(a.date > b.date) { return -1; }
   return 0;
 })
-console.log(list);
+//console.log(list);
     return (
         <div className="col">
         <div className="padding-15 row">
@@ -133,6 +159,7 @@ console.log(list);
           </div>
           </div>
           <div className="col-sm-3 col-md-2">
+            {loading ? 
             <div className="d-flex justify-content-start">
               <div className=" col-sm-8 col-md-12">
                 <div className="card">
@@ -141,14 +168,18 @@ console.log(list);
                   </div>
                   <div className="card-body">
                     <p className="card-text"></p>
-                    <p className="f-w-700">4.1 / 5</p>
-                    <footer className="text-muted">- This score was calculated with various variables.
-                    <a href="pointcalculation"> More info</a>
+                    <p className="f-w-700">{refRatio} / 5</p>
+                    <footer className="text-muted">- This score is based on the weighted calculation of pre-match ratings awarded in all weeks from observers and fans.
                     </footer>
                   </div>
                 </div>
               </div>
             </div>
+            :
+            <div className="d-flex justify-content-center">
+              <ReactBootstrap.Spinner animation="border"/>
+            </div>
+            }
           </div>
         </div>
         <div className="padding-15 row">
@@ -170,6 +201,7 @@ console.log(list);
           </div>
         </div>
         <div className="col-sm-3 col-md-2">
+            {loading ?
             <div className="d-flex justify-content-start">
               <div className=" col-sm-8 col-md-12">
                 <div className="card">
@@ -178,14 +210,18 @@ console.log(list);
                   </div>
                   <div className="card-body">
                     <p className="card-text"></p>
-                    <p className="f-w-700">3.78 / 5</p>
-                    <footer className="text-muted">- This score is the average of the fan ratings.
-                    <a href="pointcalculation"> More info</a>
+                    <p className="f-w-700">{fanRatio} / 5</p>
+                    <footer className="text-muted">- This score is based on all ratings given by the fans after the match at the end of the week.
                     </footer>
                   </div>
                 </div>
               </div>
             </div>
+            :
+            <div className="d-flex justify-content-center">
+              <ReactBootstrap.Spinner animation="border"/>
+            </div>
+            }
           </div>
       </div>
       <div className="padding-15 row">
@@ -198,7 +234,7 @@ console.log(list);
         <div className="row">
       { list ?
             (list.length > 0 ?
-              list.slice(0,3).map((item) => {
+              list.slice(0,5).map((item) => {
 
                 return(
                   <div
@@ -218,7 +254,7 @@ console.log(list);
                   </div>
 
                 );
-              }) :<p>No comment yet !!!</p>)            :
+              }) :<div className="d-flex justify-content-center ref-no-comment-text"><p>No comment yet !!!</p></div>)            :
               <div className="d-flex justify-content-center">
                   <ReactBootstrap.Spinner animation="border"/>
               </div>

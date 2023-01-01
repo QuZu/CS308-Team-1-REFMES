@@ -13,6 +13,7 @@ function ProfileComments({CurrentUser}) {
         await axios.get(`${process.env.REACT_APP_URL}/api/comments/getUserComments/${CurrentUser._id}`).then(res => {
             if (res.data.length === 0) {
                 console.log("Empty");
+                setLoading(true);
             } else {
                 setUserComments(res.data);
                 setLoading(true);
@@ -69,7 +70,7 @@ function ProfileComments({CurrentUser}) {
             );
             })
             :
-            <p style={{marginTop: "1em"}}>No comments yet!</p>
+            <p style={{marginTop: "1em",fontStyle:"italic",fontWeight:"bold",justifyContent:"center",display:"flex"}}>No comments yet!</p>
             }
         </div>
     </div> 
