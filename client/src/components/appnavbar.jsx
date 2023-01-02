@@ -1,12 +1,13 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../logo.png';
-import {Nav} from 'react-bootstrap';
+import {Nav, NavbarBrand} from 'react-bootstrap';
 import "../components/navbar.css";
 import { useStore } from "../store/store";
 import { useNavigate } from "react-router";
 import React, { useCallback } from "react";
 import { userLogout } from "../store/userreducer";
+import ReportIcon from "./problem.png";
 
 function Brand() {
   const [state, dispatch] = useStore();
@@ -22,17 +23,21 @@ function Brand() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" color="white" >
-          <Nav className="me-auto">
-          <Nav.Link href="/livestatus" className="navText">Live Status</Nav.Link>
+          <Nav justify variant="tabs" className="justify-content-center me-auto">
+            <Nav.Link href="/livestatus" className="navText">Live Status</Nav.Link>
+            <Nav.Link href="/votingresults" className=" navText">Voting Results</Nav.Link>
             <Nav.Link href="/referees" className="navText">Referees</Nav.Link>
             <Nav.Link href="/matches" className="navText">Matches</Nav.Link>
             <Nav.Link href="/clubs" className="navText">Clubs</Nav.Link>
             <Nav.Link href="/standings" className="navText">Standings</Nav.Link>
-            <Nav.Link href="/pre-match" className="navText">Pre-Match</Nav.Link>
-            <Nav.Link href="/post-match" className="navText">Post-Match</Nav.Link>
+            <Nav.Link href="/pre-match" className="navText">Pre Match</Nav.Link>
+            <Nav.Link href="/post-match" className="navText">Post Match</Nav.Link>
+            <Nav.Link href="/weeklyHighlights" className="navText">Weekly Highlights</Nav.Link>
             { !currentUser ?
               <></>:
-              <Nav.Link href={`/user/${currentUser.user.username}`} className="navText">My Profile</Nav.Link>} 
+              <Nav.Link href={`/user/${currentUser.user.username}`} className="navText">My Profile</Nav.Link>
+            }
+               
           </Nav>
 
           { !currentUser ?
@@ -42,7 +47,10 @@ function Brand() {
             <Nav.Link href="/signup" align="center"><span className="btn btn-danger">Sign Up</span></Nav.Link>
           </div>
           :
-          <Nav.Link onClick = {logOut} align="center"><span className="btn btn-danger">Log Out</span></Nav.Link>
+          <div className='row'>
+          <div className='col-4'><Navbar.Brand> <a href={`/report/${currentUser.user.username}`}> <img src={ReportIcon} style={{height: "48px"}} alt='Report'/> </a></Navbar.Brand> </div>
+          <div className='col-8'><Nav.Link onClick = {logOut} align="center"><span className="btn btn-danger">Log Out</span></Nav.Link> </div>
+          </div>
           }
         </Navbar.Collapse>
       </Container>

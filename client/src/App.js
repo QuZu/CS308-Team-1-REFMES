@@ -11,7 +11,7 @@ import ErrorPage from "./pages/error/error";
 import ProfilePage from "./pages/profile/profile";
 import EditPage from "./pages/edit/editpage";
 import RefPage from "./pages/single-referee/singleRefPage";
-import PostMatchPage from "./pages/post-match/post-match";
+import Postmatchlanding from "./pages/post-match/post-match-landing";
 import Prematchlanding from "./pages/pre-match/pre-match-landing";
 import AwardsPage from "./pages/awards/awards";
 import WHighlightsPage from "./pages/weekly-highlights/weekly-highlights";
@@ -36,9 +36,15 @@ import ObserverLoginPage from "./pages/observer/observerLogin";
 import ObserverAuthPage from "./pages/observer-auth/observer-auth";
 import ObserverRatingPage from "./pages/observer-auth/observerRating";
 import RefmesRatingPage from "./pages/admin-auth/refmesRating";
+import WHighlightsPageLanding from "./pages/weekly-highlights/weeklyHighlights-landing";
 import AdminUpdatePreWeekPage from "./pages/admin-auth/adminUpdatePreWeek";
 import AdminUpdatePostWeekPage from "./pages/admin-auth/adminUpdatePostWeek";
 import AdminAnswerReportsPage from "./pages/admin-auth/adminAnswerReports";
+import ForgotPassword from "./pages/login/forgotpassword";
+import ResetPassword from "./pages/login/resetpassword";
+import ReportPage from "./pages/report-page/report-page";
+import VotingResult from "./pages/voting-result/voting-result";
+
 
 function App() {
   const [state] = useStore();
@@ -51,6 +57,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/login/reset-password/:user_id/:token" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/admin/login" element={<AdminPage />} />
         <Route path="/admin" element={<AdminAuthPage />} />
@@ -77,9 +85,9 @@ function App() {
         <Route path="/user/:username" element={<ProfilePage />} />
         <Route path="/referee/:rUsername" element={<RefPage/>} />
         <Route path="/pre-match" element={<Prematchlanding />} />
-        <Route path="/post-match" element={<PostMatchPage />} />
+        <Route path="/post-match" element={<Postmatchlanding/>} />
         <Route path="/awards" element={<AwardsPage />} />
-        <Route path="/highlights/weekly" element={<WHighlightsPage />} />
+        <Route path="/weeklyHighlights" element={<WHighlightsPageLanding />} />
         <Route path="/highlights/monthly" element={<MHighlightsPage />} />
         <Route path="/club/:asciName" element={<SingleClubPage />} />
         <Route path="/clubs" element={<ClubsPage />} />
@@ -91,6 +99,8 @@ function App() {
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />
+        <Route path="/votingresults" element={<VotingResult/>} />
+        <Route path="/report/:username" element={<ReportPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
 }

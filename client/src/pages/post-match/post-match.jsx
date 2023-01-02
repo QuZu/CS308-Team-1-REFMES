@@ -7,15 +7,13 @@ import axios from "axios";
 import "../post-match/post-match.css";
 import * as ReactBootstrap from "react-bootstrap";
 
-function PostMatchPage() {
-    const weekNo = "3";
-
+function PostMatchPage({PostWeek}) {
     const [matchDetails, setMatchDetails] = useState([]);
     const [loading,setLoading] = useState(false);
 
     const getMatchDetails = async() => {
         await axios
-            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${weekNo}`)
+            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${PostWeek}`)
             .then(res => {
                 setMatchDetails(res.data);
                 setLoading(true);
@@ -30,7 +28,7 @@ function PostMatchPage() {
         <div>
             <AppNavBar/>
             <div>
-                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Post-Match Rating for Week {weekNo}</h1>
+                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Post-Match Rating for Week {PostWeek}</h1>
             </div>
             {loading && matchDetails ?
                 <div className="matches">

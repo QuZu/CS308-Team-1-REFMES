@@ -74,13 +74,17 @@ function Login() {
                 <button type="submit" className="col-6 btn btn-block btn-success">SIGN IN</button>
               </div>
 
+             
+
               <div className="mt-3 row text-center justify-content-center">
                 <div className="col-12">
                   <span className="link-line-gap d-flex justify-content-center">
-                    <Link className="link-success" to="/forgotpassword"><p> Forgot your password?</p></Link>
+                    Forgotton your password?
+                    <Link className="link-success"to="/login/forgotpassword"><p>Reset it!</p></Link>
                   </span>
                 </div>
               </div>
+
               <div className="mt-3 row text-center justify-content-center">
                 <div className="col-12">
                   <span className="link-line-gap d-flex justify-content-center">

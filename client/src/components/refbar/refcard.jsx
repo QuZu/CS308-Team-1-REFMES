@@ -64,13 +64,14 @@ function RefCard({Refdata,r_username,Refname}) {
   }
 
     return(
-        
+      <>
+        <a className="ref-click-all" href={`/referee/${r_username}`}>
             <div className="bg-color rounded shadow-sm pt-2 pb-2 px-2 ref-box-feature">
               <div className="ref-box-inner-container">
                 <div className="ref-box-inner-left">
                     <img  src={result}  width="90" height="90"></img>
                     <div className="mt-2 ref-hover-effect">
-                      <a href={`/referee/${r_username}`}>{Refname}</a>
+                      <p className="refcard-ref-name" >{Refname}</p>
                     </div>
                     <div>
                       <span className=" text-color small text-uppercase">Referee</span>
@@ -116,7 +117,8 @@ function RefCard({Refdata,r_username,Refname}) {
                 </div>
               </div>
             </div>
-                      
+          </a>
+      </>               
     );
     
 }

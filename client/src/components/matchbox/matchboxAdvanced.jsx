@@ -73,7 +73,7 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
         if(a.date > b.date) { return -1; }
         return 0;
     })
-
+ console.log("mylist: ",list);
     return (
         <div className="matchbox-advanced-outer-container">
             <div className="matchbox-advanced-clubs-container">

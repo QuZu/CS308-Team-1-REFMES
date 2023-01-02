@@ -23,6 +23,15 @@
     border-radius: 15px;
 } 
 
+
+.single-clup-page-table-social-flow{
+
+    width:80%;
+    margin-left: auto;
+    margin-right:auto;
+
+}
+
 #c-i-h {
     padding: 1rem 0;
     border-bottom: 1px solid #d6d5d59a;
@@ -53,7 +62,7 @@
 }
 
 #club-info-section {
-    max-width: 1080px;
+    max-width: 75%;
     background: #fff;
     margin: 2em;
     border-radius: 10px;
@@ -118,6 +127,15 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
+}
+
+#social-media-head{
+
+    color:black;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+
 }
 
 .players-table-head {

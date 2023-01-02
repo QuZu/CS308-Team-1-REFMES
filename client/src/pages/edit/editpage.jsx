@@ -181,10 +181,8 @@ function Edit(){
 
     useEffect(() => {
       getUserInfo();
-    })
+    },[])
     
-
-    console.log(oldInfos);
     return(
       <div className="container">
         <AppNavBar/>

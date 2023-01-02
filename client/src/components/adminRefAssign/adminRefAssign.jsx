@@ -47,7 +47,8 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
                     observerPoint: oneRef.observerRating[0][1]===0 ? 0 : (oneRef.observerRating[0][0] /oneRef.observerRating[0][1]),
                     fanPoint: oneRef.preRating[0][1]===0 ? 0 : (oneRef.preRating[0][0] /oneRef.preRating[0][1]),
                     experience: res5.data.currentYear - parseInt(mydate[2]),
-                    ratio: 0
+                    ratio: 0,
+                    ref_id:oneRef._id
                 })
             }
             var wConstant = parseFloat(res4.data.wConstant);
@@ -141,14 +142,18 @@ function AdminRefAssignPage ( {currentWeek, allData, formData, setFormData} ){
     }, []);
 
     useEffect(() => {
-        setFormData({...FormData, assignmentList: assignmentList});
+        setFormData({...formData, assignmentList: assignmentList});
     }, [assignmentList]);
 
     return(
         <div className="container">
             { loading ?
             <>
+            
             <div className="row">
+                <div style={{marginBottom: "2rem"}}>
+                    <p>Assign referees for matches of Week {currentWeek}:</p>
+                </div>
                 { assignmentList ?
                 (assignmentList.map((item, index) => {
                     return(<RefAssignBox key={index} refereeData={assignmentList[index].refereeDetails} matchData={assignmentList[index].matchDetails} idx={index}/>);

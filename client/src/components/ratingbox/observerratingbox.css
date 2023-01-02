@@ -1,4 +1,4 @@
-.rating-outer-container {
+.observer-rating-outer-container {
     display: flex;
     flex-direction: column;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -11,46 +11,46 @@
     width: 100%;
 }
 
-.rating-container {
+.observer-rating-container {
     display: flex;
     flex-direction: row;
 }
 
-.rating-left {
+.observer-rating-left {
     display: flex;
     flex-direction: row;
     flex: 7;
 }
 
-.rating-team {
+.observer-rating-team {
     display: flex;
     align-items: center;
 }
 
-.rating-team img {
+.observer-rating-team img {
     width: 28px;
     margin-right: 5px;
     margin-left: 10px;
 }
 
-.rating-team a {
+.observer-rating-team a {
     margin-right: 10px;
     margin-left: 5px;
 }
 
-.rating-left-match {
+.observer-rating-left-match {
     display: flex;
     flex: 3;
     justify-content: center;
     align-items: center;
 }
 
-.rating-right {
+.observer-rating-right {
     text-align: center;
     flex: 5;
 }
 
-.rating-right-referee {
+.observer-rating-right-referee {
     display: flex;
     flex: 1;
     justify-content: center;
@@ -58,12 +58,12 @@
     margin-bottom: 0.75em;
 }
 
-.rating-right-referee a {
+.observer-rating-right-referee a {
     color: #444;
     text-decoration: none;
 }
 
-.rating-right-referee a:hover {
+.observer-rating-right-referee a:hover {
     color: #e51936;
 }
 
@@ -80,19 +80,19 @@
     color: #fd9 !important;
 }
 
-.rating-right-date {
+.observer-rating-right-date {
     color: #999;
     font-size: 0.75em;
     margin-top: 0.4em;
 }
 
-.rating-right-error {
+.observer-rating-right-error {
     color: #dc3545;
     font-size: 0.75em;
     margin-top: 0.4em;
 }
 
-.rating-comment-container {
+.observer-rating-comment-container {
     display: flex;
     flex-direction: row;
     justify-content: right;
@@ -101,16 +101,16 @@
     font-size: 0.75em;
 }
 
-.rating-comment-add-button a {
+.observer-rating-comment-add-button a {
     text-decoration: none;
     color: #666;
 }
 
-.rating-comment-add-button a:hover {
+.observer-rating-comment-add-button a:hover {
     color: #e51936;
 }
 
-.rating-submit {
+.observer-rating-submit {
     display: flex;
     align-items: center;
     flex: 1.25;
