@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt=require("bcrypt");
+var nodemailer = require('nodemailer');
 require("dotenv").config();
 const Referee = require('../../models/refereeModel');
 const Observer = require('../../models/observerModel');
 const Match = require('../../models/matchModel');
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 const RefmesRating = require('../../models/refmesRatingModel');
+const Report =require('../../models/reportsModel');
+
 const Standings =require("../../models/standingsModel")
 const Week=require("../../models/weekModel")
 const request = require("request");
@@ -142,6 +145,74 @@ router.post("/postRefmesRatingWeights", async(req, res) => {
   }
 }
 );
+router.get("/getAllReports", async(req, res) => {
+  try {
+      await Report.find().then((result) => {
+          res.json(result);
+      }).catch((err) => {
+          throw err;
+      });
+  } catch (err) {
+      res.status(500).json(err);
+  }}
+);
+router.post("/answerReport", async(req, res) => {
+  const {user_email, admin_answer, report_id} =req.body;
+  try {
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'refmes.org@gmail.com',
+        pass: 'deuerygiggvzlkga'
+      }
+    });
+
+    var mailOptions = {
+      from: 'refmes.org@gmail.com',
+      to: user_email,
+      subject: 'Answer To Report',
+      text: admin_answer
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
+    await Report.findByIdAndDelete(report_id);
+    res.status(200).json("Report has been deleted...");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+);
+router.post("/getReportData", async(req, res) => {
+  try {
+    //console.log(req.body);
+    await Report.aggregate(
+      [
+      {$lookup:
+          {
+              from:"users",
+              localField:"user_email",
+              foreignField:"email",
+              as:"user_info"
+          }
+      },
+          {$match: { $expr : { $eq: [ '$_id' , { $toObjectId: req.body._id} ] } } }
+      ]
+      ).then(result=>{
+          res.status(200).json(result);
+      })
+      
+  } catch (err) {
+      res.status(500).json(err);
+  }}
+);
+
 router.post('/assignReferee', async(req, res) => {
   const myarray= req.body;
     try {
