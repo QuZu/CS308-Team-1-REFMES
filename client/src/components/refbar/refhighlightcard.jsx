@@ -23,8 +23,7 @@ import Tugay from "../refbar/refImage/tugay-numanoglu.jpg"
 import YasarKemal from  "../refbar/refImage/yasar-kemal.jpg"
 import user_profile from"../refbar/user_profile.png"
 import { useNavigate } from "react-router";
-
-
+import "../refbar/refhighlightcard.css"
 import "../refbar/refcard.css"
 function RefHighlightCard({Refdata,r_username,Refname,week}) {
   const navigate = useNavigate();
@@ -68,9 +67,9 @@ function RefHighlightCard({Refdata,r_username,Refname,week}) {
             <div className="bg-color rounded shadow-sm pt-2 pb-2 px-2 ref-box-feature">
               <div className="ref-box-inner-container">
                 <div className="ref-box-inner-left">
-                    <img style={{marginTop:"10px"}} src={result}  width="135" height="135"></img>
+                    <img style={{marginTop:"10px"}} src={result}  width="100px" height="100px"></img>
                     <div className="mt-2 ref-hover-effect">
-                      <a style={{marginLeft:"15px"}} href={`/referee/${r_username}`}>{Refname}</a>
+                      <a style={{textAlign:"center"}} href={`/referee/${r_username}`}>{Refname}</a>
                     </div>
                     <div>
                       <span className=" text-color small text-uppercase">Referee</span>
@@ -82,11 +81,11 @@ function RefHighlightCard({Refdata,r_username,Refname,week}) {
                         <div style={{marginTop:"20px"}} className="row">
                             <div className="col-6">
                              <p style={{textAlign:"center"}}><b> Average Rating Of Fans In Week {week}</b></p>
-                             <p style={{paddingTop:"10px" ,textAlign:"center", fontSize:"50px", color:"blue"}}>{Refdata.postRating[week][0]/Refdata.postRating[week][1]}</p>
+                             <div className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.postRating[week][0]/Refdata.postRating[week][1]}</div>
                             </div>
                             <div className="col-6">
                             <p style={{textAlign:"center"}}><b> Average Rating Of Observers In Week {week} </b></p>
-                            <p style={{textAlign:"center"}}>{Refdata.observerRating[week][0]/Refdata.observerRating[week][1]}</p>
+                            <div className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.observerRating[week][0]/Refdata.observerRating[week][1]}</div>
                             </div>
                         </div>
                       </div>

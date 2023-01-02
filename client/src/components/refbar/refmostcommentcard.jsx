@@ -23,7 +23,7 @@ import Tugay from "../refbar/refImage/tugay-numanoglu.jpg"
 import YasarKemal from  "../refbar/refImage/yasar-kemal.jpg"
 import user_profile from"../refbar/user_profile.png"
 import { useNavigate } from "react-router";
-
+import "../refbar/refhighlightcard.css"
 
 import "../refbar/refcard.css"
 function RefMostCommentCard({Refdata,r_username,Refname,week}) {
@@ -80,9 +80,9 @@ function RefMostCommentCard({Refdata,r_username,Refname,week}) {
                 <div className="ref-box-inner-right">
                       <div className="ref-box-right-row">
                         <div style={{marginTop:"20px"}} className="row">
-                            <div className="col-12">
+                            <div>
                              <p style={{fontSize:"20px",textAlign:"center"}} ><b> Number of Comments {Refname} Get In Week {week}</b></p>
-                             <p style={{paddingTop:"10px" ,textAlign:"center", fontSize:"50px", color:"blue"}}>{Refdata.postRating[week][2]}</p>
+                             <div className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.postRating[week][2]}</div>
                             </div>
                         </div>
                       </div>
