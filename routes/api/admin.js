@@ -139,18 +139,8 @@ router.post("/postRefmesRatingWeights", async(req, res) => {
 }
 );
 router.get("/getAllReports", async(req, res) => {
-  //console.log("in backend");
   try {
-      await Report.aggregate([
-        {$lookup:
-          {
-              from:"users",
-              localField:"user_email",
-              foreignField:"_id",
-              as:"user_info"
-          }
-      }
-       ]).then((result) => {
+      await Report.find().then((result) => {
           res.json(result);
       }).catch((err) => {
           throw err;
@@ -191,6 +181,29 @@ router.post("/answerReport", async(req, res) => {
     res.status(500).json(err);
   }
 }
+);
+router.post("/getReportData", async(req, res) => {
+  try {
+    //console.log(req.body);
+    await Report.aggregate(
+      [
+      {$lookup:
+          {
+              from:"users",
+              localField:"user_email",
+              foreignField:"email",
+              as:"user_info"
+          }
+      },
+          {$match: { $expr : { $eq: [ '$_id' , { $toObjectId: req.body._id} ] } } }
+      ]
+      ).then(result=>{
+          res.status(200).json(result);
+      })
+      
+  } catch (err) {
+      res.status(500).json(err);
+  }}
 );
 
 module.exports = router;
