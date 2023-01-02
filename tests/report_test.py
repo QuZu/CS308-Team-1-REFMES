@@ -29,15 +29,28 @@ class IsSendReport(unittest.TestCase):
         Email.send_keys("a.bilalyildiz@gmail.com")
         Email.send_keys(Keys.RETURN)
         Password=driver.find_element(By.XPATH,"//input[@name='password']")
-        Password.send_keys("8765432Bb.")
+        Password.send_keys("8765432Bb!")
         Password.send_keys(Keys.RETURN)
         time.sleep(3)
         Report = driver.find_element(By.XPATH,"//a[@id='report']")
         Report.click()
         time.sleep(3)
+        #test to page header
         Header = driver.find_element(By.XPATH, "//div[@class='row report-page-header']")
-        print(Header.text)
+        self.assertEqual("Report Page", Header.text, "page header error")
+        #test to label on the form before send
+        Form = driver.find_elements(By.XPATH, "//div[@class='form-group']")
+        self.assertEqual("Please write your report and click send report.", Form[0].text, "label error before send")
+        
+        Report_message = driver.find_element(By.XPATH,"//input[@name='submitButton']")
+        Report_message.send_keys(" This is a report message to test!")
+        time.sleep(2)
+        Report_message.send_keys(Keys.RETURN)
+        time.sleep(3)
 
+        #test to label on the form after send
+        After_form = driver.find_elements(By.XPATH, "//div[@class='form-group']")
+        self.assertEqual("Your report is submitted, please check your email for response.", After_form[0].text, "label error after send")
 
     def tearDown(self):
         self.driver.close()
