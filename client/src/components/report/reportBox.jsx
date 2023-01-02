@@ -6,10 +6,14 @@ function ReportBox({ reportData }) {
     const [errorMessage, setErrorMessage] = useState("");
     const [answer,Setanswer] = useState("");
  
-    const answerReport = () => {
+    const answerReport = async (e) => {
+        e.preventDefault();
         console.log(reportData);
             const newReport = {user_email: reportData.user_email , admin_answer: answer, report_id: reportData._id};
-            axios
+            if(answer === ""){
+                setErrorMessage("You cannot send email with an empty answer!!!");
+            }
+            else{  axios
                 .post(`${process.env.REACT_APP_URL}/api/admin/answerReport`, newReport)
                 .then((res) => {
                     
@@ -21,7 +25,8 @@ function ReportBox({ reportData }) {
                 }).catch((err) => {
                     console.log("Error: ", err);
                 });
-           
+           }
+        
         
     }
     return (
@@ -32,7 +37,7 @@ function ReportBox({ reportData }) {
           <div style={{textAlign:"center"}}>
             <form onSubmit={answerReport}>
               <textarea onChange={(e)=>Setanswer(e.target.value)}  className="reportsTextArea" placeholder="Enter your response here..."></textarea>
-              <p>{errorMessage} </p>
+              <p style={{color:"red"}}>{errorMessage} </p>
               <button className="btn btn-success" type="submit"> Answer Report</button>
           </form>
           </div>
