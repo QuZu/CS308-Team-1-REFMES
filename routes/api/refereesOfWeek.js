@@ -4,7 +4,7 @@ const router = express.Router();
 require("dotenv").config();
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 const PreRating=require("../../models/preRatingModel")
-const myReferee = require('../../models/refereeModel');
+const myReferee = require('../../models/refereemodel');
 router.get("/getRefereesOfWeek/:weekNo", async(req, res) => {
     try {
        var result=await RefereesOfWeek.findOne({week_no:req.params.weekNo})
