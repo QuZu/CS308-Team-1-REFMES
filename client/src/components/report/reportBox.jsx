@@ -8,16 +8,17 @@ function ReportBox({ reportData }) {
     const [errorMessage, setErrorMessage] = useState("");
     const [answer,Setanswer] = useState("");
     const[loading,setLoading] = useState(false);
+    const [allData,setAllData]=useState({})
     const navigate = useNavigate();
-   const getInfoReport=async()=>{
-    axios.post(`${process.env.REACT_APP_URL}/api/admin/getReportData`, reportData).then((res)=>{
-        console.log(res);
-        setLoading(true)
-    })
-   }
-   useEffect(() => {
+    const getInfoReport=async()=>{
+        axios.post(`${process.env.REACT_APP_URL}/api/admin/getReportData`, reportData).then((res)=>{
+            setAllData(res.data)
+            setLoading(true)
+        })
+    }
+    useEffect(() => {
     getInfoReport();
-  }, [])
+    }, [])
 
     const answerReport = async (e) => {
         e.preventDefault();
@@ -42,19 +43,19 @@ function ReportBox({ reportData }) {
            }
         
         
-    }
+    };
     return (
         <>
         {loading ?
             <div className="col-6 reportDiv">
-            <p style={{textAlign:"center", fontSize:"23px"}}><b>{reportData.user_email}</b></p>
+            <p style={{textAlign:"center", fontSize:"23px"}}><b>{allData[0].user_info[0].full_name}</b></p>
             <hr/>
-            <p style={{textAlign:"center"}}>{reportData.user_message}</p>
+            <p style={{textAlign:"center",fontWeight:"bold"}}>{allData[0].user_message}</p>
             <div style={{textAlign:"center"}}>
                 <form onSubmit={answerReport}>
                 <textarea onChange={(e)=>Setanswer(e.target.value)}  className="reportsTextArea" placeholder="Enter your response here..."></textarea>
                 <p style={{color:"red"}}>{errorMessage} </p>
-                <button className="btn btn-success" type="submit"> Answer Report</button>
+                <button className="mb-2 btn btn-success" type="submit"> Answer Report</button>
             </form>
             </div>
             </div>
