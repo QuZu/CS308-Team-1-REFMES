@@ -64,19 +64,55 @@ function Home() {
             <h1 style={{textAlign: "center", marginTop: "132px", fontSize: "42px"}}>WELCOME, THIS IS <b>REFMES</b>!</h1>
             <h2 style={{textAlign: "center", marginTop: "72px", marginBottom: "72px", fontSize: "24px"}}>Justice in Football!</h2>
          </div>
-         <div className="home-top-standings-container">
-            { loading ?
-               (topStandings.map((item, index) => {
-                  return(
-                  <div className="home-top-standings-inner-container" key={index} idx={index}>
-                     <div>{topStandings[index].rank} - {topStandings[index].team.name} - {topStandings[index].points}</div>
-                  </div>);
-               }))
-            :
-            <div className="d-flex justify-content-center">
-               <ReactBootstrap.Spinner animation="border"/>
-            </div>   
-            }
+         <div className="container mb-5">
+            <div className="row">
+               <div className="col-7">
+                  <div className="home-top-standings-container">
+                     <div className="home-top-standings-inner-container">
+                        <div className="home-top-standings-inner-item"><b>Rank</b></div>
+                        <div className="home-top-standings-inner-item-club"><b>Club Name</b></div>  
+                        <div className="home-top-standings-inner-item"><b>Pts</b></div>
+                     </div>
+                     { loading ?
+                        (topStandings.map((item, index) => {
+                           return(
+                           <div className="home-top-standings-inner-container" key={index} idx={index}>
+                              <div className="home-top-standings-inner-item">{topStandings[index].rank}</div>
+                              <div className="home-top-standings-inner-item-club">{topStandings[index].team.name}</div>
+                              <div className="home-top-standings-inner-item">{topStandings[index].points}</div>
+                           </div>);
+                        }))
+                     :
+                     <div className="d-flex justify-content-center">
+                        <ReactBootstrap.Spinner animation="border"/>
+                     </div>   
+                     }
+                  </div>
+               </div>
+               <div className="col-5">
+                  <div className="home-top-standings-container">
+                     <div className="home-top-standings-inner-container">
+                        <div className="home-top-standings-inner-item"><b>Rank</b></div>
+                        <div className="home-top-standings-inner-item-club"><b>Club Name</b></div>  
+                        <div className="home-top-standings-inner-item"><b>Pts</b></div>
+                     </div>
+                     { loading ?
+                        (topStandings.map((item, index) => {
+                           return(
+                           <div className="home-top-standings-inner-container" key={index} idx={index}>
+                              <div className="home-top-standings-inner-item">{topStandings[index].rank}</div>
+                              <div className="home-top-standings-inner-item-club">{topStandings[index].team.name}</div>
+                              <div className="home-top-standings-inner-item">{topStandings[index].points}</div>
+                           </div>);
+                        }))
+                     :
+                     <div className="d-flex justify-content-center">
+                        <ReactBootstrap.Spinner animation="border"/>
+                     </div>   
+                     }
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
    )
