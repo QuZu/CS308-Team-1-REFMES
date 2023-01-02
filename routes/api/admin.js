@@ -2,6 +2,7 @@ const express = require("express");
 const { response } = require("express");
 const router = express.Router();
 const bcrypt=require("bcrypt");
+var nodemailer = require('nodemailer');
 require("dotenv").config();
 const Referee = require('../../models/refereeModel');
 const Observer = require('../../models/observerModel');
@@ -140,7 +141,16 @@ router.post("/postRefmesRatingWeights", async(req, res) => {
 router.get("/getAllReports", async(req, res) => {
   //console.log("in backend");
   try {
-      await Report.find({}).then((result) => {
+      await Report.aggregate([
+        {$lookup:
+          {
+              from:"users",
+              localField:"user_email",
+              foreignField:"_id",
+              as:"user_info"
+          }
+      }
+       ]).then((result) => {
           res.json(result);
       }).catch((err) => {
           throw err;
@@ -152,6 +162,29 @@ router.get("/getAllReports", async(req, res) => {
 router.post("/answerReport", async(req, res) => {
   const {user_email, admin_answer, report_id} =req.body;
   try {
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'refmes.org@gmail.com',
+        pass: 'deuerygiggvzlkga'
+      }
+    });
+
+    var mailOptions = {
+      from: 'refmes.org@gmail.com',
+      to: user_email,
+      subject: 'Answer To Report',
+      text: admin_answer
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
     await Report.findByIdAndDelete(report_id);
     res.status(200).json("Report has been deleted...");
   } catch (err) {
