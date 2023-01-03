@@ -21,7 +21,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
     def test_send_email_in_reset_password(self):
         driver = self.driver
         time.sleep(2)
-        driver.get(LOCAL_LINK)
+        driver.get(WEB_LINK)
         time.sleep(2)
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
@@ -49,7 +49,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
         self.assertEqual("Reset password message is sending to your email!", ConfirmMessage.text, "confirm message error")
 
         #go to the sent link (false link)
-        driver.get("http://localhost:3000/login/reset-password/63a962f203a977d16ec39007/843d6afe99c61b8c3902da292d5fca06bccd0a138a8c19ecef6441dcf7448d16/")
+        driver.get("https://refmes.herokuapp.com/login/reset-password/63a962f203a977d16ec39007/9c6802f5e505466e8d66dd3e467df5d82bcc028fca18c5fb503191aa6de15c65/")
         time.sleep(3)
 
         incorrect_error = driver.find_element(By.CLASS_NAME, 'reset-password-error')
@@ -58,7 +58,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
 
 
         #go to the sent link (correct link)
-        driver.get("http://localhost:3000/login/reset-password/63a962f203a977d16ec39007/0aa18905d39768f230d929bd66ebaf79957efe600e3cd7e376407197f078efe3/")
+        driver.get("https://refmes.herokuapp.com/login/reset-password/63a962f203a977d16ec39007/9c6802f5e505466e8d66dd3e467df5d82bcc028fca18c5fb503191aa6de15c63/")
         time.sleep(3)
 
         Password = driver.find_element(By.XPATH,"//input[@type='password']")
@@ -97,7 +97,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
         time.sleep(3)
 
         #go to the sent link (expired link)
-        driver.get("http://localhost:3000/login/reset-password/63a962f203a977d16ec39007/0aa18905d39768f230d929bd66ebaf79957efe600e3cd7e376407197f078efe3/")
+        driver.get("https://refmes.herokuapp.com/login/reset-password/63a962f203a977d16ec39007/9c6802f5e505466e8d66dd3e467df5d82bcc028fca18c5fb503191aa6de15c63/")
         time.sleep(3)
 
         expired_error = driver.find_element(By.CLASS_NAME, 'reset-password-error')

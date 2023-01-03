@@ -20,7 +20,7 @@ class IsSendReport(unittest.TestCase):
     def test_send_report_in_refmes(self):
         driver = self.driver
         time.sleep(2)
-        driver.get(LOCAL_LINK)
+        driver.get(WEB_LINK)
         time.sleep(2)
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
