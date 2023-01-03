@@ -48,7 +48,7 @@ function Brand() {
           </div>
           :
           <div className='row'>
-          <div className='col-4'><Navbar.Brand> <a id='report' href={`/report/${currentUser.user.username}`}> <img src={ReportIcon} style={{height: "48px"}} alt='Report'/> </a></Navbar.Brand> </div>
+          <div className='col-4'><Navbar.Brand> <a id='report' href={`/report`}> <img src={ReportIcon} style={{height: "48px"}} alt='Report'/> </a></Navbar.Brand> </div>
           <div className='col-8'><Nav.Link onClick = {logOut} align="center"><span className="btn btn-danger">Log Out</span></Nav.Link> </div>
           </div>
           }
