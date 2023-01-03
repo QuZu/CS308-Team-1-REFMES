@@ -81,11 +81,11 @@ function RefHighlightCard({Refdata,r_username,Refname,week}) {
                         <div style={{marginTop:"20px"}} className="row">
                             <div className="col-6">
                              <p style={{textAlign:"center"}}><b> Average Rating Of Fans In Week {week}</b></p>
-                             <div className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.postRating[week][0]/Refdata.postRating[week][1]}</div>
+                             <div id="fan_vote" className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.postRating[week][0]/Refdata.postRating[week][1]}</div>
                             </div>
                             <div className="col-6">
                             <p style={{textAlign:"center"}}><b> Average Rating Of Observers In Week {week} </b></p>
-                            <div className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.observerRating[week][0]/Refdata.observerRating[week][1]}</div>
+                            <div id="observer_vote" className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.observerRating[week][0]/Refdata.observerRating[week][1]}</div>
                             </div>
                         </div>
                       </div>

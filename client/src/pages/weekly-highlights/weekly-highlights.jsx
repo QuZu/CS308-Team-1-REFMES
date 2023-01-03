@@ -63,7 +63,7 @@ function WHighlightsPage({currentWeek}) {
                 <div>
                     <h4> BEST REFEREES FOR OBSERVERS IN WEEK {currentWeek}</h4>
                 {bestObserverVotes.map((item) => {
-                    return(<div style={{marginTop:"20px"}}>
+                    return(<div id="best_observer" style={{marginTop:"20px"}}>
                         <RefHighlightCard Refdata={item} r_username={item.r_username} Refname={item.name} week ={currentWeek}></RefHighlightCard>
                         </div>)
                 })}
@@ -79,7 +79,7 @@ function WHighlightsPage({currentWeek}) {
                 <div>
                     <h4 style={{textAlign:"center"}}>BEST REFEREES FOR FANS IN WEEK {currentWeek}</h4>
                 {bestFanVotes.map((item) => {
-                    return(<div style={{marginTop:"20px"}}>
+                    return(<div id="best_fan" style={{marginTop:"20px"}}>
                        <RefHighlightCard Refdata={item} r_username={item.r_username} Refname={item.name} week ={currentWeek}></RefHighlightCard>
                         </div>)
                 })}
@@ -98,7 +98,7 @@ function WHighlightsPage({currentWeek}) {
                 <div style={{marginTop: "20px"}}>
                     <h4 style={{textAlign:"center"}}>WORST REFEREE FOR OBSERVERS IN WEEK {currentWeek}</h4>
                 {worstObserverVote.map((item) => {
-                    return(<div style={{marginTop:"20px"}}>
+                    return(<div id="worst_observer" style={{marginTop:"20px"}}>
                         <RefHighlightCard Refdata={item} r_username={item.r_username} Refname={item.name} week ={currentWeek}></RefHighlightCard>
                         </div>)
                 })}
@@ -114,7 +114,7 @@ function WHighlightsPage({currentWeek}) {
                 <div style={{marginTop:"20px"}}>
                     <h4 style={{textAlign:"center"}}>WORST REFEREE FOR FANS IN WEEK {currentWeek}</h4>
                 {worstFanVotes.map((item) => {
-                    return(<div style={{marginTop:"20px"}}>
+                    return(<div id ="worst_fan" style={{marginTop:"20px"}}>
                        <RefHighlightCard Refdata={item} r_username={item.r_username} Refname={item.name} week ={currentWeek}></RefHighlightCard>
                         </div>)
                 })}
@@ -133,7 +133,7 @@ function WHighlightsPage({currentWeek}) {
                     <h4 style={{textAlign:"center"}}>MOST COMMENTED REFEREE IN WEEK {currentWeek}</h4>
                   
                 {mostCommentedRef.map((item) => {
-                    return(<div style={{marginTop:"20px"}}>
+                    return(<div id="most_commented" style={{marginTop:"20px"}}>
                        <RefMostCommentCard Refdata={item} r_username={item.r_username} Refname={item.name} week ={currentWeek}></RefMostCommentCard>
                         </div>)
                 })}
