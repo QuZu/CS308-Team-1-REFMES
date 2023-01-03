@@ -3,6 +3,7 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
 import { useCallback, useState } from "react";
+import { useStore } from "../../store/store";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -16,16 +17,16 @@ function ReportPage(){
     .object({
         report: z.string().min(1),
     });
-
+    const [state, dispatch] = useStore();
     const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(ReportSchema), mode: "all",});
     const [submitted, setSubmitted] = useState(false);
-    const {username} = useParams();
+    const {user: currentUser} = state;
     //console.log("username", username);
 
     const onSubmit = useCallback((data) => {
 
         const user = {
-            username: username,
+            username: currentUser.user.username,
             report: data.report
         };
 

@@ -100,7 +100,7 @@ function App() {
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />
         <Route path="/votingresults" element={<VotingResult/>} />
-        <Route path="/report/:username" element={<ReportPage />} />
+        <Route path="/report" element={<ReportPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>
 }
