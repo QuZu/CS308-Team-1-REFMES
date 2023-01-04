@@ -13,9 +13,15 @@
     font-weight: 500;
 }
 .ref-hover-effect p:hover{
-    color:rgb(255, 255, 255);
-    
+    color:rgb(255, 255, 255); 
 }
+.refcomment-hover-effect a{
+    color:rgb(255, 0, 0); 
+}
+.refcomment-hover-effect a:hover{
+    color:rgb(255, 255, 255); 
+}
+
 .refcard-ref-name{
     margin-bottom: 0;
 }

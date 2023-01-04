@@ -21,7 +21,7 @@ function WHighlightsPageLanding(){
             {loading ?
             <>
                 <AppNavBar/>
-                <h1 style={{textAlign: "center", marginTop: "12px"}}>HIGHLIGHTS OF WEEK {week-1}</h1>
+                <h1 style={{textAlign: "center", marginTop: "12px", marginBottom:"50px"}}>HIGHLIGHTS OF WEEK {week-1}</h1>
                 <WHighlightsPage currentWeek= {week-1} />
             </>
              :
