@@ -26,7 +26,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
         time.sleep(2)
-        reset = driver.find_element(By.LINK_TEXT, "Reset it!")
+        reset = driver.find_element(By.LINK_TEXT, "Forgot password?")
         reset.click()
         time.sleep(2)
 
@@ -49,7 +49,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
         self.assertEqual("Reset password message is sending to your email!", ConfirmMessage.text, "confirm message error")
 
         #go to the sent link (false link)
-        driver.get("https://www.refmes.org/login/reset-password/63a962f203a977d16ec39007/9c6802f5e505466e8d66dd3e467df5d82bcc028fca18c5fb503191aa6de15c65/")
+        driver.get("https://refmes.herokuapp.com/login/reset-password/63a962f203a977d16ec39007/55b1cd6aa0d4dd2e88a3ee4511faf7501c310e4c832b6d41debf510a3b881e18/")
         time.sleep(3)
 
         incorrect_error = driver.find_element(By.CLASS_NAME, 'reset-password-error')
@@ -58,7 +58,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
 
 
         #go to the sent link (correct link)
-        driver.get("https://www.refmes.org/login/reset-password/63a962f203a977d16ec39007/9c6802f5e505466e8d66dd3e467df5d82bcc028fca18c5fb503191aa6de15c63/")
+        driver.get("https://refmes.herokuapp.com/login/reset-password/63a962f203a977d16ec39007/55b1cd6aa0d4dd2e88a3ee4511faf7501c310e4c832b6d41debf510a3b881e19/")
         time.sleep(3)
 
         Password = driver.find_element(By.XPATH,"//input[@type='password']")
@@ -84,8 +84,8 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
         #login with new password
 
         time.sleep(3)
-        Email=driver.find_element(By.XPATH,"//input[@name='email']")
-        Email.send_keys("a.bilalyildiz@gmail.com")
+        Email=driver.find_element(By.XPATH,"//input[@placeholder='Username']")
+        Email.send_keys("abilal")
         Email.send_keys(Keys.RETURN)
         Password=driver.find_element(By.XPATH,"//input[@name='password']")
         Password.send_keys("8765432Bb!")
@@ -97,7 +97,7 @@ class WholeCycleReset(unittest.TestCase): # test to reset password with wrong em
         time.sleep(3)
 
         #go to the sent link (expired link)
-        driver.get("https://www.refmes.org/login/reset-password/63a962f203a977d16ec39007/9c6802f5e505466e8d66dd3e467df5d82bcc028fca18c5fb503191aa6de15c63/")
+        driver.get("https://refmes.herokuapp.com/login/reset-password/63a962f203a977d16ec39007/55b1cd6aa0d4dd2e88a3ee4511faf7501c310e4c832b6d41debf510a3b881e19/")
         time.sleep(3)
 
         expired_error = driver.find_element(By.CLASS_NAME, 'reset-password-error')
