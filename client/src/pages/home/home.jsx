@@ -6,6 +6,9 @@ import AppNavBar from "../../components/appnavbar.jsx";
 import Carousel from 'react-bootstrap/Carousel';
 import * as ReactBootstrap from "react-bootstrap";
 import "../home/home.css";
+import slider1 from '../../dalle/match_2.jpg';
+import slider2 from '../../dalle/match_1.jpg';
+import slider3 from '../../dalle/match_3.jpg';
 
 function Home() {
    const [state, dispatch] = useStore();
@@ -38,23 +41,23 @@ function Home() {
       <div>
          <AppNavBar/>
          <Carousel activeIndex={index} onSelect={handleSelect}>
-            <Carousel.Item style={{height: "600px", background: "#bc4"}}>
-               <img className="d-block w-100 h-100" alt="..."/>
-               <Carousel.Caption style={{marginBottom: "1.5em"}}>
+            <Carousel.Item style={{height: "600px", background: "#ddd"}}>
+               <div className="d-flex align-items-center justify-content-center h-100"><img src={slider1} className="d-block w-100" alt="..."/></div>
+               <Carousel.Caption style={{marginBottom: "1.5em", textShadow: "0 0 1rem #000"}}>
                   <h2>Welcome to REFMES!</h2>
                   <p>Referee Management and Assignment System for TFF</p>
                </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item style={{height: "600px", background: "#23d"}}>
-               <img className="d-block w-100 h-100" alt="..."/>
-               <Carousel.Caption style={{marginBottom: "1.5em"}}>
+            <Carousel.Item style={{height: "600px", background: "#ddd"}}>
+               <div className="d-flex align-items-center justify-content-center h-100"><img src={slider2} className="d-block w-100" alt="..."/></div>
+               <Carousel.Caption style={{marginBottom: "1.5em", textShadow: "0 0 1rem #000"}}>
                   <h2>Give Ratings to Referees</h2>
-                  <p>Give both pre-match and post-match ratings</p>
+                  <p>Both pre-match and post-match ratings for referee assignments</p>
                </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item style={{height: "600px", background: "#42a"}}>
-               <img className="d-block w-100 h-100" alt="..."/>
-               <Carousel.Caption style={{marginBottom: "1.5em"}}>
+            <Carousel.Item style={{height: "600px", background: "#ddd"}}>
+               <div className="d-flex align-items-center justify-content-center h-100"><img src={slider3} className="d-block w-100" alt="..."/></div>
+               <Carousel.Caption style={{marginBottom: "1.5em", textShadow: "0 0 1rem #000"}}>
                   <h2>Track Live Results</h2>
                   <p>Live status of referee assignments and matches</p>
                </Carousel.Caption>
