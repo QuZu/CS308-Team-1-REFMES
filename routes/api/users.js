@@ -278,7 +278,6 @@ router.post("/delete", async(req, res) => {
       res.status(500).json(err);
     }
   }
-}
 );
 
 router.post("/updatesetting", async (req, res) => {
