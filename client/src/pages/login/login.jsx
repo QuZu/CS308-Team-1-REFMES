@@ -11,8 +11,8 @@ import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 
 const loginSchema = z
   .object({
-    username: z.string().min(3),
-    password: z.string().min(1)
+    username: z.string().min(3,"Please enter longer username"),
+    password: z.string().min(1,"Password must be at least 1 character")
   });
 
 function Login() {

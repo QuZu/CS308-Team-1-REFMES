@@ -20,15 +20,16 @@ class UserProfileEditLink(unittest.TestCase):
 
     def test_search_in_python_org(self):
         driver = self.driver
+        driver.maximize_window()
         time.sleep(2)
-        driver.get(LOCAL_LINK)
+        driver.get(WEB_LINK)
         time.sleep(2)
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
         time.sleep(2)
-        Email=driver.find_element(By.XPATH,"//input[@name='email']")
-        Email.send_keys("emertkuzu35@gmail.com")
-        Email.send_keys(Keys.RETURN)
+        username=driver.find_element(By.XPATH,"//input[@placeholder='Username']")
+        username.send_keys("quzu3524")
+        username.send_keys(Keys.RETURN)
         Password=driver.find_element(By.XPATH,"//input[@name='password']")
         Password.send_keys("Enis123!")
         Password.send_keys(Keys.RETURN)
@@ -40,7 +41,7 @@ class UserProfileEditLink(unittest.TestCase):
         EditButton=EditDiv.find_element(By.ID,"userEditpen")
         EditButton.click()
         time.sleep(2)
-        actualUrl = 'http://localhost:3000/edit'
+        actualUrl = 'https://www.refmes.org/edit'
         expectedUrl = driver.current_url
 
         self.assertTrue(expectedUrl.startswith(actualUrl))
@@ -57,14 +58,14 @@ class ProfileSectionCheck(unittest.TestCase):
         driver = self.driver
         driver.maximize_window()
         time.sleep(2)
-        driver.get(LOCAL_LINK)
+        driver.get(WEB_LINK)
         time.sleep(2)
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
         time.sleep(2)
-        Email=driver.find_element(By.XPATH,"//input[@name='email']")
-        Email.send_keys("emertkuzu35@gmail.com")
-        Email.send_keys(Keys.RETURN)
+        username=driver.find_element(By.XPATH,"//input[@placeholder='Username']")
+        username.send_keys("quzu3524")
+        username.send_keys(Keys.RETURN)
         Password=driver.find_element(By.XPATH,"//input[@name='password']")
         Password.send_keys("Enis123!")
         Password.send_keys(Keys.RETURN)

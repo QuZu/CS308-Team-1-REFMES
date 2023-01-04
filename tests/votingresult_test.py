@@ -20,14 +20,14 @@ class CorrectVotingURL(unittest.TestCase):
         driver = self.driver
         driver.maximize_window()
         time.sleep(2)
-        driver.get(LOCAL_LINK)
+        driver.get(WEB_LINK)
         time.sleep(2)
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
         time.sleep(2)
-        Email=driver.find_element(By.XPATH,"//input[@name='email']")
-        Email.send_keys("emertkuzu35@gmail.com")
-        Email.send_keys(Keys.RETURN)
+        username=driver.find_element(By.XPATH,"//input[@placeholder='Username']")
+        username.send_keys("quzu3524")
+        username.send_keys(Keys.RETURN)
         Password=driver.find_element(By.XPATH,"//input[@name='password']")
         Password.send_keys("Enis123!")
         Password.send_keys(Keys.RETURN)
@@ -35,7 +35,7 @@ class CorrectVotingURL(unittest.TestCase):
         Voting=driver.find_element(By.LINK_TEXT, "Voting Results")
         Voting.click()
         time.sleep(3)
-        actualUrl = 'http://localhost:3000/votingresults'
+        actualUrl = 'https://www.refmes.org/votingresults'
         expectedUrl = driver.current_url
         self.assertTrue(expectedUrl.startswith(actualUrl))
 
@@ -52,14 +52,14 @@ class ICheckRefereeLink(unittest.TestCase):
         driver = self.driver
         driver.maximize_window()
         time.sleep(2)
-        driver.get(LOCAL_LINK)
+        driver.get(WEB_LINK)
         time.sleep(2)
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
         time.sleep(2)
-        Email=driver.find_element(By.XPATH,"//input[@name='email']")
-        Email.send_keys("emertkuzu35@gmail.com")
-        Email.send_keys(Keys.RETURN)
+        username=driver.find_element(By.XPATH,"//input[@placeholder='Username']")
+        username.send_keys("quzu3524")
+        username.send_keys(Keys.RETURN)
         Password=driver.find_element(By.XPATH,"//input[@name='password']")
         Password.send_keys("Enis123!")
         Password.send_keys(Keys.RETURN)
@@ -71,7 +71,7 @@ class ICheckRefereeLink(unittest.TestCase):
             eachRef=driver.find_elements(By.CLASS_NAME,"voting-result-box-middle-link")[index]
             eachRef.send_keys(Keys.RETURN)
             time.sleep(2)
-            actualUrl = 'http://localhost:3000/referee'
+            actualUrl = 'https://www.refmes.org/referee'
             expectedUrl = driver.current_url
             self.assertTrue(expectedUrl.startswith(actualUrl))
             driver.execute_script("window.history.go(-1)")

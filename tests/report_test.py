@@ -19,17 +19,18 @@ class IsSendReport(unittest.TestCase):
 
     def test_send_report_in_refmes(self):
         driver = self.driver
+        driver.maximize_window()
         time.sleep(2)
         driver.get(WEB_LINK)
         time.sleep(2)
         element=driver.find_element(By.LINK_TEXT,"Login")
         element.click()
         time.sleep(2)
-        Email=driver.find_element(By.XPATH,"//input[@name='email']")
-        Email.send_keys("a.bilalyildiz@gmail.com")
-        Email.send_keys(Keys.RETURN)
+        username=driver.find_element(By.XPATH,"//input[@placeholder='Username']")
+        username.send_keys("quzu3524")
+        username.send_keys(Keys.RETURN)
         Password=driver.find_element(By.XPATH,"//input[@name='password']")
-        Password.send_keys("8765432Bb!")
+        Password.send_keys("Enis123!")
         Password.send_keys(Keys.RETURN)
         time.sleep(3)
         Report = driver.find_element(By.XPATH,"//a[@id='report']")
