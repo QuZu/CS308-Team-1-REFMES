@@ -4,7 +4,7 @@ const router = express.Router();
 require("dotenv").config();
 const PostRating = require('../../models/postRatingModel');
 const ObserverRating = require('../../models/observerRatingModel');
-const Referee = require('../../models/refereeModel');
+const Referee = require('../../models/refereemodel');
 
 router.post("/addPostRating", async(req, res) => {
     const {rating, user_id, match_id, referee_id,week_no} = req.body;

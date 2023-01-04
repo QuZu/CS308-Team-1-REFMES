@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 require("dotenv").config();
 const PreRating = require('../../models/preRatingModel');
-const Referee =require("../../models/refereeModel")
+const Referee =require("../../models/refereemodel")
 router.post("/addPreRating", async(req, res) => {
     const {rating, user_id, week_no, referee_id} = req.body;
     

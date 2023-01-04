@@ -4,7 +4,7 @@ const router = express.Router();
 require("dotenv").config();
 const Comment = require('../../models/commentModel');
 const mongoose = require("mongoose");
-const Referee =require("../../models/refereeModel")
+const Referee =require("../../models/refereemodel")
 
 router.post("/sendComment", async(req, res) => {
     const {comment, user_id, match_id, referee_id,week_no} = req.body;

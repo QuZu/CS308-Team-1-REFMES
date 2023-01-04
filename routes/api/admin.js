@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt=require("bcrypt");
 var nodemailer = require('nodemailer');
 require("dotenv").config();
-const Referee = require('../../models/refereeModel');
+const Referee = require('../../models/refereemodel');
 const Observer = require('../../models/observerModel');
 const Match = require('../../models/matchModel');
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
