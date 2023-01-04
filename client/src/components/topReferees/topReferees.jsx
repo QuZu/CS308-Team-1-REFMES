@@ -74,7 +74,7 @@ function TopReferees({ RefData, weekNo }) {
                                                 {item.name}
                                             </Link>
                                         </div>
-                                        <div className="home-top-referees-inner-item">{item.ratio}</div>
+                                        <div className="home-top-referees-inner-item home-top-referees-inner-item-rating">{item.ratio}</div>
                                     </div>
                                 )
                             }

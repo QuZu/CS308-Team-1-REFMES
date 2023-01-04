@@ -53,8 +53,8 @@ function AdminForm(){
             {PageDisplay()}
           </div>
           <div className="footer">
-            <button disabled={page === 0 || FormData.prevbutton} onClick={()=>{setPage((currPage)=>currPage-1)}} >Prev</button>
-            <button disabled={page === FormTitles.length-1 || !FormData.nextbutton}  onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</button>
+            <button name="admin-form-prev-button" disabled={page === 0 || FormData.prevbutton} onClick={()=>{setPage((currPage)=>currPage-1)}} >Prev</button>
+            <button name="admin-form-next-button" disabled={page === FormTitles.length-1 || !FormData.nextbutton}  onClick={()=>{setPage((currPage)=>currPage+1)}}>Next</button>
           </div>
         </div>
 

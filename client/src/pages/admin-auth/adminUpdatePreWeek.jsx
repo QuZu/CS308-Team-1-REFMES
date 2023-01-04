@@ -77,8 +77,8 @@ function AdminUpdatePreWeekPage(){
                     {PageDisplay()}
 
                     <div className="admin-form-container-footer" style={{margin: "2em 0"}}>
-                        <button disabled={page === 0 || formData.prevButton} onClick={()=>{setPage((currPage)=>currPage-1)}} >Prev</button>
-                        <button 
+                        <button name="admin-form-prev-button" disabled={page === 0 || formData.prevButton} onClick={()=>{setPage((currPage)=>currPage-1)}} >Prev</button>
+                        <button name="admin-form-next-button"
                         disabled={page==0 ? formData.checkedCheckboxes.length !==9 : (page === 2 || !formData.nextButton)}  
                         onClick={()=>{setPage((currPage)=>currPage+1)}}>Next
                         </button>
