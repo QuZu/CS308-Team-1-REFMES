@@ -1,32 +1,20 @@
 .btn-border {
-    border: black 1px solid !important;
-  }
-  
-  .fullscreen {
-    position: relative;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 90vh;
-    width: 100vw;
-  }
-  
-  
-  .errorMessage {
-    color: rgba(39, 39, 194, 0.801);
-  }
-  
-  .error-text {
-    color: red;
-  }
-  
-  .link-line-gap {
-    gap: 5px;
-    flex-wrap: wrap;
-  }
-  
-  .card-shadow {
-    border: 2px solid black;
-  }
-  
+  border: black 1px solid !important;
+}
+
+.errorMessage {
+  color: rgba(39, 39, 194, 0.801);
+}
+
+.error-text {
+  color: red;
+}
+
+.link-line-gap {
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.card-shadow {
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
