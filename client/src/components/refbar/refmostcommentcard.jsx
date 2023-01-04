@@ -66,26 +66,26 @@ function RefMostCommentCard({Refdata,r_username,Refname,week}) {
     return(
         
             <div className="bg-color rounded shadow-sm pt-2 pb-2 px-2 ref-box-feature">
-              <div className="ref-box-inner-container">
-                <div className="ref-box-inner-left">
-                    <img style={{marginTop:"10px"}} src={result}  width="135" height="135"></img>
-                    <div className="mt-2 ref-hover-effect">
-                      <a style={{marginLeft:"15px"}} href={`/referee/${r_username}`}>{Refname}</a>
+              <div className="ref-box-inner-container row">
+                <div className="ref-box-inner-left col-4">
+                    <img style={{marginTop:"10px"}} src={result}  width="100px" height="100px"></img>
+                    <div className="mt-2 refcomment-hover-effect">
+                      <a href={`/referee/${r_username}`}>{Refname}</a>
                     </div>
-                    <div>
+                    <div className="justify-content-center">
                       <span className=" text-color small text-uppercase">Referee</span>
                     </div>
                 </div>
                 
-                <div className="ref-box-inner-right">
-                      <div className="ref-box-right-row">
-                        <div style={{marginTop:"20px"}} className="row">
-                            <div>
+                <div className="ref-box-inner-right col-8">
+                      
+                        <div style={{marginTop:"20px"}} className="row justify-content-center">
+                           
                              <p style={{fontSize:"20px",textAlign:"center"}} ><b> Number of Comments {Refname} Get In Week {week}</b></p>
                              <div className="referee-display-point-circle-WH" style={{fontSize:"50px"}}>{Refdata.postRating[week][2]}</div>
-                            </div>
+                            
                         </div>
-                      </div>
+                     
                 </div>
               </div>
             </div>
