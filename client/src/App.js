@@ -70,6 +70,8 @@ function App() {
         <Route path="/observer-auth" element={<ObserverAuthPage />} />
         <Route path="/observer-auth/observerRating" element={<ObserverRatingPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/standings" element={<StandingPage/>} />
+        <Route path="/livestatus" element={<MatchImportancePage/>} />
         </>
         :
         <>
