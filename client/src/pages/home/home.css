@@ -25,3 +25,13 @@
 .home-top-standings-inner-item-club {
     flex: 3;
 }
+
+.home-top-standings-inner-item-club a {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.home-top-standings-inner-item-club a:hover {
+    color: #e51936;
+}
