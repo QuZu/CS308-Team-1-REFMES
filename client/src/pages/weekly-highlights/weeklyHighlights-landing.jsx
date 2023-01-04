@@ -2,32 +2,38 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import WHighlightsPage from "./weekly-highlights";
 import AppNavBar from "../../components/appnavbar.jsx";
-function WHighlightsPageLanding(){
-    const [week, setweek] = useState({});
-    const[loading,setLoading] = useState(false);
+import * as ReactBootstrap from "react-bootstrap";
 
-  const getWeek = async()=>{
-    await axios.get(`${process.env.REACT_APP_URL}/api/weeks/getPostWeek`).then(response=>{
+function WHighlightsPageLanding() {
+  const [week, setweek] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const getWeek = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/api/weeks/getPostWeek`).then(response => {
       setweek(response.data.week_no);
       setLoading(true);
     }).catch(err => console.log(err))
   };
   useEffect(() => {
-      getWeek();
+    getWeek();
   }, [])
 
-    return(
-        <div>
-            {loading ?
-            <>
-                <AppNavBar/>
-                <h1 style={{textAlign: "center", marginTop: "12px", marginBottom:"50px"}}>HIGHLIGHTS OF WEEK {week-1}</h1>
-                <WHighlightsPage currentWeek= {week-1} />
-            </>
-             :
-             <p>Loading...</p>
-            }
+  return (
+    <div>
+      {loading ?
+        <>
+          <AppNavBar />
+          <div>
+            <h1 style={{ textAlign: "center", margin: "2em 0em 1em 0em" }}>Post-Match Rating for Week {week - 1}</h1>
+          </div>
+          <WHighlightsPage currentWeek={week - 1} />
+        </>
+        :
+        <div className="d-flex justify-content-center">
+          <ReactBootstrap.Spinner animation="border" />
         </div>
-    )
+      }
+    </div>
+  )
 };
-export default  WHighlightsPageLanding;
+export default WHighlightsPageLanding;

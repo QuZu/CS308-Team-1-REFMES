@@ -28,7 +28,9 @@ function  VotingResultInner({PreWeek}) {
     }
     return (
     <div>
-        <b className='d-flex justify-content-center row mt-3 mb-3'>Voting Results and Referees for Week {PreWeek} Matches</b>
+        <div>
+            <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Referee Assignment Results for Week {PreWeek}</h1>
+        </div>
         {allmatchDetails.map(item=>{
             return(
                 <div className='d-flex justify-content-center row' key={item._id}>

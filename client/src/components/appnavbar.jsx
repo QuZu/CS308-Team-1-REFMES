@@ -25,7 +25,7 @@ function Brand() {
           <Navbar.Collapse id="basic-navbar-nav" color="white" >
             <Nav justify className="justify-content-center align-items-center me-auto">
               <Nav.Link href="/livestatus" className="navText">Live Status</Nav.Link>
-              <Nav.Link href="/votingresults" className="navText">Rating Results</Nav.Link>
+              <Nav.Link href="/ratingResults" className="navText">Referee Assignments</Nav.Link>
               { currentUser ?
                 <><Nav.Link href="/pre-match" className="navText">Pre Match</Nav.Link>
                   <Nav.Link href="/post-match" className="navText">Post Match</Nav.Link>
@@ -45,9 +45,9 @@ function Brand() {
                 <Nav.Link href="/signup" align="center"><span className="btn btn-danger">Sign Up</span></Nav.Link>
               </div>
               :
-              <div className='d-flex align-items-center'>
+              <div className='d-flex align-items-center justify-content-center'>
                 <Navbar.Brand><a id='report' href='/report'><img src={ReportIcon} style={{ height: "1.5em" }} alt='Report' /></a></Navbar.Brand>
-                <Nav.Link href={`/user/${currentUser.user.username}`} className="navText me-3">My Account</Nav.Link>
+                <Nav.Link href={`/user/${currentUser.user.username}`} className="navText me-3 text-center">My Account</Nav.Link>
                 <Nav.Link onClick={logOut} align="center"><span className="btn btn-danger">Log Out</span></Nav.Link>
               </div>
             }

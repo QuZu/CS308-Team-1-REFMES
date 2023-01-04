@@ -25,8 +25,8 @@ function MatchImportancePage() {
       <div>
         <AppNavBar/>
         {loading ?
-        <div className="mt-5 d-flex flex-column align-items-center">
-            <h1 style={{textAlign: "center", margin: "1em 0"}}>Live Assignment Status for Week {currentweek}</h1>
+        <div className="mt-5 mb-3 d-flex flex-column align-items-center">
+            <h1 style={{textAlign: "center", margin: "1em 0"}}>Live Status for Assignments of Week {currentweek}</h1>
             <MatchDataPage Week={currentweek}/>
         </div>
         :

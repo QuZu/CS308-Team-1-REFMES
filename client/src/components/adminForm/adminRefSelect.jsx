@@ -1,7 +1,9 @@
 import React from 'react'
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./formTabs.css"
+import "./formTabs.css";
+import * as ReactBootstrap from "react-bootstrap";
+
 function AdminRefSelect({currentweek,allData,FormData,setFormData}) {
     const [resultMessage, setResultMessage] = useState("");
     console.log(FormData);
@@ -88,7 +90,9 @@ function AdminRefSelect({currentweek,allData,FormData,setFormData}) {
                                 </div>
                                 );
                     }) :<p>No Referee yet !!!</p>)            :
-                <p>Loading...</p>
+                    <div className="d-flex justify-content-center">
+                    <ReactBootstrap.Spinner animation="border" />
+                  </div>
             }
             </div>
         </div>

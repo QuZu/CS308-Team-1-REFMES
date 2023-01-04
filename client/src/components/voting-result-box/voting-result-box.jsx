@@ -81,7 +81,7 @@ function VotingResultBox({ matchData}) {
             </div>
             <div className="voting-result-box-bottom-container">
                 <div className="voting-result-box-display-text">
-                    <div className="voting-result-box-point-circle">{refRatio}</div>
+                    <div className="voting-result-box-point-circle">REFMES Score: {refRatio}</div>
                 </div>
             </div>
         </div>
