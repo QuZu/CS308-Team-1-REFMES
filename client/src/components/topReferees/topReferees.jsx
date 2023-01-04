@@ -70,7 +70,7 @@ function TopReferees({ RefData, weekNo }) {
                                     <div className="home-top-referees-inner-container" key={item.name}>
                                         <div className="home-top-referees-inner-item">{index + 1}</div>
                                         <div className="home-top-referees-inner-item-referee">
-                                            <Link to={`../club/${item.r_username}`}>
+                                            <Link to={`../referee/${item.r_username}`}>
                                                 {item.name}
                                             </Link>
                                         </div>
