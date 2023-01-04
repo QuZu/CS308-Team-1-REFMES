@@ -52,11 +52,11 @@ function ReportBox({ reportData }) {
             <hr/>
             <p style={{textAlign:"center",fontWeight:"bold"}}>{allData[0].user_message}</p>
             <div style={{textAlign:"center"}}>
-                <form onSubmit={answerReport}>
                 <textarea onChange={(e)=>Setanswer(e.target.value)}  className="reportsTextArea" placeholder="Enter your response here..."></textarea>
-                <p style={{color:"red"}}>{errorMessage} </p>
-                <button className="mb-2 btn btn-success" type="submit"> Answer Report</button>
-            </form>
+                <div> <p id="errorMessage" style={{color:"red"}}>{errorMessage} </p></div>               
+                <div className="admin-auth-btn-container col-12">
+                  <a onClick={answerReport} className="admin-report-btn btn btn-primary">Answer Report</a>
+                </div>
             </div>
             </div>
             :
