@@ -2,8 +2,7 @@ const express = require("express");
 const { response } = require("express");
 const router = express.Router();
 require("dotenv").config();
-const Referee = require('../../models/refereeModel');
-const updatedReferee = require('../../models/updated_refereeModel');
+const Referee = require('../../models/refereemodel');
 const Comments=require('../../models/commentModel');
 const mongoose=require("mongoose");
 const axios = require('axios')

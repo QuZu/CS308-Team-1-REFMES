@@ -7,6 +7,7 @@ require("dotenv").config();
 const User = require('../../models/usermodel');
 const Token = require('../../models/tokenModel');
 const Observer = require('../../models/observerModel');
+const Report = require('../../models/reportsModel');
 var nodemailer = require('nodemailer');
 const { findByIdAndDelete } = require("../../models/usermodel");
 
@@ -243,14 +244,39 @@ router.post('/reset-password', async (req, res) => {
 
 });
 
+router.post('/registerReport', async(req, res)=> {
 
-router.post("/delete", async (req, res) => {
-  const { id, username, email } = req.body;
-  try {
-    await User.findByIdAndDelete(id);
-    res.status(200).json("User has been deleted...");
-  } catch (err) {
-    res.status(500).json(err);
+  //console.log("in backend");
+  const username = req.body.username;
+  const report = req.body.report;
+
+  //console.log("username", username);
+  //console.log("report", report);
+
+  const user = await User.findOne({username: username});
+
+  const newreport = new Report({
+    user_id: user._id,
+    user_email: user.email,
+    user_message: report
+
+  });
+
+  //console.log("new report", newreport);
+
+  await newreport.save();
+  return res.status(200).json(newreport);
+
+});
+
+router.post("/delete", async(req, res) => {
+    const {id, username, email} =req.body;
+    try {
+      await User.findByIdAndDelete(id);
+      res.status(200).json("User has been deleted...");
+    } catch (err) {
+      res.status(500).json(err);
+    }
   }
 }
 );
