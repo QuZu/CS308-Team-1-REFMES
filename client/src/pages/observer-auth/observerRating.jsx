@@ -25,7 +25,7 @@ function ObserverRatingPage() {
         <>
         {loading ? <div>
             <AppNavBarSingle/>
-            <ObserverRatingInnerPage currentWeekNo={currentWeekNo}/>
+            <ObserverRatingInnerPage currentWeekNo={currentWeekNo-1}/>
         </div> :
         <div className="d-flex justify-content-center">
             <ReactBootstrap.Spinner animation="border"/>
