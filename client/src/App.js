@@ -101,7 +101,7 @@ function App() {
         <Route path="/post-comment" element={<PostMatchCommentPage/>} />
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />
-        <Route path="/ratingresults" element={<VotingResult/>} />
+        <Route path="/ratingResults" element={<VotingResult/>} />
         <Route path="/report" element={<ReportPage />} />
         <Route path="*" element={<ErrorPage />} />
         </>

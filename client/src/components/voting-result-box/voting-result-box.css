@@ -123,8 +123,7 @@
     color: #e51936;
 }
 .voting-result-box-display-text{
-    margin-right: 10px;
-    margin-left: 5px;
+    margin: 0 0.5rem;
     font-weight: 600;
     font-size: large;
 }
@@ -133,9 +132,9 @@
     justify-content: center;
     text-align: center;
     vertical-align: middle;
-    background: #1997e5;
-    font-weight: 600;
-    color:white;
-    padding: 0.5rem;
+    background: #4babe6;
+    color: white;
+    font-size: 0.8rem;
+    padding: 1rem;
     border-radius: 10px;
 }
