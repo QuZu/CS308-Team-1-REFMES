@@ -24,7 +24,7 @@ function WHighlightsPageLanding() {
         <>
           <AppNavBar />
           <div>
-            <h1 style={{ textAlign: "center", margin: "2em 0em 1em 0em" }}>Post-Match Rating for Week {week - 1}</h1>
+            <h1 style={{ textAlign: "center", margin: "2em 0em 1em 0em" }}>Weekly Highlights for Week {week - 1}</h1>
           </div>
           <WHighlightsPage currentWeek={week - 1} />
         </>

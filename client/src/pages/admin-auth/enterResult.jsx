@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ResultBox from "../../components/enterResult/ResultBox.jsx";
 import * as ReactBootstrap from "react-bootstrap";
+
 function AdminEnterResult({PostWeek,formData,setFormData}){
 
     const [matchDetails, setMatchDetails] = useState([]);
@@ -27,7 +28,7 @@ function AdminEnterResult({PostWeek,formData,setFormData}){
     console.log(formData);
     return(
         <div>
-             <h1 style={{textAlign: "center" ,color:"red", paddingBottom:"10px"}}>ENTER THE RESULTS OF THE WEEK {PostWeek}</h1>
+             <p className="text-center p-1" style={{fontSize: "1.1rem"}}>Enter the match results for Week {PostWeek}</p>
              {loading && matchDetails ?
                 <div className="row">
                 {matchDetails.map((singleMatchDetails) => {
