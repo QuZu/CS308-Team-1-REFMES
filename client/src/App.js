@@ -78,6 +78,11 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         <Route path="/standings" element={<StandingPage/>} />
         <Route path="/livestatus" element={<MatchImportancePage/>} />
+        <Route path="/matches" element={<MatchesPage />} />
+        <Route path="/club/:asciName" element={<SingleClubPage />} />
+        <Route path="/clubs" element={<ClubsPage />} />
+        <Route path="/referees" element={<RefereesPage />} />
+        <Route path="/ratingResults" element={<VotingResult/>} />
         </>
         :
         <>
