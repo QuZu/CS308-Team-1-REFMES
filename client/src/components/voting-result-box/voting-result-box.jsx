@@ -23,7 +23,7 @@ function VotingResultBox({ matchData}) {
         
             var observerRate=matchData.ref_info[0].observerRating[0][1]===0 ? 0 : (matchData.ref_info[0].observerRating[0][0])/(matchData.ref_info[0].observerRating[0][1])
             var FanRate=matchData.ref_info[0].preRating[0][1]===0 ? 0 : (matchData.ref_info[0].preRating[0][0])/(matchData.ref_info[0].preRating[0][1])
-            var total=(wConstant) +(observerRate)* wObserver + (FanRate)* wFan + (experience)* wExperience
+            var total=(wConstant) +(observerRate*20)* wObserver + (FanRate*20)* wFan + (experience)* wExperience
             var ratio=(total/20).toFixed(2);
             setRefRatio(ratio);
             setLoading(true)
