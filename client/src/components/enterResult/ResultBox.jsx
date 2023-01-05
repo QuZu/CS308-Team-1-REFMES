@@ -76,7 +76,7 @@ function ResultBox({ matchData,formData,setformData }) {
     }
     return (
         <div className="d-flex justify-content-center">
-        <div className="rating-outer-container">
+        <div className="rating-outer-container" style={{padding: "3em"}}>
             <div className="rating-container">
                 <div className="rating-left">
                     <div className="rating-left-match">
