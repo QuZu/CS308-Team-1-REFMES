@@ -36,7 +36,7 @@ class IsStatisticCorrect(unittest.TestCase):
         Referee=driver.find_element(By.LINK_TEXT, "Referees")
         Referee.click()
         time.sleep(3)
-        RefDiv=driver.find_elements(By.XPATH,"//div[@class='d-flex justify-content-center col-xl-6 col-m-6 col-sm-12 mb-5']")
+        RefDiv=driver.find_elements(By.XPATH,"//div[@class='ref-box-outer-container bg-color rounded shadow-sm px-4 py-5 m-1 ref-box-feature']")
         self.assertEqual(len(RefDiv),23)
         for eachref in RefDiv:
             Scores=eachref.find_element(By.XPATH,"//div[@class='ref-box-inner-container']")
@@ -75,7 +75,7 @@ class SortedReferee(unittest.TestCase):
         Referee=driver.find_element(By.LINK_TEXT, "Referees")
         Referee.click()
         time.sleep(3)
-        RefDiv=driver.find_elements(By.XPATH,"//a[@class='ref-click-all']")
+        RefDiv=driver.find_elements(By.XPATH,"//a[@class='ref-click-all w-100 m-1']")
         previous= RefDiv[0].find_element(By.CLASS_NAME,"refcard-ref-name").text
         for eachRef in RefDiv:
             Reflink=eachRef.find_element(By.CLASS_NAME,"refcard-ref-name")

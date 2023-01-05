@@ -32,10 +32,10 @@ class CorrectVotingURL(unittest.TestCase):
         Password.send_keys("Enis123!")
         Password.send_keys(Keys.RETURN)
         time.sleep(3)
-        Voting=driver.find_element(By.LINK_TEXT, "Rating Results")
+        Voting=driver.find_element(By.LINK_TEXT, "Referee Assignments")
         Voting.click()
         time.sleep(3)
-        actualUrl = 'https://www.refmes.org/votingresults'
+        actualUrl = 'https://www.refmes.org/ratingresults'
         expectedUrl = driver.current_url
         self.assertTrue(expectedUrl.startswith(actualUrl))
 
@@ -64,7 +64,7 @@ class ICheckRefereeLink(unittest.TestCase):
         Password.send_keys("Enis123!")
         Password.send_keys(Keys.RETURN)
         time.sleep(3)
-        Voting=driver.find_element(By.LINK_TEXT, "Rating Results")
+        Voting=driver.find_element(By.LINK_TEXT, "Referee Assignments")
         Voting.click()
         time.sleep(3)
         for index in range(0,9):

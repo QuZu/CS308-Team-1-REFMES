@@ -65,7 +65,7 @@ function RefHighlightCard({Refdata,r_username,Refname,week}) {
     return(
         
             <div className="bg-color rounded shadow-sm pt-2 pb-2 px-2 ref-box-feature">
-              <div className="ref-box-inner-container row">
+              <div style={{minHeight:"200px"}} className="ref-box-inner-container row">
                 <div className="ref-box-inner-left col-4">
                     <img style={{marginTop:"10px"}} src={result}  width="100px" height="100px"></img>
                     <div className="mt-2 refcomment-hover-effect">
