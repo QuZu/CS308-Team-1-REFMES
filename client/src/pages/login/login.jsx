@@ -93,6 +93,15 @@ function Login() {
               <div className="mt-1 row text-center justify-content-center">
                 <div className="col-12">
                   <span className="link-line-gap d-flex justify-content-center">
+                    If you are an admin,
+                    <Link className="link-success" to="/admin/login"><p>Login as an Admin!</p></Link>
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-1 row text-center justify-content-center">
+                <div className="col-12">
+                  <span className="link-line-gap d-flex justify-content-center">
                     If you are an observer,
                     <Link className="link-success" to="/signup"><p>Login as an Observer!</p></Link>
                   </span>
