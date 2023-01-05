@@ -103,7 +103,7 @@ function Login() {
                 <div className="col-12">
                   <span className="link-line-gap d-flex justify-content-center">
                     If you are an observer,
-                    <Link className="link-success" to="/signup"><p>Login as an Observer!</p></Link>
+                    <Link className="link-success" to="/observer"><p>Login as an Observer!</p></Link>
                   </span>
                 </div>
               </div>
