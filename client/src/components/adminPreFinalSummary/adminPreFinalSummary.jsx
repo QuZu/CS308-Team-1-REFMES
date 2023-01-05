@@ -53,7 +53,7 @@ function AdminPreFinalSummaryPage ( {currentWeek, allData, formData, setFormData
     }
     return(
         <div  className="container">
-            <div className="selectec-ref-text"> Assigned Referee for week {currentWeek}</div>
+            <div className="selectec-ref-text">Assigned Referees for Week {currentWeek}</div>
             <div className="row">
                 {assignmentList ?
                 (assignmentList.map((item, index) => {
@@ -65,7 +65,7 @@ function AdminPreFinalSummaryPage ( {currentWeek, allData, formData, setFormData
                 </div>
                 }
             </div>
-            <div className="selectec-ref-text"> Selected Referee for week {currentWeek+1}</div>
+            <div className="selectec-ref-text">Selected Referees for Week {currentWeek+1}</div>
             <div style={{overflow: "hidden"}} className="row">
                 { myData ?
                 
@@ -73,8 +73,8 @@ function AdminPreFinalSummaryPage ( {currentWeek, allData, formData, setFormData
                     myData.map((item) => {
                         return(
                         <div style={{overflow: "hidden"}} key={item.name} className="ck-button-summary col-xs-12 col-sm-6 col-md-4 mt-2 mb-2">
-                            <label  style={{width: "80%"}}>
-                                <p style={{width: "100%"}}>{item.name}</p>
+                            <label className="w-100">
+                                <p className="w-100 m-0 p-3">{item.name}</p>
                             </label>
                         </div>
                         );
