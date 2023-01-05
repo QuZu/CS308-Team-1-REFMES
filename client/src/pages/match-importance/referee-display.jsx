@@ -40,7 +40,7 @@ function RefereeDisplay({RefData,CurrentWeek}) {
               arrayelement.ratio=0.00.toFixed(2);
             }
             else{
-              var total=(wConstant) +(arrayelement.observerPoint)* wObserver + (arrayelement.fanPoint)* wFan + (arrayelement.experience)* wExperience;
+              var total=(wConstant) +(arrayelement.observerPoint*20)* wObserver + (arrayelement.fanPoint*20)* wFan + (arrayelement.experience)* wExperience;
               arrayelement.ratio=(total/20).toFixed(2)
             }
             // var total=(wConstant) +(arrayelement.observerPoint)* wObserver + (arrayelement.fanPoint)* wFan + (arrayelement.experience)* wExperience;

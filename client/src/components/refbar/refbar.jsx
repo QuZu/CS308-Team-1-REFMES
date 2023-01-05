@@ -80,10 +80,10 @@ function RefInfo({ refName }) {
           var observerRate = refName.observerRating[0][1] === 0 ? 0 : (refName.observerRating[0][0]) / (refName.observerRating[0][1])
           var FanRate = refName.preRating[0][1] === 0 ? 0 : (refName.preRating[0][0]) / (refName.preRating[0][1])
           var PostFan = refName.postRating[0][1] === 0 ? 0 : (refName.postRating[0][0]) / (refName.postRating[0][1])
-          var total = (wConstant) + (observerRate) * wObserver + (FanRate) * wFan + (experience) * wExperience
-          var ratio = (total / 20).toFixed(2);
+          var total = (wConstant) + (observerRate*20) * wObserver + (FanRate*20) * wFan + (experience) * wExperience
+          var ratio = (total /20).toFixed(2);
           setRefRatio(ratio);
-          setFanRatio(PostFan)
+          setFanRatio(PostFan.toFixed(2))
           setLoading(true)
         }
       )
