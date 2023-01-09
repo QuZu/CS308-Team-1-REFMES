@@ -28,4 +28,17 @@
   .error-text {
     color: red;
   }
-  
+
+  .signup-page select:required:invalid {
+    color: gray;
+  }
+  .signup-page option[value=""][disabled] {
+    display: none;
+  }
+  .signup-page option {
+    color: black;
+  }
+  .signup-page-scroolbar{
+    max-height: 3em;
+    overflow-y: scroll;
+  }

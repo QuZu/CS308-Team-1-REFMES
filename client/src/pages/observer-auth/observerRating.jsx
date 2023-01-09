@@ -1,50 +1,40 @@
-import { useStore } from "../../store/store";
 import AppNavBarSingle from "../../components/appnavbarsingle.jsx";
-import ObserverRatingBox from "../../components/ratingbox/observerratingbox.jsx";
-import { useNavigate } from "react-router";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../observer-auth/observerRating.css";
+import ObserverRatingInnerPage from "./observerRating-inner";
 import * as ReactBootstrap from "react-bootstrap";
-
 function ObserverRatingPage() {
-    const weekNo = "3";
 
-    const [matchDetails, setMatchDetails] = useState([]);
+    const [currentWeekNo, setCurrentWeekNo] = useState(1);
     const [loading,setLoading] = useState(false);
-
-    const getMatchDetails = async() => {
+    const getCurrentWeek = async() => {
         await axios
-            .get(`${process.env.REACT_APP_URL}/api/matches/getMatchDetails/${weekNo}`)
+            .get(`${process.env.REACT_APP_URL}/api/weeks/getPostWeek`)
             .then(res => {
-                setMatchDetails(res.data);
-                setLoading(true);
+                setCurrentWeekNo(res.data.week_no);
+                setLoading(true)
         }).catch(err => console.log(err));
     };
 
     useEffect(() => {
-        getMatchDetails();
+        getCurrentWeek();
     }, []);
 
     return(
-        <div>
+        <>
+        {loading ? <div>
             <AppNavBarSingle/>
-            <div>
-                <h1 style={{textAlign: "center", margin: "2em 0em 1em 0em"}}>Observer Rating for Week {weekNo}</h1>
-            </div>
-            {loading && matchDetails ?
-                <div className="matches">
-                {matchDetails.map((singleMatchDetails) => {
-                    return(<ObserverRatingBox key={singleMatchDetails._id} matchData={singleMatchDetails}/>)
-                })}
-                </div>
-                :
-                <div className="d-flex justify-content-center">
-                    <ReactBootstrap.Spinner animation="border"/>
-                </div>
-            }
+            <ObserverRatingInnerPage currentWeekNo={currentWeekNo-1}/>
+        </div> :
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
         </div>
+        }
+        </>
     )
+
+    
 }
 
 export default ObserverRatingPage

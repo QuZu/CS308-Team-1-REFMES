@@ -1,8 +1,10 @@
 import React from "react";
-import {useState,useEffect} from "react"
+import {useState,useEffect} from "react";
 import axios from "axios";
 import ImportanceBox from "../../components/match-importance-box/importance-box.jsx";
-import "../match-importance/match-importance.css"
+import "../match-importance/match-importance.css";
+import * as ReactBootstrap from "react-bootstrap";
+
 function SortedMatches({allmatches}) {
     const c_images = [
         { id: "fenerbahce", src: "Fenerbahce"},
@@ -101,11 +103,15 @@ function SortedMatches({allmatches}) {
                 )
             }))
             :
-            <p>Please wait</p>
+            <div className="d-flex justify-content-center">
+                <ReactBootstrap.Spinner animation="border"/>
+            </div>
             }
         </div>
         :
-        <p>Loading...</p>
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
         }
       </div>
     );

@@ -26,7 +26,18 @@
 .matchbox-inner-left-name {
     margin-right: 0.5em;
 }
-
+.matchbox-inner-container p{
+    margin-right: 10px;
+    margin-left: 5px;
+    font-weight: 600;
+    display: contents;
+}
+.matches-league-week-no{
+    margin-right: 10px;
+    margin-left: 5px;
+    font-weight: 600;
+    display: contents;
+}
 .matchbox-inner-left-image {
     margin-right: 0.5em;
 }

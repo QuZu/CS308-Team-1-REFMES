@@ -1,6 +1,5 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 import axios from "axios";
-import { useStore } from "../../store/store";
 import "../ratingbox/ratingbox.css";
 import 'react-rater/lib/react-rater.css';
 import logoFenerbahce from '../../logos/fenerbahce.png';
@@ -45,62 +44,57 @@ const clubs = [
     { name: "Kayserispor", src: logoKayserispor},
   ]
 
-function ResultBox({ matchData }) {
+function ResultBox({ matchData,formData,setformData }) {
 
-    const [state, dispatch] = useStore();
     const [errorMessage, setErrorMessage] = useState("");
     const [btnValue, setBtnValue] = useState("Enter Result");
     const [btnDisabled, setBtnDisabled] = useState(false);
-    const [homeGoal,Sethomegoal] = useState(0);   
-    const [awayGoal,Setawaygoal] = useState(0); 
+    const [homeGoal,Sethomegoal] = useState(-1);   
+    const [awayGoal,Setawaygoal] = useState(-1); 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(homeGoal,awayGoal);
             if(homeGoal < 0 || awayGoal <0){
                 setErrorMessage("Please enter a valid score!");
             }
             else{
-                setErrorMessage("You have updated the score successfully!");
+                setBtnDisabled(true)
+                const newScore = {
+                    team1goal: homeGoal ,
+                    team2goal: awayGoal,
+                    match_id: matchData._id,
+                    team_1:matchData.club1_info[0].name,
+                    team_2:matchData.club2_info[0].name
+                };
+                var oldArray=formData.resultList
+                oldArray.push(newScore);
+                setformData({...formData,resultList:oldArray})
+                setErrorMessage("You have submitted result successfully");
+                setBtnValue("Submitted")    
             }
-
-            const newScore = {team1goal: homeGoal , team2goal: awayGoal, match_id: matchData._id};
-            axios
-                .post(`${process.env.REACT_APP_URL}/api/admin/updateMatchScore`, newScore)
-                .then((res) => {
-                    
-                        if (res.status === 200) {
-                        setErrorMessage("You have submitted result successfully");
-                    } else {
-                        setErrorMessage("Error,try again!");
-                    }
-                }).catch((err) => {
-                    console.log("Error: ", err);
-                });
-           
-        
     }
-    console.log(homeGoal,awayGoal);
     return (
-        <div style={{paddingLeft:"300px"}}>
-        <div className="rating-outer-container">
+        <div className="d-flex justify-content-center">
+        <div className="rating-outer-container" style={{padding: "3em"}}>
             <div className="rating-container">
                 <div className="rating-left">
                     <div className="rating-left-match">
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
-                            <a>{matchData.club1_info[0].name} <input style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Sethomegoal(e.target.value)}/>  </a>
+                            <img alt="Homeclub" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
+                            <a>{matchData.club1_info[0].name} <input disabled={btnDisabled} style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Sethomegoal(e.target.value)}/>  </a>
                         </div>
                         <a> vs. </a>
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
-                            <a>{matchData.club2_info[0].name} <input style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Setawaygoal(e.target.value)}/></a>
+                            <img alt="Awayclub" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
+                            <a>{matchData.club2_info[0].name} <input disabled={btnDisabled} style={{ fontSize: 15, width: "40px"}} type="number" onChange={(e)=>Setawaygoal(e.target.value)}/></a>
                         </div>
                     </div>
                 </div>
                 <div className="rating-submit">
                 <form onSubmit={handleSubmit}>
                     <p style={{color:"blue"}}>{errorMessage}</p>
-                    <input type="submit" name="submitButton" className="btn btn-success" value={`${btnValue}`}/>
+                    <input  disabled={btnDisabled} type="submit" name="submitButton" className="btn btn-success" value={`${btnValue}`}/>
                 </form>
                 </div>
             </div>

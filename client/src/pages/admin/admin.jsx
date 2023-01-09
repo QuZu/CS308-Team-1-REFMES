@@ -12,7 +12,7 @@ const adminLoginSchema = z
   });
 
 function AdminLogin() {
-  const {register, handleSubmit, formState: { errors }} = useForm({resolver: zodResolver(adminLoginSchema), mode: "all",});
+  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(adminLoginSchema), mode: "all", });
   const [, dispatch] = useStore();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -21,16 +21,16 @@ function AdminLogin() {
     const user = {
       password: data.password,
     };
-    if(user.password === "CS308Team1admin"){
-        setErrorMessage("You logged in succesfully");
-        navigate("/admin-auth");
+    if (user.password === "CS308Team1admin") {
+      setErrorMessage("You logged in succesfully");
+      navigate("/admin");
     }
-    else{setErrorMessage("Error! Please try again.");}
+    else { setErrorMessage("Error! Please try again."); }
   }, [navigate, dispatch]);
-  
+
   return (
     <div className="fullscreen row justify-content-center align-items-center">
-      <AppNavBarSingle/>
+      <AppNavBarSingle />
       <div className="col-10 col-sm-6 col-lg-4 justify-content-start">
         <div className="card p-1 mb-0 card-shadow">
           <div className="card-body">
@@ -42,7 +42,7 @@ function AdminLogin() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <p className="errorMessage">{errorMessage}</p>
               <div className="mt-3 d-flex flex-column">
-                <input {...register("password")} placeholder="Password" type="password" className="btn-border input-style form-control"/>
+                <input {...register("password")} placeholder="Password" type="password" className="btn-border input-style form-control" />
                 <small className="align-self-start error-text">{errors.password?.message}</small>
               </div>
 
@@ -54,7 +54,7 @@ function AdminLogin() {
         </div>
       </div>
     </div>
-);
+  );
 }
 
 export default AdminLogin;

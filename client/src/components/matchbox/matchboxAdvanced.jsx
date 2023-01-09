@@ -1,5 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
-import Rater from 'react-rater';
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useStore } from "../../store/store";
@@ -24,6 +23,7 @@ import logoAnkaragucu from '../../logos/ankaragucu.png';
 import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
+import * as ReactBootstrap from "react-bootstrap";
 
 const clubs = [
     { name: "Fenerbahçe", src: logoFenerbahce},
@@ -49,16 +49,14 @@ const clubs = [
 
 function MatchBoxAdvanced({ matchData, playedWeek }) {
 
-    const [state, dispatch] = useStore();
-    const {user:currentUser} = state;
     const [loading, setLoading] = useState(false);
     const [hasRefInfo, setHasRefInfo] = useState(matchData.referee_id ? true : false);
     const [list, setList] = useState([]);
 
     const getCurrentComments = async () => {
         await axios.get(`${process.env.REACT_APP_URL}/api/comments/getComments/${matchData._id}`).then(res => {
-            if (res.data == []) {
-                console.log("Empty");
+            if (res.data === []) {
+                
             } else {
                 setList(res.data);
                 setLoading(true);
@@ -68,47 +66,47 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
 
     useEffect(() => {
         getCurrentComments();
-    }, []);
+    },[]);
 
     list.sort(function(a, b){
         if(a.date < b.date) { return 1; }
         if(a.date > b.date) { return -1; }
         return 0;
     })
-
+ console.log("mylist: ",list);
     return (
         <div className="matchbox-advanced-outer-container">
             <div className="matchbox-advanced-clubs-container">
                 <div className="matchbox-advanced-clubs-left-container">
                     <div className="matchbox-advanced-clubs-left-inner">
                         <div className="matchbox-advanced-clubs-left-logo">
-                            <img className="matchbox-advanced-clubs-left-club-img" src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
+                            <img alt="Homeclub" className="matchbox-advanced-clubs-left-club-img" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
                         </div>
                         <div className="matchbox-advanced-clubs-left-name">
                             <Link to={`../club/${matchData.club1_info[0].asci_name}`}><b>{matchData.club1_info[0].name}</b></Link>
                         </div>
                         <div className="matchbox-advanced-clubs-left-score">
-                            {playedWeek && hasRefInfo ? <a>{matchData.club1_goals}</a> : <a>-</a>}
+                            {playedWeek && hasRefInfo ? <p>{matchData.club1_goals}</p> : <p>-</p>}
                         </div>
                     </div>
                 </div>
-                <div className="matchbox-advanced-clubs-vs"><a>vs.</a></div>
+                <div className="matchbox-advanced-clubs-vs"><p>vs.</p></div>
                 <div className="matchbox-advanced-clubs-right-container">
                     <div className="matchbox-advanced-clubs-right-inner">
                         <div className="matchbox-advanced-clubs-right-score">
-                            {playedWeek && hasRefInfo ? <a>{matchData.club2_goals}</a> : <a>-</a>}
+                            {playedWeek && hasRefInfo ? <p>{matchData.club2_goals}</p> : <p>-</p>}
                         </div>
                         <div className="matchbox-advanced-clubs-right-name">
                             <Link to={`../club/${matchData.club2_info[0].asci_name}`}><b>{matchData.club2_info[0].name}</b></Link>
                         </div>
                         <div className="matchbox-advanced-clubs-right-logo">
-                            <img className="matchbox-advanced-clubs-right-club-img" src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
+                            <img alt="Awayclub" className="matchbox-advanced-clubs-right-club-img" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="matchbox-advanced-stadium-container">
-                <div className="matchbox-advanced-stadium-name"><a><b>Stadium:</b> {matchData.club1_info[0].stadium}</a></div>
+                <div className="matchbox-advanced-stadium-name"><p><b>Stadium:</b> {matchData.club1_info[0].stadium}</p></div>
             </div>
             <div className="matchbox-advanced-referee-container">
                 {playedWeek && hasRefInfo ?
@@ -118,7 +116,7 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
                 }
             </div>
             <div className="matchbox-advanced-comments-container">
-                <a style={{fontWeight: "bold"}}>Comments from Fans</a>
+                <p style={{fontWeight: "bold"}}>Comments from Fans</p>
                 { loading ? (list.length > 0 ? list.slice(0, 10).map((item) => {
 
                     return(
@@ -133,7 +131,9 @@ function MatchBoxAdvanced({ matchData, playedWeek }) {
                     :
                     <p style={{marginTop: "1em"}}>No comments yet!</p>)
                 :
-                <p>Loading...</p>
+                <div className="d-flex justify-content-center">
+                    <ReactBootstrap.Spinner animation="border"/>
+                </div>
                 }
             </div>
         </div>

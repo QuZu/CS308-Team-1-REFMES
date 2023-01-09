@@ -4,133 +4,116 @@ import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import React, { useCallback, useState } from "react";
 import axios from "axios";
-import "./single-club.css" 
+import "./single-club.css"
 import { useEffect } from "react";
-
-//importing all club logos
-import logoFenerbahce from '../../logos/fenerbahce.png';
-import logoGalatasaray from '../../logos/galatasaray.png';
-import logoBesiktas from '../../logos/besiktas.png';
-import logoBasaksehir from '../../logos/basaksehir.png';
-import logoAdanaDemirspor from '../../logos/adana_demirspor.png';
-import logoKonyaspor from '../../logos/konyaspor.png';
-import logoHatayspor from '../../logos/hatayspor.png';
-import logoGiresunspor from '../../logos/giresunspor.png';
-import logoAlanyaspor from '../../logos/alanyaspor.png';
-import logoSivasspor from '../../logos/sivasspor.png';
-import logoAntalyaspor from '../../logos/antalyaspor.png';
-import logoGaziantepFK from '../../logos/gaziantep_fk.png';
-import logoUmraniyespor from '../../logos/umraniyespor.png';
-import logoIstanbulspor from '../../logos/istanbulspor.png';
-import logoKasimpasa from '../../logos/kasimpasa.png';
-import logoAnkaragucu from '../../logos/ankaragucu.png';
-import logoTrabzonspor from '../../logos/trabzonspor.png';
-import logoKaragumruk from '../../logos/karagumruk.png';
-import logoKayserispor from '../../logos/kayserispor.png';
-
+import * as ReactBootstrap from "react-bootstrap";
+import findLogo from "../../components/clubLogos/clubLogos.jsx";
+import findSocialMedia from "../../components/clubLogos/clubsocials";
+import { Timeline } from 'react-twitter-widgets'
 
 function SingleClubPage() { // it takes clubname parameter from clubs.jsx
   // getting parameters from clubs page
-  const{clubName} = useParams();
-  console.log("clubname use params: " , clubName);
-  const [ClubData, setClubData] = useState({});
-  const [Loading, setLoading] = useState(false);
-    
-  const getClub = async() =>{
-    await axios.get(`${process.env.REACT_APP_URL}/api/clubs/getClub/${clubName}`).then(response =>{
-      console.log("response: ", response);
-      setClubData(response.data);
-      setLoading(true);
+  const { asciName } = useParams();
 
+  const [ClubData, setClubData] = useState({});
+  const [clubName, setClubName] = useState();
+  const [logo, setLogo] = useState();
+  const [loading, setLoading] = useState(false);
+  const [socialMedia, setSocialMedia] = useState();
+
+  const getClub = async () => {
+    await axios.get(`${process.env.REACT_APP_URL}/api/clubs/getClub/${asciName}`).then(response => {
+      if (response.data) {
+        setClubName(response.data.name);
+        setClubData(response.data);
+        setLogo(findLogo(response.data.name));
+        setSocialMedia(findSocialMedia(response.data.name));
+        setLoading(true);
+      }
     }).catch(err => console.log(err))
 
   };
+  function setTimeLoad() {
+    setLoading(true);
+  }
 
-  useEffect(()=> {
+  useEffect(() => {
     getClub();
   }, [])
-  console.log(ClubData);
-  // declaring the logos dictionary
-  const images = [
-    { id: "fenerbahce", src: logoFenerbahce},
-    { id: "galatasaray", src: logoGalatasaray},
-    { id: "besiktas", src: logoBesiktas},
-    { id: "basaksehir", src: logoBasaksehir},
-    { id: "adanademirspor", src: logoAdanaDemirspor},
-    { id: "konyaspor", src: logoKonyaspor},
-    { id: "hatayspor", src: logoHatayspor},
-    { id: "giresunspor", src: logoGiresunspor},
-    { id: "alanyaspor", src: logoAlanyaspor},
-    { id: "sivasspor", src: logoSivasspor},
-    { id: "antalyaspor", src: logoAntalyaspor},
-    { id: "gaziantepfk", src: logoGaziantepFK},
-    { id: "umraniyespor", src: logoUmraniyespor},
-    { id: "istanbulspor", src: logoIstanbulspor},
-    { id: "kasimpasaspor", src: logoKasimpasa},
-    { id: "ankaragucuspor", src: logoAnkaragucu},
-    { id: "trabzonspor", src: logoTrabzonspor},
-    { id: "karagumrukspor", src: logoKaragumruk},
-    { id: "kayserispor", src: logoKayserispor}
 
-  ]
-
-  // result = related image source
-  const result=(images.find(({id})=>id === clubName)).src;
-  console.log("result: ", result);
-  // declaring the playerlist
   var playerlist = ClubData.playerArray;
+  console.log("social media: ", socialMedia);
 
-  return(
-     
+  return (
+
     <div className="container-fluid">
-    <div className="col-12">
-        <div className="row"> <AppNavBar/> </div>
-        <div id = "club-info-section" className = "row">
-          <div id = "club-logo" className = "col-3"> <a href = {ClubData.website} target = "_blank"> <img id = "club-image" src = {result} alt = "Fenerbahce logo" /> </a> </div>
-          <div id = "club-info" className="col-9">
-            <div id = "c-i-h"  className="row"> <h1 id = "c-info-head"> <b>{ClubData.full_name}</b> </h1> <br/> </div>
-            <div id = "c-i-t1" className="row"> <p className="c-info-text"> Founded: {ClubData.founded}</p> <br/> </div>
-            <div id = "c-i-t2" className="row"> <p className="c-info-text"> Stadium informations: {ClubData.stadium}</p> </div>
-            <div id = "c-i-g"  className="row"> <p className="c-info-text"> {ClubData.full_name} ({ClubData.founded}) </p> 
-            <p className="c-g-info"> {ClubData.info}</p>
+      <div className="row"> <AppNavBar /> </div>
+
+      <div id="club-details-container" className="col-12">
+        <div id="club-info-section" className="row">
+          <div id="club-logo" className="col-3"> {loading ? <a href={ClubData.website} target="_blank"> <img id="club-image" src={logo} /> </a> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border" /></div>} </div>
+          <div id="club-info" className="col-9">
+            <div id="c-i-h" className="row"> {loading ? <h1 id="c-info-head"> <b>{ClubData.full_name}</b> </h1> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border" /></div>} <br /> </div>
+            <div id="c-i-t1" className="row"> {loading ? <p className="c-info-text"> <b>Founded:</b> {ClubData.founded}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border" /></div>}  <br /> </div>
+            <div id="c-i-t2" className="row"> {loading ? <p className="c-info-text"> <b>Stadium:</b> {ClubData.stadium}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border" /></div>}  </div>
+            <div id="c-i-g" className="row"> {loading ? <p className="c-g-info"> {ClubData.info}</p> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border" /></div>}  </div>
+          </div>
+        </div>
+        <div className="row single-clup-page-table-social-flow">
+          <div className="col-7">
+            <div className="container players-table-container">
+              <div id="table-head" className="row container text-center"> {loading ? <h2>Player List of {ClubData.name}</h2> : <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border" /></div>} </div>
+
+              <div className="row">
+
+                <div id="table">
+                  <table className="players-table">
+                    <thead className="players-table-head">
+                      <tr>
+                        <th className="players-table-head-th">Player Name</th> <th className="players-table-head-th">Number</th> <th className="players-table-head-th">Age</th> <th className="players-table-head-th">Height</th> <th className="players-table-head-th">Foot</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {playerlist ?
+                        (playerlist.length > 0 ?
+                          playerlist.map((item) => {
+
+                            return (
+
+                              <tr className="players-table-tr" key={item.pName}>
+                                <td className="players-table-name-col col-3">{item.pName}</td>
+                                <td className="players-table-td col-1">{item.jerseyNumber}</td>
+                                <td className="players-table-td col-1">{item.Age}</td>
+                                <td className="players-table-td col-1">{item.height}</td>
+                                <td className="players-table-td players-table-last-col col-1">{item.Foot}</td>
+                              </tr>
+                            );
+                          }) : <></>) : <></>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-5">
+            <div id="social-media-head" className="row container text-center">  <div className="d-flex justify-content-center"> <h2>Social Media </h2> </div> </div>
+
+            <div>
+              {loading ?
+                <Timeline
+                  dataSource={{ sourceType: "url", url: socialMedia.twitter }}
+                  options={{ borderColor: "#FF0000", width: "80%", height: "800" }}
+                />
+                :
+                <div className="d-flex justify-content-center"><ReactBootstrap.Spinner animation="border" /></div>
+              }
             </div>
           </div>
         </div>
-        
-        <div  className = "row"> 
-          <div id = "table-head" className = "row container text-center"> <h2> Current List of Players</h2> </div>
-         
-          <div  className = "row">
-            <div id = "table" className="col-8">
-            <table  className= "players-table"> 
-                <thead className="players-table-head">
-                  <tr>
-                    <th className="players-table-head-th">Player Name</th> <th className="players-table-head-th">Jersey Number</th> <th className="players-table-head-th">Age</th> <th className="players-table-head-th">Height</th> <th className="players-table-head-th">Foot</th>
-                  </tr>
-                </thead>
-                <tbody>
-                { playerlist ?
-                  (playerlist.length > 0 ?
-                    playerlist.map((item) => {
-                      
-                      return(
-                      
-                        <tr className = "players-table-tr" key={item.pName}>
-                          <td className="name-col">{item.pName}</td>
-                          <td className="players-table-td">{item.jerseyNumber}</td>
-                          <td className="players-table-td">{item.Age}</td>
-                          <td className="players-table-td">{item.height}</td>
-                          <td className="players-table-td">{item.Foot}</td>
-                        </tr>
-                      );
-                    }) : <></>)            :<></>                  
-                }
-                </tbody>
-            </table>
-            </div>
-            </div>
-        </div>
-    </div>
+
+      </div>
     </div>
   )
 }

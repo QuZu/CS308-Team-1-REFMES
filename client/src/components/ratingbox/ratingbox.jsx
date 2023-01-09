@@ -51,7 +51,7 @@ function RatingBox({ matchData }) {
 
     const [state, dispatch] = useStore();
     const {user:currentUser} = state;
-    const [rating, setRating] = useState(0);
+    const [rating, setPostRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
     const [isInteractive, setIsInteractive] = useState(true);
     const [btnValue, setBtnValue] = useState("Submit");
@@ -63,44 +63,49 @@ function RatingBox({ matchData }) {
 
     const monthSet = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        if (rating == 0) {
+        console.log(rating);
+        if (rating === 0) {
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
-            const newPostRating = {rating: rating, user_id: currentUser.user.id, match_id: matchData._id};
-            axios
-                .post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating)
-                .then((res) => {
-                    if (res.status === 200 && res.data.message) {
-                        setErrorMessage(res.data.message);
-                    } else if (res.status === 200) {
-                        setErrorMessage("Your rating submitted successfully");
-                    } else {
-                        setErrorMessage("Error! Please try again.");
-                    }
-                }).catch((err) => {
-                    console.log("Error: ", err);
+            const newPostRating = {rating: rating, user_id: currentUser.user.id, match_id: matchData._id, referee_id:matchData.referee_id, week_no:matchData.week_no};
+            await axios.all([
+                axios.post(`${process.env.REACT_APP_URL}/api/postRatings/addPostRating`, newPostRating),
+                axios.post(`${process.env.REACT_APP_URL}/api/postRatings/refereeAddPostRating`, newPostRating),
+              ])
+              .then(axios.spread((res1, res2) =>    {
+                console.log("Stattus:",res1.status,res2.status);
+                 if (res1.status === 200 && res2.status===200) {
+                    setErrorMessage("Your rating submitted successfully");
+                    const date = new Date();
+                    setDay(date.getDate());
+                    setMonth(monthSet[date.getMonth()]);
+                    setYear(date.getFullYear());
+                    setIsInteractive(false);
+                    setBtnValue("Saved");
+                    setBtnDisabled(true);
+                } else {
+                    console.log("elsedeyim");
                     setErrorMessage("Error! Please try again.");
-                });
-            const date = new Date();
-            setDay(date.getDate());
-            setMonth(monthSet[date.getMonth()]);
-            setYear(date.getFullYear());
-            setIsInteractive(false);
-            setBtnValue("Saved");
-            setBtnDisabled(true);
+                    setBtnValue("Save");
+                    setBtnDisabled(false);
+                }
+            
+              })).catch(err =>{
+                console.log("Error: ", err);
+                setErrorMessage("Error! Please try again.");
+            });
         }
     }
 
     const getCurrentPostRating = async()=>{
         await axios.get(`${process.env.REACT_APP_URL}/api/postRatings/getPostRating/${matchData._id}/${currentUser.user.id}`).then(res => {
-            setRating(res.data);
-            if (res.data == []) {
-                console.log("Empty");
+            if (res.data.length === 0) {
+
             } else {
-                setRating(res.data[0].rating);
+                setPostRating(res.data[0].rating);
                 const date = new Date(res.data[0].date);
                 setDay(date.getDate());
                 setMonth(monthSet[date.getMonth()]);
@@ -115,29 +120,39 @@ function RatingBox({ matchData }) {
     useEffect(() => {
         getCurrentPostRating();
     }, []);
-
+    //console.log(matchData);
     return (
         <>
-        <div className="rating-outer-container">
+        { matchData.ref_info[0] ?
+         <div className="rating-outer-container">
             <div className="rating-container">
                 <div className="rating-left">
                     <div className="rating-left-match">
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name == matchData.club1_info[0].name)).src}/>
-                            <a>{matchData.club1_info[0].name} <b>({matchData.club1_goals})</b></a>
+                            <a href={`../club/${matchData.club1_info[0].asci_name}`}>{matchData.club1_info[0].name} </a>
+                            <img alt="Homeclub" src={(clubs.find(({name})=>name === matchData.club1_info[0].name)).src}/>
+                            <div className="rating-team-score-box">
+                                <b>{matchData.club1_goals}</b>
+                            </div>
                         </div>
-                        <a> vs. </a>
+                        <div className="rating-team-middle">
+                        <p >-</p>
+                        </div>
                         <div className="rating-team">
-                            <img src={(clubs.find(({name})=>name == matchData.club2_info[0].name)).src}/>
-                            <a>{matchData.club2_info[0].name} <b>({matchData.club2_goals})</b></a>
+                            <div className="rating-team-score-box">
+                                <b>{matchData.club2_goals}</b>
+                            </div>
+                            <img alt="Awayclub" src={(clubs.find(({name})=>name === matchData.club2_info[0].name)).src}/>
+                            <a href={`../club/${matchData.club2_info[0].asci_name}`}>{matchData.club2_info[0].name} </a>
                         </div>
                     </div>
                 </div>
                 <div className="rating-right">
                     <div className="rating-right-referee"><a href={`../referee/${matchData.ref_info[0].r_username}`}><b>{matchData.ref_info[0].name}</b></a></div>
-                    <Rater onRate={({rating}) => {setRating(rating); setRatingEntered(true);}} total={5} rating={rating} interactive={isInteractive}/>
+                    <Rater onRate={({rating}) => { console.log(rating); setPostRating(rating); setRatingEntered(true);}} total={5} rating={rating} interactive={isInteractive}/>
                     {isInteractive ? <></> : <div className="rating-right-date">{month} {day}, {year}</div>}
                     {ratingEntered ? <></> : <div className="rating-right-error"><a>Choose a rating, please!</a><br/></div>}
+                    <p className="rating-box-post-error-msg">{errorMessage}</p>
                 </div>
                 <div className="rating-submit">
                 <form onSubmit={handleSubmit}>
@@ -146,9 +161,12 @@ function RatingBox({ matchData }) {
                 </div>
             </div>
             <div className="rating-comment-container">
-                <div className="rating-comment-add-button"><Link to={`../matches/${matchData._id}`}>Add Comment</Link></div>
+                <div className="rating-comment-add-button"><Link to={`../match/${matchData._id}/comment`}>Add Comment</Link></div>
             </div>
         </div>
+        :
+        <p>No Referee</p>
+        }
         </>
     );
   }

@@ -4,9 +4,21 @@ const router = express.Router();
 require("dotenv").config();
 const Week = require('../../models/weekModel');
 
-router.get("/getWeek", async(req, res) => {
+router.get("/getPreWeek", async(req, res) => {
     try {
-        await Week.findById("63781a749e79075af41da252").then((result) => {
+        await Week.findOne({type: "pre-week"}).then((result) => {
+            res.json(result);
+        }).catch((err) => {
+            throw err;
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }}
+);
+
+router.get("/getPostWeek", async(req, res) => {
+    try {
+        await Week.findOne({type: "post-week"}).then((result) => {
             res.json(result);
         }).catch((err) => {
             throw err;
@@ -29,7 +41,16 @@ router.post("/setWeek", async(req, res) => {
             }});
     } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get all match for this week");
     }
 });
+
+router.get("/getCurrentYear", async(req, res) => {
+    try {
+        var currentYear = new Date().getFullYear();
+        res.json({currentYear});
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

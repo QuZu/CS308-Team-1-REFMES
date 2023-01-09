@@ -10,10 +10,10 @@ import AppNavBarSingle from "../../components/appnavbarsingle.jsx"
 
 const signUpSchema = z
   .object({
-    username: z.string().min(1),
-    fullName: z.string().min(1),
+    username: z.string().min(2,"Please use longer username"),
+    fullName: z.string().min(3,"Please enter longer Full name"),
     email: z.string().email("Please enter a valid email"),
-    fanOf: z.string().min(1),
+    fanOf: z.string().min(1,"Please select your team"),
     password: z.string().min(8, {message: "Password must be at least 8 character"}).regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*';."_)(+,/:>\]<=?@\\^`|[}{~-])/,
         {message: "Password must contain uppercase, lowercase, numeric and special character"}),
@@ -32,7 +32,7 @@ function Signup() {
 
   const onSubmit = useCallback((data) => {
     const newUser = {
-      username: data.username,
+      username: data.username.replaceAll(/ /g,"").toLowerCase(),
       full_name: data.fullName,
       email: data.email,
       password: data.password,
@@ -54,11 +54,10 @@ function Signup() {
         }
       })
       .catch((err) => {
-        console.log("Error:", err);
         setErrorMessage("Error! Please try again.");
       });
   }, [reset, navigate]);
-
+  
   return (
     <div className="fullscreen row justify-content-center align-items-center">
       <AppNavBarSingle/>
@@ -88,8 +87,29 @@ function Signup() {
                 <small className="align-self-start error-text">{errors.email?.message}</small>
               </div>
 
-              <div className="mt-3 d-flex flex-column">
-                <input {...register("fanOf")} placeholder="Football Club" type="text" className="btn-border input-style form-control"/>
+              <div className="signup-page mt-3 d-flex flex-column">
+                <select required className="btn-border input-style form-control" {...register("fanOf")}>
+                  <option value="" disabled selected>Select your Team</option>
+                  <option value="Alanyaspor">Alanyaspor</option>
+                  <option value="Adana Demirspor">Adana Demirspor</option>
+                  <option value="Antalyaspor">Antalyaspor</option>
+                  <option value="Ankaragücü">Ankaragücü</option>
+                  <option value="Başakşehir">Başakşehir</option>
+                  <option value="Beşiktaş">Beşiktaş</option>
+                  <option value="Fenerbahçe">Fenerbahçe</option>
+                  <option value="Galatasaray">Galatasaray</option>
+                  <option value="Gaziantep FK">Gaziantep FK</option>
+                  <option value="Giresunspor">Giresunspor</option>
+                  <option value="Hatayspor">Hatayspor</option>
+                  <option value="İstanbulspor">İstanbulspor</option>
+                  <option value="Karagümrük">Karagümrük</option>
+                  <option value="Kasımpaşa">Kasımpaşa</option>
+                  <option value="Kayserispor">Kayserispor</option>
+                  <option value="Konyaspor">Konyaspor</option>
+                  <option value="Ümraniyespor">Ümraniyespor</option>
+                  <option value="Trabzonspor">Trabzonspor</option>
+                  <option value="Sivasspor">Sivasspor</option>
+                </select>
                 <small className="align-self-start error-text">{errors.fanOf?.message}</small>
               </div>
 

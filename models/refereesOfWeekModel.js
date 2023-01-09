@@ -6,8 +6,8 @@ const RefereesOfWeekSchema = new Schema({
     type: String,
     required: true
   },
-  referee_id: {
-    type: Schema.Types.ObjectId,
+  referee_ids: {
+    type: Schema.Types.Array,
     required: true
   }
 });

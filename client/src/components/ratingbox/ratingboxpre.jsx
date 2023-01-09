@@ -25,6 +25,7 @@ import logoAnkaragucu from '../../logos/ankaragucu.png';
 import logoTrabzonspor from '../../logos/trabzonspor.png';
 import logoKaragumruk from '../../logos/karagumruk.png';
 import logoKayserispor from '../../logos/kayserispor.png';
+import * as ReactBootstrap from "react-bootstrap";
 
 const clubs = [
     { name: "Fenerbahçe", src: logoFenerbahce},
@@ -48,9 +49,9 @@ const clubs = [
     { name: "Kayserispor", src: logoKayserispor},
   ]
 
-function RatingBoxPre({ refereeData }) {
-
-    const [state, dispatch] = useStore();
+function RatingBoxPre({ refereeData,preWeek }) {
+    //console.log(refereeData);
+    const [state] = useStore();
     const {user:currentUser} = state;
     const [rating, setRating] = useState(0);
     const [errorMessage, setErrorMessage] = useState("");
@@ -61,43 +62,49 @@ function RatingBoxPre({ refereeData }) {
     const [day, setDay] = useState("");
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
+    const [loading,setLoading] = useState(false);
 
     const monthSet = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        if (rating == 0) {
+        if (rating === 0) {
             setRatingEntered(false);
         } else {
             setRatingEntered(true);
-            const newPreRating = {rating: rating, user_id: currentUser.user.id, week_no: refereeData.week_no, referee_id: refereeData.referee_id };
-            axios
-                .post(`${process.env.REACT_APP_URL}/api/preRatings/addPreRating`, newPreRating)
-                .then((res) => {
-                    if (res.status === 200 && res.data.message) {
-                        setErrorMessage(res.data.message);
-                    } else if (res.status === 200) {
-                        setErrorMessage("Your rating submitted successfully");
-                    } else {
-                        setErrorMessage("Error! Please try again.");
-                    }
-                }).catch((err) => {
-                    console.log("Error: ", err);
+            const newPreRating = {rating: rating, user_id: currentUser.user.id, week_no: preWeek, referee_id: refereeData._id} ;
+            await axios.all([
+                axios.post(`${process.env.REACT_APP_URL}/api/preRatings/addPreRating`, newPreRating),
+                axios.post(`${process.env.REACT_APP_URL}/api/preRatings/refereeAddPreRating`, newPreRating),
+              ])
+              .then(axios.spread((res1, res2) =>    {
+                console.log("Stattus:",res1.status,res2.status);
+                 if (res1.status === 200 && res2.status===200) {
+                    setErrorMessage("Your rating submitted successfully");
+                    const date = new Date();
+                    setDay(date.getDate());
+                    setMonth(monthSet[date.getMonth()]);
+                    setYear(date.getFullYear());
+                    setIsInteractive(false);
+                    setBtnValue("Saved");
+                    setBtnDisabled(true);
+                } else {
+                    console.log("elsedeyim");
                     setErrorMessage("Error! Please try again.");
-                });
-            const date = new Date();
-            setDay(date.getDate());
-            setMonth(monthSet[date.getMonth()]);
-            setYear(date.getFullYear());
-            setIsInteractive(false);
-            setBtnValue("Saved");
-            setBtnDisabled(true);
+                    setBtnValue("Save");
+                    setBtnDisabled(false);
+                }
+            
+              })).catch(err =>{
+                console.log("Error: ", err);
+                setErrorMessage("Error! Please try again.");
+            });
         }
     }
 
-    const getCurrentPostRating = async()=>{
-        await axios.get(`${process.env.REACT_APP_URL}/api/preRatings/getPreRating/${currentUser.user.id}/${refereeData.referee_id}/${refereeData.week_no}`).then(res => {
-            if (res.data == []) {
+    const getCurrentPostRating = async()=>   {
+        await axios.get(`${process.env.REACT_APP_URL}/api/preRatings/getPreRating/${currentUser.user.id}/${refereeData._id}/${preWeek}`).then(res => {
+            if (res.data.length === 0) {
                 console.log("Empty");
             } else {
                 setRating(res.data[0].rating);
@@ -109,6 +116,7 @@ function RatingBoxPre({ refereeData }) {
                 setBtnValue("Saved");
                 setBtnDisabled(true);
             }
+            setLoading(true);
         }).catch(err => console.log(err))
     };
 
@@ -118,17 +126,18 @@ function RatingBoxPre({ refereeData }) {
 
     return (
         <>
-        <div className="rating-outer-container-pre">
+        {loading ? <div className="rating-outer-container-pre">
             <div className="rating-container">
                 <div className="rating-left-pre">
                     <div className="rating-left-match">
-                        <div className="rating-right-referee" style={{margin: "0"}}><a href={`../referee/${refereeData.ref_info[0].r_username}`}><b>{refereeData.ref_info[0].name}</b></a></div>
+                        <div className="rating-right-referee" style={{margin: "0"}}><a href={`../referee/${refereeData.r_username}`}><b>{refereeData.name}</b></a></div>
                     </div>
                 </div>
                 <div className="rating-right-pre">
                     <Rater onRate={({rating}) => {setRating(rating); setRatingEntered(true);}} total={5} rating={rating} interactive={isInteractive}/>
                     {isInteractive ? <></> : <div className="rating-right-date">{month} {day}, {year}</div>}
                     {ratingEntered ? <></> : <div className="rating-right-error"><a>Choose a rating, please!</a><br/></div>}
+                    <p className="rating-box-error-msg">{errorMessage}</p>
                 </div>
                 <div className="rating-submit">
                 <form onSubmit={handleSubmit}>
@@ -137,6 +146,11 @@ function RatingBoxPre({ refereeData }) {
                 </div>
             </div>
         </div>
+        :
+        <div className="d-flex justify-content-center">
+            <ReactBootstrap.Spinner animation="border"/>
+        </div>
+        }
         </>
     );
   }

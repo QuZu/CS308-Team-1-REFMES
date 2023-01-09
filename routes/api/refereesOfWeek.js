@@ -4,26 +4,23 @@ const router = express.Router();
 require("dotenv").config();
 const RefereesOfWeek = require('../../models/refereesOfWeekModel');
 const PreRating=require("../../models/preRatingModel")
-
+const myReferee = require('../../models/refereemodel');
 router.get("/getRefereesOfWeek/:weekNo", async(req, res) => {
     try {
-       await RefereesOfWeek.aggregate(
-            [{$lookup:
-                {
-                    from:"referees",
-                    localField:"referee_id",
-                    foreignField:"_id",
-                    as:"ref_info"
-                }
-            },
-                {$match:{week_no:req.params.weekNo}}
-            ]
-            ).then(result=>{
-                res.json(result);
-            })
+       var result=await RefereesOfWeek.findOne({week_no:req.params.weekNo})
+       var RefArray=[];
+       for (let index = 0; index < result.referee_ids.length; index++) {
+        const RefID = result.referee_ids[index];
+        var oneRef= await myReferee.findById(RefID)
+        RefArray.push(oneRef);
+       }
+       var mydata={
+        week_no:req.params.weekNo,
+        myarray:RefArray
+       }
+        res.json(mydata);
             } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get referees of the week");
     }
 });
 router.get("/getpointsRefereesOfWeek/:referee_id/:currentweek", async(req, res) => {
@@ -39,7 +36,6 @@ router.get("/getpointsRefereesOfWeek/:referee_id/:currentweek", async(req, res) 
             })
             } catch (err) {
         res.status(500).json(err);
-        console.log("Could not get referees of the week");
     }
 });
 

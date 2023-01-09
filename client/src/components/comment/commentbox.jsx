@@ -1,4 +1,4 @@
-import { set } from "mongoose";
+
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -48,7 +48,7 @@ const clubs = [
   { name: "Kayserispor", src: logoKayserispor},
 ]
 function Comment({ commentPerson, pComment, myDate,MatchData, }) {
-  console.log(MatchData);
+  //console.log(MatchData);
   const matchID=MatchData[0]._id
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const RenderDate=new Date(myDate)
@@ -69,25 +69,24 @@ function Comment({ commentPerson, pComment, myDate,MatchData, }) {
     };
   useEffect(() => {
     getMatchDetails();
-  }, []);
-  console.log("Alldetails",matchDetails);
+  },[]);
     return(
       (loading ?
       <div className="refs-page-container">
         <div className="refs-page-inner-container">
           <div className="refs-page-header">
             <div className="refs-page-header-person"><b>{commentPerson}</b></div>
-            <div className="refs-page-header-dot"><a>•</a></div>
-            <div className="refs-page-header-date"><a>{mth} {day}, {year}</a></div>
+            <div className="refs-page-header-dot"><p>•</p></div>
+            <div className="refs-page-header-date"><p>{mth} {day}, {year}</p></div>
           </div>
           <div className="refs-page-comment">
-            <div className="refs-page-comment-text"><a>{pComment}</a></div>
+            <div className="refs-page-comment-text"><p>{pComment}</p></div>
           </div>
         </div>
         <div className="refs-page-right-container">
           <div className="refs-page-rigth-logos">
-            <div className="refs-page-rigth-logo"><img src={(clubs.find(({name})=>name == matchDetails.club1_info[0].name)).src} className="refs-page-right-logo-img"/></div>
-            <div className="refs-page-rigth-logo"><img src= {(clubs.find(({name})=>name == matchDetails.club2_info[0].name)).src} className="refs-page-right-logo-img"/></div>
+            <div className="refs-page-rigth-logo"><img alt="Homeclub" src={(clubs.find(({name})=>name === matchDetails.club1_info[0].name)).src} className="refs-page-right-logo-img"/></div>
+            <div className="refs-page-rigth-logo"><img alt="Awayclub" src= {(clubs.find(({name})=>name === matchDetails.club2_info[0].name)).src} className="refs-page-right-logo-img"/></div>
           </div>
           <div  className="refs-page-rigth-week"><b>Week {myweek}</b></div>
         </div>
